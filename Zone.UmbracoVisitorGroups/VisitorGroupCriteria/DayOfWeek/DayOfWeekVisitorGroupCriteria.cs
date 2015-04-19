@@ -28,8 +28,20 @@
 
         public bool MatchesVisitor(string definition)
         {
-            var definedDays = JsonConvert.DeserializeObject<int[]>(definition);
-            return definedDays.Contains((int)DateTime.Now.DayOfWeek);
+            if (string.IsNullOrEmpty(definition))
+            {
+                throw new ArgumentNullException("definition", "definition cannot be null or empty");
+            }
+
+            try
+            {
+                var definedDays = JsonConvert.DeserializeObject<int[]>(definition);
+                return definedDays.Contains((int)DateTime.Now.DayOfWeek);
+            }
+            catch (JsonReaderException)
+            {
+                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+            }
         }
     }
 }

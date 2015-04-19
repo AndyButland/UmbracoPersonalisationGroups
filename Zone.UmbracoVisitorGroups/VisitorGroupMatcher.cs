@@ -20,13 +20,16 @@
 
         public static bool IsMatch(VisitorGroupDefinitionDetail definitionDetail)
         {
-            var criteria = _availableCriteria[definitionDetail.Alias];
-            if (criteria == null)
+            try
             {
-                throw new NullReferenceException(string.Format("Visitor group criteria not found with alias '{0}'", definitionDetail.Alias));
+                var criteria = _availableCriteria[definitionDetail.Alias];
+                return criteria.MatchesVisitor(definitionDetail.Definition);
             }
-
-            return criteria.MatchesVisitor(definitionDetail.Definition);
+            catch (KeyNotFoundException)
+            {
+                throw new KeyNotFoundException(string.Format("Visitor group criteria not found with alias '{0}'",
+                    definitionDetail.Alias));
+            }
         }
 
         private static void BuildAvailableCriteria()

@@ -29,10 +29,22 @@
 
         public bool MatchesVisitor(string definition)
         {
-            var definedTimesOfDay = JsonConvert.DeserializeObject<IList<TimeOfDaySetting>>(definition);
-            var now = int.Parse(DateTime.Now.ToString("HHmm"));
-            return definedTimesOfDay
-                .Any(x => x.From >= now && x.To < now);
+            if (string.IsNullOrEmpty(definition))
+            {
+                throw new ArgumentNullException("definition", "definition cannot be null or empty");
+            }
+
+            try
+            {
+                var definedTimesOfDay = JsonConvert.DeserializeObject<IList<TimeOfDaySetting>>(definition);
+                var now = int.Parse(DateTime.Now.ToString("HHmm"));
+                return definedTimesOfDay
+                    .Any(x => x.From <= now && x.To >= now);
+            }
+            catch (JsonReaderException)
+            {
+                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+            }
         }
     }
 }
