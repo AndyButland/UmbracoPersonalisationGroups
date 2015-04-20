@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Zone.UmbracoVisitorGroups.VisitorGroupCriteria;
 
     public static class VisitorGroupMatcher
     {

@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Zone.UmbracoVisitorGroups.VisitorGroupCriteria;
 
     [TestClass]
     public class DayOfWeekVisitorGroupCriteriaTests

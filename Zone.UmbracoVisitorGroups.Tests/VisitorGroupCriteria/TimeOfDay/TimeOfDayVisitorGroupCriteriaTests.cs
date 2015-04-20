@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using VisitorGroupCriteria;
 
     [TestClass]
     public class TimeOfDayVisitorGroupCriteriaTests

@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoVisitorGroups
+﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria
 {
     using System;
     using System.Linq;

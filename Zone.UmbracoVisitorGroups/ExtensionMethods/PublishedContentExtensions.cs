@@ -1,6 +1,7 @@
 ﻿namespace Umbraco.Web
 {
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using Umbraco.Core.Models;
     using Zone.UmbracoVisitorGroups;
@@ -9,22 +10,16 @@
     {
         public static bool ShowToVisitor(this IPublishedContent content)
         {
-            var pickerProperty = GetPickerProperty(content);
-            if (pickerProperty == null || pickerProperty.Value == null)
-            {
-                return true;
-            }
-
-            var pickedVisitorGroups = GetPickedVisitorGroups(pickerProperty).ToList();
+            var pickedVisitorGroups = GetPickedVisitorGroups(content).ToList();
             if (!pickedVisitorGroups.Any())
             {
-                // No visitor groups picked, so we assume available to all
+                // No visitor groups picked or no property for picker, so we assume available to all
                 return true;
             }
 
             foreach (var visitorGroup in pickedVisitorGroups)
             {
-                var definition = visitorGroup.GetPropertyValue<VisitorGroupDefinition>("definition");
+                var definition = visitorGroup.GetPropertyValue<VisitorGroupDefinition>(Constants.VisitorGroupDefinitionPropertyAlias);
                 var matchCount = CountMatchingDefinitionDetails(definition);
 
                 if (definition.Match == VisitorGroupDefinitionMatch.Any && matchCount > 0 ||
@@ -39,19 +34,30 @@
             return false;
         }
 
-        private static IPublishedProperty GetPickerProperty(IPublishedContent content)
+        private static IEnumerable<IPublishedContent> GetPickedVisitorGroups(IPublishedContent content)
         {
-            return content.Properties
-                .FirstOrDefault(x => x.PropertyTypeAlias == "visitorGroupPicker");
+            if (content.HasProperty(GetVisitorGroupPickerAlias()))
+            {
+                var pickedVisitorGroupIds = content.GetProperty("propertyAlias").DataValue.ToString()
+                    .Split(',')
+                    .Select(x => int.Parse(x));
+
+                var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
+                return umbracoHelper.TypedContent(pickedVisitorGroupIds);
+            }
+
+            return Enumerable.Empty<IPublishedContent>();
         }
 
-        private static IEnumerable<IPublishedContent> GetPickedVisitorGroups(IPublishedProperty pickerProperty)
+        private static string GetVisitorGroupPickerAlias()
         {
-            var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
-            var pickedVisitorGroupIds = pickerProperty.Value.ToString()
-                .Split(',')
-                .Select(x => int.Parse(x));
-            return umbracoHelper.TypedContent(pickedVisitorGroupIds);
+            var visitorGroupPickerAlias = ConfigurationManager.AppSettings["visitorGroups.visitorGroupPickerAlias"];
+            if (string.IsNullOrEmpty(visitorGroupPickerAlias))
+            {
+                visitorGroupPickerAlias = Constants.DefaultVisitorGroupPickerAlias;
+            }
+
+            return visitorGroupPickerAlias;
         }
 
         private static int CountMatchingDefinitionDetails(VisitorGroupDefinition definition)
