@@ -2,10 +2,9 @@
 {
     using System;
     using System.Linq;
-    using ClientDependency.Core;
     using Newtonsoft.Json;
+    using Umbraco.Core;
 
-    [ClientDependency(ClientDependencyType.Javascript, "/App_Plugins/UmbracoVisitorGroups/Resource/DayOfWeek/dayofweek.definition.editor.controller.js")]
     public class DayOfWeekVisitorGroupCriteria : IVisitorGroupCriteria
     {
         public string Name
@@ -35,10 +34,7 @@
 
         public bool MatchesVisitor(string definition)
         {
-            if (string.IsNullOrEmpty(definition))
-            {
-                throw new ArgumentNullException("definition", "definition cannot be null or empty");
-            }
+            Mandate.ParameterNotNullOrEmpty(definition, "definition");
 
             try
             {

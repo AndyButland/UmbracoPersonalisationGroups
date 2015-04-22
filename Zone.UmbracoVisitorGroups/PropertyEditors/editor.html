@@ -8,15 +8,15 @@
 
     Add criteria:
     <select ng-model="selectedCriteria"
-            ng-options="item.Name for item in availableCriteria"></select>
+            ng-options="item.name for item in availableCriteria"></select>
     <button type="button" class="btn btn-default" ng-click="addCriteria()">Add</button>
     <br/><br/>
 
     <div>
-        <b ng-bind="selectedCriteria.Name"></b>: <span ng-bind="selectedCriteria.Description"></span>
+        <b ng-bind="selectedCriteria.name"></b>: <span ng-bind="selectedCriteria.description"></span>
     </div>
     <div>
-        <i ng-bind="selectedCriteria.DefinitionSyntaxDescription"></i>
+        <i ng-bind="selectedCriteria.definitionSyntaxDescription"></i>
     </div>
     <br />
 

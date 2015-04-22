@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ClientDependency.Core;
     using Zone.UmbracoVisitorGroups.VisitorGroupCriteria;
-
+    
     public static class VisitorGroupMatcher
     {
         private static readonly Dictionary<string, IVisitorGroupCriteria> _availableCriteria = new Dictionary<string, IVisitorGroupCriteria>();

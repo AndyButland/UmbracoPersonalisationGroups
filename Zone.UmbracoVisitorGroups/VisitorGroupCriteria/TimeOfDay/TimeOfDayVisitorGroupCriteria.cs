@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
+    using Umbraco.Core;
 
     public class TimeOfDayVisitorGroupCriteria : IVisitorGroupCriteria
     {
@@ -34,10 +35,7 @@
 
         public bool MatchesVisitor(string definition)
         {
-            if (string.IsNullOrEmpty(definition))
-            {
-                throw new ArgumentNullException("definition", "definition cannot be null or empty");
-            }
+            Mandate.ParameterNotNullOrEmpty(definition, "definition");
 
             try
             {

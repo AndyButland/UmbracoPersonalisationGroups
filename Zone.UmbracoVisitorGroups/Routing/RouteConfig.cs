@@ -9,8 +9,8 @@
         {
             routes.MapRoute(
                 name: "Visitor group criteria resources",
-                url: "App_Plugins/UmbracoVisitorGroups/Resource/{criteriaAlias}/{fileName}",
-                defaults: new { controller = "VisitorGroupDefinition", action = "Resource" }
+                url: "App_Plugins/UmbracoVisitorGroups/ResourceForCriteria/{criteriaAlias}/{fileName}",
+                defaults: new { controller = "VisitorGroupDefinition", action = "ResourceForCriteria" }
             );
 
             routes.MapRoute(

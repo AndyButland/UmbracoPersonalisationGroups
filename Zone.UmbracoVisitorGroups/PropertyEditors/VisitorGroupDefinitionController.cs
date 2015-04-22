@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+    using Umbraco.Core;
 
     public class VisitorGroupDefinitionController : Controller
     {
@@ -19,6 +20,8 @@
 
         public FileStreamResult Resource(string fileName)
         {
+            Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
+
             var resourceName =
                 Assembly.GetExecutingAssembly()
                     .GetManifestResourceNames()
@@ -30,10 +33,13 @@
             return new FileStreamResult(assembly.GetManifestResourceStream(resourceName), GetMimeType(fileName));
         }
 
-        public FileStreamResult Resource(string criteriaAlias, string fileName)
+        public FileStreamResult ResourceForCriteria(string criteriaAlias, string fileName)
         {
+            Mandate.ParameterNotNullOrEmpty(criteriaAlias, "criteriaAlias");
+            Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
+
             var criteria = VisitorGroupMatcher.GetAvailableCriteria()
-                .SingleOrDefault(x => x.Alias == criteriaAlias);
+                .SingleOrDefault(x => x.Alias.ToLowerInvariant() == criteriaAlias.ToLowerInvariant());
             if (criteria != null)
             {
                 var resourceName =

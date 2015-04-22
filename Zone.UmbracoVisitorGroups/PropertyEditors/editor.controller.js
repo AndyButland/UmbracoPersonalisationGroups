@@ -31,12 +31,13 @@
             };
 
             $scope.editDefinitionDetail = function (definitionDetail) {
+                var templateUrl = "/App_Plugins/UmbracoVisitorGroups/ResourceForCriteria/" + definitionDetail.alias + "/definition.editor.html";
                 dialogService.open(
                     {
-                        template: "/App_Plugins/UmbracoVisitorGroups/Resource/" + definitionDetail.alias.toLowerCase() + ".definition.editor.html",
+                        template: templateUrl,
                         definition: definitionDetail.definition,
                         callback: function (data) {
-                            definitionDetail.definition = data.definition;
+                            definitionDetail.definition = data;
                         }
                     });
             };
@@ -48,14 +49,18 @@
             $scope.getCriteriaName = function (alias) {
                 var criteria = getCriteriaByAlias(alias);
                 if (criteria) {
-                    return $scope.availableCriteria[i].name;
+                    return criteria.name;
                 }
+
+                return "";
             };
 
             $scope.criteriaHasDefinitionEditorView = function (alias) {
                 var criteria = getCriteriaByAlias(alias);
                 if (criteria) {
-                    return $scope.availableCriteria[i].hasDefinitionEditorView;
+                    return criteria.hasDefinitionEditorView;
                 }
+
+                return false;
             };
         });

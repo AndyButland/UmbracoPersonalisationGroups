@@ -217,10 +217,10 @@
     <EmbeddedResource Include="PropertyEditors\editor.controller.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="VisitorGroupCriteria\DayOfWeek\dayofweek.definition.editor.html" />
+    <EmbeddedResource Include="VisitorGroupCriteria\DayOfWeek\definition.editor.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="VisitorGroupCriteria\DayOfWeek\dayofweek.definition.editor.controller.js" />
+    <EmbeddedResource Include="VisitorGroupCriteria\DayOfWeek\definition.editor.controller.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

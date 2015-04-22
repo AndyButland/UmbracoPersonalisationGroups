@@ -4,9 +4,13 @@
         <div class="umb-panel-body no-header with-footer compact">
 
             <umb-pane>
-                <textarea name="configSource"
-                          rows="20" class="umb-editor umb-textarea"
-                          umb-raw-model="renderModel.definition"></textarea>
+                <div>Sunday: <input type="checkbox" ng-model="renderModel.days[0]" /></div>
+                <div>Monday: <input type="checkbox" ng-model="renderModel.days[1]" /></div>
+                <div>Tuesday: <input type="checkbox" ng-model="renderModel.days[2]" /></div>
+                <div>Wednesday: <input type="checkbox" ng-model="renderModel.days[3]" /></div>
+                <div>Thursday: <input type="checkbox" ng-model="renderModel.days[4]" /></div>
+                <div>Friday: <input type="checkbox" ng-model="renderModel.days[5]" /></div>
+                <div>Saturday: <input type="checkbox" ng-model="renderModel.days[6]" /></div>
             </umb-pane>
         </div>
 
