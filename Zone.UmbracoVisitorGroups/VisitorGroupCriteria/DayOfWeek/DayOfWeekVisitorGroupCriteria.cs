@@ -2,8 +2,10 @@
 {
     using System;
     using System.Linq;
+    using ClientDependency.Core;
     using Newtonsoft.Json;
 
+    [ClientDependency(ClientDependencyType.Javascript, "/App_Plugins/UmbracoVisitorGroups/Resource/DayOfWeek/dayofweek.definition.editor.controller.js")]
     public class DayOfWeekVisitorGroupCriteria : IVisitorGroupCriteria
     {
         public string Name
@@ -24,6 +26,11 @@
         public string DefinitionSyntaxDescription
         {
             get { return "Example JSON: [ 1, 2, 6, 7 ].  Sunday is considered day 1."; }
+        }
+
+        public bool HasDefinitionEditorView
+        {
+            get { return true; }
         }
 
         public bool MatchesVisitor(string definition)

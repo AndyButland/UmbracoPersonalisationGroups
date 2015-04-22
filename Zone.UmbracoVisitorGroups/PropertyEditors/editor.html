@@ -1,5 +1,43 @@
 ﻿<div ng-controller="UmbracoVisitorGroups.VisitorGroupDefinitionController">
-    <textarea ng-model="model.value"></textarea>
+    Match:
+    <select ng-model="model.value.match">
+        <option value="All">All</option>
+        <option value="Any">Any</option>
+    </select>
+    <br/><br />
+
+    Add criteria:
+    <select ng-model="selectedCriteria"
+            ng-options="item.Name for item in availableCriteria"></select>
+    <button type="button" class="btn btn-default" ng-click="addCriteria()">Add</button>
+    <br/><br/>
+
+    <div>
+        <b ng-bind="selectedCriteria.Name"></b>: <span ng-bind="selectedCriteria.Description"></span>
+    </div>
+    <div>
+        <i ng-bind="selectedCriteria.DefinitionSyntaxDescription"></i>
+    </div>
     <br />
-    <span ng-bind="info"></span>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Criteria</td>
+            <td>Definition</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="detail in model.value.details">
+            <td><span ng-bind="getCriteriaName(detail.alias)"></span></td>
+            <td>
+                <textarea ng-model="detail.definition"></textarea>
+                <button type="button" class="btn" ng-if="criteriaHasDefinitionEditorView(detail.alias)" ng-click="editDefinitionDetail(detail)">...</button>
+            </td>
+            <td><button type="button" class="btn btn-default" ng-click="delete($index)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

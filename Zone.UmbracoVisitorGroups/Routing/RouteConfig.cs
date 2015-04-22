@@ -8,9 +8,21 @@
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
-                name: "Example",
-                url: "App_Plugins/UmbracoVisitorGroups/{action}/{id}",
-                defaults: new { controller = "Embedded", action = "Resource", id = UrlParameter.Optional }
+                name: "Visitor group criteria resources",
+                url: "App_Plugins/UmbracoVisitorGroups/Resource/{criteriaAlias}/{fileName}",
+                defaults: new { controller = "VisitorGroupDefinition", action = "Resource" }
+            );
+
+            routes.MapRoute(
+                name: "Visitor group resources",
+                url: "App_Plugins/UmbracoVisitorGroups/Resource/{fileName}",
+                defaults: new { controller = "VisitorGroupDefinition", action = "Resource" }
+            );
+
+            routes.MapRoute(
+                name: "Visitor group methods",
+                url: "App_Plugins/UmbracoVisitorGroups/{action}",
+                defaults: new { controller = "VisitorGroupDefinition", action = "Index" }
             );
         }
     }

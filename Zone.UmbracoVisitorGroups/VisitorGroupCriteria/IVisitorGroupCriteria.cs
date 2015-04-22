@@ -10,6 +10,8 @@
 
         string DefinitionSyntaxDescription { get; }
 
+        bool HasDefinitionEditorView { get; }
+
         bool MatchesVisitor(string definition);
     }
 }

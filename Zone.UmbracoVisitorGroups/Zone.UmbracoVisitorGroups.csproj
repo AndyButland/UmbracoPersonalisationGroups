@@ -193,7 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="PropertyEditors\EmbeddedControler.cs" />
+    <Compile Include="PropertyEditors\VisitorGroupDefinitionController.cs" />
     <Compile Include="PropertyEditors\VisitorGroupDefinitionPropertyEditor.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="Routing\RouteConfig.cs" />
@@ -214,7 +214,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PropertyEditors\editor.html" />
-    <EmbeddedResource Include="PropertyEditors\controller.js" />
+    <EmbeddedResource Include="PropertyEditors\editor.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VisitorGroupCriteria\DayOfWeek\dayofweek.definition.editor.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VisitorGroupCriteria\DayOfWeek\dayofweek.definition.editor.controller.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

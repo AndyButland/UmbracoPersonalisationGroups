@@ -36,14 +36,19 @@
 
         private static IEnumerable<IPublishedContent> GetPickedVisitorGroups(IPublishedContent content)
         {
-            if (content.HasProperty(GetVisitorGroupPickerAlias()))
+            var propertyAlias = GetVisitorGroupPickerAlias();
+            if (content.HasProperty(propertyAlias))
             {
-                var pickedVisitorGroupIds = content.GetProperty("propertyAlias").DataValue.ToString()
-                    .Split(',')
-                    .Select(x => int.Parse(x));
+                var propertyValue = content.GetProperty(propertyAlias).DataValue.ToString();
+                if (!string.IsNullOrEmpty(propertyValue))
+                {
+                    var pickedVisitorGroupIds = propertyValue
+                        .Split(',')
+                        .Select(x => int.Parse(x));
 
-                var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
-                return umbracoHelper.TypedContent(pickedVisitorGroupIds);
+                    var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
+                    return umbracoHelper.TypedContent(pickedVisitorGroupIds);
+                }
             }
 
             return Enumerable.Empty<IPublishedContent>();

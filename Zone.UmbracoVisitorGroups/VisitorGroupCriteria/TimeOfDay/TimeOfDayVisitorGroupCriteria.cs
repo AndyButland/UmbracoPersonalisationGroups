@@ -27,6 +27,11 @@
             get { return "Example JSON: [ { \"from\": 900, \"to\": 1000 }, { \"from\": 1700, \"to\": 1800 } ].  Sunday is considered day 1."; }
         }
 
+        public bool HasDefinitionEditorView
+        {
+            get { return false; }
+        }
+
         public bool MatchesVisitor(string definition)
         {
             if (string.IsNullOrEmpty(definition))

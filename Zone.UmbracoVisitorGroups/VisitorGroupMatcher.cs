@@ -14,9 +14,9 @@
             BuildAvailableCriteria();
         }
 
-        public static IEnumerable<string> GetAvailableCriteria()
+        public static IEnumerable<IVisitorGroupCriteria> GetAvailableCriteria()
         {
-            return _availableCriteria.Keys;
+            return _availableCriteria.Values;
         }
 
         public static bool IsMatch(VisitorGroupDefinitionDetail definitionDetail)
