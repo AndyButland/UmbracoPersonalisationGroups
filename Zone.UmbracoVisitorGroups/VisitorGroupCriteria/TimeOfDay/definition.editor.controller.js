@@ -2,6 +2,17 @@
     .controller("UmbracoVisitorGroups.TimeOfDayVisitorGroupCriteriaController",
         function ($scope) {
 
+            function isNumber(n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            };
+            
+            function isValidPeriod(from, to) {
+                return isNumber(from) && isNumber(to) &&
+                    parseInt(from) >= 0 && parseInt(from) < 2359 &&
+                    parseInt(to) >= 0 && parseInt(to) < 2359 &&
+                    parseInt(to) > parseInt(from);
+            };
+
             $scope.renderModel = {};
             $scope.renderModel.periods = [];
 
@@ -13,17 +24,6 @@
             $scope.newTo = "";
             $scope.currentEditPeriod = null;
             $scope.hasError = false;
-
-            function isNumber(n) {
-                return !isNaN(parseFloat(n)) && isFinite(n);
-            };
-            
-            function isValidPeriod(from, to) {
-                return isNumber(from) && isNumber(to) &&
-                    parseInt(from) >= 0 && parseInt(from) < 2359 &&
-                    parseInt(to) >= 0 && parseInt(to) < 2359 &&
-                    parseInt(to) > parseInt(from);
-            };
 
             $scope.edit = function (index) {
                 for (var i = 0; i < $scope.renderModel.periods.length; i++) {

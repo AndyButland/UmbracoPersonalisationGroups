@@ -1,35 +1,17 @@
 ﻿angular.module("umbraco")
     .controller("UmbracoVisitorGroups.VisitorGroupDefinitionController",
         function ($scope, $http, dialogService, assetsService) {
-            if (!$scope.model.value) {
-                $scope.model.value = { match: "All", details: [] };
-            }
 
-            // Load the available criteria
-            $scope.availableCriteria = [];
-            $scope.selectedCriteria = null;
-            $http.get("/App_Plugins/UmbracoVisitorGroups/AvailableCriteria")
-                .then(function (result) {
-
-                    // Assign to scope so can be selected for use
-                    $scope.availableCriteria = result.data;
-                    if (result.data.length > 0) {
-                        $scope.selectedCriteria = result.data[0];
-                    }
-
-                    // Load associated controllers needed for definition builders (this is working in the sense
-                    // that the controller is being loaded, but it's not found when the view loads from the dialogService)
-                    /*
-                    for (var i = 0; i < result.data.length; i++) {
-                        if (result.data[i].hasDefinitionEditorView) {
-                            var controllerPath = "/App_Plugins/UmbracoVisitorGroups/ResourceForCriteria/" + result.data[i].alias + "/definition.editor.controller.js";
-                            assetsService.loadJs(controllerPath).then(function () {
-                                console.log("Loaded controller.");
-                            });
+            function initAvailableCriteriaList() {
+                $scope.availableCriteria = [];
+                $http.get("/App_Plugins/UmbracoVisitorGroups/AvailableCriteria")
+                    .then(function (result) {
+                        $scope.availableCriteria = result.data;
+                        if (result.data.length > 0) {
+                            $scope.selectedCriteria = result.data[0];
                         }
-                    }
-                    */
-                });
+                    });
+            };
 
             function getCriteriaByAlias(alias) {
                 for (var i = 0; i < $scope.availableCriteria.length; i++) {
@@ -40,6 +22,14 @@
 
                 return null;
             };
+
+            if (!$scope.model.value) {
+                $scope.model.value = { match: "All", details: [] };
+            }
+
+            $scope.selectedCriteria = null;
+
+            initAvailableCriteriaList();
 
             $scope.addCriteria = function () {
                 var detail = { alias: $scope.selectedCriteria.alias, definition: "" };
