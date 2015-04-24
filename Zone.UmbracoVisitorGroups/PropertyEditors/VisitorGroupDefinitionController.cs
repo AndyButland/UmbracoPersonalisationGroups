@@ -1,5 +1,6 @@
 ﻿namespace Zone.UmbracoVisitorGroups.PropertyEditors
 {
+    using System;
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
@@ -39,14 +40,14 @@
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
             var criteria = VisitorGroupMatcher.GetAvailableCriteria()
-                .SingleOrDefault(x => x.Alias.ToLowerInvariant() == criteriaAlias.ToLowerInvariant());
+                .SingleOrDefault(x => string.Equals(x.Alias, criteriaAlias, StringComparison.InvariantCultureIgnoreCase));
             if (criteria != null)
             {
                 var resourceName =
                     criteria.GetType().Assembly
                         .GetManifestResourceNames()
                         .ToList()
-                        .FirstOrDefault(f => f.EndsWith(fileName));
+                        .FirstOrDefault(f => f.EndsWith(criteriaAlias + "." + fileName, StringComparison.InvariantCultureIgnoreCase));
 
                 var assembly = criteria.GetType().Assembly;
 

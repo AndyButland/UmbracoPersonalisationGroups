@@ -19,6 +19,7 @@
 
                     // Load associated controllers needed for definition builders (this is working in the sense
                     // that the controller is being loaded, but it's not found when the view loads from the dialogService)
+                    /*
                     for (var i = 0; i < result.data.length; i++) {
                         if (result.data[i].hasDefinitionEditorView) {
                             var controllerPath = "/App_Plugins/UmbracoVisitorGroups/ResourceForCriteria/" + result.data[i].alias + "/definition.editor.controller.js";
@@ -27,6 +28,7 @@
                             });
                         }
                     }
+                    */
                 });
 
             function getCriteriaByAlias(alias) {

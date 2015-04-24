@@ -30,7 +30,7 @@
 
         public bool HasDefinitionEditorView
         {
-            get { return false; }
+            get { return true; }
         }
 
         public bool MatchesVisitor(string definition)
