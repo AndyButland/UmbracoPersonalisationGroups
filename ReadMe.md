@@ -17,21 +17,29 @@ If things work out it'll hopefully be made into an Umbraco package and released 
 
 ## Set up and use
 
-As this is currently only available as source code there are a few manual steps required to set it up and use it in an Umbraco installation.  Firstly you'll need to download or clone the source code and build it.  Then reference the **Zone.UmbracoPersonalisationGroups.dll** file in an Umbraco project (everything is in this single dll).
+As this is currently only available as source code there are a few manual steps required to set it up and use it in an Umbraco installation.  Once created as an Umbraco package the necessary document types and data types will be included, but that's not the case at the moment.
+
+Firstly you'll need to download or clone the source code and build it.  Then reference the **Zone.UmbracoPersonalisationGroups.dll** file in an Umbraco project (everything is in this single dll).
 
 ### Data types (1)
 
-Having referenced this dll and started the Umbraco application you should find available a property editor called *Personalisation group definition*.  Create a data type based on this.  There are no pre-values to configure.
+Having referenced this dll and started the Umbraco application you should find available a property editor called **Personalisation group definition**.  Create a data type based on this.  There are no pre-values to configure.
 
 ### Document types
 
-Firstly I'd suggest setting up a container document type named e.g. *Personalisation Group Folder* - it doesn't need any properties nor a template. and should be allowed to be created at the site root or in a "data" folder as appropriate.
+Firstly I'd suggest setting up a container document type named e.g. *Personalisation Group Folder* - it doesn't need any properties nor a template and should be allowed to be created at the site root or in a "data" folder as appropriate.
 
 Allowable as a child within that should be a second document type named e.g. *Personalisation Group*.  This needs a single instance of the data type that was created above.  The alias for this property must be **definition**.
 
 ### Content (1)
 
-Create an instance of the *Personalisation Group Folder* and one or more *Personalisation Groups* underneath that.  You should find you can configure the personalisation groups for all the available criteria.  Firstly you choose whether to match all or any of the definitions you'll provide.  Then you configure one or more definitions by selecting the appropriate criteria.  The definition is specified as JSON according to a syntax specified by the given criteria.  Currently you'll see some instruction for this, but the easiest way to enter is to use the definition builder that's available via a dialogue box.
+Create an instance of the *Personalisation Group Folder* and one or more *Personalisation Groups* underneath that.  You should find you can configure the personalisation groups for all the available criteria.
+
+Firstly you choose whether to match all or any of the definitions you'll provide.  Then you configure one or more definitions by selecting the appropriate criteria.  The definition is specified as JSON according to a syntax specified by the given criteria.  Currently you'll see some instruction for this, but the easiest way to enter is to use the definition builder that's available via a dialogue box.
+
+![Editing a group definition](/documentation/group-editing.png?raw=true "Editing a group definition")
+
+![Editing a specific criteria](/documentation/definition-editing.png?raw=true "Editing a specific criteria")
 
 ### Data types (2)
 
@@ -43,7 +51,7 @@ For any content node you wish to personalise, add a new property of the *Persona
 
 ### Querying and templating
 
-You'll find that when you work in the templates any reference to an IPublishedContent type has a new extension method called **ShowToVisitor**.  By calling this you can determine if the current site visitor matches one ore more of the personalisation groups you have associated with the content (which in turn of course depend on the definition for the group you have configured.
+You'll find that when you work in the templates any reference to an IPublishedContent type has a new extension method called **ShowToVisitor()**.  By calling this you can determine if the current site visitor matches one ore more of the personalisation groups you have associated with the content (which in turn of course depend on the definition for the group you have configured).
 
 So for example, if you have repeated content such as a listing of pages, you can do this to just display the pages relevant for the current site visitor:
 
@@ -60,15 +68,15 @@ So for example, if you have repeated content such as a listing of pages, you can
 			</div>
 		}
 
-With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. "Page Variation".  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the *Personalisation group picker*.  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.
+With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. *Page Variation*.  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the *Personalisation group picker*.  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.
 
 ## How it works
 
 ### Personalisation group criteria (IPersonalisationGroupCriteria)
 
-Group criteria all implement an interface **IPersonalisationGroupCriteria** which provides a few properties to identify and describe the criteria as well as a single method - MatchesVisitor().
+Group criteria all implement an interface **IPersonalisationGroupCriteria** which provides a few properties to identify and describe the criteria as well as a single method - **MatchesVisitor()**.
 
-Implementations of this interface must provide logic in this method for checking whether the current site visitor matches the definition provided using a JSON syntax supported by the criteria.  So for example the *DayOfWeekPersonalisationGroupCriteria* expects a simple JSON array of day numbers - e.g. [1, 3, 5] - which is compared with the current day to determine a match.
+Implementations of this interface must provide logic in this method for checking whether the current site visitor matches the definition provided using a JSON syntax supported by the criteria.  So for example the **DayOfWeekPersonalisationGroupCriteria** expects a simple JSON array of day numbers - e.g. [1, 3, 5] - which is compared with the current day to determine a match.
 
 Currently there are just a couple of criteria provided:
 
@@ -77,7 +85,7 @@ Currently there are just a couple of criteria provided:
 
 ### PersonalisationGroupMatcher
 
-**PersonalisationGroupMatcher** is a static class that when first instantiated will scan all loaded assemblies for implementations of the IPersonalisationGroupCriteria interface.  It's in this way the package will support extensions through the development of other criteria that may not be in the core package itself.
+**PersonalisationGroupMatcher** is a static class that when first instantiated will scan all loaded assemblies for implementations of the IPersonalisationGroupCriteria interface and store references to them.  It's in this way the package will support extensions through the development of other criteria that may not be in the core package itself.
 
 It then makes these criteria available to application logic that needs to create group definitions based on them and to check if a given definition matches the related criteria.
 
@@ -87,7 +95,7 @@ It then makes these criteria available to application logic that needs to create
 
 ### PersonalisationGroupDefinitionController
 
-**PersonalisationGroupDefinitionController** is a controller that provides logic and resources to the angular view and controller used for the property editor.  It provides JSON end-points for the retrieval of the available criteria.  It also provides end-points for the retrieval of the angular assets that are provided as embedded resources in the single dll. See http://www.nibble.be/?p=415 for more detail on how this technique is implemented.
+**PersonalisationGroupDefinitionController** is a server-side controller that provides logic and resources to the angular view and controller used for the property editor.  It provides JSON end-points for the retrieval of the available criteria via HTTP requests.  It also provides methods for the retrieval of the angular assets that are provided as embedded resources in the package dll (or any extension dlls). See http://www.nibble.be/?p=415 for more detail on how this technique is implemented.
 
 ### Angular views and controllers
 
@@ -95,11 +103,11 @@ The primary view and controller for the property editor are **editor.html** and 
 
 ## How to extend it
 
-The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should mostly be straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of IPersonalisationGroupCriteria along with the embedded definition editor angular view and controller.
+The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should be mostly straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of **IPersonalisationGroupCriteria** along with the definition editor angular view and controller - **definition.editor.html** and **definition.editor.controller.js** - as embedded resources.
 
-There's one gotcha though, which is that it's not (I believe?) possible to load an angular controller into Umbraco once the back-office application itself has bootstrapped.  The only way to do this is via a property editor, specifically it's [PropertyEditorAsset] attribute which is detailed [here](http://issues.umbraco.org/issue/U4-3712).
+There's one gotcha though, which is that it's not (I believe) possible to load an angular controller into Umbraco once the back-office application itself has bootstrapped.  The only way to do this is via a property editor, specifically it's **[PropertyEditorAsset]** attribute which is detailed [here](http://issues.umbraco.org/issue/U4-3712).
 
-So in order to have the definition angular controller loaded, it's necessary to create a property editor to do this and have this defined within the extension dll:
+So in order to have the definition angular controller loaded, it's necessary to create a property editor to do this and have this defined within the extension dll, e.g.:
 
     /// <summary>
     /// This isn't a "real" property editor, it's rather a hack to inject the angular controller for this criteria definition builder.
