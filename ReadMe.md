@@ -21,7 +21,7 @@ As this is currently only available as source code there are a few manual steps 
 
 Firstly you'll need to download or clone the source code and build it.  Then reference the **Zone.UmbracoPersonalisationGroups.dll** file in an Umbraco project (everything is in this single dll).
 
-### Data types (1)
+### Data types - part 1
 
 Having referenced this dll and started the Umbraco application you should find available a property editor called **Personalisation group definition**.  Create a data type based on this.  There are no pre-values to configure.
 
@@ -31,7 +31,7 @@ Firstly I'd suggest setting up a container document type named e.g. *Personalisa
 
 Allowable as a child within that should be a second document type named e.g. *Personalisation Group*.  This needs a single instance of the data type that was created above.  The alias for this property must be **definition**.
 
-### Content (1)
+### Content - part 1
 
 Create an instance of the *Personalisation Group Folder* and one or more *Personalisation Groups* underneath that.  You should find you can configure the personalisation groups for all the available criteria.
 
@@ -41,11 +41,11 @@ Firstly you choose whether to match all or any of the definitions you'll provide
 
 ![Editing a specific criteria](/documentation/definition-editing.png?raw=true "Editing a specific criteria")
 
-### Data types (2)
+### Data types - part 2
 
 Going back to data types, create a new data type based on multi-node tree picker called e.g. *Personalisation group picker*.  Set it's root node to be where you've created the *Personalisation Group Folder* and the types of nodes available to select as just the *Personalisation Groups*.  
 
-### Content (2)
+### Content - part 2
 
 For any content node you wish to personalise, add a new property of the *Personalisation group picker* and select the appropriate groups.
 
@@ -100,6 +100,16 @@ It then makes these criteria available to application logic that needs to create
 ### Angular views and controllers
 
 The primary view and controller for the property editor are **editor.html** and **editor.controller.js** respectively.  In addition to these, each criteria has it's own view and controller that provide a user friendly means of configuring the definitions, named **definition.editor.html** and **definition.editor.controller.js** which are loaded via a call to the Umbraco dialogService.  All are provided as embedded resources.
+
+### PublishedContentExtensions
+
+**PublishedContentExtensions** defines the extension method on **IPublishedContent** named **ShowToVisitor()**.  This implements the following logic:
+
+- Checks for a group picker on the content, if there's not one then we return true (indicating to show to everyone)
+- If found get the list of groups picked
+- For each group picked, see if the definition provided matches the current site visitor.
+    - If any one of them does, we return true (indicating to show the content)
+	- If none of them do, we return false (indicating to hide the content)
 
 ## How to extend it
 
