@@ -1,10 +1,13 @@
-﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria
+﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria.DayOfWeek
 {
     using System;
     using System.Linq;
     using Newtonsoft.Json;
     using Umbraco.Core;
 
+    /// <summary>
+    /// Implements a visitor group criteria based on the day of the week
+    /// </summary>
     public class DayOfWeekVisitorGroupCriteria : IVisitorGroupCriteria
     {
         public string Name

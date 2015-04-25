@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria
+﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria.TimeOfDay
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,9 @@
     using Newtonsoft.Json;
     using Umbraco.Core;
 
+    /// <summary>
+    /// Implements a visitor group criteria based on the time of the day
+    /// </summary>
     public class TimeOfDayVisitorGroupCriteria : IVisitorGroupCriteria
     {
         public string Name

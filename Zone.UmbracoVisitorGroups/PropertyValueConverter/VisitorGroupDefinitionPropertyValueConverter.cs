@@ -5,6 +5,10 @@
     using Umbraco.Core.PropertyEditors;
     using Umbraco.Web;
 
+    /// <summary>
+    /// Property converter to convert the saved JSON representation of a visitor group definition to the
+    /// strongly typed model
+    /// </summary>
     [PropertyValueType(typeof(VisitorGroupDefinition))]
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.ContentCache)]
     public class VisitorGroupDefinitionPropertyValueConverter : PropertyValueConverterBase

@@ -2,7 +2,11 @@
 {
     using System.Web.Mvc;
     using System.Web.Routing;
+    using PropertyEditors;
 
+    /// <summary>
+    /// Configures custom routing for the <see cref="VisitorGroupDefinitionController"/>
+    /// </summary>
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)

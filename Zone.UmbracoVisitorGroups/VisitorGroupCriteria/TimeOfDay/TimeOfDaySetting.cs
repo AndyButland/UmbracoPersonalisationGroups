@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria
+﻿namespace Zone.UmbracoVisitorGroups.VisitorGroupCriteria.TimeOfDay
 {
     public class TimeOfDaySetting
     {

@@ -6,17 +6,27 @@
     using Umbraco.Core.Models;
     using Zone.UmbracoVisitorGroups;
 
+    /// <summary>
+    /// Provides extension methods to IPublishedContent
+    /// </summary>
     public static class PublishedContentExtensions
     {
+        /// <summary>
+        /// Adds an extension method to IPublishedContent to determine if the content item should be shown to the current site
+        /// visitor, based on the visitor groups associated with it.
+        /// </summary>
+        /// <param name="content">Instance of IPublishedContent</param>
+        /// <returns>True if content should be shown to visitor</returns>
         public static bool ShowToVisitor(this IPublishedContent content)
         {
-            var pickedVisitorGroups = GetPickedVisitorGroups(content).ToList();
+            var pickedVisitorGroups = GetPickedVisitorGroups(content);
             if (!pickedVisitorGroups.Any())
             {
                 // No visitor groups picked or no property for picker, so we assume available to all
                 return true;
             }
 
+            // Check each visitor group assigned for a match with the current site visitor
             foreach (var visitorGroup in pickedVisitorGroups)
             {
                 var definition = visitorGroup.GetPropertyValue<VisitorGroupDefinition>(Constants.VisitorGroupDefinitionPropertyAlias);
@@ -34,7 +44,12 @@
             return false;
         }
 
-        private static IEnumerable<IPublishedContent> GetPickedVisitorGroups(IPublishedContent content)
+        /// <summary>
+        /// Gets the list of visitor group content items associated with the current content item
+        /// </summary>
+        /// <param name="content">Instance of IPublished content</param>
+        /// <returns>List of visitor group content items</returns>
+        private static IList<IPublishedContent> GetPickedVisitorGroups(IPublishedContent content)
         {
             var propertyAlias = GetVisitorGroupPickerAlias();
             if (content.HasProperty(propertyAlias))
@@ -47,24 +62,36 @@
                         .Select(x => int.Parse(x));
 
                     var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
-                    return umbracoHelper.TypedContent(pickedVisitorGroupIds);
+                    return umbracoHelper.TypedContent(pickedVisitorGroupIds).ToList();
                 }
             }
 
-            return Enumerable.Empty<IPublishedContent>();
+            return new List<IPublishedContent>();
         }
 
+        /// <summary>
+        /// Gets the alias used for identifying the picked visitor groups
+        /// </summary>
+        /// <returns>Alias string</returns>
         private static string GetVisitorGroupPickerAlias()
         {
+            // First check if defined in config
             var visitorGroupPickerAlias = ConfigurationManager.AppSettings["visitorGroups.visitorGroupPickerAlias"];
             if (string.IsNullOrEmpty(visitorGroupPickerAlias))
             {
+                // If not, use the convention alias
                 visitorGroupPickerAlias = Constants.DefaultVisitorGroupPickerAlias;
             }
 
             return visitorGroupPickerAlias;
         }
 
+        /// <summary>
+        /// Gets a count of the number of the definition details for a given visitor group definition that matches
+        /// the current site visitor
+        /// </summary>
+        /// <param name="definition">Visitor group definition</param>
+        /// <returns>Number of definition details that match</returns>
         private static int CountMatchingDefinitionDetails(VisitorGroupDefinition definition)
         {
             var matchCount = 0;

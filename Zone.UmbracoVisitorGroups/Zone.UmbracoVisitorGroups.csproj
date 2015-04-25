@@ -198,6 +198,8 @@
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="Routing\RouteConfig.cs" />
     <Compile Include="UmbracoApplicationEvents.cs" />
+    <Compile Include="VisitorGroupCriteria\DayOfWeek\DummyPropertyEditor.cs" />
+    <Compile Include="VisitorGroupCriteria\TimeOfDay\DummyPropertyEditor.cs" />
     <Compile Include="VisitorGroupCriteria\TimeOfDay\TimeOfDaySetting.cs" />
     <Compile Include="VisitorGroupCriteria\TimeOfDay\TimeOfDayVisitorGroupCriteria.cs" />
     <Compile Include="VisitorGroupCriteria\DayOfWeek\DayOfWeekVisitorGroupCriteria.cs" />
