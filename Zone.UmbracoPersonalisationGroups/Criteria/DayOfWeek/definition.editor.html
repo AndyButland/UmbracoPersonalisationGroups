@@ -1,0 +1,34 @@
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.DayOfWeekPersonalisationGroupCriteriaController">
+
+    <div class="umb-panel-body no-header with-footer compact">
+
+        <p>Please select the days for which this group will be valid:</p>
+
+        <umb-pane>
+            <table>
+                <tr><td>Sunday: </td><td><input type="checkbox" ng-model="renderModel.days[0]"/></td></tr>
+                <tr><td>Monday: </td><td><input type="checkbox" ng-model="renderModel.days[1]"/></td></tr>
+                <tr><td>Tuesday: </td><td><input type="checkbox" ng-model="renderModel.days[2]"/></td></tr>
+                <tr><td>Wednesday: </td><td><input type="checkbox" ng-model="renderModel.days[3]"/></td></tr>
+                <tr><td>Thursday: </td><td><input type="checkbox" ng-model="renderModel.days[4]"/></td></tr>
+                <tr><td>Friday: </td><td><input type="checkbox" ng-model="renderModel.days[5]"/></td></tr>
+                <tr><td>Saturday: </td><td><input type="checkbox" ng-model="renderModel.days[6]" /></td></tr>
+            </table>
+        </umb-pane>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

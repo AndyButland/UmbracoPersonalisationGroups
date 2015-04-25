@@ -1,0 +1,18 @@
+﻿namespace Zone.UmbracoPersonalisationGroups.PropertyEditors
+{
+    using ClientDependency.Core;
+    using Umbraco.Core.PropertyEditors;
+    using Umbraco.Web.PropertyEditors;
+    using Constants = Constants;
+
+    /// <summary>
+    /// Property editor for managing the definition of a personalisation group
+    /// </summary>
+    [PropertyEditor(Constants.PersonalisationGroupDefinitionPropertyEditorAlias, "Personalisation group definition", "/App_Plugins/UmbracoPersonalisationGroups/Resource/editor.html", ValueType = "JSON")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/Resource/editor.controller.js")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/dayOfWeek/definition.editor.controller.js")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/timeOfDay/definition.editor.controller.js")]
+    public class PersonalisationGroupDefinitionPropertyEditor : PropertyEditor
+    {
+    }
+}
