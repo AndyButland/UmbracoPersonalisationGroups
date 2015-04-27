@@ -140,6 +140,6 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 The following tasks are planned to continue development of this package:
 
-- Implementation of further criteria, including cookie value, session key value and geographical
+- Implementation of further criteria, including cookie value, session key value, geographical and member based
 - Release as a package on our.umbraco.org
 
