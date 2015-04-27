@@ -25,16 +25,6 @@
             get { return "Matches visitor session with defined days of the week"; }
         }
 
-        public string DefinitionSyntaxDescription
-        {
-            get { return "Example JSON: [ 1, 2, 6, 7 ].  Sunday is considered day 1."; }
-        }
-
-        public bool HasDefinitionEditorView
-        {
-            get { return true; }
-        }
-
         public bool MatchesVisitor(string definition)
         {
             Mandate.ParameterNotNullOrEmpty(definition, "definition");

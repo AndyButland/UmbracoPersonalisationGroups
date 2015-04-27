@@ -99,7 +99,11 @@ It then makes these criteria available to application logic that needs to create
 
 ### Angular views and controllers
 
-The primary view and controller for the property editor are **editor.html** and **editor.controller.js** respectively.  In addition to these, each criteria has it's own view and controller that provide a user friendly means of configuring the definitions, named **definition.editor.html** and **definition.editor.controller.js** which are loaded via a call to the Umbraco dialogService.  All are provided as embedded resources.
+The primary view and controller for the property editor are **editor.html** and **editor.controller.js** respectively.
+
+In addition to these, each criteria has it's own view and controller that provide a user friendly means of configuring the definitions, named **definition.editor.html** and **definition.editor.controller.js** which are loaded via a call to the Umbraco dialogService.  All are provided as embedded resources.
+
+Each criteria also has an angular service named **definition.translator.js** responsible for translating the JSON syntax into something more human readable.  So again for example the **DayOfWeekPersonalisationGroupCriteria** will render "Sunday, Tuesday, Thursday" from [1, 3, 5].
 
 ### PublishedContentExtensions
 
@@ -113,7 +117,7 @@ The primary view and controller for the property editor are **editor.html** and 
 
 ## How to extend it
 
-The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should be mostly straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of **IPersonalisationGroupCriteria** along with the definition editor angular view and controller - **definition.editor.html** and **definition.editor.controller.js** - as embedded resources.
+The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should be mostly straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of **IPersonalisationGroupCriteria** along with the definition editor angular view, controller and translation service - **definition.editor.html**, **definition.editor.controller.js** and **definition.definition.translator.js** respectively - as embedded resources.
 
 There's one gotcha though, which is that it's not (I believe) possible to load an angular controller into Umbraco once the back-office application itself has bootstrapped.  The only way to do this is via a property editor, specifically it's **[PropertyEditorAsset]** attribute which is detailed [here](http://issues.umbraco.org/issue/U4-3712).
 
@@ -125,6 +129,7 @@ So in order to have the definition angular controller loaded, it's necessary to 
     /// </summary>
     [PropertyEditor("personalisationGroupDefinitionDayOfWeek", "Visitor group definition (day of week - don't use)")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/dayOfWeek/definition.editor.controller.js")]
+	[PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/dayOfWeek/definition.translator.js")]
     public class DummyDefinitionPropertyEditor : PropertyEditor
     {
     }
@@ -136,6 +141,5 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 The following tasks are planned to continue development of this package:
 
 - Implementation of further criteria, including cookie value, session key value and geographical
-- Find a nicer way of presenting the definition, so hiding the JSON and displaying as a human readable translation
 - Release as a package on our.umbraco.org
 

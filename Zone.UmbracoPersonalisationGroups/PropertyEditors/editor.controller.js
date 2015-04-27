@@ -1,6 +1,18 @@
 ﻿angular.module("umbraco")
     .controller("UmbracoPersonalisationGroups.PersonalisationGroupDefinitionController",
-        function ($scope, $http, dialogService, assetsService) {
+        function ($scope, $http, $injector, dialogService) {
+
+            var translators = [];
+
+            function convertToPascalCase(s) {
+                return s.charAt(0).toUpperCase() + s.substr(1);
+            }
+
+            function loadTranslators() {
+                for (var i = 0; i < $scope.availableCriteria.length; i++) {
+                    translators.push($injector.get("UmbracoPersonalisationGroups." + convertToPascalCase($scope.availableCriteria[i].alias) + "TranslatorService"));
+                }
+            }
 
             function initAvailableCriteriaList() {
                 $scope.availableCriteria = [];
@@ -10,7 +22,9 @@
                         if (result.data.length > 0) {
                             $scope.selectedCriteria = result.data[0];
                         }
-                    });
+
+                        loadTranslators();
+                });
             };
 
             function getCriteriaByAlias(alias) {
@@ -21,6 +35,19 @@
                 }
 
                 return null;
+            };
+
+            function getCriteriaIndexByAlias(alias) {
+                var index = 0;
+                for (var i = 0; i < $scope.availableCriteria.length; i++) {
+                    if ($scope.availableCriteria[i].alias === alias) {
+                        return index;
+                    }
+
+                    index++;
+                }
+
+                return -1;
             };
 
             if (!$scope.model.value) {
@@ -61,12 +88,12 @@
                 return "";
             };
 
-            $scope.criteriaHasDefinitionEditorView = function (alias) {
-                var criteria = getCriteriaByAlias(alias);
-                if (criteria) {
-                    return criteria.hasDefinitionEditorView;
+            $scope.getDefinitionTranslation = function (definitionDetail) {
+                var translator = translators[getCriteriaIndexByAlias(definitionDetail.alias)];
+                if (translator) {
+                    return translator.translate(definitionDetail.definition);
                 }
 
-                return false;
+                return "";
             };
         });

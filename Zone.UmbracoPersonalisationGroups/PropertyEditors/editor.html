@@ -15,9 +15,6 @@
     <div>
         <b ng-bind="selectedCriteria.name"></b>: <span ng-bind="selectedCriteria.description"></span>
     </div>
-    <div>
-        <i ng-bind="selectedCriteria.definitionSyntaxDescription"></i>
-    </div>
     <br />
 
     <table class="table table-striped">
@@ -32,10 +29,10 @@
             <tr ng-repeat="detail in model.value.details">
                 <td><span ng-bind="getCriteriaName(detail.alias)"></span></td>
                 <td>
-                    <textarea ng-model="detail.definition"></textarea>
-                    <button type="button" class="btn" ng-if="criteriaHasDefinitionEditorView(detail.alias)" ng-click="editDefinitionDetail(detail)">...</button>
+                    <span ng-bind="getDefinitionTranslation(detail)"></span>
                 </td>
                 <td>
+                    <button type="button" class="btn btn-default" ng-click="editDefinitionDetail(detail)">Edit</button>                    
                     <button type="button" class="btn btn-default" ng-click="delete($index)">Delete</button>
                 </td>
             </tr>

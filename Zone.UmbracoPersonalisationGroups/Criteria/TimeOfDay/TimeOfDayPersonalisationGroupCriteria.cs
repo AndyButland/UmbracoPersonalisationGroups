@@ -26,16 +26,6 @@
             get { return "Matches visitor session with defined times of the day"; }
         }
 
-        public string DefinitionSyntaxDescription
-        {
-            get { return "Example JSON: [ { \"from\": 900, \"to\": 1000 }, { \"from\": 1700, \"to\": 1800 } ].  Sunday is considered day 1."; }
-        }
-
-        public bool HasDefinitionEditorView
-        {
-            get { return true; }
-        }
-
         public bool MatchesVisitor(string definition)
         {
             Mandate.ParameterNotNullOrEmpty(definition, "definition");
