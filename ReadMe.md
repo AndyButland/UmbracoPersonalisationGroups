@@ -136,5 +136,6 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 The following tasks are planned to continue development of this package:
 
 - Implementation of further criteria, including cookie value, session key value and geographical
+- Find a nicer way of presenting the definition, so hiding the JSON and displaying as a human readable translation
 - Release as a package on our.umbraco.org
 
