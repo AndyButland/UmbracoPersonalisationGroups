@@ -5,6 +5,10 @@
 Umbraco Personalisation Groups is an Umbraco package intended to allow personalisation of content to different groups of site visitors.  It contains a few different pieces:
 
 - An interface for and various implementations of different personalisation group criteria (e.g. "time of day", "day of week")
+- Implementation of the following criteria:
+    - Day of week
+    - Time of day
+    - Cookie key presence/absence and value matching
 - An extensible mechanism to allow other criteria to be created and loaded from other assemblies
 - A property editor with associated angular controllers/views that provide the means of configuring personalisation groups based on the available criteria
 - A single extension method on IPublishedContent named ShowToVisitor() that allows checking if the content should be available for the current site visitor
@@ -78,10 +82,11 @@ Group criteria all implement an interface **IPersonalisationGroupCriteria** whic
 
 Implementations of this interface must provide logic in this method for checking whether the current site visitor matches the definition provided using a JSON syntax supported by the criteria.  So for example the **DayOfWeekPersonalisationGroupCriteria** expects a simple JSON array of day numbers - e.g. [1, 3, 5] - which is compared with the current day to determine a match.
 
-Currently there are just a couple of criteria provided:
+The following criteria have been implemented:
 
 - Day of week (DayOfWeekPersonalisationGroupCriteria)
 - Time of day (TimeOfDayPersonalisationGroupCriteria)
+- Cookie key presence/absence and value matching (CookiePersonalisationGroupCriteria)
 
 ### PersonalisationGroupMatcher
 
@@ -140,6 +145,6 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 The following tasks are planned to continue development of this package:
 
-- Implementation of further criteria, including cookie value, session key value, geographical and member based
+- Implementation of further criteria, including session key value, geographical and member based
 - Release as a package on our.umbraco.org
 
