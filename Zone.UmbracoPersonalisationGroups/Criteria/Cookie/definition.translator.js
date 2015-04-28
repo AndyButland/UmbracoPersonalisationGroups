@@ -1,18 +1,26 @@
 ﻿angular.module("umbraco.services")
-	.factory("UmbracoPersonalisationGroups.DayOfWeekTranslatorService", function () {
+	.factory("UmbracoPersonalisationGroups.CookieTranslatorService", function () {
 
 	    var service = {
 	        translate: function (definition) {
 	            var translation = "";
-	            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	            var selectedDays = JSON.parse(definition);
-
-	            for (var i = 0; i < selectedDays.length; i++) {
-	                if (translation.length > 0) {
-	                    translation += ", ";
+	            if (definition) {
+	                var selectedCookieDetails = JSON.parse(definition);
+	                translation = "Cookie with key '" + selectedCookieDetails.key + "' ";
+	                switch (selectedCookieDetails.match) {
+	                case "Exists":
+	                    translation += "is present.";
+	                    break;
+	                case "DoesNotExist":
+	                    translation += "is not present.";
+	                    break;
+	                case "MatchesValue":
+	                    translation += "matches value '" + selectedCookieDetails.value + "'.";
+	                    break;
+	                case "ContainsValue":
+	                    translation += "contains value '" + selectedCookieDetails.value + "'.";
+	                    break;
 	                }
-
-	                translation += days[selectedDays[i] - 1];
 	            }
 
 	            return translation;

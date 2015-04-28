@@ -1,18 +1,24 @@
-﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.DayOfWeekPersonalisationGroupCriteriaController">
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.CookiePersonalisationGroupCriteriaController">
 
     <div class="umb-panel-body no-header with-footer compact">
 
-        <p>Please select the days for which this group will be valid:</p>
+        <p>Please enter the cookie settings:</p>
 
         <umb-pane>
             <table>
-                <tr><td>Sunday: </td><td><input type="checkbox" ng-model="renderModel.days[0]"/></td></tr>
-                <tr><td>Monday: </td><td><input type="checkbox" ng-model="renderModel.days[1]"/></td></tr>
-                <tr><td>Tuesday: </td><td><input type="checkbox" ng-model="renderModel.days[2]"/></td></tr>
-                <tr><td>Wednesday: </td><td><input type="checkbox" ng-model="renderModel.days[3]"/></td></tr>
-                <tr><td>Thursday: </td><td><input type="checkbox" ng-model="renderModel.days[4]"/></td></tr>
-                <tr><td>Friday: </td><td><input type="checkbox" ng-model="renderModel.days[5]"/></td></tr>
-                <tr><td>Saturday: </td><td><input type="checkbox" ng-model="renderModel.days[6]" /></td></tr>
+                <tr><td>Key: </td><td><input type="text" ng-model="renderModel.key" /></td></tr>
+                <tr>
+                    <td>Match: </td>
+                    <td>
+                        <select ng-model="renderModel.match">
+                            <option value="Exists">Cookie is present</option>
+                            <option value="DoesNotExist">Cookie is absent</option>
+                            <option value="MatchesValue">Cookie value matches</option>
+                            <option value="ContainsValue">Cookie value contains</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td>Value: </td><td><input type="text" ng-model="renderModel.value" ng-disabled="!valueRequired()" /></td></tr>
             </table>
         </umb-pane>
     </div>

@@ -17,6 +17,9 @@
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/timeOfDay/definition.editor.controller.js")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/timeOfDay/definition.translator.js")]
+
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/cookie/definition.editor.controller.js")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/cookie/definition.translator.js")]
     public class PersonalisationGroupDefinitionPropertyEditor : PropertyEditor
     {
     }

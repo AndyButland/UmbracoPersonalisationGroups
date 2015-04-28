@@ -1,33 +1,23 @@
 ﻿angular.module("umbraco")
-    .controller("UmbracoPersonalisationGroups.DayOfWeekPersonalisationGroupCriteriaController",
+    .controller("UmbracoPersonalisationGroups.CookiePersonalisationGroupCriteriaController",
         function ($scope) {
 
             $scope.renderModel = {};
-            $scope.renderModel.days = [];
-            for (var i = 0; i < 7; i++) {
-                $scope.renderModel.days.push(false);
-            }
 
             if ($scope.dialogOptions.definition) {
-                var selectedDays = JSON.parse($scope.dialogOptions.definition);
-                for (var i = 0; i < selectedDays.length; i++) {
-                    $scope.renderModel.days[i + 1] = true;
-                }
+                var cookieSettings = JSON.parse($scope.dialogOptions.definition);
+                $scope.renderModel = cookieSettings;
             }
 
+            $scope.valueRequired = function() {
+                return $scope.renderModel.match === "MatchesValue" || $scope.renderModel.match === "ContainsValue";
+            };
+
             $scope.saveAndClose = function () {
-                var serializedResult = "[";
-                for (var i = 0; i < 7; i++) {
-                    if ($scope.renderModel.days[i]) {
-                        if (serializedResult.length > 1) {
-                            serializedResult += ",";
-                        }
+                var serializedResult = "{ \"key\": \"" + $scope.renderModel.key + "\", " +
+                    "\"match\": \"" + $scope.renderModel.match + "\", " + 
+                    "\"value\": \"" + ($scope.valueRequired() ? $scope.renderModel.value : "") + "\" }";
 
-                        serializedResult += (i + 1);
-                    }
-                }
-
-                serializedResult += "]";
                 $scope.submit(serializedResult);
             };
 
