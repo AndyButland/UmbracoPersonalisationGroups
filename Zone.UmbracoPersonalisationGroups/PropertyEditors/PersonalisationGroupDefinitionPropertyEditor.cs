@@ -20,6 +20,9 @@
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/cookie/definition.editor.controller.js")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/cookie/definition.translator.js")]
+
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/session/definition.editor.controller.js")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/session/definition.translator.js")]
     public class PersonalisationGroupDefinitionPropertyEditor : PropertyEditor
     {
     }

@@ -29,7 +29,8 @@
         /// <returns></returns>
         public static IEnumerable<IPersonalisationGroupCriteria> GetAvailableCriteria()
         {
-            return _availableCriteria.Values;
+            return _availableCriteria.Values
+                .OrderBy(x => x.Name);
         }
 
         /// <summary>

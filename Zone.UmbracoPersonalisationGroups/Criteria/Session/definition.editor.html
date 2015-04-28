@@ -1,0 +1,40 @@
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.SessionPersonalisationGroupCriteriaController">
+
+    <div class="umb-panel-body no-header with-footer compact">
+
+        <p>Please enter the session settings:</p>
+
+        <umb-pane>
+            <table>
+                <tr><td>Key: </td><td><input type="text" ng-model="renderModel.key" /></td></tr>
+                <tr>
+                    <td>Match: </td>
+                    <td>
+                        <select ng-model="renderModel.match">
+                            <option value="Exists">Key is present</option>
+                            <option value="DoesNotExist">Key is absent</option>
+                            <option value="MatchesValue">Value matches</option>
+                            <option value="ContainsValue">Value contains</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td>Value: </td><td><input type="text" ng-model="renderModel.value" ng-disabled="!valueRequired()" /></td></tr>
+            </table>
+        </umb-pane>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

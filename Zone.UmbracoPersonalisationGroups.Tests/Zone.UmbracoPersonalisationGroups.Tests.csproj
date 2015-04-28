@@ -53,11 +53,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Criteria\DayOfWeek\DayOfWeekVisitorGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\Session\SessionPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\DayOfWeek\DayOfWeekPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="PersonalisationGroupMatcherTests.cs" />
-    <Compile Include="Criteria\Cookie\CookieVisitorGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\Cookie\CookiePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Criteria\TimeOfDay\TimeOfDayVisitorGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\TimeOfDay\TimeOfDayPersonalisationGroupCriteriaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zone.UmbracoPersonalisationGroups\Zone.UmbracoPersonalisationGroups.csproj">

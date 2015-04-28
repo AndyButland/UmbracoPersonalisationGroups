@@ -1,13 +1,13 @@
 ﻿angular.module("umbraco.services")
-	.factory("UmbracoPersonalisationGroups.CookieTranslatorService", function () {
+	.factory("UmbracoPersonalisationGroups.SessionTranslatorService", function () {
 
 	    var service = {
 	        translate: function (definition) {
 	            var translation = "";
 	            if (definition) {
-	                var selectedCookieDetails = JSON.parse(definition);
-	                translation = "Cookie with key '" + selectedCookieDetails.key + "' ";
-	                switch (selectedCookieDetails.match) {
+	                var selectedSessionDetails = JSON.parse(definition);
+	                translation = "Session key '" + selectedSessionDetails.key + "' ";
+	                switch (selectedSessionDetails.match) {
 	                case "Exists":
 	                    translation += "is present.";
 	                    break;
@@ -15,10 +15,10 @@
 	                    translation += "is absent.";
 	                    break;
 	                case "MatchesValue":
-	                    translation += "matches value '" + selectedCookieDetails.value + "'.";
+	                    translation += "matches value '" + selectedSessionDetails.value + "'.";
 	                    break;
 	                case "ContainsValue":
-	                    translation += "contains value '" + selectedCookieDetails.value + "'.";
+	                    translation += "contains value '" + selectedSessionDetails.value + "'.";
 	                    break;
 	                }
 	            }

@@ -55,9 +55,9 @@
                 throw new ArgumentNullException("key", "Cookie key not set");
             }
 
-            var cookiesExists = _cookieProvider.CookieExists(cookieSetting.Key);
+            var cookieExists = _cookieProvider.CookieExists(cookieSetting.Key);
             var cookieValue = string.Empty;
-            if (cookiesExists)
+            if (cookieExists)
             {
                 cookieValue = _cookieProvider.GetCookieValue(cookieSetting.Key);
             }
@@ -65,13 +65,13 @@
             switch (cookieSetting.Match)
             {
                 case CookieSettingMatch.Exists:
-                    return cookiesExists;
+                    return cookieExists;
                 case CookieSettingMatch.DoesNotExist:
-                    return !cookiesExists;
+                    return !cookieExists;
                 case CookieSettingMatch.MatchesValue:
-                    return cookiesExists && cookieValue == cookieSetting.Value;
+                    return cookieExists && cookieValue == cookieSetting.Value;
                 case CookieSettingMatch.ContainsValue:
-                    return cookiesExists && cookieValue.Contains(cookieSetting.Value);
+                    return cookieExists && cookieValue.Contains(cookieSetting.Value);
                 default:
                     return false;
             }
