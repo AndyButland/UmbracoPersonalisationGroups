@@ -10,6 +10,7 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
     - Time of day
     - Cookie key presence/absence and value matching
     - Session key presence/absence and value matching
+	- Authentication status
 - An extensible mechanism to allow other criteria to be created and loaded from other assemblies
 - A property editor with associated angular controllers/views that provide the means of configuring personalisation groups based on the available criteria
 - A single extension method on IPublishedContent named ShowToVisitor() that allows checking if the content should be available for the current site visitor
@@ -88,7 +89,8 @@ The following criteria have been implemented:
 - Day of week (DayOfWeekPersonalisationGroupCriteria)
 - Time of day (TimeOfDayPersonalisationGroupCriteria)
 - Cookie key presence/absence and value matching (CookiePersonalisationGroupCriteria)
-- Session key presence/absence and value matching (CookiePersonalisationGroupCriteria)
+- Session key presence/absence and value matching (SessionPersonalisationGroupCriteria)
+- Authentication status (AuthenticationStatusPersonalisationGroupCriteria)
 
 ### PersonalisationGroupMatcher
 
