@@ -61,6 +61,7 @@
             $scope.addCriteria = function () {
                 var detail = { alias: $scope.selectedCriteria.alias, definition: "" };
                 $scope.model.value.details.push(detail);
+                $scope.editDefinitionDetail(detail);
             };
 
             $scope.editDefinitionDetail = function (definitionDetail) {
