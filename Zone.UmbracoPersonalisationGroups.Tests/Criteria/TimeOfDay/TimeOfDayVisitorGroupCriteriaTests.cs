@@ -7,6 +7,8 @@
     [TestClass]
     public class TimeOfDayPersonalisationGroupCriteriaTests
     {
+        private const string DefinitionFormat = "[ {{ \"from\": {0}, \"to\": {1} }}, {{ \"from\": {2}, \"to\": {3} }} ]";
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithEmptyDefinition_ThrowsException()
@@ -49,7 +51,7 @@
         {
             // Arrange
             var criteria = new TimeOfDayPersonalisationGroupCriteria();
-            var definition = string.Format("[ {{ \"from\": {0}, \"to\": {1} }}, {{ \"from\": {2}, \"to\": {3} }} ]",
+            var definition = string.Format(DefinitionFormat,
                 DateTime.Now.AddHours(2).ToString("HHmm"), 
                 DateTime.Now.AddHours(2).AddMinutes(30).ToString("HHmm"),
                 DateTime.Now.AddHours(4).ToString("HHmm"), 
@@ -67,7 +69,7 @@
         {
             // Arrange
             var criteria = new TimeOfDayPersonalisationGroupCriteria();
-            var definition = string.Format("[ {{ \"from\": {0}, \"to\": {1} }}, {{ \"from\": {2}, \"to\": {3} }} ]",
+            var definition = string.Format(DefinitionFormat,
                 DateTime.Now.AddMinutes(-1).ToString("HHmm"),
                 DateTime.Now.AddMinutes(30).ToString("HHmm"),
                 DateTime.Now.AddHours(4).ToString("HHmm"),

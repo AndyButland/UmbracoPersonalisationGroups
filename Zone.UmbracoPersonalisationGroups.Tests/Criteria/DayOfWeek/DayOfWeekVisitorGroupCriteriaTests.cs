@@ -7,6 +7,8 @@
     [TestClass]
     public class DayOfWeekPersonalisationGroupCriteriaTests
     {
+        private const string DefinitionFormat = "[ {0}, {1} ]";
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DayOfWeekPersonalisationGroupCriteria_MatchesVisitor_WithEmptyDefinition_ThrowsException()
@@ -49,7 +51,7 @@
         {
             // Arrange
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
-            var definition = string.Format("[ {0}, {1} ]", 
+            var definition = string.Format(DefinitionFormat, 
                 (int)(DateTime.Now.AddDays(1).DayOfWeek), 
                 (int)(DateTime.Now.AddDays(2).DayOfWeek));
 
@@ -65,7 +67,7 @@
         {
             // Arrange
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
-            var definition = string.Format("[ {0}, {1} ]", 
+            var definition = string.Format(DefinitionFormat, 
                 (int)(DateTime.Now.DayOfWeek), 
                 (int)(DateTime.Now.AddDays(1).DayOfWeek));
 
