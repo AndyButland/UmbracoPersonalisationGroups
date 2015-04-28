@@ -19,7 +19,7 @@
             var criteria = new CookiePersonalisationGroupCriteria(mockCookieProvider.Object);
 
             // Act
-            criteria.MatchesVisitor((string) null);
+            criteria.MatchesVisitor((string)null);
         }
 
         [TestMethod]

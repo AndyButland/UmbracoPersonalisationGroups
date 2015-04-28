@@ -32,8 +32,8 @@
                 var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(Constants.PersonalisationGroupDefinitionPropertyAlias);
                 var matchCount = CountMatchingDefinitionDetails(definition);
 
-                if (definition.Match == PersonalisationGroupDefinitionMatch.Any && matchCount > 0 ||
-                    definition.Match == PersonalisationGroupDefinitionMatch.All && matchCount == definition.Details.Count())
+                if ((definition.Match == PersonalisationGroupDefinitionMatch.Any && matchCount > 0) ||
+                    (definition.Match == PersonalisationGroupDefinitionMatch.All && matchCount == definition.Details.Count()))
                 {
                     // We've matched one of the definitions associated with a selected personalisation group
                     return true;
@@ -104,8 +104,8 @@
                 }
 
                 // We can short-cut here if matching any and found one match, or matching all and found one mismatch
-                if (isMatch && definition.Match == PersonalisationGroupDefinitionMatch.Any ||
-                    !isMatch && definition.Match == PersonalisationGroupDefinitionMatch.All)
+                if ((isMatch && definition.Match == PersonalisationGroupDefinitionMatch.Any) ||
+                    (!isMatch && definition.Match == PersonalisationGroupDefinitionMatch.All))
                 {
                     break;
                 }

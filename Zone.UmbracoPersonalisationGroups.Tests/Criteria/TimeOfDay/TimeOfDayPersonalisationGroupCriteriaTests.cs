@@ -17,7 +17,7 @@
             var criteria = new TimeOfDayPersonalisationGroupCriteria();
 
             // Act
-            criteria.MatchesVisitor((string) null);
+            criteria.MatchesVisitor((string)null);
         }
 
         [TestMethod]
@@ -52,9 +52,9 @@
             // Arrange
             var criteria = new TimeOfDayPersonalisationGroupCriteria();
             var definition = string.Format(DefinitionFormat,
-                DateTime.Now.AddHours(2).ToString("HHmm"), 
+                DateTime.Now.AddHours(2).ToString("HHmm"),
                 DateTime.Now.AddHours(2).AddMinutes(30).ToString("HHmm"),
-                DateTime.Now.AddHours(4).ToString("HHmm"), 
+                DateTime.Now.AddHours(4).ToString("HHmm"),
                 DateTime.Now.AddHours(4).AddMinutes(30).ToString("HHmm"));
 
             // Act

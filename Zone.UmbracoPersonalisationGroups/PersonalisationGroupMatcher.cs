@@ -6,17 +6,17 @@
     using Zone.UmbracoPersonalisationGroups.Criteria;
 
     /// <summary>
-    /// Static class providing available details and matchin logic for personalisation groups
+    /// Static class providing available details and matching logic for personalisation groups
     /// </summary>
     public static class PersonalisationGroupMatcher
     {
         /// <summary>
         /// Application lifetime variable storing the available personalisation group criteria
         /// </summary>
-        private static readonly Dictionary<string, IPersonalisationGroupCriteria> _availableCriteria = new Dictionary<string, IPersonalisationGroupCriteria>();
+        private static readonly Dictionary<string, IPersonalisationGroupCriteria> AvailableCriteria = new Dictionary<string, IPersonalisationGroupCriteria>();
 
         /// <summary>
-        /// Constructor of the static class called once to retrieve and store the available personalisation group criteria 
+        /// Initializes static members of the <see cref="PersonalisationGroupMatcher"/> class. Called once to retrieve and store the available personalisation group criteria.
         /// </summary>
         static PersonalisationGroupMatcher()
         {
@@ -26,10 +26,10 @@
         /// <summary>
         /// Gets the stored available personalisation group criteria
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Enumerable of available criteria</returns>
         public static IEnumerable<IPersonalisationGroupCriteria> GetAvailableCriteria()
         {
-            return _availableCriteria.Values
+            return AvailableCriteria.Values
                 .OrderBy(x => x.Name);
         }
 
@@ -42,7 +42,7 @@
         {
             try
             {
-                var criteria = _availableCriteria[definitionDetail.Alias];
+                var criteria = AvailableCriteria[definitionDetail.Alias];
                 return criteria.MatchesVisitor(definitionDetail.Definition);
             }
             catch (KeyNotFoundException)
@@ -53,7 +53,7 @@
         }
 
         /// <summary>
-        /// Helper to scan the loaded assemblies and retrive the available personalisation group criteria (that implement the
+        /// Helper to scan the loaded assemblies and retrieve the available personalisation group criteria (that implement the
         /// <see cref="IPersonalisationGroupCriteria"/> interface
         /// </summary>
         private static void BuildAvailableCriteria()
@@ -65,7 +65,7 @@
                 .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria);
             foreach (var typeImplementingInterface in typesImplementingInterface)
             {
-                _availableCriteria.Add(typeImplementingInterface.Alias, typeImplementingInterface);
+                AvailableCriteria.Add(typeImplementingInterface.Alias, typeImplementingInterface);
             }
         }
     }

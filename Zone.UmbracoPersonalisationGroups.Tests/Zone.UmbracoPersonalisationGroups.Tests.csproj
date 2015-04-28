@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Session\SessionPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\DayOfWeek\DayOfWeekPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="PersonalisationGroupMatcherTests.cs" />

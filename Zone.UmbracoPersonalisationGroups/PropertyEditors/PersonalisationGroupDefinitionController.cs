@@ -14,7 +14,7 @@
     public class PersonalisationGroupDefinitionController : Controller
     {
         /// <summary>
-        /// Gets a JSON list of the availabile criteria
+        /// Gets a JSON list of the available criteria
         /// </summary>
         /// <returns>JSON response of available criteria</returns>
         /// <remarks>Using ContentResult so can serialize with camel case for consistency in client-side code</remarks>

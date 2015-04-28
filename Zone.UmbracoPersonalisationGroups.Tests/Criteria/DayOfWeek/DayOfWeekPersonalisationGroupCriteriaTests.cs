@@ -17,7 +17,7 @@
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
 
             // Act
-            criteria.MatchesVisitor((string) null);
+            criteria.MatchesVisitor((string)null);
         }
 
         [TestMethod]
@@ -51,9 +51,9 @@
         {
             // Arrange
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
-            var definition = string.Format(DefinitionFormat, 
-                (int)(DateTime.Now.AddDays(1).DayOfWeek), 
-                (int)(DateTime.Now.AddDays(2).DayOfWeek));
+            var definition = string.Format(DefinitionFormat,
+                (int)DateTime.Now.AddDays(1).DayOfWeek,
+                (int)DateTime.Now.AddDays(2).DayOfWeek);
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -67,9 +67,9 @@
         {
             // Arrange
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
-            var definition = string.Format(DefinitionFormat, 
-                (int)(DateTime.Now.DayOfWeek), 
-                (int)(DateTime.Now.AddDays(1).DayOfWeek));
+            var definition = string.Format(DefinitionFormat,
+                (int)DateTime.Now.DayOfWeek,
+                (int)DateTime.Now.AddDays(1).DayOfWeek);
 
             // Act
             var result = criteria.MatchesVisitor(definition);

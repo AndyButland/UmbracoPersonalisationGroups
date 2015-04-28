@@ -14,20 +14,17 @@
             routes.MapRoute(
                 name: "Personalisation group criteria resources",
                 url: "App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/{criteriaAlias}/{fileName}",
-                defaults: new { controller = "PersonalisationGroupDefinition", action = "ResourceForCriteria" }
-            );
+                defaults: new { controller = "PersonalisationGroupDefinition", action = "ResourceForCriteria" });
 
             routes.MapRoute(
                 name: "Personalisation group resources",
                 url: "App_Plugins/UmbracoPersonalisationGroups/Resource/{fileName}",
-                defaults: new { controller = "PersonalisationGroupDefinition", action = "Resource" }
-            );
+                defaults: new { controller = "PersonalisationGroupDefinition", action = "Resource" });
 
             routes.MapRoute(
                 name: "Personalisation group methods",
                 url: "App_Plugins/UmbracoPersonalisationGroups/{action}",
-                defaults: new { controller = "PersonalisationGroupDefinition", action = "Index" }
-            );
+                defaults: new { controller = "PersonalisationGroupDefinition", action = "Index" });
         }
     }
 }
