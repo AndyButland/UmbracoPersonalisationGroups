@@ -6,11 +6,13 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
 
 - An interface for and various implementations of different personalisation group criteria (e.g. "time of day", "day of week")
 - Implementation of the following criteria:
-    - Day of week
-    - Time of day
-    - Cookie key presence/absence and value matching
-    - Session key presence/absence and value matching
 	- Authentication status
+    - Cookie key presence/absence and value matching
+    - Day of week
+    - Session key presence/absence and value matching
+    - Time of day
+	- Umbraco member group
+	- Umbraco member type
 - An extensible mechanism to allow other criteria to be created and loaded from other assemblies
 - A property editor with associated angular controllers/views that provide the means of configuring personalisation groups based on the available criteria
 - A single extension method on IPublishedContent named ShowToVisitor() that allows checking if the content should be available for the current site visitor
@@ -84,14 +86,6 @@ Group criteria all implement an interface **IPersonalisationGroupCriteria** whic
 
 Implementations of this interface must provide logic in this method for checking whether the current site visitor matches the definition provided using a JSON syntax supported by the criteria.  So for example the **DayOfWeekPersonalisationGroupCriteria** expects a simple JSON array of day numbers - e.g. [1, 3, 5] - which is compared with the current day to determine a match.
 
-The following criteria have been implemented:
-
-- Day of week (DayOfWeekPersonalisationGroupCriteria)
-- Time of day (TimeOfDayPersonalisationGroupCriteria)
-- Cookie key presence/absence and value matching (CookiePersonalisationGroupCriteria)
-- Session key presence/absence and value matching (SessionPersonalisationGroupCriteria)
-- Authentication status (AuthenticationStatusPersonalisationGroupCriteria)
-
 ### PersonalisationGroupMatcher
 
 **PersonalisationGroupMatcher** is a static class that when first instantiated will scan all loaded assemblies for implementations of the IPersonalisationGroupCriteria interface and store references to them.  It's in this way the package will support extensions through the development of other criteria that may not be in the core package itself.
@@ -149,6 +143,7 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 The following tasks are planned to continue development of this package:
 
-- Implementation of further criteria, including geographical and member based
+- Implementation of further criteria, including geographical
 - Release as a package on our.umbraco.org
+- Update member group and type definition editors to use drop-down list rather than free text entry
 
