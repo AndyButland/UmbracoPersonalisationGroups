@@ -2,7 +2,7 @@
     .controller("UmbracoPersonalisationGroups.SessionPersonalisationGroupCriteriaController",
         function ($scope) {
 
-            $scope.renderModel = {};
+            $scope.renderModel = { match: "Exists" };
 
             if ($scope.dialogOptions.definition) {
                 var sessionSettings = JSON.parse($scope.dialogOptions.definition);

@@ -2,7 +2,7 @@
     .controller("UmbracoPersonalisationGroups.MemberGroupPersonalisationGroupCriteriaController",
         function ($scope) {
 
-            $scope.renderModel = {};
+            $scope.renderModel = { match: "IsInGroup" };
 
             if ($scope.dialogOptions.definition) {
                 var memberGroupSettings = JSON.parse($scope.dialogOptions.definition);

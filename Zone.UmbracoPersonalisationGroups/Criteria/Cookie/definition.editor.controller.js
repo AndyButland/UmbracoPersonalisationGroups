@@ -2,7 +2,7 @@
     .controller("UmbracoPersonalisationGroups.CookiePersonalisationGroupCriteriaController",
         function ($scope) {
 
-            $scope.renderModel = {};
+            $scope.renderModel = { match: "Exists" };
 
             if ($scope.dialogOptions.definition) {
                 var cookieSettings = JSON.parse($scope.dialogOptions.definition);

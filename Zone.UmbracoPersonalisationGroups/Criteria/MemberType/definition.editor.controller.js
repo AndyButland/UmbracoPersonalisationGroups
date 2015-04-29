@@ -2,7 +2,7 @@
     .controller("UmbracoPersonalisationGroups.MemberTypePersonalisationGroupCriteriaController",
         function ($scope) {
 
-            $scope.renderModel = {};
+            $scope.renderModel = { match: "IsOfType" };
 
             if ($scope.dialogOptions.definition) {
                 var memberTypeSettings = JSON.parse($scope.dialogOptions.definition);

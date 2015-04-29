@@ -12,6 +12,7 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
     - Session key presence/absence and value matching
     - Time of day
 	- Umbraco member group
+	- Umbraco member profile field	
 	- Umbraco member type
 - An extensible mechanism to allow other criteria to be created and loaded from other assemblies
 - A property editor with associated angular controllers/views that provide the means of configuring personalisation groups based on the available criteria
@@ -146,4 +147,3 @@ The following tasks are planned to continue development of this package:
 - Implementation of further criteria, including geographical
 - Release as a package on our.umbraco.org
 - Update member group and type definition editors to use drop-down list rather than free text entry
-

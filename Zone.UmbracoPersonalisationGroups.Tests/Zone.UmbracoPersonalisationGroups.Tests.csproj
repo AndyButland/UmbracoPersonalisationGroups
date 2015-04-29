@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Criteria\MemberGroup\MemberTypePersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\MemberProfileField\MemberProfileFieldPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Session\SessionPersonalisationGroupCriteriaTests.cs" />
