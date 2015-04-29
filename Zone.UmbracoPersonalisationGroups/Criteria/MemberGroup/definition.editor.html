@@ -4,20 +4,16 @@
 
         <p>Please enter the member group settings:</p>
 
-        <umb-pane>
-            <table>
-                <tr><td>Group name: </td><td><input type="text" ng-model="renderModel.groupName" /></td></tr>
-                <tr>
-                    <td>Match: </td>
-                    <td>
-                        <select ng-model="renderModel.match">
-                            <option value="IsInGroup">Is in group</option>
-                            <option value="IsNotInGroup">Is not in group</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </umb-pane>
+        <umb-control-group alias="groupName" label="Group name">
+            <input type="text" ng-model="renderModel.groupName" />
+        </umb-control-group>
+        <umb-control-group alias="match" label="Comparison">
+            <select ng-model="renderModel.match">
+                <option value="IsInGroup">Is in group</option>
+                <option value="IsNotInGroup">Is not in group</option>
+            </select>
+        </umb-control-group>
+
     </div>
 
     <div class="umb-panel-footer">

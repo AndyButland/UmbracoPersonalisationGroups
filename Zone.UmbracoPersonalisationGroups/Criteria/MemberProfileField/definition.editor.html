@@ -4,21 +4,19 @@
 
         <p>Please enter the member profile field settings:</p>
 
-        <umb-pane>
-            <table>
-                <tr><td>Alias: </td><td><input type="text" ng-model="renderModel.alias" /></td></tr>
-                <tr>
-                    <td>Match: </td>
-                    <td>
-                        <select ng-model="renderModel.match">
-                            <option value="MatchesValue">Matches</option>
-                            <option value="DoesNotMatchValue">Does not match</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr><td>Value: </td><td><input type="text" ng-model="renderModel.value" /></td></tr>
-            </table>
-        </umb-pane>
+        <umb-control-group alias="alias" label="Alias">
+            <input type="text" ng-model="renderModel.alias"/>
+        </umb-control-group>
+        <umb-control-group alias="match" label="Comparison">
+            <select ng-model="renderModel.match">
+                <option value="MatchesValue">Matches</option>
+                <option value="DoesNotMatchValue">Does not match</option>
+            </select>
+        </umb-control-group>
+        <umb-control-group alias="value" label="Value">
+            <input type="text" ng-model="renderModel.value" />
+        </umb-control-group>
+
     </div>
 
     <div class="umb-panel-footer">

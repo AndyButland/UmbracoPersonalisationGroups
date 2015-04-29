@@ -4,20 +4,16 @@
 
         <p>Please enter the member type settings:</p>
 
-        <umb-pane>
-            <table>
-                <tr><td>Type name: </td><td><input type="text" ng-model="renderModel.typeName" /></td></tr>
-                <tr>
-                    <td>Match: </td>
-                    <td>
-                        <select ng-model="renderModel.match">
-                            <option value="IsOfType">Matches type</option>
-                            <option value="IsNotOfType">Does not match type</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </umb-pane>
+        <umb-control-group alias="typeName" label="Type name">
+            <input type="text" ng-model="renderModel.typeName" />
+        </umb-control-group>
+        <umb-control-group alias="match" label="Comparison">
+            <select ng-model="renderModel.match">
+                <option value="IsOfType">Matches type</option>
+                <option value="IsNotOfType">Does not match type</option>
+            </select>
+        </umb-control-group>
+
     </div>
 
     <div class="umb-panel-footer">
