@@ -1,0 +1,37 @@
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.MemberTypePersonalisationGroupCriteriaController">
+
+    <div class="umb-panel-body no-header with-footer compact">
+
+        <p>Please enter the member type settings:</p>
+
+        <umb-pane>
+            <table>
+                <tr><td>Type: </td><td><input type="text" ng-model="renderModel.typeName" /></td></tr>
+                <tr>
+                    <td>Match: </td>
+                    <td>
+                        <select ng-model="renderModel.match">
+                            <option value="IsOfType">Matches type</option>
+                            <option value="IsNotOfType">Does not match type</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
