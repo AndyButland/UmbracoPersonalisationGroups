@@ -29,7 +29,7 @@
             // Check each personalisation group assigned for a match with the current site visitor
             foreach (var group in pickedGroups)
             {
-                var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(Constants.PersonalisationGroupDefinitionPropertyAlias);
+                var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
                 var matchCount = CountMatchingDefinitionDetails(definition);
 
                 if ((definition.Match == PersonalisationGroupDefinitionMatch.Any && matchCount > 0) ||
@@ -76,11 +76,11 @@
         private static string GetGroupPickerAlias()
         {
             // First check if defined in config
-            var groupPickerAlias = ConfigurationManager.AppSettings[Constants.ConfigKeyForCustomPersonalisationGroupPickerAlias];
+            var groupPickerAlias = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForCustomPersonalisationGroupPickerAlias];
             if (string.IsNullOrEmpty(groupPickerAlias))
             {
                 // If not, use the convention alias
-                groupPickerAlias = Constants.DefaultPersonalisationGroupPickerAlias;
+                groupPickerAlias = AppConstants.DefaultPersonalisationGroupPickerAlias;
             }
 
             return groupPickerAlias;

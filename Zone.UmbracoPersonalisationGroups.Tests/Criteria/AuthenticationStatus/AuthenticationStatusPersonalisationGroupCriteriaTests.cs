@@ -97,7 +97,7 @@
 
         #region Mocks
 
-        protected static Mock<IAuthenticationStatusProvider> MockAuthenticationStatusProvider(bool authenticationStatus = false)
+        private static Mock<IAuthenticationStatusProvider> MockAuthenticationStatusProvider(bool authenticationStatus = false)
         {
             var mock = new Mock<IAuthenticationStatusProvider>();
 

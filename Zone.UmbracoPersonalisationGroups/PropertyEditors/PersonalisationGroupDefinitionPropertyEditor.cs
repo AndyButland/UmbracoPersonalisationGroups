@@ -3,7 +3,7 @@
     using ClientDependency.Core;
     using Umbraco.Core.PropertyEditors;
     using Umbraco.Web.PropertyEditors;
-    using Constants = Zone.UmbracoPersonalisationGroups.Constants;
+    using Constants = Zone.UmbracoPersonalisationGroups.AppConstants;
 
     /// <summary>
     /// Property editor for managing the definition of a personalisation group
@@ -16,6 +16,9 @@
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "cookie/definition.editor.controller.js")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "cookie/definition.translator.js")]
+
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "country/definition.editor.controller.js")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "country/definition.translator.js")]
     
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "dayOfWeek/definition.editor.controller.js")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "dayOfWeek/definition.translator.js")]

@@ -97,7 +97,7 @@
 
         #region Mocks
 
-        protected static Mock<IMemberTypeProvider> MockMemberTypeProvider(string typeName = "member")
+        private static Mock<IMemberTypeProvider> MockMemberTypeProvider(string typeName = "member")
         {
             var mock = new Mock<IMemberTypeProvider>();
 

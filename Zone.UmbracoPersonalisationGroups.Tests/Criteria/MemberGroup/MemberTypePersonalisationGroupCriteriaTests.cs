@@ -97,7 +97,7 @@
 
         #region Mocks
 
-        protected static Mock<IMemberGroupProvider> MockMemberGroupProvider(string groupName = "Group A")
+        private static Mock<IMemberGroupProvider> MockMemberGroupProvider(string groupName = "Group A")
         {
             var mock = new Mock<IMemberGroupProvider>();
 

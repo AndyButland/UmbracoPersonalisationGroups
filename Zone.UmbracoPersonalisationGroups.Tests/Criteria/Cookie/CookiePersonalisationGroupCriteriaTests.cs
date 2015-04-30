@@ -157,7 +157,7 @@
 
         #region Mocks
 
-        protected static Mock<ICookieProvider> MockCookieProvider()
+        private static Mock<ICookieProvider> MockCookieProvider()
         {
             var mock = new Mock<ICookieProvider>();
 

@@ -97,7 +97,7 @@
 
         #region Mocks
 
-        protected static Mock<IMemberProfileFieldProvider> MockMemberProfileFieldProvider()
+        private static Mock<IMemberProfileFieldProvider> MockMemberProfileFieldProvider()
         {
             var mock = new Mock<IMemberProfileFieldProvider>();
 

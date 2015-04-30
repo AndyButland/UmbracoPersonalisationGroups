@@ -114,6 +114,14 @@ Each criteria also has an angular service named **definition.translator.js** res
 - For each group picked, see if the definition provided matches the current site visitor.
     - If any one of them does, we return true (indicating to show the content)
 	- If none of them do, we return false (indicating to hide the content)
+	
+## Notes on particular criteria
+
+### Country
+
+The country criteria uses the free GeoLite2 IP to country database (http://dev.maxmind.com/geoip/geoip2/geolite2/) made available by Maxmind.com.  It'll look for it in /App_Data/GeoLite2-Country.mmdb or at the path specified in the following appSetting:
+
+    <add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 	
 
 ## How to extend it
 
@@ -140,6 +148,5 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 The following tasks are planned to continue development of this package:
 
-- Implementation of further criteria, including geographical
 - Release as a package on our.umbraco.org
 - Update member group and type definition editors to use drop-down list rather than free text entry

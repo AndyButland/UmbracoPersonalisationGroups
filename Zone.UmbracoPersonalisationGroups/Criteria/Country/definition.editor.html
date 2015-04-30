@@ -1,0 +1,57 @@
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.CountryPersonalisationGroupCriteriaController">
+
+    <div class="umb-panel-body no-header with-footer compact">
+        <p>Please enter the country codes for which this group will be valid. Countries must be entered in <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="_blank">two-letter iso code format</a>, e.g. GB, ES, IT</p>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Country code</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="country in renderModel.countries">
+                <td>
+                    <span ng-show="!country.edit">{{country.code}}</span>
+                    <input type="text" ng-model="country.code" ng-show="country.edit" style="width: 100px" maxlength="2" />
+                </td>
+                <td>
+                    <div class="btn-group" ng-show="!country.edit">
+                        <button type="button" class="btn btn-default" ng-click="edit($index)"><localize key="edit">Edit</localize></button>
+                        <button type="button" class="btn btn-default" ng-click="delete($index)"><localize key="delete">Delete</localize></button>
+                    </div>
+                    <div class="btn-group" ng-show="country.edit">
+                        <button type="button" class="btn btn-default" ng-click="saveEdit($index)"><localize key="buttons_save">Save</localize></button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td><input type="text" ng-model="newCode" val-highlight="hasError" style="width: 100px"/></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" ng-click="add()"><localize key="general_add">Add</localize></button>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

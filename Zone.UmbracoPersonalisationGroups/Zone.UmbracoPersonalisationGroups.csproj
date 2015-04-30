@@ -81,6 +81,12 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="MaxMind.Db">
+      <HintPath>..\packages\MaxMind.Db.1.0.0.0\lib\net40\MaxMind.Db.dll</HintPath>
+    </Reference>
+    <Reference Include="MaxMind.GeoIP2">
+      <HintPath>..\packages\MaxMind.GeoIP2.2.1.0.0\lib\net40\MaxMind.GeoIP2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
       <HintPath>..\packages\UmbracoCms.Core.7.2.4\lib\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
@@ -100,6 +106,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.0.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="SQLCE4Umbraco">
       <HintPath>..\packages\UmbracoCms.Core.7.2.4\lib\SQLCE4Umbraco.dll</HintPath>
@@ -192,7 +201,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="AppConstants.cs" />
+    <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteria.cs" />
+    <Compile Include="Criteria\Country\MaxMindCountryGeoLocationProvider.cs" />
+    <Compile Include="Criteria\Country\HttpContextIpProvider.cs" />
+    <Compile Include="Criteria\Country\IIpProvider.cs" />
+    <Compile Include="Criteria\Country\ICountryGeoLocationProvider.cs" />
+    <Compile Include="Criteria\Country\CountrySetting.cs" />
     <Compile Include="Criteria\MemberGroup\IMemberGroupProvider.cs" />
     <Compile Include="Criteria\MemberGroup\MemberGroupPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\MemberGroup\MemberGroupSetting.cs" />
@@ -311,6 +326,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Criteria\MemberProfileField\definition.translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Country\definition.editor.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Country\definition.editor.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Country\definition.translator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

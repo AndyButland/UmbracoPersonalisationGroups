@@ -157,7 +157,7 @@
 
         #region Mocks
 
-        protected static Mock<ISessionProvider> MockSessionProvider()
+        private static Mock<ISessionProvider> MockSessionProvider()
         {
             var mock = new Mock<ISessionProvider>();
 

@@ -15,7 +15,7 @@
     {
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
-            return propertyType.PropertyEditorAlias.Equals(Constants.PersonalisationGroupDefinitionPropertyEditorAlias);
+            return propertyType.PropertyEditorAlias.Equals(AppConstants.PersonalisationGroupDefinitionPropertyEditorAlias);
         }
 
         public override object ConvertSourceToObject(PublishedPropertyType propertyType, object source, bool preview)
