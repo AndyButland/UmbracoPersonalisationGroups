@@ -56,7 +56,11 @@ Going back to data types, create a new data type based on multi-node tree picker
 
 ### Content - part 2
 
-For any content node you wish to personalise, add a new property of the *Personalisation group picker* and select the appropriate groups.
+For any content node you wish to personalise, add a new property of the *Personalisation group picker* with an alias of *personalisationGroups* and select the appropriate groups.
+
+If you don't like this alias you can use a different one, but you will also need to add the following appSetting key to your config file:
+
+    <add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 
 
 ### Querying and templating
 
@@ -66,15 +70,7 @@ So for example, if you have repeated content such as a listing of pages, you can
 
 		@foreach (var post in Model.Content.Children.Where(x => x.ShowToVisitor()))
 		{
-			<div class="col-sm-6">
-				<div class="content equal">
-					<a href="@post.Url">
-						<div class="date">@post.CreateDate.ToLongDateString()</div>
-						<h2>@post.Name</h2>
-						<p>@Umbraco.Truncate(post.GetPropertyValue<string>("introduction"), 240, true)</p>
-					</a>
-				</div>
-			</div>
+			<h2>@post.Name</h2>
 		}
 
 With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. *Page Variation*.  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the *Personalisation group picker*.  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.
