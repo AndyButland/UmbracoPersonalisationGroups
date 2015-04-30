@@ -8,6 +8,7 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
 - Implementation of the following criteria:
 	- Authentication status
     - Cookie key presence/absence and value matching
+	- Country (via IP matching)
     - Day of week
     - Session key presence/absence and value matching
     - Time of day
