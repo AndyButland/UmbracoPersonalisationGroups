@@ -2,6 +2,8 @@
 {
     using System;
     using System.Configuration;
+    using System.Web;
+    using System.Web.Caching;
     using System.Web.Hosting;
     using MaxMind.GeoIP2;
     using MaxMind.GeoIP2.Exceptions;
@@ -17,18 +19,34 @@
 
         public string GetCountryFromIp(string ip)
         {
-            using (var reader = new DatabaseReader(_pathToDb))
+            var cacheKey = string.Format("PersonalisationGroups_Criteria_Country_GeoLocation_{0}", ip);
+            var countryCode = HttpRuntime.Cache[cacheKey];
+            if (countryCode == null)
             {
-                try
+                using (var reader = new DatabaseReader(_pathToDb))
                 {
-                    var response = reader.Country(ip);
-                    return response.Country.IsoCode;
-                }
-                catch (AddressNotFoundException)
-                {
-                    return string.Empty;
+                    try
+                    {
+                        var response = reader.Country(ip);
+                        var isoCode = response.Country.IsoCode;
+                        if (!string.IsNullOrEmpty(isoCode))
+                        {
+                            HttpRuntime.Cache.Insert(cacheKey, isoCode, null, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration);
+                        }
+
+                        return isoCode;
+                    }
+                    catch (AddressNotFoundException)
+                    {
+                        return string.Empty;
+                    }
                 }
             }
+            else
+            {
+                return countryCode.ToString();
+            }
+
         }
 
         private string GetDatabasePath()

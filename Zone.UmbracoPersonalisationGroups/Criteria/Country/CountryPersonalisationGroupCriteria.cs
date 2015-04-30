@@ -56,6 +56,7 @@
             }
 
             var ip = _ipProvider.GetIp();
+            ip = "2.37.150.125";
             if (!string.IsNullOrEmpty(ip))
             {
                 var country = _countryGeoLocationProvider.GetCountryFromIp(ip);
