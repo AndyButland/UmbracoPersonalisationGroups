@@ -59,7 +59,6 @@
             initAvailableCriteriaList();
 
             $scope.addCriteria = function () {
-                console.log($scope.selectedCriteria.alias);
                 var detail = { alias: $scope.selectedCriteria.alias, definition: "" };
                 $scope.model.value.details.push(detail);
                 $scope.editDefinitionDetail(detail);

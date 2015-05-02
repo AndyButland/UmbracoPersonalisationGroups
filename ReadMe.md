@@ -128,7 +128,7 @@ The country criteria uses the [free GeoLite2 IP to country database](http://dev.
 
 The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should be mostly straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of **IPersonalisationGroupCriteria** along with the definition editor angular view, controller and translation service - **definition.editor.html**, **definition.editor.controller.js** and **definition.definition.translator.js** respectively - as embedded resources.
 
-There's one gotcha though, which is that it's not (I believe) possible to load an angular controller into Umbraco once the back-office application itself has bootstrapped.  The only way to do this is via a property editor, specifically it's **[PropertyEditorAsset]** attribute which is detailed [here](http://issues.umbraco.org/issue/U4-3712).
+There's one gotcha though if you try to use embedded resources as used in the criteria classes in this package. Which is that it's not (I believe) possible to load an angular controller into Umbraco once the back-office application itself has bootstrapped.  The only way to do this is via a property editor, specifically it's **[PropertyEditorAsset]** attribute which is detailed [here](http://issues.umbraco.org/issue/U4-3712).
 
 So in order to have the definition angular controller loaded, it's necessary to create a property editor to do this and have this defined within the extension dll, e.g.:
 
@@ -147,13 +147,15 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 ## Planned next steps
 
-### Known issues
-
-- Issue with loading of referenced angular resources with debug setting set to false (http://issues.umbraco.org/issue/U4-6583)
-
-### Further developments
-
 The following tasks are planned to continue development of this package:
 
 - Release as a package on our.umbraco.org
 - Update member group and type definition editors to use drop-down list rather than free text entry
+
+## Troubleshooting/known issues
+
+If you run into a problem with the data type failing to load when running with debug="false", this is because it's necessary to whitelist the domains in use.  See the [forum post here](https://our.umbraco.org/forum/umbraco-7/developing-umbraco-7-packages/64459-Single-file-property-editor-and-debug=false) along with links for discussion and resolution details.  In summary though:
+
+- Open Config\ClientDependency.config
+- Find the **bundleDomains** attribute
+- Add a comma separated list of the domains you are using
