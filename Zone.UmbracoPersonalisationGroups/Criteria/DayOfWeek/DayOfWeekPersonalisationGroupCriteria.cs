@@ -32,7 +32,7 @@
             try
             {
                 var definedDays = JsonConvert.DeserializeObject<int[]>(definition);
-                return definedDays.Contains((int)DateTime.Now.DayOfWeek);
+                return definedDays.Contains((int)DateTime.Now.DayOfWeek + 1);
             }
             catch (JsonReaderException)
             {

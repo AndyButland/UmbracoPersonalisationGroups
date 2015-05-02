@@ -2,7 +2,11 @@
 
 ## What it does
 
-Umbraco Personalisation Groups is an Umbraco package intended to allow personalisation of content to different groups of site visitors.  It contains a few different pieces:
+Umbraco Personalisation Groups is an Umbraco package intended to allow personalisation of content to different groups of site visitors.  
+
+It can be downloaded and installed from: 
+
+It contains a few different pieces:
 
 - An interface for and various implementations of different personalisation group criteria (e.g. "time of day", "day of week")
 - Implementation of the following criteria:

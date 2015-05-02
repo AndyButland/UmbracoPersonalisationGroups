@@ -52,8 +52,8 @@
             // Arrange
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
             var definition = string.Format(DefinitionFormat,
-                (int)DateTime.Now.AddDays(1).DayOfWeek,
-                (int)DateTime.Now.AddDays(2).DayOfWeek);
+                GetDayOfWeekAsInteger(DateTime.Now.AddDays(1)),
+                GetDayOfWeekAsInteger(DateTime.Now.AddDays(2)));
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -68,14 +68,19 @@
             // Arrange
             var criteria = new DayOfWeekPersonalisationGroupCriteria();
             var definition = string.Format(DefinitionFormat,
-                (int)DateTime.Now.DayOfWeek,
-                (int)DateTime.Now.AddDays(1).DayOfWeek);
+                GetDayOfWeekAsInteger(DateTime.Now),
+                GetDayOfWeekAsInteger(DateTime.Now.AddDays(1)));
 
             // Act
             var result = criteria.MatchesVisitor(definition);
 
             // Assert
             Assert.IsTrue(result);
+        }
+
+        private int GetDayOfWeekAsInteger(DateTime date)
+        {
+            return (int)date.DayOfWeek + 1;
         }
     }
 }
