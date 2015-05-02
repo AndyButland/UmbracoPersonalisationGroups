@@ -147,6 +147,12 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 ## Planned next steps
 
+### Known issues
+
+- Issue with loading of referenced angular resources with debug setting set to false (http://issues.umbraco.org/issue/U4-6583)
+
+### Further developments
+
 The following tasks are planned to continue development of this package:
 
 - Release as a package on our.umbraco.org
