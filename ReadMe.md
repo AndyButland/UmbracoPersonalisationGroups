@@ -4,7 +4,7 @@
 
 Umbraco Personalisation Groups is an Umbraco package intended to allow personalisation of content to different groups of site visitors.  
 
-It can be downloaded and installed from: 
+It can be downloaded and installed from: https://our.umbraco.org/projects/website-utilities/personalisation-groups
 
 It contains a few different pieces:
 
