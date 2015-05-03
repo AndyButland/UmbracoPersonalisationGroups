@@ -45,6 +45,11 @@ Once installed you'll find a few additional components:
 	 - Add a new criteria of type **Day of week** and tick the boxes for Monday to Friday.
 	 - Add a second criteria of type **Time of day** and add a range of 0000 to 1200
 	 - Save and publish
+	 
+![Editing a group definition](/documentation/group-editing.png?raw=true "Editing a group definition")
+
+![Editing a specific criteria](/documentation/definition-editing.png?raw=true "Editing a specific criteria")	 
+	 
  - Now go to "Settings" and find the document type for a piece of content you want to personalise.  For example with the Fanoe Starter Kit you could select the *Blog Post* document type
  - Add a new field of type **Personsalisation group picker** with an alias of **personalisationGroups**.
     - If you don't like this alias you can use a different one, but you will also need to add the following appSetting key to your config file:
@@ -56,18 +61,16 @@ Once installed you'll find a few additional components:
  - Back to "Content" again, find or create a page of this document type and pick the **Weekday morning visitors** personalisation group
  - Finally you need to amend your template to make use of the personalisation group via new extension method that will be available on instances of **IPublishedContent**, named **ShowToVisitor()**, as described below.
  
- ## Templating
+## Templating
  
- ### Personalising repeated content
+### Personalising repeated content
  
- A typical example would be to personalise a list of repeated content to only show items that are appropriate for the current site visitor.  Here's how you might do that:
+A typical example would be to personalise a list of repeated content to only show items that are appropriate for the current site visitor.  Here's how you might do that:
  
-    ```
  	@foreach (var post in Model.Content.Children.Where(x => x.ShowToVisitor()))
 	{
 	    <h2>@post.Name</h2>
     }
-    ```	
 		
 With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. "Page Variation".  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the "Personalisation group picker".  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.  Something like:
 
