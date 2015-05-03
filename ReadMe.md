@@ -31,10 +31,10 @@ Firstly install the package in the usual way.
 
 Once installed you'll find a few additional components:
 
- - *Personalisation Groups Folder* is a document type purely used to organise your personalisation groups.  By default you can create it at root and within it create further instances of itself.
- - *Personalisation Group* is a document type where the group itself is created.  You can place these inside the folders.  It comes with a single property called *Group definition* of a data type also provided with this package.
- - *Personalisation group definition* the data type provided to allow the definition of personalisation group, based on a new property editor provided in the dll installed with the package.
- - *Personalisation group picker* is an data type instance of the multi-node tree picker property editor, for the selection of groups for given piece of content
+ - **Personalisation Groups Folder** is a document type purely used to organise your personalisation groups.  By default you can create it at root and within it create further instances of itself.
+ - **Personalisation Group** is a document type where the group itself is created.  You can place these inside the folders.  It comes with a single property called *Group definition* of a data type also provided with this package.
+ - **Personalisation group definition** the data type provided to allow the definition of personalisation group, based on a new property editor provided in the dll installed with the package.
+ - **Personalisation group picker** is an data type instance of the multi-node tree picker property editor, for the selection of groups for given piece of content
  
 ### Example usage
 
@@ -49,8 +49,10 @@ Once installed you'll find a few additional components:
  - Add a new field of type **Personsalisation group picker** with an alias of **personalisationGroups**.
     - If you don't like this alias you can use a different one, but you will also need to add the following appSetting key to your config file:
 	
-	    <add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 
-		
+	```
+	<add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 
+	```	
+	
  - Back to "Content" again, find or create a page of this document type and pick the **Weekday morning visitors** personalisation group
  - Finally you need to amend your template to make use of the personalisation group via new extension method that will be available on instances of **IPublishedContent**, named **ShowToVisitor()**, as described below.
  
@@ -60,13 +62,16 @@ Once installed you'll find a few additional components:
  
  A typical example would be to personalise a list of repeated content to only show items that are appropriate for the current site visitor.  Here's how you might do that:
  
+    ```
  	@foreach (var post in Model.Content.Children.Where(x => x.ShowToVisitor()))
 	{
 	    <h2>@post.Name</h2>
     }
+    ```	
 		
 With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. "Page Variation".  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the "Personalisation group picker".  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.  Something like:
 
+    ```
 	@{
 		var personalisedContent = Model.Content.Children.Where(x => x.ShowToVisitor()).FirstOrDefault();
 		string title, bodyText;
@@ -84,6 +89,7 @@ With a little more work you can also personalise an individual page.  One way to
 	
 	<h1>@title</h1>
 	<p>@bodyText</p>
+    ```	
 
 ## How it works
 
