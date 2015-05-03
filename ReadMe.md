@@ -23,62 +23,67 @@ It contains a few different pieces:
 - A property editor with associated angular controllers/views that provide the means of configuring personalisation groups based on the available criteria
 - A single extension method on IPublishedContent named ShowToVisitor() that allows checking if the content should be available for the current site visitor
 
-## Status
+## Using the package
 
-If you've stumbled across this please be warned it's a very early stage prototype - anything might change at any time.  It's not been used in any production setting and is purely experimental at the moment.
+### Installation
 
-If things work out it'll hopefully be made into an Umbraco package and released on our.umbraco.org, but for now it's only available as source code from this location.
+Firstly install the package in the usual way.  
 
-## Set up and use
+Once installed you'll find a few additional components:
 
-As this is currently only available as source code there are a few manual steps required to set it up and use it in an Umbraco installation.  Once created as an Umbraco package the necessary document types and data types will be included, but that's not the case at the moment.
+ - *Personalisation Groups Folder* is a document type purely used to organise your personalisation groups.  By default you can create it at root and within it create further instances of itself.
+ - *Personalisation Group* is a document type where the group itself is created.  You can place these inside the folders.  It comes with a single property called *Group definition* of a data type also provided with this package.
+ - *Personalisation group definition* the data type provided to allow the definition of personalisation group, based on a new property editor provided in the dll installed with the package.
+ - *Personalisation group picker* is an data type instance of the multi-node tree picker property editor, for the selection of groups for given piece of content
+ 
+### Example usage
 
-Firstly you'll need to download or clone the source code and build it.  Then reference the **Zone.UmbracoPersonalisationGroups.dll** file in an Umbraco project (everything is in this single dll).
+ - Within the "Content" section, create a root node of type **Personalisation Groups Folder**, called **Personalisation Groups**
+ - Switch to "Developer" and find the **Personalisation group picker** data type.  Set the root node to be the node you just created.
+ - Back to "Content", as a child of the node you just created, create a node of type **Personalisation Group** called, for example, *Weekday morning visitors*
+     - Set the **Match** option to **All**
+	 - Add a new criteria of type **Day of week** and tick the boxes for Monday to Friday.
+	 - Add a second criteria of type **Time of day** and add a range of 0000 to 1200
+	 - Save and publish
+ - Now go to "Settings" and find the document type for a piece of content you want to personalise.  For example with the Fanoe Starter Kit you could select the *Blog Post* document type
+ - Add a new field of type **Personsalisation group picker** with an alias of **personalisationGroups**.
+    - If you don't like this alias you can use a different one, but you will also need to add the following appSetting key to your config file:
+	
+	    <add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 
+		
+ - Back to "Content" again, find or create a page of this document type and pick the **Weekday morning visitors** personalisation group
+ - Finally you need to amend your template to make use of the personalisation group via new extension method that will be available on instances of **IPublishedContent**, named **ShowToVisitor()**, as described below.
+ 
+ ## Templating
+ 
+ ### Personalising repeated content
+ 
+ A typical example would be to personalise a list of repeated content to only show items that are appropriate for the current site visitor.  Here's how you might do that:
+ 
+ 	@foreach (var post in Model.Content.Children.Where(x => x.ShowToVisitor()))
+	{
+	    <h2>@post.Name</h2>
+    }
+		
+With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. "Page Variation".  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the "Personalisation group picker".  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.  Something like:
 
-### Data types - part 1
-
-Having referenced this dll and started the Umbraco application you should find available a property editor called **Personalisation group definition**.  Create a data type based on this.  There are no pre-values to configure.
-
-### Document types
-
-Firstly I'd suggest setting up a container document type named e.g. *Personalisation Group Folder* - it doesn't need any properties nor a template and should be allowed to be created at the site root or in a "data" folder as appropriate.
-
-Allowable as a child within that should be a second document type named e.g. *Personalisation Group*.  This needs a single instance of the data type that was created above.  The alias for this property must be **definition**.
-
-### Content - part 1
-
-Create an instance of the *Personalisation Group Folder* and one or more *Personalisation Groups* underneath that.  You should find you can configure the personalisation groups for all the available criteria.
-
-Firstly you choose whether to match all or any of the definitions you'll provide.  Then you configure one or more definitions by selecting the appropriate criteria.  The definition is specified as JSON according to a syntax specified by the given criteria.  Currently you'll see some instruction for this, but the easiest way to enter is to use the definition builder that's available via a dialogue box.
-
-![Editing a group definition](/documentation/group-editing.png?raw=true "Editing a group definition")
-
-![Editing a specific criteria](/documentation/definition-editing.png?raw=true "Editing a specific criteria")
-
-### Data types - part 2
-
-Going back to data types, create a new data type based on multi-node tree picker called e.g. *Personalisation group picker*.  Set it's root node to be where you've created the *Personalisation Group Folder* and the types of nodes available to select as just the *Personalisation Groups*.  
-
-### Content - part 2
-
-For any content node you wish to personalise, add a new property of the *Personalisation group picker* with an alias of *personalisationGroups* and select the appropriate groups.
-
-If you don't like this alias you can use a different one, but you will also need to add the following appSetting key to your config file:
-
-    <add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 
-
-### Querying and templating
-
-You'll find that when you work in the templates any reference to an IPublishedContent type has a new extension method called **ShowToVisitor()**.  By calling this you can determine if the current site visitor matches one ore more of the personalisation groups you have associated with the content (which in turn of course depend on the definition for the group you have configured).
-
-So for example, if you have repeated content such as a listing of pages, you can do this to just display the pages relevant for the current site visitor:
-
-		@foreach (var post in Model.Content.Children.Where(x => x.ShowToVisitor()))
+	@{
+		var personalisedContent = Model.Content.Children.Where(x => x.ShowToVisitor()).FirstOrDefault();
+		string title, bodyText;
+		if (personalisedContent != null) 
 		{
-			<h2>@post.Name</h2>
+			title = personalisedContent.Name;
+			bodyText = personalisedContent.GetPropertyValue<string>("bodyText);
 		}
-
-With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. *Page Variation*.  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the *Personalisation group picker*.  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.
+		else 
+		{
+			title = Model.Content.Name;
+			bodyText = Model.Content.GetPropertyValue<string>("bodyText);	
+		}
+	}
+	
+	<h1>@title</h1>
+	<p>@bodyText</p>
 
 ## How it works
 
