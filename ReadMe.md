@@ -165,7 +165,6 @@ It doesn't need to be used (i.e. there's no need to create a data type from it).
 
 The following tasks are planned to continue development of this package:
 
-- Release as a package on our.umbraco.org
 - Update member group and type definition editors to use drop-down list rather than free text entry
 
 ## Troubleshooting/known issues
