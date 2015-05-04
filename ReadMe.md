@@ -168,3 +168,10 @@ If you run into a problem with the data type failing to load when running with d
 - Open Config\ClientDependency.config
 - Find the **bundleDomains** attribute
 - Add a comma separated list of the domains you are using
+
+## Version history
+
+0.1.0
+ - Initial release
+0.1.1 
+ - Converted member type, group and profile field criteria to use drop-down list of available options for selection rather than free-text entry
