@@ -4,6 +4,10 @@
     {
         MatchesValue,
         DoesNotMatchValue,
+        GreaterThanValue,
+        GreaterThanOrEqualToValue,
+        LessThanValue,
+        LessThanOrEqualToValue,
     }
 
     public class MemberProfileFieldSetting

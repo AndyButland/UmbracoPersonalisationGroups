@@ -30,7 +30,7 @@
             {
                 Alias = "dayOfWeek",
                 Definition = string.Format("[ {0} ]", 
-                    (int)(DateTime.Now.DayOfWeek)),
+                    (int)(DateTime.Now.DayOfWeek) + 1),
             };
 
             // Act

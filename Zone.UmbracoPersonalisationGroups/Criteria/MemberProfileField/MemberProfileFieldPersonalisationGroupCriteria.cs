@@ -3,6 +3,7 @@
     using System;
     using Newtonsoft.Json;
     using Umbraco.Core;
+    using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a session key
@@ -51,8 +52,38 @@
             }
 
             var value = _memberProfileFieldProvider.GetMemberProfileFieldValue(setting.Alias);
-            return (setting.Match == MemberProfileFieldSettingMatch.MatchesValue && string.Equals(setting.Value, value, StringComparison.InvariantCultureIgnoreCase)) ||
-                   (setting.Match == MemberProfileFieldSettingMatch.DoesNotMatchValue && !string.Equals(setting.Value, value, StringComparison.InvariantCultureIgnoreCase));
+
+            switch (setting.Match)
+            {
+                case MemberProfileFieldSettingMatch.MatchesValue:
+                    return string.Equals(setting.Value, value, StringComparison.InvariantCultureIgnoreCase);
+                case MemberProfileFieldSettingMatch.DoesNotMatchValue:
+                    return !string.Equals(setting.Value, value, StringComparison.InvariantCultureIgnoreCase);
+                case MemberProfileFieldSettingMatch.GreaterThanValue:
+                case MemberProfileFieldSettingMatch.GreaterThanOrEqualToValue:
+                case MemberProfileFieldSettingMatch.LessThanValue:
+                case MemberProfileFieldSettingMatch.LessThanOrEqualToValue:
+                    return ComparisonHelpers.CompareValues(value, setting.Value, GetComparison(setting.Match));
+                default:
+                    return false;
+            }
+        }
+
+        private static Comparison GetComparison(MemberProfileFieldSettingMatch settingMatch)
+        {
+            switch (settingMatch)
+            {
+                case MemberProfileFieldSettingMatch.GreaterThanValue:
+                    return Comparison.GreaterThan;
+                case MemberProfileFieldSettingMatch.GreaterThanOrEqualToValue:
+                    return Comparison.GreaterThanOrEqual;
+                case MemberProfileFieldSettingMatch.LessThanValue:
+                    return Comparison.LessThan;
+                case MemberProfileFieldSettingMatch.LessThanOrEqualToValue:
+                    return Comparison.LessThanOrEqual;
+                default:
+                    throw new ArgumentException("Setting supplied does not match a comparison type", "settingMatch");
+            }
         }
     }
 }

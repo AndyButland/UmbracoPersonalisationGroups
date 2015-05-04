@@ -10,7 +10,7 @@
             }
 
             $scope.valueRequired = function() {
-                return $scope.renderModel.match === "MatchesValue" || $scope.renderModel.match === "ContainsValue";
+                return !($scope.renderModel.match === "Exists" || $scope.renderModel.match === "DoesNotExist");
             };
 
             $scope.saveAndClose = function () {
