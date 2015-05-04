@@ -4,8 +4,9 @@
 
         <p>Please enter the member group settings:</p>
 
-        <umb-control-group alias="groupName" label="Group name">
-            <input type="text" ng-model="renderModel.groupName" />
+        <umb-control-group alias="groupName" label="Group">
+            <select ng-model="renderModel.groupName"
+                    ng-options="item as item for item in availableGroups"></select>
         </umb-control-group>
         <umb-control-group alias="match" label="Comparison">
             <select ng-model="renderModel.match">

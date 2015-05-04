@@ -25,6 +25,11 @@
                 name: "Criteria methods",
                 url: "App_Plugins/UmbracoPersonalisationGroups/Criteria/{action}",
                 defaults: new { controller = "Criteria", action = "Index" });
+
+            routes.MapRoute(
+                name: "Member methods",
+                url: "App_Plugins/UmbracoPersonalisationGroups/Member/{action}",
+                defaults: new { controller = "Member", action = "Index" });
         }
     }
 }

@@ -203,6 +203,7 @@
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
     <Compile Include="Controllers\BaseJsonResultController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
     <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Country\MaxMindCountryGeoLocationProvider.cs" />

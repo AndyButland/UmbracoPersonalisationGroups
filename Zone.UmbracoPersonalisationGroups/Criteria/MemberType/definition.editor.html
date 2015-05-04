@@ -4,8 +4,9 @@
 
         <p>Please enter the member type settings:</p>
 
-        <umb-control-group alias="typeName" label="Type name">
-            <input type="text" ng-model="renderModel.typeName" />
+        <umb-control-group alias="typeName" label="Type">
+            <select ng-model="renderModel.typeName"
+                    ng-options="item as item for item in availableTypes"></select>
         </umb-control-group>
         <umb-control-group alias="match" label="Comparison">
             <select ng-model="renderModel.match">
