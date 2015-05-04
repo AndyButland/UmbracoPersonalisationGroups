@@ -16,7 +16,7 @@
 
             function initAvailableCriteriaList() {
                 $scope.availableCriteria = [];
-                $http.get("/App_Plugins/UmbracoPersonalisationGroups/AvailableCriteria")
+                $http.get("/App_Plugins/UmbracoPersonalisationGroups/Criteria")
                     .then(function (result) {
                         $scope.availableCriteria = result.data;
                         if (result.data.length > 0) {
@@ -65,7 +65,7 @@
             };
 
             $scope.editDefinitionDetail = function (definitionDetail) {
-                var templateUrl = "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/" + definitionDetail.alias + "/definition.editor.html";
+                var templateUrl = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/" + definitionDetail.alias + "/definition.editor.html";
                 dialogService.open(
                     {
                         template: templateUrl,

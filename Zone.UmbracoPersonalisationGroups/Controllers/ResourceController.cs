@@ -1,38 +1,22 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.PropertyEditors
+﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
 {
     using System;
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
     using Umbraco.Core;
 
     /// <summary>
-    /// Controller making available various details and resources for the available personalisation group criteria
+    /// Controller providing access to embedded client-side angular resource
     /// </summary>
-    public class PersonalisationGroupDefinitionController : Controller
+    public class ResourceController : Controller
     {
-        /// <summary>
-        /// Gets a JSON list of the available criteria
-        /// </summary>
-        /// <returns>JSON response of available criteria</returns>
-        /// <remarks>Using ContentResult so can serialize with camel case for consistency in client-side code</remarks>
-        public ContentResult AvailableCriteria()
-        {
-            var criteria = PersonalisationGroupMatcher.GetAvailableCriteria();
-            var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            var json = JsonConvert.SerializeObject(criteria, Formatting.Indented, jsonSerializerSettings);
-
-            return Content(json, "application/json");
-        }
-
         /// <summary>
         /// Gets an embedded resource from the main assembly
         /// </summary>
         /// <param name="fileName">Name of resource</param>
         /// <returns>File stream of resource</returns>
-        public FileStreamResult Resource(string fileName)
+        public FileStreamResult GetResource(string fileName)
         {
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
@@ -42,7 +26,7 @@
                     .ToList()
                     .FirstOrDefault(f => f.EndsWith(fileName));
 
-            var assembly = typeof(PersonalisationGroupDefinitionController).Assembly;
+            var assembly = typeof(ResourceController).Assembly;
 
             return new FileStreamResult(assembly.GetManifestResourceStream(resourceName), GetMimeType(fileName));
         }
@@ -53,7 +37,7 @@
         /// <param name="criteriaAlias">Alias of criteria</param>
         /// <param name="fileName">Name of resource</param>
         /// <returns>File stream of resource</returns>
-        public FileStreamResult ResourceForCriteria(string criteriaAlias, string fileName)
+        public FileStreamResult GetResourceForCriteria(string criteriaAlias, string fileName)
         {
             Mandate.ParameterNotNullOrEmpty(criteriaAlias, "criteriaAlias");
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");

@@ -202,6 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Controllers\BaseJsonResultController.cs" />
+    <Compile Include="Controllers\CriteriaController.cs" />
     <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Country\MaxMindCountryGeoLocationProvider.cs" />
     <Compile Include="Criteria\Country\HttpContextIpProvider.cs" />
@@ -232,7 +234,7 @@
     <Compile Include="Criteria\Cookie\HttpContextCookieProvider.cs" />
     <Compile Include="Criteria\Cookie\ICookieProvider.cs" />
     <Compile Include="Criteria\Cookie\CookieSetting.cs" />
-    <Compile Include="PropertyEditors\PersonalisationGroupDefinitionController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="PropertyEditors\PersonalisationGroupDefinitionPropertyEditor.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="Routing\RouteConfig.cs" />

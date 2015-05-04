@@ -5,26 +5,26 @@
     using PropertyEditors;
 
     /// <summary>
-    /// Configures custom routing for the <see cref="PersonalisationGroupDefinitionController"/>
+    /// Configures custom routing for controller action method requests
     /// </summary>
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
-                name: "Personalisation group criteria resources",
-                url: "App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/{criteriaAlias}/{fileName}",
-                defaults: new { controller = "PersonalisationGroupDefinition", action = "ResourceForCriteria" });
+                name: "Criteria resources",
+                url: "App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/{criteriaAlias}/{fileName}",
+                defaults: new { controller = "Resource", action = "GetResourceForCriteria" });
 
             routes.MapRoute(
-                name: "Personalisation group resources",
-                url: "App_Plugins/UmbracoPersonalisationGroups/Resource/{fileName}",
-                defaults: new { controller = "PersonalisationGroupDefinition", action = "Resource" });
+                name: "Core esources",
+                url: "App_Plugins/UmbracoPersonalisationGroups/GetResource/{fileName}",
+                defaults: new { controller = "Resource", action = "GetResource" });
 
             routes.MapRoute(
-                name: "Personalisation group methods",
-                url: "App_Plugins/UmbracoPersonalisationGroups/{action}",
-                defaults: new { controller = "PersonalisationGroupDefinition", action = "Index" });
+                name: "Criteria methods",
+                url: "App_Plugins/UmbracoPersonalisationGroups/Criteria/{action}",
+                defaults: new { controller = "Criteria", action = "Index" });
         }
     }
 }

@@ -10,9 +10,9 @@
 
         public const string PersonalisationGroupDefinitionPropertyAlias = "definition";
 
-        public const string ResourceRoot = "/App_Plugins/UmbracoPersonalisationGroups/Resource/";
+        public const string ResourceRoot = "/App_Plugins/UmbracoPersonalisationGroups/GetResource/";
 
-        public const string ResourceForCriteriaRoot = "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/";
+        public const string ResourceForCriteriaRoot = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/";
 
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
 
