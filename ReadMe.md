@@ -161,12 +161,6 @@ So in order to have the definition angular controller loaded, it's necessary to 
 
 It doesn't need to be used (i.e. there's no need to create a data type from it).  And so the only downside if that you have this property editor available in the drop-down list for creating data types that you don't need.  
 
-## Planned next steps
-
-The following tasks are planned to continue development of this package:
-
-- Update member group and type definition editors to use drop-down list rather than free text entry
-
 ## Troubleshooting/known issues
 
 If you run into a problem with the data type failing to load when running with debug="false", this is because it's necessary to whitelist the domains in use.  See the [forum post here](https://our.umbraco.org/forum/umbraco-7/developing-umbraco-7-packages/64459-Single-file-property-editor-and-debug=false) along with links for discussion and resolution details.  In summary though:

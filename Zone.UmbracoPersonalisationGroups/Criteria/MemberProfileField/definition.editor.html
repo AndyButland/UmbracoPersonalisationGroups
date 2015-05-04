@@ -5,7 +5,8 @@
         <p>Please enter the member profile field settings:</p>
 
         <umb-control-group alias="alias" label="Alias">
-            <input type="text" ng-model="renderModel.alias"/>
+            <select ng-model="renderModel.alias"
+                    ng-options="item as item for item in availableFields"></select>
         </umb-control-group>
         <umb-control-group alias="match" label="Comparison">
             <select ng-model="renderModel.match">

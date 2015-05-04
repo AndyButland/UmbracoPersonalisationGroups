@@ -1,5 +1,6 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Umbraco.Core;
@@ -36,5 +37,23 @@
                 .OrderBy(x => x);
             return CamelCasedJsonResult(memberGroups);
        }
+
+        /// <summary>
+        /// Gets a JSON list of the available member profile fields
+        /// </summary>
+        /// <returns>JSON response of available criteria</returns>
+        /// <remarks>Using ContentResult so can serialize with camel case for consistency in client-side code</remarks>
+        public ContentResult GetMemberProfileFields()
+        {
+            var memberTypeService = ApplicationContext.Current.Services.MemberTypeService;
+            var memberTypes = memberTypeService.GetAll();
+            var fields = memberTypes
+                .SelectMany(x => x.PropertyTypes)
+                .Select(x => x.Alias)
+                .Distinct()
+                .OrderBy(x => x);
+
+            return CamelCasedJsonResult(fields);
+        }
     }
 }
