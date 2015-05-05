@@ -80,12 +80,12 @@ With a little more work you can also personalise an individual page.  One way to
 		if (personalisedContent != null) 
 		{
 			title = personalisedContent.Name;
-			bodyText = personalisedContent.GetPropertyValue<string>("bodyText);
+			bodyText = personalisedContent.GetPropertyValue<string>("bodyText");
 		}
 		else 
 		{
 			title = Model.Content.Name;
-			bodyText = Model.Content.GetPropertyValue<string>("bodyText);	
+			bodyText = Model.Content.GetPropertyValue<string>("bodyText");	
 		}
 	}
 	
