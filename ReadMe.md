@@ -138,7 +138,7 @@ Each criteria also has an angular service named **definition.translator.js** res
 
 The country criteria uses the [free GeoLite2 IP to country database](http://dev.maxmind.com/geoip/geoip2/geolite2/) made available by Maxmind.com.  It'll look for it in /App_Data/GeoLite2-Country.mmdb or at the path specified in the following appSetting:
 
-    <add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/> 	
+    <add key="personalisationGroups.geoLocationCountryDatabasePath" value="myCustomAlias"/> 	
 
 ## How to extend it
 
