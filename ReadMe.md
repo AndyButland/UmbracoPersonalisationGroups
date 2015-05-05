@@ -177,3 +177,4 @@ If you run into a problem with the data type failing to load when running with d
  - Converted member type, group and profile field criteria to use drop-down list of available options for selection rather than free-text entry
 0.1.2
  - Added comparison (greater than, less than etc.) options for session, cookie and member profile field
+ - Fixed issue with saving of definition of day of week criteria
