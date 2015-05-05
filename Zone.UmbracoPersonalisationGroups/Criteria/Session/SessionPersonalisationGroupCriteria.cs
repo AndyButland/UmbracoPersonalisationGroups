@@ -1,6 +1,7 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Session
 {
     using System;
+    using Helpers;
     using Newtonsoft.Json;
     using Umbraco.Core;
 
@@ -72,8 +73,31 @@
                     return keyExists && value == sessionSetting.Value;
                 case SessionSettingMatch.ContainsValue:
                     return keyExists && value.Contains(sessionSetting.Value);
+                case SessionSettingMatch.GreaterThanValue:
+                case SessionSettingMatch.GreaterThanOrEqualToValue:
+                case SessionSettingMatch.LessThanValue:
+                case SessionSettingMatch.LessThanOrEqualToValue:
+                    return keyExists && 
+                        ComparisonHelpers.CompareValues(value, sessionSetting.Value, GetComparison(sessionSetting.Match));
                 default:
                     return false;
+            }
+        }
+
+        private static Comparison GetComparison(SessionSettingMatch settingMatch)
+        {
+            switch (settingMatch)
+            {
+                case SessionSettingMatch.GreaterThanValue:
+                    return Comparison.GreaterThan;
+                case SessionSettingMatch.GreaterThanOrEqualToValue:
+                    return Comparison.GreaterThanOrEqual;
+                case SessionSettingMatch.LessThanValue:
+                    return Comparison.LessThan;
+                case SessionSettingMatch.LessThanOrEqualToValue:
+                    return Comparison.LessThanOrEqual;
+                default:
+                    throw new ArgumentException("Setting supplied does not match a comparison type", "settingMatch");
             }
         }
     }

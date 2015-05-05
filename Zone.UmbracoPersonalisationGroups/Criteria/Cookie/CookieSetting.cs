@@ -6,6 +6,10 @@
         DoesNotExist,
         MatchesValue,
         ContainsValue,
+        GreaterThanValue,
+        GreaterThanOrEqualToValue,
+        LessThanValue,
+        LessThanOrEqualToValue,
     }
 
     public class CookieSetting

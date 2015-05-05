@@ -60,6 +60,7 @@
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Session\SessionPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\DayOfWeek\DayOfWeekPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Helpers\ComparisonHelpersTests.cs" />
     <Compile Include="PersonalisationGroupMatcherTests.cs" />
     <Compile Include="Criteria\Cookie\CookiePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +76,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

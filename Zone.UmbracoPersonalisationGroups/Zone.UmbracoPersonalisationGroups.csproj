@@ -236,6 +236,7 @@
     <Compile Include="Criteria\Cookie\ICookieProvider.cs" />
     <Compile Include="Criteria\Cookie\CookieSetting.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Helpers\ComparisonHelpers.cs" />
     <Compile Include="PropertyEditors\PersonalisationGroupDefinitionPropertyEditor.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="Routing\RouteConfig.cs" />

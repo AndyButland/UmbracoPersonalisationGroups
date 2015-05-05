@@ -1,5 +1,13 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups
 {
+    public enum Comparison
+    {
+        GreaterThan,
+        GreaterThanOrEqual,
+        LessThan,
+        LessThanOrEqual,
+    }
+
     public static class AppConstants
     {
         public const string DefaultPersonalisationGroupPickerAlias = "personalisationGroups";
