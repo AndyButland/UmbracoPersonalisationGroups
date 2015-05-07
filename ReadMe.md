@@ -91,6 +91,15 @@ With a little more work you can also personalise an individual page.  One way to
 	
 	<h1>@title</h1>
 	<p>@bodyText</p>
+	
+## Configuration
+
+No configuration is required if you are happy to accept the default behaviour of the package.  The following optional keys can be added to your web.config appSettings though if required to amend this.  
+
+- `<add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/>` - amends the alias that must be used when creating a property field of type personalisation group picker
+- `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found see below for more details.
+- `<add key="personalisationGroups.includeCriteria" value="alias1,alias2"/>` - provides the specific list of criteria to make available for creating personsaliation groups
+- `<add key="personalisationGroups.excludeCriteria" value="alias1,alias2"/>` - provides a list of criteria to exclude from the full list of available criteria made available for creating personsaliation groups
 
 ## How it works
 
@@ -178,3 +187,5 @@ If you run into a problem with the data type failing to load when running with d
 0.1.2
  - Added comparison (greater than, less than etc.) options for session, cookie and member profile field
  - Fixed issue with saving of definition of day of week criteria
+0.1.3
+ - Added configuration option to specifically include or exclude certain criteria

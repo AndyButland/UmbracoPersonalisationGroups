@@ -25,5 +25,9 @@
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
 
         public const string ConfigKeyForCustomGeoLocationCountryDatabasePath = "personalisationGroups.geoLocationCountryDatabasePath";
+
+        public const string ConfigKeyForIncludeCriteria = "personalisationGroups.includeCriteria";
+
+        public const string ConfigKeyForExcludeCriteria = "personalisationGroups.excludeCriteria";
     }
 }

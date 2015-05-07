@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using Zone.UmbracoPersonalisationGroups.Criteria;
 
@@ -63,6 +64,21 @@
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass)
                 .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria);
+
+            var includeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForIncludeCriteria];
+            if (!string.IsNullOrEmpty(includeCriteria))
+            {
+                typesImplementingInterface = typesImplementingInterface
+                    .Where(x => includeCriteria.Split(',').Contains(x.Alias, StringComparer.InvariantCultureIgnoreCase));
+            }
+
+            var excludeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForExcludeCriteria];
+            if (!string.IsNullOrEmpty(excludeCriteria))
+            {
+                typesImplementingInterface = typesImplementingInterface
+                    .Where(x => !excludeCriteria.Split(',').Contains(x.Alias, StringComparer.InvariantCultureIgnoreCase));
+            }
+
             foreach (var typeImplementingInterface in typesImplementingInterface)
             {
                 AvailableCriteria.Add(typeImplementingInterface.Alias, typeImplementingInterface);
