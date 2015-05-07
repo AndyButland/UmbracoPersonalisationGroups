@@ -53,7 +53,7 @@
                             "MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {0}. The path is derived from either the default ({1}) or can be configured using a relative path in an appSetting with key: \"{2}\"",
                                 _pathToDb, 
                                 AppConstants.DefaultGeoLocationCountryDatabasePath,
-                                AppConstants.ConfigKeyForCustomGeoLocationCountryDatabasePath), 
+                                AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath), 
                             _pathToDb);
                 }
             }
@@ -66,7 +66,7 @@
 
         private string GetDatabasePath()
         {
-            var path = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForCustomGeoLocationCountryDatabasePath];
+            var path = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath];
             if (string.IsNullOrEmpty(path))
             {
                 path = AppConstants.DefaultGeoLocationCountryDatabasePath;

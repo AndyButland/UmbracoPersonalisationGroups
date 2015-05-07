@@ -10,9 +10,18 @@
 
     public static class AppConstants
     {
-        public const string DefaultPersonalisationGroupPickerAlias = "personalisationGroups";
+        public static class ConfigKeys
+        {
+            public const string CustomPersonalisationGroupPickerAlias = "personalisationGroups.groupPickerAlias";
 
-        public const string ConfigKeyForCustomPersonalisationGroupPickerAlias = "personalisationGroups.groupPickerAlias";
+            public const string CustomGeoLocationCountryDatabasePath = "personalisationGroups.geoLocationCountryDatabasePath";
+
+            public const string IncludeCriteria = "personalisationGroups.includeCriteria";
+
+            public const string ExcludeCriteria = "personalisationGroups.excludeCriteria";
+        }
+
+        public const string DefaultPersonalisationGroupPickerAlias = "personalisationGroups";
 
         public const string PersonalisationGroupDefinitionPropertyEditorAlias = "personalisationGroupDefinition";
 
@@ -23,11 +32,5 @@
         public const string ResourceForCriteriaRoot = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/";
 
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
-
-        public const string ConfigKeyForCustomGeoLocationCountryDatabasePath = "personalisationGroups.geoLocationCountryDatabasePath";
-
-        public const string ConfigKeyForIncludeCriteria = "personalisationGroups.includeCriteria";
-
-        public const string ConfigKeyForExcludeCriteria = "personalisationGroups.excludeCriteria";
     }
 }

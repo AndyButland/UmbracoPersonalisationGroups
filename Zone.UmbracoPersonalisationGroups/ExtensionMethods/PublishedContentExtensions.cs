@@ -76,7 +76,7 @@
         private static string GetGroupPickerAlias()
         {
             // First check if defined in config
-            var groupPickerAlias = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForCustomPersonalisationGroupPickerAlias];
+            var groupPickerAlias = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomPersonalisationGroupPickerAlias];
             if (string.IsNullOrEmpty(groupPickerAlias))
             {
                 // If not, use the convention alias

@@ -65,14 +65,14 @@
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass)
                 .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria);
 
-            var includeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForIncludeCriteria];
+            var includeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.IncludeCriteria];
             if (!string.IsNullOrEmpty(includeCriteria))
             {
                 typesImplementingInterface = typesImplementingInterface
                     .Where(x => includeCriteria.Split(',').Contains(x.Alias, StringComparer.InvariantCultureIgnoreCase));
             }
 
-            var excludeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeyForExcludeCriteria];
+            var excludeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.ExcludeCriteria];
             if (!string.IsNullOrEmpty(excludeCriteria))
             {
                 typesImplementingInterface = typesImplementingInterface
