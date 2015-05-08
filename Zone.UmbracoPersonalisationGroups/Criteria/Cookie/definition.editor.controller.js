@@ -14,11 +14,12 @@
             };
 
             $scope.saveAndClose = function () {
-                var serializedResult = "{ \"key\": \"" + $scope.renderModel.key + "\", " +
-                    "\"match\": \"" + $scope.renderModel.match + "\", " + 
-                    "\"value\": \"" + ($scope.valueRequired() ? $scope.renderModel.value : "") + "\" }";
-
-                $scope.submit(serializedResult);
+                if ($scope.renderModel.key) {
+                    var serializedResult = "{ \"key\": \"" + $scope.renderModel.key + "\", " +
+                        "\"match\": \"" + $scope.renderModel.match + "\", " +
+                        "\"value\": \"" + ($scope.valueRequired() ? $scope.renderModel.value : "") + "\" }";
+                    $scope.submit(serializedResult);
+                }
             };
 
         });

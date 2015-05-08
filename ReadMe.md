@@ -189,3 +189,5 @@ If you run into a problem with the data type failing to load when running with d
  - Fixed issue with saving of definition of day of week criteria
 0.1.3
  - Added configuration option to specifically include or exclude certain criteria
+0.1.4
+ - Fixed some JavaScript errors in rendering translations for empty values

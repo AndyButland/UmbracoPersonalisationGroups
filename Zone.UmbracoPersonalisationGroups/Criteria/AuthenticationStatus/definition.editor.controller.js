@@ -10,7 +10,8 @@
             }
 
             $scope.saveAndClose = function () {
-                var serializedResult = "{ \"isAuthenticated\": " + $scope.renderModel.isAuthenticated + " }";
+                var value = $scope.renderModel.isAuthenticated ? true : false;
+                var serializedResult = "{ \"isAuthenticated\": " + value + " }";
                 $scope.submit(serializedResult);
             };
 

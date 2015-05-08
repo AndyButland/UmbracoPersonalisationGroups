@@ -9,14 +9,16 @@
 	    var service = {
 	        translate: function (definition) {
 	            var translation = "";
-	            var selectedTimes = JSON.parse(definition);
+	            if (definition) {
+	                var selectedTimes = JSON.parse(definition);
 
-	            for (var i = 0; i < selectedTimes.length; i++) {
-	                if (translation.length > 0) {
-	                    translation += ", ";
+	                for (var i = 0; i < selectedTimes.length; i++) {
+	                    if (translation.length > 0) {
+	                        translation += ", ";
+	                    }
+
+	                    translation += formatTime(selectedTimes[i].from) + " - " + formatTime(selectedTimes[i].to);
 	                }
-
-	                translation += formatTime(selectedTimes[i].from) + " - " + formatTime(selectedTimes[i].to);
 	            }
 
 	            return translation;

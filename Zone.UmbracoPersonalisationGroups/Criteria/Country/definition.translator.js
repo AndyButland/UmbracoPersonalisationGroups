@@ -4,14 +4,16 @@
 	    var service = {
 	        translate: function (definition) {
 	            var translation = "";
-	            var selectedCountryCodes = JSON.parse(definition);
+	            if (definition) {
+	                var selectedCountryCodes = JSON.parse(definition);
 
-	            for (var i = 0; i < selectedCountryCodes.length; i++) {
-	                if (translation.length > 0) {
-	                    translation += ", ";
+	                for (var i = 0; i < selectedCountryCodes.length; i++) {
+	                    if (translation.length > 0) {
+	                        translation += ", ";
+	                    }
+
+	                    translation += selectedCountryCodes[i].code.toUpperCase();
 	                }
-
-	                translation += selectedCountryCodes[i].code.toUpperCase();
 	            }
 
 	            return translation;
