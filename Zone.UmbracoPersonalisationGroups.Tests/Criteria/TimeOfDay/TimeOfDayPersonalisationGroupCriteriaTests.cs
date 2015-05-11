@@ -7,7 +7,7 @@
     [TestClass]
     public class TimeOfDayPersonalisationGroupCriteriaTests
     {
-        private const string DefinitionFormat = "[ {{ \"from\": {0}, \"to\": {1} }}, {{ \"from\": {2}, \"to\": {3} }} ]";
+        private const string DefinitionFormat = "[ {{ \"from\": \"{0}\", \"to\": \"{1}\" }}, {{ \"from\": \"{2}\", \"to\": \"{3}\" }} ]";
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

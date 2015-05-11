@@ -2,8 +2,7 @@
 	.factory("UmbracoPersonalisationGroups.TimeOfDayTranslatorService", function () {
 
 	    function formatTime(time) {
-	        var timeAsString = "" + time;
-	        return timeAsString.substr(0, timeAsString.length - 2) + ":" + timeAsString.substr(timeAsString.length - 2);
+	        return time.substr(0, time.length - 2) + ":" + time.substr(time.length - 2);
 	    }
 
 	    var service = {

@@ -61,8 +61,8 @@
                         serializedResult += ", ";
                     }
 
-                    serializedResult += "{ \"from\": " + $scope.renderModel.periods[i].from + ", " + 
-                        "\"to\": " + $scope.renderModel.periods[i].to + " }";
+                    serializedResult += "{ \"from\": \"" + $scope.renderModel.periods[i].from + "\", " + 
+                        "\"to\": \"" + $scope.renderModel.periods[i].to + "\" }";
                 }
 
                 serializedResult += "]";

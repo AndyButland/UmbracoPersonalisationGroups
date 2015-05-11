@@ -191,3 +191,5 @@ If you run into a problem with the data type failing to load when running with d
  - Added configuration option to specifically include or exclude certain criteria
 0.1.4
  - Fixed some JavaScript errors in rendering translations for empty values
+0.1.5
+ - Amended time of day criteria internal JSON format to store times as strings rather than numbers (was causing some cross-browser issues)
