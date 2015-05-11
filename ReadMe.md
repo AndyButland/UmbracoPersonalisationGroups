@@ -180,16 +180,16 @@ If you run into a problem with the data type failing to load when running with d
 
 ## Version history
 
-0.1.0
- - Initial release
-0.1.1 
- - Converted member type, group and profile field criteria to use drop-down list of available options for selection rather than free-text entry
-0.1.2
- - Added comparison (greater than, less than etc.) options for session, cookie and member profile field
- - Fixed issue with saving of definition of day of week criteria
-0.1.3
- - Added configuration option to specifically include or exclude certain criteria
-0.1.4
- - Fixed some JavaScript errors in rendering translations for empty values
-0.1.5
- - Amended time of day criteria internal JSON format to store times as strings rather than numbers (was causing some cross-browser issues)
+- 0.1.0
+    - Initial release
+- 0.1.1 
+     - Converted member type, group and profile field criteria to use drop-down list of available options for selection rather than free-text entry
+- 0.1.2
+     - Added comparison (greater than, less than etc.) options for session, cookie and member profile field
+     - Fixed issue with saving of definition of day of week criteria
+- 0.1.3
+     - Added configuration option to specifically include or exclude certain criteria
+- 0.1.4
+    - Fixed some JavaScript errors in rendering translations for empty values
+- 0.1.5
+    - Amended time of day criteria internal JSON format to store times as strings rather than numbers (was causing some cross-browser issues)
