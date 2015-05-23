@@ -1,26 +1,41 @@
-﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.CookiePersonalisationGroupCriteriaController">
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.PagesViewedPersonalisationGroupCriteriaController">
 
     <div class="umb-panel-body no-header with-footer compact">
 
-        <p>Please enter the cookie settings:</p>
+        <p>Please enter the pages viewed criteria settings:</p>
 
-        <umb-control-group alias="key" label="Key">
-            <input type="text" ng-model="renderModel.key" />
-        </umb-control-group>
-        <umb-control-group alias="match" label="Comparison">
+        <umb-control-group alias="match" label="Visitor has">
             <select ng-model="renderModel.match">
-                <option value="Exists">Cookie is present</option>
-                <option value="DoesNotExist">Cookie is absent</option>
-                <option value="MatchesValue">Cookie value matches</option>
-                <option value="ContainsValue">Cookie value contains</option>
-                <option value="GreaterThanValue">Cookie value is greater than</option>
-                <option value="GreaterThanOrEqualToValue">Cookie value is greater than or equal to</option>
-                <option value="LessThanValue">Cookie value is less than</option>
-                <option value="LessThanOrEqualToValue">Cookie value is less than or equal to</option>
+                <option value="ViewedAny">Viewed any pages</option>
+                <option value="ViewedAll">Viewed all pages</option>
+                <option value="NotViewedAny">Not viewed any pages</option>
+                <option value="NotViewedAll">Not viewed all pages</option>
             </select>
         </umb-control-group>
-        <umb-control-group alias="value" label="Value">
-            <input type="text" ng-model="renderModel.value" ng-disabled="!valueRequired()" />
+        <umb-control-group alias="nodeIds" label="Pages">
+
+            <ul class="unstyled list-icons" ng-model="renderModel.nodes">
+
+                <li ng-repeat="node in renderModel.nodes">
+
+                    <a href="#" prevent-default ng-click="remove($index)">
+                        <i class="icon icon-delete red hover-show"></i>
+                        <i class="{{node.icon}} hover-hide"></i>
+                        {{node.name}}
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="unstyled list-icons">
+                <li>
+                    <i class="icon icon-add blue"></i>
+                    <a href="#" ng-click="openContentPicker()" prevent-default>
+                        <localize key="general_add">Add</localize>
+                    </a>
+                </li>
+            </ul>
+
         </umb-control-group>
 
     </div>

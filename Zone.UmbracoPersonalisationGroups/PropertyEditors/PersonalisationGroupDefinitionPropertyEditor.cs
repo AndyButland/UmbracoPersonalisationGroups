@@ -31,6 +31,9 @@
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "memberType/definition.editor.controller.js")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "memberType/definition.translator.js")]
+    
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "pagesViewed/definition.editor.controller.js")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "pagesViewed/definition.translator.js")]
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "session/definition.editor.controller.js")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "session/definition.translator.js")]
