@@ -1,9 +1,6 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed
 {
     using System;
-    using System.Linq;
-    using Cookie;
-    using Helpers;
     using Newtonsoft.Json;
     using Umbraco.Core;
 
@@ -12,6 +9,8 @@
     /// </summary>
     public class PagesViewedPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
+        internal static string CriteriaAlias = "pagesViewed";
+
         private readonly IPagesViewedProvider _pagesViewedProvider;
 
         public PagesViewedPersonalisationGroupCriteria()

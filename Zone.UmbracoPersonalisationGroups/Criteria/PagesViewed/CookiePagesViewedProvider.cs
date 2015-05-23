@@ -6,7 +6,7 @@
 
     public class CookiePagesViewedProvider : IPagesViewedProvider
     {
-        private const string CookieKey = "personalisationGroupsPagesViewed";
+        internal static string CookieKey = "personalisationGroupsPagesViewed";
 
         public IEnumerable<int> GetNodeIdsViewed()
         {

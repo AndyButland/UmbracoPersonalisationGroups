@@ -231,6 +231,7 @@
     <Compile Include="Criteria\AuthenticationStatus\IAuthenticationStatusProvider.cs" />
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusSetting.cs" />
+    <Compile Include="Criteria\PagesViewed\RegisterApplicationEvents.cs" />
     <Compile Include="Criteria\Session\SessionPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Session\SessionSetting.cs" />
     <Compile Include="Criteria\Session\HttpContextSessionProvider.cs" />
