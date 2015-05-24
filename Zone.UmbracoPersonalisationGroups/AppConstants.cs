@@ -19,6 +19,8 @@
             public const string IncludeCriteria = "personalisationGroups.includeCriteria";
 
             public const string ExcludeCriteria = "personalisationGroups.excludeCriteria";
+
+            public const string ViewedPagesTrackingCookieExpiryInDays = "personalisationGroups.viewedPagesTrackingCookieExpiryInDays";
         }
 
         public const string DefaultPersonalisationGroupPickerAlias = "personalisationGroups";
@@ -32,5 +34,7 @@
         public const string ResourceForCriteriaRoot = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/";
 
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
+
+        public const int DefaultViewedPagesTrackingCookieExpiryInDays = 90;
     }
 }

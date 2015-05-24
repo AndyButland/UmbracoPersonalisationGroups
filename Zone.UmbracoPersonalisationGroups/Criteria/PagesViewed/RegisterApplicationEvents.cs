@@ -4,6 +4,7 @@
     using System.Configuration;
     using System.Linq;
     using System.Web;
+    using Helpers;
     using Umbraco.Core;
     using Umbraco.Web;
 
@@ -16,31 +17,10 @@
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            if (IsCriteriaInUse())
+            if (CriteriaConfigHelpers.IsCriteriaInUse(PagesViewedPersonalisationGroupCriteria.CriteriaAlias))
             {
                 UmbracoApplicationBase.ApplicationInit += ApplicationInit;
             }
-        }
-
-        private bool IsCriteriaInUse()
-        {
-            var includeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.IncludeCriteria];
-            if (!string.IsNullOrEmpty(includeCriteria))
-            {
-                return includeCriteria
-                    .Split(',')
-                    .Contains(PagesViewedPersonalisationGroupCriteria.CriteriaAlias);
-            }
-
-            var excludeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.ExcludeCriteria];
-            if (!string.IsNullOrEmpty(excludeCriteria))
-            {
-                return !excludeCriteria
-                    .Split(',')
-                    .Contains(PagesViewedPersonalisationGroupCriteria.CriteriaAlias);
-            }
-
-            return true;
         }
 
         private void ApplicationInit(object sender, EventArgs e)
@@ -70,7 +50,13 @@
                 cookie.Value = umbracoContext.PageId.Value.ToString();
             }
 
-            cookie.Expires = DateTime.Now.AddDays(30);
+            int cookieExpiryInDays;
+            if (!int.TryParse(ConfigurationManager.AppSettings[AppConstants.ConfigKeys.ViewedPagesTrackingCookieExpiryInDays], out cookieExpiryInDays))
+            {
+                cookieExpiryInDays = AppConstants.DefaultViewedPagesTrackingCookieExpiryInDays;
+            }
+
+            cookie.Expires = DateTime.Now.AddDays(cookieExpiryInDays);
             httpContext.Response.Cookies.Add(cookie);
         }
 
