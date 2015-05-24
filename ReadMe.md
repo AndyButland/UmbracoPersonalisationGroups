@@ -14,6 +14,7 @@ It contains a few different pieces:
     - Cookie key presence/absence and value matching
 	- Country (via IP matching)
     - Day of week
+	- Pages viewed
     - Session key presence/absence and value matching
     - Time of day
 	- Umbraco member group
@@ -100,6 +101,7 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found see below for more details.
 - `<add key="personalisationGroups.includeCriteria" value="alias1,alias2"/>` - provides the specific list of criteria to make available for creating personsaliation groups
 - `<add key="personalisationGroups.excludeCriteria" value="alias1,alias2"/>` - provides a list of criteria to exclude from the full list of available criteria made available for creating personsaliation groups
+- `<add key="personalisationGroups.viewedPagesTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for viewed page tracking for the pages viewed criteria (default if not provided is 90)
 
 ## How it works
 
@@ -147,7 +149,13 @@ Each criteria also has an angular service named **definition.translator.js** res
 
 The country criteria uses the [free GeoLite2 IP to country database](http://dev.maxmind.com/geoip/geoip2/geolite2/) made available by Maxmind.com.  It'll look for it in /App_Data/GeoLite2-Country.mmdb or at the path specified in the following appSetting:
 
-    <add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/> 	
+    <add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/> 
+
+### Pages viewed
+
+In order to support personalising content to site visitors that have seen or not seen particular pages we need to track which pages they have viewed.  This is implemented using a cooke named **personalisationGroupsPagesViewed** that will be written and amended on each page request.  It has a default expiry of 90 days but you can amend this in configuration.  The cookie expiry slides, so if the site is used again before it expires, the values stored remain.	
+
+If you don't want this cookie to be written, you can remove this criteria from the list available to select via configuration (see above).  If you do that, the criteria can't be used and the page tracking behaviour will be switched off.
 
 ## How to extend it
 
