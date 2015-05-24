@@ -201,3 +201,7 @@ If you run into a problem with the data type failing to load when running with d
     - Fixed some JavaScript errors in rendering translations for empty values
 - 0.1.5
     - Amended time of day criteria internal JSON format to store times as strings rather than numbers (was causing some cross-browser issues)
+- 0.1.6
+    - No code changes - added missing dll to package
+- 0.1.7
+    - Added pages viewed criteria
