@@ -206,6 +206,7 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
     <Compile Include="Criteria\PagesViewed\CookiePagesViewedProvider.cs" />
+    <Compile Include="Helpers\CriteriaConfigHelpers.cs" />
     <Compile Include="Criteria\PagesViewed\IPagesViewedProvider.cs" />
     <Compile Include="Criteria\PagesViewed\PagesViewedPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\PagesViewed\PagesViewedSetting.cs" />

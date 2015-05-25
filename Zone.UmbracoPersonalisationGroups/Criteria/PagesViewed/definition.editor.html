@@ -5,11 +5,11 @@
         <p>Please enter the pages viewed criteria settings:</p>
 
         <umb-control-group alias="match" label="Visitor has">
-            <select ng-model="renderModel.match">
-                <option value="ViewedAny">Viewed any pages</option>
-                <option value="ViewedAll">Viewed all pages</option>
-                <option value="NotViewedAny">Not viewed any pages</option>
-                <option value="NotViewedAll">Not viewed all pages</option>
+            <select ng-model="renderModel.match" style="width: auto">
+                <option value="ViewedAny">Viewed any one of the following pages</option>
+                <option value="ViewedAll">Viewed all of the following pages</option>
+                <option value="NotViewedAny">Not viewed any one of the following pages</option>
+                <option value="NotViewedAll">Not viewed all of the following pages</option>
             </select>
         </umb-control-group>
         <umb-control-group alias="nodeIds" label="Pages">
