@@ -205,3 +205,5 @@ If you run into a problem with the data type failing to load when running with d
     - No code changes - added missing dll to package
 - 0.1.7
     - Added pages viewed criteria
+- 0.1.8
+    - Fixed issue where adding a new criteria but cancelling left an empty one that needed to be deleted

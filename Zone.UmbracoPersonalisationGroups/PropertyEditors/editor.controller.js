@@ -3,6 +3,7 @@
         function ($scope, $http, $injector, dialogService) {
 
             var translators = [];
+            var editingNew = false;
 
             function convertToPascalCase(s) {
                 return s.charAt(0).toUpperCase() + s.substr(1);
@@ -62,9 +63,11 @@
                 var detail = { alias: $scope.selectedCriteria.alias, definition: "" };
                 $scope.model.value.details.push(detail);
                 $scope.editDefinitionDetail(detail);
+                editingNew = true;
             };
 
             $scope.editDefinitionDetail = function (definitionDetail) {
+                editingNew = false;
                 var templateUrl = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/" + definitionDetail.alias + "/definition.editor.html";
                 dialogService.open(
                     {
@@ -72,7 +75,13 @@
                         definition: definitionDetail.definition,
                         callback: function (data) {
                             definitionDetail.definition = data;
-                        }
+                        },
+                        closeCallback: function() {
+                            if (editingNew) {
+                                // If we've cancelled a new one, we don't want an empty record
+                                $scope.model.value.details.pop();
+                            }
+                        },
                     });
             };
 
