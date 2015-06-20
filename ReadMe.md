@@ -15,6 +15,7 @@ It contains a few different pieces:
 	- Country (via IP matching)
     - Day of week
 	- Pages viewed
+	- Referrer
     - Session key presence/absence and value matching
     - Time of day
 	- Umbraco member group
@@ -207,3 +208,5 @@ If you run into a problem with the data type failing to load when running with d
     - Added pages viewed criteria
 - 0.1.8
     - Fixed issue where adding a new criteria but cancelling left an empty one that needed to be deleted
+- 0.1.9
+    - Added referrer criteria

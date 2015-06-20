@@ -5,7 +5,7 @@
     using Umbraco.Core;
 
     /// <summary>
-    /// Implements a personalisation group criteria based on the presence, absence or value of a session key
+    /// Implements a personalisation group criteria based on whether the user is logged on or not
     /// </summary>
     public class AuthenticationStatusPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
