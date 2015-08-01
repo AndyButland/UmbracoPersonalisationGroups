@@ -205,6 +205,11 @@
     <Compile Include="Controllers\BaseJsonResultController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
+    <Compile Include="Criteria\NumberOfVisits\CookieNumberOfVisitsProvider.cs" />
+    <Compile Include="Criteria\NumberOfVisits\INumberOfVisitsProvider.cs" />
+    <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsPersonalisationGroupCriteria.cs" />
+    <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsSetting.cs" />
+    <Compile Include="Criteria\NumberOfVisits\RegisterApplicationEvents.cs" />
     <Compile Include="Criteria\PagesViewed\CookiePagesViewedProvider.cs" />
     <Compile Include="Criteria\Referral\HttpContextReferrerProvider.cs" />
     <Compile Include="Criteria\Referral\IReferrerProvider.cs" />
@@ -367,6 +372,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Criteria\Referral\definition.translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\NumberOfVisits\definition.editor.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\NumberOfVisits\definition.editor.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\NumberOfVisits\definition.translator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\PagesViewed\PagesViewedPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\MemberGroup\MemberTypePersonalisationGroupCriteriaTests.cs" />

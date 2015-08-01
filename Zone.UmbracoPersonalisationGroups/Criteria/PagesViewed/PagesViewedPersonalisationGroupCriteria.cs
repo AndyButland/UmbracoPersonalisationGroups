@@ -30,7 +30,7 @@
 
         public string Alias
         {
-            get { return "pagesViewed"; }
+            get { return CriteriaAlias; }
         }
 
         public string Description

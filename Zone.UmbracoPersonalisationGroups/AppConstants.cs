@@ -20,6 +20,8 @@
 
             public const string ExcludeCriteria = "personalisationGroups.excludeCriteria";
 
+            public const string NumberOfVisitsTrackingCookieExpiryInDays = "personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays";
+
             public const string ViewedPagesTrackingCookieExpiryInDays = "personalisationGroups.viewedPagesTrackingCookieExpiryInDays";
         }
 

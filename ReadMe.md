@@ -14,6 +14,7 @@ It contains a few different pieces:
     - Cookie key presence/absence and value matching
 	- Country (via IP matching)
     - Day of week
+	- Number of site visits
 	- Pages viewed
 	- Referrer
     - Session key presence/absence and value matching
@@ -210,3 +211,5 @@ If you run into a problem with the data type failing to load when running with d
     - Fixed issue where adding a new criteria but cancelling left an empty one that needed to be deleted
 - 0.1.9
     - Added referrer criteria
+- 0.1.10
+    - Added number of site visits criteria
