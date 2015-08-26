@@ -6,6 +6,15 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
 
 It can be downloaded and installed from: https://our.umbraco.org/projects/website-utilities/personalisation-groups
 
+There's also a NuGet installer if you prefer to use that:
+
+    PM> Install-Package UmbracoPersonalisationGroups
+	
+However this will only install the dll, not the document types and data types.  As such I'd reccommend if you do want to use NuGet for ease of updates, do the following:
+
+- Install the package from our.umbraco.org
+- Then install from NuGet to get the dll as a package reference	
+
 It contains a few different pieces:
 
 - An interface for and various implementations of different personalisation group criteria (e.g. "time of day", "day of week")
@@ -103,6 +112,7 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found see below for more details.
 - `<add key="personalisationGroups.includeCriteria" value="alias1,alias2"/>` - provides the specific list of criteria to make available for creating personsaliation groups
 - `<add key="personalisationGroups.excludeCriteria" value="alias1,alias2"/>` - provides a list of criteria to exclude from the full list of available criteria made available for creating personsaliation groups
+- `<add key="personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for number of visits page tracking for the pages viewed criteria (default if not provided is 90)
 - `<add key="personalisationGroups.viewedPagesTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for viewed page tracking for the pages viewed criteria (default if not provided is 90)
 
 ## How it works
