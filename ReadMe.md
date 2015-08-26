@@ -198,6 +198,8 @@ If you run into a problem with the data type failing to load when running with d
 - Find the **bundleDomains** attribute
 - Add a comma separated list of the domains you are using
 
+*This has been resolved from version 0.1.11 - thanks to [James Jackson-South](https://github.com/JimBobSquarePants) for the pull request.
+
 ## Version history
 
 - 0.1.0
@@ -223,3 +225,5 @@ If you run into a problem with the data type failing to load when running with d
     - Added referrer criteria
 - 0.1.10
     - Added number of site visits criteria
+- 0.1.11
+    - Fix for issue where embedded resources couldn't be loaded with debug="false" unless client dependency was configured with the domains in use - thanks to [James Jackson-South](https://github.com/JimBobSquarePants) for the pull request.

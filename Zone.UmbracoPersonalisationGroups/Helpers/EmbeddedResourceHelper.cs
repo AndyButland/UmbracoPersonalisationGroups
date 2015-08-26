@@ -98,7 +98,6 @@
             return null;
         }
 
-
         /// <summary>
         /// Gets a sanitized name for an embedded criteria resource.
         /// </summary>
