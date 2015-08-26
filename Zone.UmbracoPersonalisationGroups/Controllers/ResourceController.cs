@@ -3,9 +3,11 @@
     using System;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Web.Mvc;
     using Umbraco.Core;
 
+    using Zone.UmbracoPersonalisationGroups.Criteria;
     using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
@@ -22,8 +24,10 @@
         {
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
+            // Get this assembly.
+            Assembly assembly = typeof(ResourceController).Assembly;
             string resourceName;
-            Stream resourceStream = EmbeddedResourceHelper.GetResource(fileName, out resourceName);
+            Stream resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out resourceName);
 
             if (resourceStream != null)
             {
@@ -44,13 +48,14 @@
             Mandate.ParameterNotNullOrEmpty(criteriaAlias, "criteriaAlias");
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
-            var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
-                                                      .SingleOrDefault(x => string.Equals(x.Alias, criteriaAlias, StringComparison.InvariantCultureIgnoreCase));
+            IPersonalisationGroupCriteria criteria = 
+                PersonalisationGroupMatcher.GetAvailableCriteria()
+                                           .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
 
             if (criteria != null)
             {
                 string resourceName;
-                Stream resourceStream = EmbeddedResourceHelper.GetResource(criteriaAlias + "." + fileName, out resourceName);
+                Stream resourceStream = EmbeddedResourceHelper.GetResource(criteria.GetType().Assembly, criteriaAlias + "." + fileName, out resourceName);
 
                 if (resourceStream != null)
                 {
