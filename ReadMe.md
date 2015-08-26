@@ -6,15 +6,6 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
 
 It can be downloaded and installed from: https://our.umbraco.org/projects/website-utilities/personalisation-groups
 
-There's also a NuGet installer if you prefer to use that:
-
-    PM> Install-Package UmbracoPersonalisationGroups
-	
-However this will only install the dll, not the document types and data types.  As such I'd reccommend if you do want to use NuGet for ease of updates, do the following:
-
-- Install the package from our.umbraco.org
-- Then install from NuGet to get the dll as a package reference	
-
 It contains a few different pieces:
 
 - An interface for and various implementations of different personalisation group criteria (e.g. "time of day", "day of week")
@@ -47,6 +38,15 @@ Once installed you'll find a few additional components:
  - **Personalisation Group** is a document type where the group itself is created.  You can place these inside the folders.  It comes with a single property called *Group definition* of a data type also provided with this package.
  - **Personalisation group definition** the data type provided to allow the definition of personalisation group, based on a new property editor provided in the dll installed with the package.
  - **Personalisation group picker** is an data type instance of the multi-node tree picker property editor, for the selection of groups for given piece of content
+ 
+There's also a NuGet installer if you prefer to use that:
+
+    PM> Install-Package UmbracoPersonalisationGroups
+	
+However this will only install the dll, not the document types and data types.  As such I'd reccommend if you do want to use NuGet for ease of updates, do the following:
+
+- Install the package from our.umbraco.org
+- Then install from NuGet to get the dll as a package reference	 
  
 ### Example usage
 
