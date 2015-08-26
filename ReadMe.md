@@ -198,7 +198,7 @@ If you run into a problem with the data type failing to load when running with d
 - Find the **bundleDomains** attribute
 - Add a comma separated list of the domains you are using
 
-*This has been resolved from version 0.1.11 - thanks to [James Jackson-South](https://github.com/JimBobSquarePants) for the pull request.
+*This has been resolved from version 0.1.11 for the criteria provided with the package, but there still looks to be a problem if you have created your own criteria.*
 
 ## Version history
 
