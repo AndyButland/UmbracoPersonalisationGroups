@@ -33,7 +33,13 @@
 
         public const string ResourceRoot = "/App_Plugins/UmbracoPersonalisationGroups/GetResource/";
 
+        public const string ResourceRootNameSpace = "Zone.UmbracoPersonalisationGroups.PropertyEditors.";
+
         public const string ResourceForCriteriaRoot = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/";
+
+        public const string ResourceForCriteriaRootNameSpace = "Zone.UmbracoPersonalisationGroups.Criteria.";
+
+        public const string ResourceExtension = ".umb"; 
 
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
 

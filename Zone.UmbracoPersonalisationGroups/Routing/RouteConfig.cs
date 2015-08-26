@@ -2,7 +2,10 @@
 {
     using System.Web.Mvc;
     using System.Web.Routing;
-    using PropertyEditors;
+
+    using ClientDependency.Core;
+
+    using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
     /// Configures custom routing for controller action method requests
@@ -30,6 +33,9 @@
                 name: "Member methods",
                 url: "App_Plugins/UmbracoPersonalisationGroups/Member/{action}",
                 defaults: new { controller = "Member", action = "Index" });
+
+            // Add the virtual file writer for the extension type.
+            FileWriters.AddWriterForExtension(AppConstants.ResourceExtension, new EmbeddedResourceWriter());
         }
     }
 }

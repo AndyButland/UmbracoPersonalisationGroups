@@ -1,10 +1,14 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
     using Umbraco.Core;
+
+    using Zone.UmbracoPersonalisationGroups.Criteria;
+    using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
     /// Controller providing access to embedded client-side angular resource
@@ -16,19 +20,21 @@
         /// </summary>
         /// <param name="fileName">Name of resource</param>
         /// <returns>File stream of resource</returns>
-        public FileStreamResult GetResource(string fileName)
+        public ActionResult GetResource(string fileName)
         {
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
-            var resourceName =
-                Assembly.GetExecutingAssembly()
-                    .GetManifestResourceNames()
-                    .ToList()
-                    .FirstOrDefault(f => f.EndsWith(fileName));
+            // Get this assembly.
+            Assembly assembly = typeof(ResourceController).Assembly;
+            string resourceName;
+            Stream resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out resourceName);
 
-            var assembly = typeof(ResourceController).Assembly;
+            if (resourceStream != null)
+            {
+                return new FileStreamResult(resourceStream, this.GetMimeType(resourceName));
+            }
 
-            return new FileStreamResult(assembly.GetManifestResourceStream(resourceName), GetMimeType(fileName));
+            return this.HttpNotFound();
         }
 
         /// <summary>
@@ -37,27 +43,27 @@
         /// <param name="criteriaAlias">Alias of criteria</param>
         /// <param name="fileName">Name of resource</param>
         /// <returns>File stream of resource</returns>
-        public FileStreamResult GetResourceForCriteria(string criteriaAlias, string fileName)
+        public ActionResult GetResourceForCriteria(string criteriaAlias, string fileName)
         {
             Mandate.ParameterNotNullOrEmpty(criteriaAlias, "criteriaAlias");
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
-            var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
-                .SingleOrDefault(x => string.Equals(x.Alias, criteriaAlias, StringComparison.InvariantCultureIgnoreCase));
+            IPersonalisationGroupCriteria criteria = 
+                PersonalisationGroupMatcher.GetAvailableCriteria()
+                                           .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
+
             if (criteria != null)
             {
-                var resourceName =
-                    criteria.GetType().Assembly
-                        .GetManifestResourceNames()
-                        .ToList()
-                        .FirstOrDefault(f => f.EndsWith(criteriaAlias + "." + fileName, StringComparison.InvariantCultureIgnoreCase));
+                string resourceName;
+                Stream resourceStream = EmbeddedResourceHelper.GetResource(criteria.GetType().Assembly, criteriaAlias + "." + fileName, out resourceName);
 
-                var assembly = criteria.GetType().Assembly;
-
-                return new FileStreamResult(assembly.GetManifestResourceStream(resourceName), GetMimeType(fileName));
+                if (resourceStream != null)
+                {
+                    return new FileStreamResult(resourceStream, this.GetMimeType(resourceName));
+                }
             }
 
-            return null;
+            return this.HttpNotFound();
         }
 
         /// <summary>
