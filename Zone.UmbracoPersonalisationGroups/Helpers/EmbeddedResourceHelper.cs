@@ -55,8 +55,7 @@
                 // We need to loop through the loaded criteria and check each one.
                 Assembly localAssembly = assembly;
                 IEnumerable<IPersonalisationGroupCriteria> criteria =
-                    PersonalisationGroupMatcher
-                    .GetAvailableCriteria().Where(a => a.GetType().Assembly != localAssembly);
+                    PersonalisationGroupMatcher.GetAvailableCriteria().Where(a => a.GetType().Assembly != localAssembly);
 
                 foreach (IPersonalisationGroupCriteria criterion in criteria)
                 {
@@ -89,7 +88,6 @@
 
             // Find the resource name; not case sensitive.
             resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
-
             if (resourceName != null)
             {
                 return assembly.GetManifestResourceStream(resourceName);

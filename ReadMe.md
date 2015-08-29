@@ -173,22 +173,7 @@ If you don't want this cookie to be written, you can remove this criteria from t
 
 The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should be mostly straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of **IPersonalisationGroupCriteria** along with the definition editor angular view, controller and translation service - **definition.editor.html**, **definition.editor.controller.js** and **definition.definition.translator.js** respectively - as embedded resources.
 
-There's one gotcha though if you try to use embedded resources as used in the criteria classes in this package. Which is that it's not (I believe) possible to load an angular controller into Umbraco once the back-office application itself has bootstrapped.  The only way to do this is via a property editor, specifically it's **[PropertyEditorAsset]** attribute which is detailed [here](http://issues.umbraco.org/issue/U4-3712).
-
-So in order to have the definition angular controller loaded, it's necessary to create a property editor to do this and have this defined within the extension dll, e.g.:
-
-    /// <summary>
-    /// This isn't a "real" property editor, it's rather a hack to inject the angular controller for this criteria definition builder.
-    /// The PropertyEditorAsset attribute seems the only way currently to inject additional angular controllers before the application is bootstrapped.
-    /// </summary>
-    [PropertyEditor("personalisationGroupDefinitionDayOfWeek", "Visitor group definition (day of week - don't use)")]
-    [PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/dayOfWeek/definition.editor.controller.js")]
-	[PropertyEditorAsset(ClientDependencyType.Javascript, "/App_Plugins/UmbracoPersonalisationGroups/ResourceForCriteria/dayOfWeek/definition.translator.js")]
-    public class DummyDefinitionPropertyEditor : PropertyEditor
-    {
-    }
-
-It doesn't need to be used (i.e. there's no need to create a data type from it).  And so the only downside if that you have this property editor available in the drop-down list for creating data types that you don't need.  
+The C# files can sit anywhere of course.  The client-side files should live in `App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/<criteriaAlias`.
 
 ## Troubleshooting/known issues
 
@@ -198,7 +183,7 @@ If you run into a problem with the data type failing to load when running with d
 - Find the **bundleDomains** attribute
 - Add a comma separated list of the domains you are using
 
-*This has been resolved from version 0.1.11 for the criteria provided with the package, but there still looks to be a problem if you have created your own criteria.*
+*This has been resolved from version 0.1.11 for the criteria provided with the package, but there still looks to be a problem if you have created your own criteria using embedded resources as I've done so in the core package.  And then, even the bundleDomains workaround doesn't help.  So I believe it's necessary to avoid those and have the client-side files on disk as described in the section above.*
 
 ## Version history
 
