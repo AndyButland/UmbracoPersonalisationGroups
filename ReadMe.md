@@ -212,3 +212,5 @@ If you run into a problem with the data type failing to load when running with d
     - Added number of site visits criteria
 - 0.1.11
     - Fix for issue where embedded resources couldn't be loaded with debug="false" unless client dependency was configured with the domains in use - thanks to [James Jackson-South](https://github.com/JimBobSquarePants) for the pull request.
+- 0.1.12
+	- Removed a hard-coded test IP address from the CountryPersonalisationGroupCriteria implementation
