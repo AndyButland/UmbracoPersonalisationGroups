@@ -5,6 +5,7 @@
     using System.Configuration;
     using System.Linq;
     using Zone.UmbracoPersonalisationGroups.Criteria;
+    using Zone.UmbracoPersonalisationGroups.ExtensionMethods;
 
     /// <summary>
     /// Static class providing available details and matching logic for personalisation groups
@@ -61,7 +62,7 @@
         {
             var type = typeof(IPersonalisationGroupCriteria);
             var typesImplementingInterface = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
+                .SelectMany(s => s.GetLoadableTypes())
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass)
                 .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria);
 

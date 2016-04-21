@@ -217,6 +217,7 @@
     <Compile Include="Criteria\Referral\IReferrerProvider.cs" />
     <Compile Include="Criteria\Referral\ReferralPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Referral\ReferralSetting.cs" />
+    <Compile Include="ExtensionMethods\AssemblyExtensions.cs" />
     <Compile Include="Helpers\EmbeddedResourceVirtualFile.cs" />
     <Compile Include="Helpers\EmbeddedResourceVirtualPathProvider.cs" />
     <Compile Include="Helpers\EmbeddedResourceWriter.cs" />
