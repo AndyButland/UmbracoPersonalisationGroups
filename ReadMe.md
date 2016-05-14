@@ -147,10 +147,12 @@ Each criteria also has an angular service named **definition.translator.js** res
 
 ### PublishedContentExtensions
 
-**PublishedContentExtensions** defines the extension method on **IPublishedContent** named **ShowToVisitor()**.  This implements the following logic:
+**PublishedContentExtensions** defines the extension method on **IPublishedContent** named **ShowToVisitor(bool showIfNoGroupsDefined = true)**.  This implements the following logic:
 
-- Checks for a group picker on the content, if there's not one then we return true (indicating to show to everyone)
+- Checks for a group picker on the content.
+    - If there's not one then we return the default value passed in the `showIfNoGroupsDefined` parameter (which if not provided, defaults to true, indicating to show to everyone).
 - If found get the list of groups picked
+    - If no groups are found then again we return the default value passed in the `showIfNoGroupsDefined` parameter.
 - For each group picked, see if the definition provided matches the current site visitor.
     - If any one of them does, we return true (indicating to show the content)
 	- If none of them do, we return false (indicating to hide the content)
@@ -216,3 +218,5 @@ If you run into a problem with the data type failing to load when running with d
 	- Removed a hard-coded test IP address from the CountryPersonalisationGroupCriteria implementation
 - 0.1.13
 	- Fixed a [reported issue with loading criteria from assemblies](https://our.umbraco.org/projects/website-utilities/personalisation-groups/issues-and-feedback/76753-anyone-tried-on-74)
+- 0.1.14
+	- Provided an optional boolean parameter to the `ShowToVisitor` extension method allowing the caller to indicate that if no groups have been configured the content should be shown or hidden.  Previously shown was assumed and this is still the default for this parameter.

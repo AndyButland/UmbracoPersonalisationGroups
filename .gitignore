@@ -188,6 +188,9 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+# VS.Net 2015
+.vs/
+
 # Umbraco
 ClientDependency/
 ExamineIndexes/

@@ -16,14 +16,15 @@
         /// visitor, based on the personalisation groups associated with it.
         /// </summary>
         /// <param name="content">Instance of IPublishedContent</param>
+        /// <param name="showIfNoGroupsDefined">Indicates the response to return if groups cannot be found on the content</param>
         /// <returns>True if content should be shown to visitor</returns>
-        public static bool ShowToVisitor(this IPublishedContent content)
+        public static bool ShowToVisitor(this IPublishedContent content, bool showIfNoGroupsDefined = true)
         {
             var pickedGroups = GetPickedGroups(content);
             if (!pickedGroups.Any())
             {
-                // No personalisation groups picked or no property for picker, so we assume available to all
-                return true;
+                // No personalisation groups picked or no property for picker, so we return the provided default
+                return showIfNoGroupsDefined;
             }
 
             // Check each personalisation group assigned for a match with the current site visitor
