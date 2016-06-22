@@ -10,20 +10,11 @@
     /// </summary>
     public class DayOfWeekPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
-        public string Name
-        {
-            get { return "Day of week"; }
-        }
+        public string Name => "Day of week";
 
-        public string Alias
-        {
-            get { return "dayOfWeek"; }
-        }
+        public string Alias => "dayOfWeek";
 
-        public string Description
-        {
-            get { return "Matches visitor session with defined days of the week"; }
-        }
+        public string Description => "Matches visitor session with defined days of the week";
 
         public bool MatchesVisitor(string definition)
         {
@@ -36,7 +27,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
         }
     }

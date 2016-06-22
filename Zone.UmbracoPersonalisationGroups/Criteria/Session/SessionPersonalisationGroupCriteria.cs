@@ -22,20 +22,11 @@
             _sessionProvider = sessionProvider;
         }
 
-        public string Name
-        {
-            get { return "Session"; }
-        }
+        public string Name => "Session";
 
-        public string Alias
-        {
-            get { return "session"; }
-        }
+        public string Alias => "session";
 
-        public string Description
-        {
-            get { return "Matches visitor session with the presence, absence or value of a session key"; }
-        }
+        public string Description => "Matches visitor session with the presence, absence or value of a session key";
 
         public bool MatchesVisitor(string definition)
         {
@@ -48,7 +39,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             if (string.IsNullOrEmpty(sessionSetting.Key))

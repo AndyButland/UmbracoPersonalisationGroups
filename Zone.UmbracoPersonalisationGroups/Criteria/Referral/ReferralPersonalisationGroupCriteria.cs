@@ -23,20 +23,11 @@
             _referrerProvider = referrerProvider;
         }
 
-        public string Name
-        {
-            get { return "Referral"; }
-        }
+        public string Name => "Referral";
 
-        public string Alias
-        {
-            get { return "referral"; }
-        }
+        public string Alias => "referral";
 
-        public string Description
-        {
-            get { return "Matches visitor with a referral URL"; }
-        }
+        public string Description => "Matches visitor with a referral URL";
 
         public bool MatchesVisitor(string definition)
         {
@@ -49,7 +40,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var referrer = _referrerProvider.GetReferrer();

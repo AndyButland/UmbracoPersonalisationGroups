@@ -21,20 +21,11 @@
             _authenticationStatusProvider = authenticationStatusProvider;
         }
 
-        public string Name
-        {
-            get { return "Authentication status"; }
-        }
+        public string Name => "Authentication status";
 
-        public string Alias
-        {
-            get { return "authenticationStatus"; }
-        }
+        public string Alias => "authenticationStatus";
 
-        public string Description
-        {
-            get { return "Matches visitor session with their authentication status"; }
-        }
+        public string Description => "Matches visitor session with their authentication status";
 
         public bool MatchesVisitor(string definition)
         {
@@ -47,7 +38,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             return (authenticationStatusSetting.IsAuthenticated && _authenticationStatusProvider.IsAuthenticated()) ||

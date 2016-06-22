@@ -20,7 +20,7 @@
 
         public string GetCountryFromIp(string ip)
         {
-            var cacheKey = string.Format("PersonalisationGroups_Criteria_Country_GeoLocation_{0}", ip);
+            var cacheKey = $"PersonalisationGroups_Criteria_Country_GeoLocation_{ip}";
             var countryCode = HttpRuntime.Cache[cacheKey];
             if (countryCode == null)
             {
@@ -49,11 +49,7 @@
                 catch (FileNotFoundException)
                 {
                     throw new FileNotFoundException(
-                        string.Format(
-                            "MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {0}. The path is derived from either the default ({1}) or can be configured using a relative path in an appSetting with key: \"{2}\"",
-                                _pathToDb, 
-                                AppConstants.DefaultGeoLocationCountryDatabasePath,
-                                AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath), 
+                        $"MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {_pathToDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"", 
                             _pathToDb);
                 }
             }

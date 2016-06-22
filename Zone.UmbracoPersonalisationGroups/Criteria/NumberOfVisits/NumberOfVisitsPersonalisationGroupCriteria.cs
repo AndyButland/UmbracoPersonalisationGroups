@@ -24,20 +24,11 @@
             _numberOfVisitsProvider = numberOfVisitsProvider;
         }
 
-        public string Name
-        {
-            get { return "Number of visits"; }
-        }
+        public string Name => "Number of visits";
 
-        public string Alias
-        {
-            get { return CriteriaAlias; }
-        }
+        public string Alias => CriteriaAlias;
 
-        public string Description
-        {
-            get { return "Matches visitor session with the number of times they have visited the site"; }
-        }
+        public string Description => "Matches visitor session with the number of times they have visited the site";
 
         public bool MatchesVisitor(string definition)
         {
@@ -50,7 +41,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var timesVisited = _numberOfVisitsProvider.GetNumberOfVisits();

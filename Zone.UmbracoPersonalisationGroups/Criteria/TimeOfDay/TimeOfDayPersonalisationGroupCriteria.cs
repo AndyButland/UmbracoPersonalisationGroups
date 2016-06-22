@@ -11,20 +11,11 @@
     /// </summary>
     public class TimeOfDayPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
-        public string Name
-        {
-            get { return "Time of day"; }
-        }
+        public string Name => "Time of day";
 
-        public string Alias
-        {
-            get { return "timeOfDay"; }
-        }
+        public string Alias => "timeOfDay";
 
-        public string Description
-        {
-            get { return "Matches visitor session with defined times of the day"; }
-        }
+        public string Description => "Matches visitor session with defined times of the day";
 
         public bool MatchesVisitor(string definition)
         {
@@ -39,7 +30,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
         }
     }

@@ -21,20 +21,11 @@
             _memberTypeProvider = memberTypeProvider;
         }
 
-        public string Name
-        {
-            get { return "Member type"; }
-        }
+        public string Name => "Member type";
 
-        public string Alias
-        {
-            get { return "memberType"; }
-        }
+        public string Alias => "memberType";
 
-        public string Description
-        {
-            get { return "Matches authenticated visitor session with their member type"; }
-        }
+        public string Description => "Matches authenticated visitor session with their member type";
 
         public bool MatchesVisitor(string definition)
         {
@@ -47,7 +38,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var memberType = _memberTypeProvider.GetMemberType();

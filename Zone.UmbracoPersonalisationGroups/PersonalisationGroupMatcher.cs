@@ -49,8 +49,8 @@
             }
             catch (KeyNotFoundException)
             {
-                throw new KeyNotFoundException(string.Format("Personalisation group criteria not found with alias '{0}'",
-                    definitionDetail.Alias));
+                throw new KeyNotFoundException(
+                    $"Personalisation group criteria not found with alias '{definitionDetail.Alias}'");
             }
         }
 

@@ -22,20 +22,11 @@
             _cookieProvider = cookieProvider;
         }
 
-        public string Name
-        {
-            get { return "Cookie"; }
-        }
+        public string Name => "Cookie";
 
-        public string Alias
-        {
-            get { return "cookie"; }
-        }
+        public string Alias => "cookie";
 
-        public string Description
-        {
-            get { return "Matches visitor session with the presence, absence or value of a cookie"; }
-        }
+        public string Description => "Matches visitor session with the presence, absence or value of a cookie";
 
         public bool MatchesVisitor(string definition)
         {
@@ -48,7 +39,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             if (string.IsNullOrEmpty(cookieSetting.Key))

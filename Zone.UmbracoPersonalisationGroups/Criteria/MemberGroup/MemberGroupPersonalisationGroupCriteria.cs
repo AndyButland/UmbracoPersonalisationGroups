@@ -22,20 +22,11 @@
             _memberGroupProvider = memberGroupProvider;
         }
 
-        public string Name
-        {
-            get { return "Member group"; }
-        }
+        public string Name => "Member group";
 
-        public string Alias
-        {
-            get { return "memberGroup"; }
-        }
+        public string Alias => "memberGroup";
 
-        public string Description
-        {
-            get { return "Matches authenticated visitor session with their member group"; }
-        }
+        public string Description => "Matches authenticated visitor session with their member group";
 
         public bool MatchesVisitor(string definition)
         {
@@ -48,7 +39,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var memberGroups = _memberGroupProvider.GetMemberGroups();

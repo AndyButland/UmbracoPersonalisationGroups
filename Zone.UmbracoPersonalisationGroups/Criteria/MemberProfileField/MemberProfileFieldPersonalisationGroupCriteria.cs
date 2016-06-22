@@ -22,20 +22,11 @@
             _memberProfileFieldProvider = memberProfileFieldProvider;
         }
 
-        public string Name
-        {
-            get { return "Member profile field"; }
-        }
+        public string Name => "Member profile field";
 
-        public string Alias
-        {
-            get { return "memberProfileField"; }
-        }
+        public string Alias => "memberProfileField";
 
-        public string Description
-        {
-            get { return "Matches authenticated visitor session with a field on their member profile"; }
-        }
+        public string Description => "Matches authenticated visitor session with a field on their member profile";
 
         public bool MatchesVisitor(string definition)
         {
@@ -48,7 +39,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var value = _memberProfileFieldProvider.GetMemberProfileFieldValue(setting.Alias);

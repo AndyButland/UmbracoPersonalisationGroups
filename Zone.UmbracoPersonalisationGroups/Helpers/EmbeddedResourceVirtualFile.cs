@@ -36,10 +36,7 @@
         /// <summary>
         /// Gets the path to the virtual resource.
         /// </summary>
-        public string Path
-        {
-            get { return this.virtualPath; }
-        }
+        public string Path => this.virtualPath;
 
         /// <summary>
         /// When overridden in a derived class, returns a read-only stream to the virtual resource.

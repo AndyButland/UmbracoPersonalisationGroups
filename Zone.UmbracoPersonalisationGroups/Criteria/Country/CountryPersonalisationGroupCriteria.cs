@@ -26,20 +26,11 @@
             _countryGeoLocationProvider = countryGeoLocationProvider;
         }
 
-        public string Name
-        {
-            get { return "Country"; }
-        }
+        public string Name => "Country";
 
-        public string Alias
-        {
-            get { return "country"; }
-        }
+        public string Alias => "country";
 
-        public string Description
-        {
-            get { return "Matches visitor country derived from their IP address to a given list of countries"; }
-        }
+        public string Description => "Matches visitor country derived from their IP address to a given list of countries";
 
         public bool MatchesVisitor(string definition)
         {
@@ -52,7 +43,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var ip = _ipProvider.GetIp();

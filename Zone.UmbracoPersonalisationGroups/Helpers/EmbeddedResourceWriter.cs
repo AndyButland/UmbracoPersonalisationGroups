@@ -16,10 +16,7 @@
         /// <summary>
         /// Gets the file provider.
         /// </summary>
-        public IVirtualFileProvider FileProvider
-        {
-            get { return new EmbeddedResourceVirtualPathProvider(); }
-        }
+        public IVirtualFileProvider FileProvider => new EmbeddedResourceVirtualPathProvider();
 
         /// <summary>
         /// Writes the virtual file to a stream for serving.
