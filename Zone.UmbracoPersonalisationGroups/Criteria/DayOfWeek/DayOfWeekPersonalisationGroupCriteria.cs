@@ -10,6 +10,18 @@
     /// </summary>
     public class DayOfWeekPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public DayOfWeekPersonalisationGroupCriteria()
+        {
+            _dateTimeProvider = new DateTimeProvider();
+        }
+
+        public DayOfWeekPersonalisationGroupCriteria(IDateTimeProvider dateTimeProvider)
+        {
+            _dateTimeProvider = dateTimeProvider;
+        }
+
         public string Name => "Day of week";
 
         public string Alias => "dayOfWeek";
@@ -23,7 +35,7 @@
             try
             {
                 var definedDays = JsonConvert.DeserializeObject<int[]>(definition);
-                return definedDays.Contains((int)DateTime.Now.DayOfWeek + 1);
+                return definedDays.Contains((int)_dateTimeProvider.GetCurrentDateTime().DayOfWeek + 1);
             }
             catch (JsonReaderException)
             {

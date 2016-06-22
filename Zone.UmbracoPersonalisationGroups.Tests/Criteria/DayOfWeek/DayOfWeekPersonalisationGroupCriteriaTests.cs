@@ -1,11 +1,11 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Tests
+﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.DayOfWeek
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Zone.UmbracoPersonalisationGroups.Criteria.DayOfWeek;
 
     [TestClass]
-    public class DayOfWeekPersonalisationGroupCriteriaTests
+    public class DayOfWeekPersonalisationGroupCriteriaTests : DateTimeCriteriaTestsBase
     {
         private const string DefinitionFormat = "[ {0}, {1} ]";
 
@@ -14,7 +14,8 @@
         public void DayOfWeekPersonalisationGroupCriteria_MatchesVisitor_WithEmptyDefinition_ThrowsException()
         {
             // Arrange
-            var criteria = new DayOfWeekPersonalisationGroupCriteria();
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new DayOfWeekPersonalisationGroupCriteria(mockDateTimeProvider.Object);
 
             // Act
             criteria.MatchesVisitor((string)null);
@@ -25,7 +26,8 @@
         public void DayOfWeekPersonalisationGroupCriteria_MatchesVisitor_WithInvalidDefinition_ThrowsException()
         {
             // Arrange
-            var criteria = new DayOfWeekPersonalisationGroupCriteria();
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new DayOfWeekPersonalisationGroupCriteria(mockDateTimeProvider.Object);
             var definition = "invalid";
 
             // Act
@@ -36,7 +38,8 @@
         public void DayOfWeekPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithEmptyDays_ReturnsFalse()
         {
             // Arrange
-            var criteria = new DayOfWeekPersonalisationGroupCriteria();
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new DayOfWeekPersonalisationGroupCriteria(mockDateTimeProvider.Object);
             var definition = "[]";
 
             // Act
@@ -50,10 +53,9 @@
         public void DayOfWeekPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentDays_ReturnsFalse()
         {
             // Arrange
-            var criteria = new DayOfWeekPersonalisationGroupCriteria();
-            var definition = string.Format(DefinitionFormat,
-                GetDayOfWeekAsInteger(DateTime.Now.AddDays(1)),
-                GetDayOfWeekAsInteger(DateTime.Now.AddDays(2)));
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new DayOfWeekPersonalisationGroupCriteria(mockDateTimeProvider.Object);
+            var definition = string.Format(DefinitionFormat, 2, 3); // Monday, Tuesday
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -66,21 +68,15 @@
         public void DayOfWeekPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingDays_ReturnsTrue()
         {
             // Arrange
-            var criteria = new DayOfWeekPersonalisationGroupCriteria();
-            var definition = string.Format(DefinitionFormat,
-                GetDayOfWeekAsInteger(DateTime.Now),
-                GetDayOfWeekAsInteger(DateTime.Now.AddDays(1)));
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new DayOfWeekPersonalisationGroupCriteria(mockDateTimeProvider.Object);
+            var definition = string.Format(DefinitionFormat, 6, 7); // Friday, Saturday
 
             // Act
             var result = criteria.MatchesVisitor(definition);
 
             // Assert
             Assert.IsTrue(result);
-        }
-
-        private int GetDayOfWeekAsInteger(DateTime date)
-        {
-            return (int)date.DayOfWeek + 1;
         }
     }
 }

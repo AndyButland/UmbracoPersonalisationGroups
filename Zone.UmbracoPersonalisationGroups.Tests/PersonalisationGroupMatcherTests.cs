@@ -1,8 +1,9 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Tests
+﻿namespace Zone.UmbracoPersonsalisationGroups.Tests
 {
     using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Zone.UmbracoPersonalisationGroups;
 
     [TestClass]
     public class PersonalisationGroupMatcherTests

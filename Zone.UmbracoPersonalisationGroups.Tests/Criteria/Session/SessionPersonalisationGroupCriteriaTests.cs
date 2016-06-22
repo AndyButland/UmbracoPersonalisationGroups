@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Tests
+﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Session
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

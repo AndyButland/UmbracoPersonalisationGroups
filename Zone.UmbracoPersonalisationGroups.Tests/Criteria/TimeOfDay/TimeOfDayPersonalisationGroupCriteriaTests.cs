@@ -1,11 +1,13 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Tests
+﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.TimeOfDay
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+    using Zone.UmbracoPersonalisationGroups.Criteria;
     using Zone.UmbracoPersonalisationGroups.Criteria.TimeOfDay;
 
     [TestClass]
-    public class TimeOfDayPersonalisationGroupCriteriaTests
+    public class TimeOfDayPersonalisationGroupCriteriaTests : DateTimeCriteriaTestsBase
     {
         private const string DefinitionFormat = "[ {{ \"from\": \"{0}\", \"to\": \"{1}\" }}, {{ \"from\": \"{2}\", \"to\": \"{3}\" }} ]";
 
@@ -14,7 +16,8 @@
         public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithEmptyDefinition_ThrowsException()
         {
             // Arrange
-            var criteria = new TimeOfDayPersonalisationGroupCriteria();
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new TimeOfDayPersonalisationGroupCriteria(mockDateTimeProvider.Object);
 
             // Act
             criteria.MatchesVisitor((string)null);
@@ -25,7 +28,8 @@
         public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithInvalidDefinition_ThrowsException()
         {
             // Arrange
-            var criteria = new TimeOfDayPersonalisationGroupCriteria();
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new TimeOfDayPersonalisationGroupCriteria(mockDateTimeProvider.Object);
             var definition = "invalid";
 
             // Act
@@ -36,7 +40,8 @@
         public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithEmptyDays_ReturnsFalse()
         {
             // Arrange
-            var criteria = new TimeOfDayPersonalisationGroupCriteria();
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new TimeOfDayPersonalisationGroupCriteria(mockDateTimeProvider.Object);
             var definition = "[]";
 
             // Act
@@ -50,12 +55,9 @@
         public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentTimePeriods_ReturnsFalse()
         {
             // Arrange
-            var criteria = new TimeOfDayPersonalisationGroupCriteria();
-            var definition = string.Format(DefinitionFormat,
-                DateTime.Now.AddHours(2).ToString("HHmm"),
-                DateTime.Now.AddHours(2).AddMinutes(30).ToString("HHmm"),
-                DateTime.Now.AddHours(4).ToString("HHmm"),
-                DateTime.Now.AddHours(4).AddMinutes(30).ToString("HHmm"));
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new TimeOfDayPersonalisationGroupCriteria(mockDateTimeProvider.Object);
+            var definition = string.Format(DefinitionFormat, "0900", "0930", "1100", "1130");
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -68,12 +70,24 @@
         public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingTimePeriods_ReturnsTrue()
         {
             // Arrange
-            var criteria = new TimeOfDayPersonalisationGroupCriteria();
-            var definition = string.Format(DefinitionFormat,
-                DateTime.Now.AddMinutes(-1).ToString("HHmm"),
-                DateTime.Now.AddMinutes(30).ToString("HHmm"),
-                DateTime.Now.AddHours(4).ToString("HHmm"),
-                DateTime.Now.AddHours(4).AddMinutes(30).ToString("HHmm"));
+            var mockDateTimeProvider = MockDateTimeProvider();
+            var criteria = new TimeOfDayPersonalisationGroupCriteria(mockDateTimeProvider.Object);
+            var definition = string.Format(DefinitionFormat, "0900", "1015", "1100", "1130");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TimeOfDayPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingTimePeriodsInLastMinute_ReturnsTrue()
+        {
+            // Arrange
+            var mockDateTimeProvider = MockDateTimeProvider(new DateTime(2016, 1, 1, 23, 59, 59));
+            var criteria = new TimeOfDayPersonalisationGroupCriteria(mockDateTimeProvider.Object);
+            var definition = string.Format(DefinitionFormat, "0900", "0930", "2300", "2359");
 
             // Act
             var result = criteria.MatchesVisitor(definition);

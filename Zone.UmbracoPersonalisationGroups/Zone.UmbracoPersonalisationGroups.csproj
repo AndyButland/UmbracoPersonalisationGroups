@@ -207,6 +207,8 @@
     <Compile Include="Controllers\BaseJsonResultController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
+    <Compile Include="Criteria\DateTimeProvider.cs" />
+    <Compile Include="Criteria\IDateTimeProvider.cs" />
     <Compile Include="Criteria\NumberOfVisits\CookieNumberOfVisitsProvider.cs" />
     <Compile Include="Criteria\NumberOfVisits\INumberOfVisitsProvider.cs" />
     <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsPersonalisationGroupCriteria.cs" />

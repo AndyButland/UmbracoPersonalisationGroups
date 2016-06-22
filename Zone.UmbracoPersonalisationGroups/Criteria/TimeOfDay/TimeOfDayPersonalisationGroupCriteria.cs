@@ -11,6 +11,18 @@
     /// </summary>
     public class TimeOfDayPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public TimeOfDayPersonalisationGroupCriteria()
+        {
+            _dateTimeProvider = new DateTimeProvider();
+        }
+
+        public TimeOfDayPersonalisationGroupCriteria(IDateTimeProvider dateTimeProvider)
+        {
+            _dateTimeProvider = dateTimeProvider;
+        }
+
         public string Name => "Time of day";
 
         public string Alias => "timeOfDay";
@@ -24,7 +36,7 @@
             try
             {
                 var definedTimesOfDay = JsonConvert.DeserializeObject<IList<TimeOfDaySetting>>(definition);
-                var now = int.Parse(DateTime.Now.ToString("HHmm"));
+                var now = int.Parse(_dateTimeProvider.GetCurrentDateTime().ToString("HHmm"));
                 return definedTimesOfDay
                     .Any(x => x.From <= now && x.To >= now);
             }
