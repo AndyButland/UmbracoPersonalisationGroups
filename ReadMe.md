@@ -231,3 +231,6 @@ If you run into a problem with the data type failing to load when running with d
 	- Fixed a [reported issue with loading criteria from assemblies](https://our.umbraco.org/projects/website-utilities/personalisation-groups/issues-and-feedback/76753-anyone-tried-on-74)
 - 0.1.14
 	- Provided an optional boolean parameter to the `ShowToVisitor` extension method allowing the caller to indicate that if no groups have been configured the content should be shown or hidden.  Previously shown was assumed and this is still the default for this parameter.
+- 0.1.15
+	- Extended the country criteria to allow for matching visitors that are not in (as well as in) a given country.
+	- This is a minor *breaking change* for anyone using this criteria as the JSON structure for the definition has been changed.  Any personalisation groups containing country criteria would need to have those criteria updated and resaved.
