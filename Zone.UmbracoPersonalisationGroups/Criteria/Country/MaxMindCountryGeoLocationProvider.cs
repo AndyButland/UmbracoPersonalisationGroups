@@ -8,6 +8,7 @@
     using System.Web.Hosting;
     using MaxMind.GeoIP2;
     using MaxMind.GeoIP2.Exceptions;
+    using Umbraco.Core;
 
     public class MaxMindCountryGeoLocationProvider : ICountryGeoLocationProvider
     {
@@ -21,43 +22,41 @@
         public string GetCountryFromIp(string ip)
         {
             var cacheKey = $"PersonalisationGroups_Criteria_Country_GeoLocation_{ip}";
-            var countryCode = HttpRuntime.Cache[cacheKey];
-            if (countryCode == null)
-            {
-                try
-                {
-                    using (var reader = new DatabaseReader(_pathToDb))
+            var cachedItem = ApplicationContext.Current.ApplicationCache.RuntimeCache
+                .GetCacheItem(cacheKey,
+                    () =>
                     {
                         try
                         {
-                            var response = reader.Country(ip);
-                            var isoCode = response.Country.IsoCode;
-                            if (!string.IsNullOrEmpty(isoCode))
+                            using (var reader = new DatabaseReader(_pathToDb))
                             {
-                                HttpRuntime.Cache.Insert(cacheKey, isoCode, null, Cache.NoAbsoluteExpiration,
-                                    Cache.NoSlidingExpiration);
+                                try
+                                {
+                                    var response = reader.Country(ip);
+                                    var isoCode = response.Country.IsoCode;
+                                    if (!string.IsNullOrEmpty(isoCode))
+                                    {
+                                        HttpRuntime.Cache.Insert(cacheKey, isoCode, null, Cache.NoAbsoluteExpiration,
+                                            Cache.NoSlidingExpiration);
+                                    }
+
+                                    return isoCode;
+                                }
+                                catch (AddressNotFoundException)
+                                {
+                                    return string.Empty;
+                                }
                             }
-
-                            return isoCode;
                         }
-                        catch (AddressNotFoundException)
+                        catch (FileNotFoundException)
                         {
-                            return string.Empty;
+                            throw new FileNotFoundException(
+                                $"MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {_pathToDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
+                                    _pathToDb);
                         }
-                    }
-                }
-                catch (FileNotFoundException)
-                {
-                    throw new FileNotFoundException(
-                        $"MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {_pathToDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"", 
-                            _pathToDb);
-                }
-            }
-            else
-            {
-                return countryCode.ToString();
-            }
+                    });
 
+            return cachedItem?.ToString() ?? string.Empty;
         }
 
         private string GetDatabasePath()

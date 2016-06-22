@@ -36,10 +36,10 @@
         {
             Mandate.ParameterNotNullOrEmpty(definition, "definition");
 
-            IList<CountrySetting> definedCountries;
+            CountrySetting countrySetting;
             try
             {
-                definedCountries = JsonConvert.DeserializeObject<IList<CountrySetting>>(definition);
+                countrySetting = JsonConvert.DeserializeObject<CountrySetting>(definition);
             }
             catch (JsonReaderException)
             {
@@ -52,8 +52,17 @@
                 var country = _countryGeoLocationProvider.GetCountryFromIp(ip);
                 if (!string.IsNullOrEmpty(country))
                 {
-                    return definedCountries
-                        .Any(x => string.Equals(x.Code, country, StringComparison.InvariantCultureIgnoreCase));
+                    var matchedCountry = countrySetting.Codes
+                        .Any(x => string.Equals(x, country, StringComparison.InvariantCultureIgnoreCase));
+                    switch (countrySetting.Match)
+                    {
+                        case CountrySettingMatch.IsLocatedIn:
+                            return matchedCountry;
+                        case CountrySettingMatch.IsNotLocatedIn:
+                            return !matchedCountry;
+                        default:
+                            return false;
+                    }
                 }
             }
 

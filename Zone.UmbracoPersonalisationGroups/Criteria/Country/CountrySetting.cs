@@ -1,7 +1,17 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
 {
+    using System.Collections.Generic;
+
+    public enum CountrySettingMatch
+    {
+        IsLocatedIn,
+        IsNotLocatedIn,
+    }
+
     public class CountrySetting
     {
-        public string Code { get; set; }
+        public CountrySettingMatch Match { get; set; }
+
+        public List<string> Codes { get; set; }
     }
 }

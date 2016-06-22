@@ -6,16 +6,24 @@
                 return code.length === 2;
             };
 
-            $scope.renderModel = {};
+            function resetNewCode() {
+                $scope.newCode = { value: "", hasError: false };
+            }
+
+            $scope.renderModel = { match: "IsLocatedIn" };
             $scope.renderModel.countries = [];
 
             if ($scope.dialogOptions.definition) {
-                $scope.renderModel.countries = JSON.parse($scope.dialogOptions.definition);
+                var countrySettings = JSON.parse($scope.dialogOptions.definition);
+                $scope.renderModel.match = countrySettings.match;
+                if (countrySettings.codes) {
+                    for (var i = 0; i < countrySettings.codes.length; i++) {
+                        $scope.renderModel.countries.push({ code: countrySettings.codes[i], edit: false });
+                    }
+                }
             }
 
-            $scope.newCode = "";
-            $scope.currentEditCountry = null;
-            $scope.hasError = false;
+            resetNewCode();
 
             $scope.edit = function (index) {
                 for (var i = 0; i < $scope.renderModel.countries.length; i++) {
@@ -34,28 +42,28 @@
             };
 
             $scope.add = function () {
-                if (isValidCountryCode($scope.newCode)) {
-                    var country = { code: $scope.newCode };
+                if (isValidCountryCode($scope.newCode.value)) {
+                    var country = { code: $scope.newCode.value, edit: false };
                     $scope.renderModel.countries.push(country);
 
-                    $scope.newCode = "";
+                    resetNewCode();
                 } else {
-                    $scope.hasError = true;
+                    $scope.newCode.hasError = true;
                 }
             };
 
             $scope.saveAndClose = function () {
-                var serializedResult = "[";
+                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", " + "\"codes\": [";
 
                 for (var i = 0; i < $scope.renderModel.countries.length; i++) {
-                    if (serializedResult.length > 1) {
+                    if (i > 0) {
                         serializedResult += ", ";
                     }
 
-                    serializedResult += "{ \"code\": \"" + $scope.renderModel.countries[i].code + "\" }";
+                    serializedResult += "\"" + $scope.renderModel.countries[i].code + "\"";
                 }
 
-                serializedResult += "]";
+                serializedResult += "] }";
                 $scope.submit(serializedResult);
             };
         });

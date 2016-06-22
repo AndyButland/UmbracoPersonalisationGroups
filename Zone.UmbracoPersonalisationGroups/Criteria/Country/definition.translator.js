@@ -5,14 +5,25 @@
 	        translate: function (definition) {
 	            var translation = "";
 	            if (definition) {
-	                var selectedCountryCodes = JSON.parse(definition);
+	                var selectedCountryDetails = JSON.parse(definition);
+	                translation = "Visitor is ";
+	                switch (selectedCountryDetails.match) {
+	                    case "IsLocatedIn":
+	                        translation += "located";
+	                        break;
+	                    case "IsNotLocatedIn":
+	                        translation += "not located";
+	                        break;
+	                }
 
-	                for (var i = 0; i < selectedCountryCodes.length; i++) {
-	                    if (translation.length > 0) {
+	                translation += " in: ";
+
+	                for (var i = 0; i < selectedCountryDetails.codes.length; i++) {
+	                    if (i > 0) {
 	                        translation += ", ";
 	                    }
 
-	                    translation += selectedCountryCodes[i].code.toUpperCase();
+	                    translation += selectedCountryDetails.codes[i].toUpperCase();
 	                }
 	            }
 
