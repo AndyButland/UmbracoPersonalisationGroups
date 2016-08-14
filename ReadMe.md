@@ -188,7 +188,71 @@ As with other Umbraco packages, you'll also need to create a `package.manifest` 
 }
 ```
 
+## Working with caching
+
+Caching - at least at the page level - and personalisation don't really play nicely together.  Such caching will normally be varied by the URL but with personalisation we are displaying different content to different users, so we don't want the cached version of a page customised to particular user being displayed to the next.
+
+There are a couple of helper methods available within the package to help with this though.
+
+Firstly there's an extension method associated with the Umbraco helper called `GetPersonalisationGroupsHashForVisitor()` that calculates a hash for the current visitor based on all the personalisation groups that apply to them.  In other words, if you've created three groups, it will determine whether the user matches each of those three groups and create a string based on the result.  It takes three parameters:
+
+- Either an Id or an instance of the root node for the created personalisation groups
+- An identifer for the user (most likely to be the ASP.Net session Id)
+- A number of seconds to cache the calculation for
+
+The last parameter is quite important - although not expensive, you likely don't want to calculate this value on every page request.  However it equally shouldn't be cached for too long as visitor's status in each personalisation group may change as they use the website.  For example a group targetting morning visitors would no longer match if the same visitor is still there in the afternoon.
+
+With that method in available, it's possible to use it with output caching to ensure the cache varies by this set of matched personalisation groups, for example with a controller like this:
+
+```
+    public class TestPageController : RenderMvcController
+    {
+        [OutputCache(Duration = 600, VaryByParam = "*", VaryByCustom = "PersonalisationGroupsVisitorHash")]
+        public override ActionResult Index(RenderModel model)
+        {
+            ...
+        }
+
+    }
+```
+	
+And code in `global.asax.cs` as follows:
+
+```
+    public class Global : UmbracoApplication
+    {
+        private static readonly SessionStateSection SessionStateSection = (SessionStateSection)ConfigurationManager.GetSection("system.web/sessionState");
+
+        public void Session_OnStart()
+        {
+            // Just set something to ensure a session is created
+            Session[AppConstants.SessionKeys.PersonalisationGroupsEnsureSession] = 1;
+        }
+
+        public override string GetVaryByCustomString(HttpContext context, string custom)
+        {
+            if (custom.Equals("PersonalisationGroupsVisitorHash", StringComparison.OrdinalIgnoreCase))
+            {
+                var cookieName = SessionStateSection.CookieName;
+                var sessionIdCookie = context.Request.Cookies[cookieName];
+                if (sessionIdCookie != null)
+                {
+                    var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
+                    var hash = umbracoHelper.GetPersonalisationGroupsHashForVisitor(1093,   // Would normally get the node Id from config
+                        sessionIdCookie.Value, 
+                        20);
+                    return hash;
+                }
+            }
+
+            return base.GetVaryByCustomString(context, custom);
+        }
+    }
+```
+
 ## Troubleshooting/known issues
+
+### Personalisation group data type not loading
 
 If you run into a problem with the data type failing to load when running with debug="false", this is because it's necessary to whitelist the domains in use.  See the [forum post here](https://our.umbraco.org/forum/umbraco-7/developing-umbraco-7-packages/64459-Single-file-property-editor-and-debug=false) along with links for discussion and resolution details.  In summary though:
 
@@ -197,6 +261,18 @@ If you run into a problem with the data type failing to load when running with d
 - Add a comma separated list of the domains you are using
 
 *This has been resolved from version 0.1.11 for the criteria provided with the package, but there still looks to be a problem if you have created your own criteria using embedded resources as I've done so in the core package.  And then, even the bundleDomains workaround doesn't help.  So I believe it's necessary to avoid those and have the client-side files on disk as described in the section above.*
+
+### Output cache being invalidated
+
+In testing I've discovered that installing the package with default options will cause any output cache to be invalidated on every page request.  Clearly personalisation with output caching is likely tricky anyway (as by defintion, the same cached page may need to be presented differently to different users), so unlikely to be something being used.  If you do have a need for it though, it's necessary to disable any criteria that set cookies on each page request.  It's this action that invalidates the cache.
+
+To do this you can exclude such critieria with this configuration option:
+
+```
+<add key="personalisationGroups.excludeCriteria" value="numberOfVisits,pagesViewed"/>
+```
+
+If you needed to personalise by these criteria - number of pages viewed and/or number of visits - it would be necessary to implement an alternate criteria that uses a different storage mechanism (such as a custom table or hooked into an analytics engine).
 
 ## Version history
 
@@ -234,3 +310,5 @@ If you run into a problem with the data type failing to load when running with d
 - 0.1.15
 	- Extended the country criteria to allow for matching visitors that are not in (as well as in) a given country.
 	- This is a minor *breaking change* for anyone using this criteria as the JSON structure for the definition has been changed.  Any personalisation groups containing country criteria would need to have those criteria updated and resaved.
+- 0.1.16
+    - Added the output caching helper `GetPersonalisationGroupsHashForVisitor()`

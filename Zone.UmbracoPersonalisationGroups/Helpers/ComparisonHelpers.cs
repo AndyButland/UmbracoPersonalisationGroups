@@ -12,18 +12,14 @@
             {
                 return result;
             }
-            else
+            result = NumericCompare(value, definitionValue, comparison, out comparisonMade);
+
+            if (comparisonMade)
             {
-                result = NumericCompare(value, definitionValue, comparison, out comparisonMade);
-                if (comparisonMade)
-                {
-                    return result;
-                }
-                else
-                {
-                    return StringCompare(value, definitionValue, comparison);
-                }
+                return result;
             }
+
+            return StringCompare(value, definitionValue, comparison);
         }
 
         private static bool DateCompare(string value, string definitionValue, Comparison comparison, out bool comparisonMade)
@@ -52,7 +48,7 @@
         private static bool NumericCompare(string value, string definitionValue, Comparison comparison, out bool comparisonMade)
         {
             decimal decimalValue, decimalDefinitionValue;
-            if (Decimal.TryParse(value, out decimalValue) && Decimal.TryParse(definitionValue, out decimalDefinitionValue))
+            if (decimal.TryParse(value, out decimalValue) && decimal.TryParse(definitionValue, out decimalDefinitionValue))
             {
                 comparisonMade = true;
                 switch (comparison)

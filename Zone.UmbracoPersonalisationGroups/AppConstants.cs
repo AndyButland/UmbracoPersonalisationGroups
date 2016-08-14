@@ -25,6 +25,13 @@
             public const string ViewedPagesTrackingCookieExpiryInDays = "personalisationGroups.viewedPagesTrackingCookieExpiryInDays";
         }
 
+        public static class DocumentTypeAliases
+        {
+            public const string PersonalisationGroupsFolder = "PersonalisationGroupsFolder";
+
+            public const string PersonalisationGroup = "PersonalisationGroup";
+        }
+
         public const string DefaultPersonalisationGroupPickerAlias = "personalisationGroups";
 
         public const string PersonalisationGroupDefinitionPropertyEditorAlias = "personalisationGroupDefinition";
@@ -44,5 +51,15 @@
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
 
         public const int DefaultViewedPagesTrackingCookieExpiryInDays = 90;
+
+        public static class CacheKeys
+        {
+            public const string PersonalisationGroupsVisitorHash = "PersonalisationGroups.VisitorHash";
+        }
+
+        public static class SessionKeys
+        {
+            public const string PersonalisationGroupsEnsureSession = "PersonalisationGroups.EnsureSession";
+        }
     }
 }

@@ -31,7 +31,7 @@
             foreach (var group in pickedGroups)
             {
                 var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
-                var matchCount = CountMatchingDefinitionDetails(definition);
+                var matchCount = PersonalisationGroupMatcher.CountMatchingDefinitionDetails(definition);
 
                 if ((definition.Match == PersonalisationGroupDefinitionMatch.Any && matchCount > 0) ||
                     (definition.Match == PersonalisationGroupDefinitionMatch.All && matchCount == definition.Details.Count()))
@@ -85,34 +85,6 @@
             }
 
             return groupPickerAlias;
-        }
-
-        /// <summary>
-        /// Gets a count of the number of the definition details for a given personalisation group definition that matches
-        /// the current site visitor
-        /// </summary>
-        /// <param name="definition">Personalisation group definition</param>
-        /// <returns>Number of definition details that match</returns>
-        private static int CountMatchingDefinitionDetails(PersonalisationGroupDefinition definition)
-        {
-            var matchCount = 0;
-            foreach (var detail in definition.Details)
-            {
-                var isMatch = PersonalisationGroupMatcher.IsMatch(detail);
-                if (isMatch)
-                {
-                    matchCount++;
-                }
-
-                // We can short-cut here if matching any and found one match, or matching all and found one mismatch
-                if ((isMatch && definition.Match == PersonalisationGroupDefinitionMatch.Any) ||
-                    (!isMatch && definition.Match == PersonalisationGroupDefinitionMatch.All))
-                {
-                    break;
-                }
-            }
-
-            return matchCount;
         }
     }
 }

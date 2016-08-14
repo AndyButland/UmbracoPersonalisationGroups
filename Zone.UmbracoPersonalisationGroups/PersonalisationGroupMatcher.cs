@@ -36,6 +36,34 @@
         }
 
         /// <summary>
+        /// Gets a count of the number of the definition details for a given personalisation group definition that matches
+        /// the current site visitor
+        /// </summary>
+        /// <param name="definition">Personalisation group definition</param>
+        /// <returns>Number of definition details that match</returns>
+        public static int CountMatchingDefinitionDetails(PersonalisationGroupDefinition definition)
+        {
+            var matchCount = 0;
+            foreach (var detail in definition.Details)
+            {
+                var isMatch = IsMatch(detail);
+                if (isMatch)
+                {
+                    matchCount++;
+                }
+
+                // We can short-cut here if matching any and found one match, or matching all and found one mismatch
+                if ((isMatch && definition.Match == PersonalisationGroupDefinitionMatch.Any) ||
+                    (!isMatch && definition.Match == PersonalisationGroupDefinitionMatch.All))
+                {
+                    break;
+                }
+            }
+
+            return matchCount;
+        }
+
+        /// <summary>
         /// Checks if a given detail record of a personalisation group definition matches the current site visitor
         /// </summary>
         /// <param name="definitionDetail">Personalisation group definition detail record</param>
@@ -49,8 +77,7 @@
             }
             catch (KeyNotFoundException)
             {
-                throw new KeyNotFoundException(
-                    $"Personalisation group criteria not found with alias '{definitionDetail.Alias}'");
+                throw new KeyNotFoundException($"Personalisation group criteria not found with alias '{definitionDetail.Alias}'");
             }
         }
 
