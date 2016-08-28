@@ -53,28 +53,27 @@
 
             var querystring = _querystringProvider.GetQuerystring();
 
-            var valueFromQuerystring = querystring[querystringSetting.Key];
-            var valueFromDefinition = querystringSetting.Value;
+            var querystringValue = querystring[querystringSetting.Key];
 
             switch (querystringSetting.Match)
             {
                 case QuerystringSettingMatch.MatchesValue:
-                    return MatchesValue(valueFromQuerystring, valueFromDefinition);
+                    return MatchesValue(querystringValue, querystringSetting.Value);
                 case QuerystringSettingMatch.DoesNotMatchValue:
-                    return !MatchesValue(valueFromQuerystring, valueFromDefinition);
+                    return !MatchesValue(querystringValue, querystringSetting.Value);
                 case QuerystringSettingMatch.ContainsValue:
-                    return ContainsValue(valueFromQuerystring, valueFromDefinition);
+                    return ContainsValue(querystringValue, querystringSetting.Value);
                 case QuerystringSettingMatch.DoesNotContainValue:
-                    return !ContainsValue(valueFromQuerystring, valueFromDefinition);
+                    return !ContainsValue(querystringValue, querystringSetting.Value);
                 case QuerystringSettingMatch.GreaterThanValue:
                 case QuerystringSettingMatch.GreaterThanOrEqualToValue:
                 case QuerystringSettingMatch.LessThanValue:
                 case QuerystringSettingMatch.LessThanOrEqualToValue:
-                    return CompareValues(valueFromQuerystring, valueFromDefinition, GetComparison(querystringSetting.Match));
+                    return CompareValues(querystringValue, querystringSetting.Value, GetComparison(querystringSetting.Match));
                 case QuerystringSettingMatch.MatchesRegex:
-                    return MatchesRegex(valueFromQuerystring, valueFromDefinition);
+                    return MatchesRegex(querystringValue, querystringSetting.Value);
                 case QuerystringSettingMatch.DoesNotMatchRegex:
-                    return !MatchesRegex(valueFromQuerystring, valueFromDefinition);
+                    return !MatchesRegex(querystringValue, querystringSetting.Value);
                 default:
                     return false;
             }

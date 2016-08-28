@@ -335,6 +335,66 @@
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void CookiePersonalisationGroupCriteria_MatchesVisitor_WithDefinitionMatchesRegex_WithMatchingCookie_ReturnsTrue()
+        {
+            // Arrange
+            var mockCookieProvider = MockCookieProvider();
+            var criteria = new CookiePersonalisationGroupCriteria(mockCookieProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "MatchesRegex", "[a-z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void CookiePersonalisationGroupCriteria_MatchesVisitor_WithDefinitionMatchesRegex_WithNonMatchingCookie_ReturnsTrue()
+        {
+            // Arrange
+            var mockCookieProvider = MockCookieProvider();
+            var criteria = new CookiePersonalisationGroupCriteria(mockCookieProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "MatchesRegex", "[A-Z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void CookiePersonalisationGroupCriteria_MatchesVisitor_WithDefinitionDoesNotMatchRegex_WithMatchingCookie_ReturnsFalse()
+        {
+            // Arrange
+            var mockCookieProvider = MockCookieProvider();
+            var criteria = new CookiePersonalisationGroupCriteria(mockCookieProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "DoesNotMatchRegex", "[a-z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void CookiePersonalisationGroupCriteria_MatchesVisitor_WithDefinitionDoesNotMatchRegex_WithNonMatchingCookie_ReturnsTrue()
+        {
+            // Arrange
+            var mockCookieProvider = MockCookieProvider();
+            var criteria = new CookiePersonalisationGroupCriteria(mockCookieProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "DoesNotMatchRegex", "[A-Z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
         #region Mocks
 
         private static Mock<ICookieProvider> MockCookieProvider()
@@ -346,10 +406,12 @@
             mock.Setup(x => x.CookieExists(It.Is<string>(y => y == "numericCompareTest"))).Returns(true);
             mock.Setup(x => x.CookieExists(It.Is<string>(y => y == "stringCompareTest"))).Returns(true);
             mock.Setup(x => x.CookieExists(It.Is<string>(y => y == "missing-key"))).Returns(false);
+            mock.Setup(x => x.CookieExists(It.Is<string>(y => y == "regexTest"))).Returns(true);
             mock.Setup(x => x.GetCookieValue(It.Is<string>(y => y == "key"))).Returns("aaa,bbb,ccc");
             mock.Setup(x => x.GetCookieValue(It.Is<string>(y => y == "dateCompareTest"))).Returns("1-MAY-2015 10:30:00");
             mock.Setup(x => x.GetCookieValue(It.Is<string>(y => y == "numericCompareTest"))).Returns("5");
             mock.Setup(x => x.GetCookieValue(It.Is<string>(y => y == "stringCompareTest"))).Returns("bbb");
+            mock.Setup(x => x.GetCookieValue(It.Is<string>(y => y == "regexTest"))).Returns("b");
 
             return mock;
         }

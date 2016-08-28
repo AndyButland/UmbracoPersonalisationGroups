@@ -10,6 +10,8 @@
         GreaterThanOrEqualToValue,
         LessThanValue,
         LessThanOrEqualToValue,
+        MatchesRegex,
+        DoesNotMatchRegex,
     }
 
     public class SessionSetting

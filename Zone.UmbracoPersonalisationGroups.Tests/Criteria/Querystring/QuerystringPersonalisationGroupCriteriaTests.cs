@@ -277,6 +277,66 @@
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void QuerystringPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionMatchesRegex_WithMatchingQuerystring_ReturnsTrue()
+        {
+            // Arrange
+            var mockQuerystringProvider = MockQuerystringProvider();
+            var criteria = new QuerystringPersonalisationGroupCriteria(mockQuerystringProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "MatchesRegex", "[a-z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void QuerystringPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionMatchesRegex_WithNonMatchingQuerystring_ReturnsTrue()
+        {
+            // Arrange
+            var mockQuerystringProvider = MockQuerystringProvider();
+            var criteria = new QuerystringPersonalisationGroupCriteria(mockQuerystringProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "MatchesRegex", "[A-Z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void QuerystringPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionDoesNotMatchRegex_WithMatchingQuerystring_ReturnsFalse()
+        {
+            // Arrange
+            var mockQuerystringProvider = MockQuerystringProvider();
+            var criteria = new QuerystringPersonalisationGroupCriteria(mockQuerystringProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "DoesNotMatchRegex", "[a-z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void QuerystringPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionDoesNotMatchRegex_WithNonMatchingQuerystring_ReturnsTrue()
+        {
+            // Arrange
+            var mockQuerystringProvider = MockQuerystringProvider();
+            var criteria = new QuerystringPersonalisationGroupCriteria(mockQuerystringProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "DoesNotMatchRegex", "[A-Z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
         #region Mocks
 
         private static Mock<IQuerystringProvider> MockQuerystringProvider()
@@ -288,7 +348,8 @@
                  { "key", "aaa,bbb,ccc"},
                  { "dateCompareTest", "1-MAY-2015 10:30:00" },
                  { "numericCompareTest", "5" },
-                 { "stringCompareTest", "bbb" }
+                 { "stringCompareTest", "bbb" },
+                 { "regexTest", "b" }
             });
 
             return mock;

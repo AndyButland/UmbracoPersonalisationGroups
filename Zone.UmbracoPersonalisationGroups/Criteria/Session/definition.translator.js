@@ -32,6 +32,12 @@
 	                    case "LessThanOrEqualToValue":
 	                        translation += "is less than or equal to value '" + selectedSessionDetails.value + "'.";
 	                        break;
+	                    case "MatchesRegex":
+	                        translation += "matches regular expression '" + selectedSessionDetails.value + "'.";
+	                        break;
+	                    case "DoesNotMatchRegex":
+	                        translation += "does not match regular expression '" + selectedSessionDetails.value + "'.";
+	                        break;
 	                }
 	            }
 

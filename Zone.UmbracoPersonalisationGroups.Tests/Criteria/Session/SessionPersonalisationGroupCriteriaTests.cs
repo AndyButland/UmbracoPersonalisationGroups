@@ -335,6 +335,66 @@
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void SessionPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionMatchesRegex_WithMatchingSession_ReturnsTrue()
+        {
+            // Arrange
+            var mockSessionProvider = MockSessionProvider();
+            var criteria = new SessionPersonalisationGroupCriteria(mockSessionProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "MatchesRegex", "[a-z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void SessionPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionMatchesRegex_WithNonMatchingSession_ReturnsTrue()
+        {
+            // Arrange
+            var mockSessionProvider = MockSessionProvider();
+            var criteria = new SessionPersonalisationGroupCriteria(mockSessionProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "MatchesRegex", "[A-Z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void SessionPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionDoesNotMatchRegex_WithMatchingSession_ReturnsFalse()
+        {
+            // Arrange
+            var mockSessionProvider = MockSessionProvider();
+            var criteria = new SessionPersonalisationGroupCriteria(mockSessionProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "DoesNotMatchRegex", "[a-z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void SessionPersonalisationGroupCriteria_MatchesVisitor_WithDefinitionDoesNotMatchRegex_WithNonMatchingSession_ReturnsTrue()
+        {
+            // Arrange
+            var mockSessionProvider = MockSessionProvider();
+            var criteria = new SessionPersonalisationGroupCriteria(mockSessionProvider.Object);
+            var definition = string.Format(DefinitionFormat, "regexTest", "DoesNotMatchRegex", "[A-Z]");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
         #region Mocks
 
         private static Mock<ISessionProvider> MockSessionProvider()
@@ -346,10 +406,12 @@
             mock.Setup(x => x.KeyExists(It.Is<string>(y => y == "numericCompareTest"))).Returns(true);
             mock.Setup(x => x.KeyExists(It.Is<string>(y => y == "stringCompareTest"))).Returns(true);
             mock.Setup(x => x.KeyExists(It.Is<string>(y => y == "missing-key"))).Returns(false);
+            mock.Setup(x => x.KeyExists(It.Is<string>(y => y == "regexTest"))).Returns(true);
             mock.Setup(x => x.GetValue(It.Is<string>(y => y == "key"))).Returns("aaa,bbb,ccc");
             mock.Setup(x => x.GetValue(It.Is<string>(y => y == "dateCompareTest"))).Returns("1-MAY-2015 10:30:00");
             mock.Setup(x => x.GetValue(It.Is<string>(y => y == "numericCompareTest"))).Returns("5");
             mock.Setup(x => x.GetValue(It.Is<string>(y => y == "stringCompareTest"))).Returns("bbb");
+            mock.Setup(x => x.GetValue(It.Is<string>(y => y == "regexTest"))).Returns("b");
 
             return mock;
         }

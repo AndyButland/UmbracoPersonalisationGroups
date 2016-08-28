@@ -32,6 +32,12 @@
 	                    case "LessThanOrEqualToValue":
 	                        translation += "is less than or equal to value '" + selectedCookieDetails.value + "'.";
 	                        break;
+	                    case "MatchesRegex":
+	                        translation += "matches regular expression '" + selectedCookieDetails.value + "'.";
+	                        break;
+	                    case "DoesNotMatchRegex":
+	                        translation += "does not match regular expression '" + selectedCookieDetails.value + "'.";
+	                        break;
 	                }
 	            }
 

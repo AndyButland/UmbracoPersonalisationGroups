@@ -70,6 +70,11 @@
                 case SessionSettingMatch.LessThanOrEqualToValue:
                     return keyExists && 
                         CompareValues(value, sessionSetting.Value, GetComparison(sessionSetting.Match));
+                case SessionSettingMatch.MatchesRegex:
+                    return keyExists && MatchesRegex(value, sessionSetting.Value);
+                case SessionSettingMatch.DoesNotMatchRegex:
+                    return keyExists && !MatchesRegex(value, sessionSetting.Value);
+
                 default:
                     return false;
             }

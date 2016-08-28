@@ -3,6 +3,7 @@
     using System;
     using Newtonsoft.Json;
     using Umbraco.Core;
+    using Zone.UmbracoPersonalisationGroups.Criteria.Querystring;
 
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a cookie
@@ -69,6 +70,10 @@
                 case CookieSettingMatch.LessThanOrEqualToValue:
                     return cookieExists &&
                         CompareValues(cookieValue, cookieSetting.Value, GetComparison(cookieSetting.Match));
+                case CookieSettingMatch.MatchesRegex:
+                    return cookieExists && MatchesRegex(cookieValue, cookieSetting.Value);
+                case CookieSettingMatch.DoesNotMatchRegex:
+                    return cookieExists && !MatchesRegex(cookieValue, cookieSetting.Value);
                 default:
                     return false;
             }
