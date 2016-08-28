@@ -62,11 +62,12 @@
     <Compile Include="Criteria\MemberProfileField\MemberProfileFieldPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\Querystring\QuerystringPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Referral\ReferralPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Session\SessionPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\DayOfWeek\DayOfWeekPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\DateTimeCriteriaTestsBase.cs" />
-    <Compile Include="Helpers\ComparisonHelpersTests.cs" />
+    <Compile Include="Criteria\PersonalisationGroupCriteriaBaseTests.cs" />
     <Compile Include="PersonalisationGroupMatcherTests.cs" />
     <Compile Include="Criteria\Cookie\CookiePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

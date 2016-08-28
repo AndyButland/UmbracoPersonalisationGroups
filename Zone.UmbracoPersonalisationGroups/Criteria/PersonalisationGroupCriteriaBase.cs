@@ -1,10 +1,47 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
+﻿namespace Zone.UmbracoPersonalisationGroups.Criteria
 {
     using System;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
 
-    public static class ComparisonHelpers
+    /// <summary>
+    /// Provides common base functionality for personalisation criteria
+    /// </summary>
+    public abstract class PersonalisationGroupCriteriaBase
     {
-        public static bool CompareValues(string value, string definitionValue, Comparison comparison)
+        protected bool MatchesValue(string valueFromContext, string valueFromDefinition)
+        {
+            if (valueFromContext == null)
+            {
+                return false;
+            }
+
+            return string.Equals(valueFromContext, valueFromDefinition, 
+                StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        protected bool ContainsValue(string valueFromContext, string valueFromDefinition)
+        {
+            if (valueFromContext == null)
+            {
+                return false;
+            }
+
+            return CultureInfo.InvariantCulture.CompareInfo
+                .IndexOf(valueFromContext, valueFromDefinition, CompareOptions.IgnoreCase) >= 0;
+        }
+
+        protected bool MatchesRegex(string valueFromContext, string valueFromDefinition)
+        {
+            if (valueFromContext == null)
+            {
+                return false;
+            }
+
+            return Regex.IsMatch(valueFromContext, valueFromDefinition);
+        }
+
+        protected bool CompareValues(string value, string definitionValue, Comparison comparison)
         {
             bool comparisonMade;
             var result = DateCompare(value, definitionValue, comparison, out comparisonMade);
@@ -22,7 +59,7 @@
             return StringCompare(value, definitionValue, comparison);
         }
 
-        private static bool DateCompare(string value, string definitionValue, Comparison comparison, out bool comparisonMade)
+        private bool DateCompare(string value, string definitionValue, Comparison comparison, out bool comparisonMade)
         {
             DateTime dateValue, dateDefinitionValue;
             if (DateTime.TryParse(value, out dateValue) && DateTime.TryParse(definitionValue, out dateDefinitionValue))
@@ -45,7 +82,7 @@
             return false;
         }
 
-        private static bool NumericCompare(string value, string definitionValue, Comparison comparison, out bool comparisonMade)
+        private bool NumericCompare(string value, string definitionValue, Comparison comparison, out bool comparisonMade)
         {
             decimal decimalValue, decimalDefinitionValue;
             if (decimal.TryParse(value, out decimalValue) && decimal.TryParse(definitionValue, out decimalDefinitionValue))
@@ -68,7 +105,7 @@
             return false;
         }
 
-        private static bool StringCompare(string value, string definitionValue, Comparison comparison)
+        private bool StringCompare(string value, string definitionValue, Comparison comparison)
         {
             var comparisonValue = string.Compare(value, definitionValue, StringComparison.InvariantCultureIgnoreCase);
             switch (comparison)

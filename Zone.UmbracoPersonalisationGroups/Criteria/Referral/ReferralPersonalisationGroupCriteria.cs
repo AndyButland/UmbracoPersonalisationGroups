@@ -2,14 +2,13 @@
 {
     using System;
     using System.Globalization;
-    using Helpers;
     using Newtonsoft.Json;
     using Umbraco.Core;
 
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a session key
     /// </summary>
-    public class ReferralPersonalisationGroupCriteria : IPersonalisationGroupCriteria
+    public class ReferralPersonalisationGroupCriteria : PersonalisationGroupCriteriaBase, IPersonalisationGroupCriteria
     {
         private readonly IReferrerProvider _referrerProvider;
 
@@ -48,15 +47,13 @@
             switch (referralSetting.Match)
             {
                 case ReferralSettingMatch.MatchesValue:
-                    return referrer.Equals(referralSetting.Value, StringComparison.InvariantCultureIgnoreCase);
+                    return MatchesValue(referrer, referralSetting.Value);
                 case ReferralSettingMatch.DoesNotMatchValue:
-                    return !referrer.Equals(referralSetting.Value, StringComparison.InvariantCultureIgnoreCase);
+                    return !MatchesValue(referrer, referralSetting.Value);
                 case ReferralSettingMatch.ContainsValue:
-                    return invariantCulture.CompareInfo.IndexOf(referrer, referralSetting.Value,
-                        CompareOptions.IgnoreCase) >= 0;
+                    return ContainsValue(referrer, referralSetting.Value);
                 case ReferralSettingMatch.DoesNotContainValue:
-                    return invariantCulture.CompareInfo.IndexOf(referrer, referralSetting.Value,
-                        CompareOptions.IgnoreCase) < 0;
+                    return !ContainsValue(referrer, referralSetting.Value);
                 default:
                     return false;
             }

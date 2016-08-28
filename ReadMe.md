@@ -175,6 +175,8 @@ If you don't want this cookie to be written, you can remove this criteria from t
 
 The idea moving forward is that not every criteria will necessarily be provided by the core package - it should be extensible by developers looking to implement something that might be quite specific to their application.  This should be mostly straightforward.  Due to the fact that the criteria that are made available come from a scan of all loaded assemblies, it should only be necessary to provide a dll with an implementation of **IPersonalisationGroupCriteria** and a unique `Alias` property, along with the definition editor angular view, controller and translation service - **definition.editor.html**, **definition.editor.controller.js** and **definition.definition.translator.js** respectively.
 
+As well as the interface, there's a helper base class `PersonalisationGroupCriteriaBase` that you can inherit from that provides some useful methods for matching values and regular expressions.  This isn't required though for the criteria to be recognised and used.
+
 The C# files can sit anywhere of course.  The client-side files should live in `App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/<criteriaAlias`.
 
 As with other Umbraco packages, you'll also need to create a `package.manifest` file listing out the additional JavaScript files you need.  It should live in `App_Plugins/UmbracoPersonalisationGroups/` and look like this:
@@ -312,3 +314,7 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- This is a minor *breaking change* for anyone using this criteria as the JSON structure for the definition has been changed.  Any personalisation groups containing country criteria would need to have those criteria updated and resaved.
 - 0.1.16
     - Added the output caching helper `GetPersonalisationGroupsHashForVisitor()`
+- 0.2.0
+    - Added querystring criteria
+	- Creates base class `PersonalisationGroupCriteriaBase` providing common helper methods for all criteria
+	- Added the "matches regular expression" from the querystring criteria to other appropriate ones

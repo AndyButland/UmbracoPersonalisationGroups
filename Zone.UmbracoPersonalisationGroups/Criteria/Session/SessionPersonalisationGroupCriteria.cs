@@ -8,7 +8,7 @@
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a session key
     /// </summary>
-    public class SessionPersonalisationGroupCriteria : IPersonalisationGroupCriteria
+    public class SessionPersonalisationGroupCriteria : PersonalisationGroupCriteriaBase, IPersonalisationGroupCriteria
     {
         private readonly ISessionProvider _sessionProvider;
 
@@ -61,15 +61,15 @@
                 case SessionSettingMatch.DoesNotExist:
                     return !keyExists;
                 case SessionSettingMatch.MatchesValue:
-                    return keyExists && value == sessionSetting.Value;
+                    return keyExists && MatchesValue(value, sessionSetting.Value);
                 case SessionSettingMatch.ContainsValue:
-                    return keyExists && value.Contains(sessionSetting.Value);
+                    return keyExists && ContainsValue(value, sessionSetting.Value);
                 case SessionSettingMatch.GreaterThanValue:
                 case SessionSettingMatch.GreaterThanOrEqualToValue:
                 case SessionSettingMatch.LessThanValue:
                 case SessionSettingMatch.LessThanOrEqualToValue:
                     return keyExists && 
-                        ComparisonHelpers.CompareValues(value, sessionSetting.Value, GetComparison(sessionSetting.Match));
+                        CompareValues(value, sessionSetting.Value, GetComparison(sessionSetting.Match));
                 default:
                     return false;
             }

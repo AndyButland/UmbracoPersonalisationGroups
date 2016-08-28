@@ -1,0 +1,31 @@
+﻿<div class="umb-panel querystring-personalisation-group-critera" ng-controller="UmbracoPersonalisationGroups.QuerystringPersonalisationGroupCriteriaController as ctrl">
+    <div class="umb-panel-body no-header with-footer compact">
+        <p>Please enter the querystring settings:</p>
+        <umb-control-group alias="key" label="Querystring key">
+            <input type="text" ng-model="ctrl.renderModel.key" />
+        </umb-control-group>
+
+        <umb-control-group alias="match" label="Comparison">
+            <select ng-model="ctrl.renderModel.match" ng-options="match.key as match.value for match in ctrl.matchOptions"></select>
+        </umb-control-group>
+
+        <umb-control-group alias="value" label="Value">
+            <input type="text" ng-model="ctrl.renderModel.value" />
+            <div ng-if="ctrl.currentMatchIsCaseInsensitive()">
+                <em>Matching is not case sensitive</em>
+            </div>
+        </umb-control-group>
+    </div>
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

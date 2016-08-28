@@ -215,6 +215,11 @@
     <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsSetting.cs" />
     <Compile Include="Criteria\NumberOfVisits\RegisterApplicationEvents.cs" />
     <Compile Include="Criteria\PagesViewed\CookiePagesViewedProvider.cs" />
+    <Compile Include="Criteria\Querystring\HttpContextQuerystringProvider.cs" />
+    <Compile Include="Criteria\Querystring\IQuerystringProvider.cs" />
+    <Compile Include="Criteria\Querystring\QuerystringPersonalisationGroupCriteria.cs" />
+    <Compile Include="Criteria\Querystring\QuerystringSetting.cs" />
+    <Compile Include="Criteria\PersonalisationGroupCriteriaBase.cs" />
     <Compile Include="Criteria\Referral\HttpContextReferrerProvider.cs" />
     <Compile Include="Criteria\Referral\IReferrerProvider.cs" />
     <Compile Include="Criteria\Referral\ReferralPersonalisationGroupCriteria.cs" />
@@ -261,7 +266,6 @@
     <Compile Include="Criteria\Cookie\ICookieProvider.cs" />
     <Compile Include="Criteria\Cookie\CookieSetting.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
-    <Compile Include="Helpers\ComparisonHelpers.cs" />
     <Compile Include="PropertyEditors\PersonalisationGroupDefinitionPropertyEditor.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="Routing\RouteConfig.cs" />
@@ -392,7 +396,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Criteria\NumberOfVisits\definition.translator.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Querystring\definition.editor.controller.js" />
+    <EmbeddedResource Include="Criteria\Querystring\definition.editor.html" />
+    <EmbeddedResource Include="Criteria\Querystring\definition.translator.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

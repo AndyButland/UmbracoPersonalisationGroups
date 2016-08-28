@@ -1,14 +1,13 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Cookie
 {
     using System;
-    using Helpers;
     using Newtonsoft.Json;
     using Umbraco.Core;
 
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a cookie
     /// </summary>
-    public class CookiePersonalisationGroupCriteria : IPersonalisationGroupCriteria
+    public class CookiePersonalisationGroupCriteria : PersonalisationGroupCriteriaBase, IPersonalisationGroupCriteria
     {
         private readonly ICookieProvider _cookieProvider;
 
@@ -61,15 +60,15 @@
                 case CookieSettingMatch.DoesNotExist:
                     return !cookieExists;
                 case CookieSettingMatch.MatchesValue:
-                    return cookieExists && cookieValue == cookieSetting.Value;
+                    return cookieExists && MatchesValue(cookieValue, cookieSetting.Value);
                 case CookieSettingMatch.ContainsValue:
-                    return cookieExists && cookieValue.Contains(cookieSetting.Value);
+                    return cookieExists && ContainsValue(cookieValue, cookieSetting.Value);
                 case CookieSettingMatch.GreaterThanValue:
                 case CookieSettingMatch.GreaterThanOrEqualToValue:
                 case CookieSettingMatch.LessThanValue:
                 case CookieSettingMatch.LessThanOrEqualToValue:
                     return cookieExists &&
-                        ComparisonHelpers.CompareValues(cookieValue, cookieSetting.Value, GetComparison(cookieSetting.Match));
+                        CompareValues(cookieValue, cookieSetting.Value, GetComparison(cookieSetting.Match));
                 default:
                     return false;
             }

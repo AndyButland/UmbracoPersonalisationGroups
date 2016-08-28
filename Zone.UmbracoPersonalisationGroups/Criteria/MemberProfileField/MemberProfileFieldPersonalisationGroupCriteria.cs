@@ -8,7 +8,7 @@
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a session key
     /// </summary>
-    public class MemberProfileFieldPersonalisationGroupCriteria : IPersonalisationGroupCriteria
+    public class MemberProfileFieldPersonalisationGroupCriteria : PersonalisationGroupCriteriaBase, IPersonalisationGroupCriteria
     {
         private readonly IMemberProfileFieldProvider _memberProfileFieldProvider;
 
@@ -47,14 +47,14 @@
             switch (setting.Match)
             {
                 case MemberProfileFieldSettingMatch.MatchesValue:
-                    return string.Equals(setting.Value, value, StringComparison.InvariantCultureIgnoreCase);
+                    return MatchesValue(value, setting.Value);
                 case MemberProfileFieldSettingMatch.DoesNotMatchValue:
-                    return !string.Equals(setting.Value, value, StringComparison.InvariantCultureIgnoreCase);
+                    return !MatchesValue(value, setting.Value);
                 case MemberProfileFieldSettingMatch.GreaterThanValue:
                 case MemberProfileFieldSettingMatch.GreaterThanOrEqualToValue:
                 case MemberProfileFieldSettingMatch.LessThanValue:
                 case MemberProfileFieldSettingMatch.LessThanOrEqualToValue:
-                    return ComparisonHelpers.CompareValues(value, setting.Value, GetComparison(setting.Match));
+                    return CompareValues(value, setting.Value, GetComparison(setting.Match));
                 default:
                     return false;
             }
