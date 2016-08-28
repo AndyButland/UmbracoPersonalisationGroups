@@ -19,23 +19,11 @@
             _querystringProvider = querystringProvider;
         }
 
-        public string Alias
-        {
-            get { return "querystring"; }
-        }
+        public string Alias => "querystring";
 
-        public string Name
-        {
-            get { return "Querystring"; }
-        }
+        public string Name => "Querystring";
 
-        public string Description
-        {
-            get
-            {
-                return "Matches visitor based on specific values in the Querystring";
-            }
-        }
+        public string Description => "Matches visitor based on specific values in the Querystring";
 
         public bool MatchesVisitor(string definition)
         {
@@ -48,7 +36,7 @@
             }
             catch (JsonReaderException)
             {
-                throw new ArgumentException(string.Format("Provided definition is not valid JSON: {0}", definition));
+                throw new ArgumentException($"Provided definition is not valid JSON: {definition}");
             }
 
             var querystring = _querystringProvider.GetQuerystring();
@@ -92,7 +80,7 @@
                 case QuerystringSettingMatch.LessThanOrEqualToValue:
                     return Comparison.LessThanOrEqual;
                 default:
-                    throw new ArgumentException("Setting supplied does not match a comparison type", "settingMatch");
+                    throw new ArgumentException("Setting supplied does not match a comparison type", nameof(settingMatch));
             }
         }
     }

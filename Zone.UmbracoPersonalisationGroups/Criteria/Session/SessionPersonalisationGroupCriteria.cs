@@ -93,7 +93,7 @@
                 case SessionSettingMatch.LessThanOrEqualToValue:
                     return Comparison.LessThanOrEqual;
                 default:
-                    throw new ArgumentException("Setting supplied does not match a comparison type", "settingMatch");
+                    throw new ArgumentException("Setting supplied does not match a comparison type", nameof(settingMatch));
             }
         }
     }
