@@ -34,20 +34,23 @@
             var httpContext = HttpContext.Current;
             var umbracoContext = UmbracoContext.Current;
 
-            if (umbracoContext == null || !umbracoContext.PageId.HasValue)
+            if (umbracoContext?.PageId == null)
             {
                 return;
             }
 
-            var cookie = httpContext.Request.Cookies[CookiePagesViewedProvider.CookieKey];
+            var key = CookiePagesViewedProvider.GetCookieKeyForTrackingNumberOfVisits();
+            var cookie = httpContext.Request.Cookies[key];
             if (cookie != null)
             {
                 cookie.Value = AppendPageIdIfNotPreviouslyViewed(cookie.Value, umbracoContext.PageId.Value);
             }
             else
             {
-                cookie = new HttpCookie(CookiePagesViewedProvider.CookieKey);
-                cookie.Value = umbracoContext.PageId.Value.ToString();
+                cookie = new HttpCookie(key)
+                {
+                    Value = umbracoContext.PageId.Value.ToString()
+                };
             }
 
             int cookieExpiryInDays;

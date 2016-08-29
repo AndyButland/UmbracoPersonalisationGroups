@@ -23,6 +23,12 @@
             public const string NumberOfVisitsTrackingCookieExpiryInDays = "personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays";
 
             public const string ViewedPagesTrackingCookieExpiryInDays = "personalisationGroups.viewedPagesTrackingCookieExpiryInDays";
+
+            public const string CookieKeyForTrackingNumberOfVisits = "personalisationGroups.CookieKeyForTrackingNumberOfVisits";
+
+            public const string CookieKeyForTrackingIfSessionAlreadyTracked = "personalisationGroups.cookieKeyForTrackingIfSessionAlreadyTracked";
+
+            public const string CookieKeyForTrackingPagesViewed = "personalisationGroups.CookieKeyForTrackingPagesViewed";
         }
 
         public static class DocumentTypeAliases

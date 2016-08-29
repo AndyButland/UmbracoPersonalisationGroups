@@ -114,6 +114,10 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.excludeCriteria" value="alias1,alias2"/>` - provides a list of criteria to exclude from the full list of available criteria made available for creating personsaliation groups
 - `<add key="personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for number of visits page tracking for the pages viewed criteria (default if not provided is 90)
 - `<add key="personalisationGroups.viewedPagesTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for viewed page tracking for the pages viewed criteria (default if not provided is 90)
+- `<add key="personalisationGroups.cookieKeyForTrackingNumberOfVisits" value="myCookieKey"/>` - defines the cookie key name used for tracking the number of visits
+- `<add key="personalisationGroups.cookieKeyForTrackingIfSessionAlreadyTracked" value="myCookieKey"/>` - defines the cookie key name used for tracking if the session has been recorded for the number of visits criteria, default is `personalisationGroupsNumberOfVisitsSessionStarted`
+- `<add key="personalisationGroups.cookieKeyForTrackingPagesViewed" value="myCookieKey"/>` - defines the cookie key name used for tracking pages viewed
+
 
 ## How it works
 

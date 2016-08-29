@@ -33,12 +33,11 @@
             var httpContext = HttpContext.Current;
 
             // Check if session cookie present
-            var sessionCookie = httpContext.Request.Cookies[CookieNumberOfVisitsProvider.CookieKeyForTrackingIfSessionAlreadyTracked];
+            var sessionCookie = httpContext.Request.Cookies[CookieNumberOfVisitsProvider.GetCookieKeyForTrackingIfSessionAlreadyTracked()];
             if (sessionCookie == null)
             {
                 // If not, create or update the number of visits cookie
-                var trackingCookie =
-                    httpContext.Request.Cookies[CookieNumberOfVisitsProvider.CookieKeyForTrackingNumberOfVisits];
+                var trackingCookie = httpContext.Request.Cookies[CookieNumberOfVisitsProvider.GetCookieKeyForTrackingNumberOfVisits()];
                 if (trackingCookie != null)
                 {
                     int cookieValue;
@@ -53,15 +52,14 @@
                 }
                 else
                 {
-                    trackingCookie = new HttpCookie(CookieNumberOfVisitsProvider.CookieKeyForTrackingNumberOfVisits);
+                    trackingCookie = new HttpCookie(CookieNumberOfVisitsProvider.GetCookieKeyForTrackingNumberOfVisits());
                     trackingCookie.Value = "1";
                 }
 
                 int cookieExpiryInDays;
-                if (
-                    !int.TryParse(
-                        ConfigurationManager.AppSettings[
-                            AppConstants.ConfigKeys.NumberOfVisitsTrackingCookieExpiryInDays], out cookieExpiryInDays))
+                if (!int.TryParse(
+                    ConfigurationManager.AppSettings[
+                        AppConstants.ConfigKeys.NumberOfVisitsTrackingCookieExpiryInDays], out cookieExpiryInDays))
                 {
                     cookieExpiryInDays = AppConstants.DefaultViewedPagesTrackingCookieExpiryInDays;
                 }
@@ -70,7 +68,7 @@
                 httpContext.Response.Cookies.Add(trackingCookie);
 
                 // Set the session cookie so we don't keep updating on each request
-                sessionCookie = new HttpCookie(CookieNumberOfVisitsProvider.CookieKeyForTrackingIfSessionAlreadyTracked);
+                sessionCookie = new HttpCookie(CookieNumberOfVisitsProvider.GetCookieKeyForTrackingIfSessionAlreadyTracked());
                 sessionCookie.Value = "1";
                 httpContext.Response.Cookies.Add(sessionCookie);
             }
