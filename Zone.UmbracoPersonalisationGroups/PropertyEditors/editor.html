@@ -7,6 +7,16 @@
         </select>
     </umb-control-group>
 
+    <umb-control-group alias="duration" label="Duration in group:">
+        <select ng-model="model.value.duration">
+            <option value="Page">Per page request</option>
+            <option value="Session">Per session</option>
+            <option value="Visitor">Per visitor</option>
+        </select>
+        <div class="help-inline" style="margin: 3px 0 12px 0; font-size: 80%;">
+            <span>Determines for how long a user that is matched to a personalisation group remains in it</span>
+        </div>
+    </umb-control-group>
 
     <div class="control-group umb-control-group">
         <div class="umb-el-wrap">

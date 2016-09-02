@@ -52,7 +52,11 @@
             };
 
             if (!$scope.model.value) {
-                $scope.model.value = { match: "All", details: [] };
+                $scope.model.value = { match: "All", duration: "Page", details: [] };
+            }
+
+            if (!$scope.model.value.duration) {
+                $scope.model.value.duration = "Page";
             }
 
             $scope.selectedCriteria = null;

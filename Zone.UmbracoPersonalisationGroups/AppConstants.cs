@@ -29,6 +29,12 @@
             public const string CookieKeyForTrackingIfSessionAlreadyTracked = "personalisationGroups.cookieKeyForTrackingIfSessionAlreadyTracked";
 
             public const string CookieKeyForTrackingPagesViewed = "personalisationGroups.CookieKeyForTrackingPagesViewed";
+
+            public const string CookieKeyForSessionMatchedGroups = "personalisationGroups.cookieKeyForSessionMatchedGroups";
+
+            public const string CookieKeyForPersistentMatchedGroups = "personalisationGroups.cookieKeyForPersistentMatchedGroups";
+
+            public const string PersistentMatchedGroupsCookieExpiryInDays = "personalisationGroups.persistentMatchedGroupsCookieExpiryInDays";
         }
 
         public static class DocumentTypeAliases
@@ -57,6 +63,8 @@
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
 
         public const int DefaultViewedPagesTrackingCookieExpiryInDays = 90;
+
+        public const int DefaultMatchedGroupsTrackingCookieExpiryInDays = 90;
 
         public static class CacheKeys
         {

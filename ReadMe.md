@@ -54,6 +54,8 @@ However this will only install the dll, not the document types and data types.  
  - Switch to "Developer" and find the **Personalisation group picker** data type.  Set the root node to be the node you just created.
  - Back to "Content", as a child of the node you just created, create a node of type **Personalisation Group** called, for example, *Weekday morning visitors*
      - Set the **Match** option to **All**
+	 - Set the **Duration in group** option to **Page**
+	     - If you select other options here, the groups will become "sticky".  For example if someone comes to your home page that's personalised based on a querystring parameter, if they then return to the page by default they will no longer match the group (as the querystring value is no longer there).  But selecting **Session** or **Visitor** you can make the visitor stick to the group they matched origianlly (using a cookie).
 	 - Add a new criteria of type **Day of week** and tick the boxes for Monday to Friday.
 	 - Add a second criteria of type **Time of day** and add a range of 0000 to 1200
 	 - Save and publish
@@ -117,6 +119,9 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.cookieKeyForTrackingNumberOfVisits" value="myCookieKey"/>` - defines the cookie key name used for tracking the number of visits
 - `<add key="personalisationGroups.cookieKeyForTrackingIfSessionAlreadyTracked" value="myCookieKey"/>` - defines the cookie key name used for tracking if the session has been recorded for the number of visits criteria, default is `personalisationGroupsNumberOfVisitsSessionStarted`
 - `<add key="personalisationGroups.cookieKeyForTrackingPagesViewed" value="myCookieKey"/>` - defines the cookie key name used for tracking pages viewed
+- `<add key="personalisationGroups.cookieKeyForSessionMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which session level groups the visitor has matched
+- `<add key="personalisationGroups.cookieKeyForPersistentMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which persistent (visitor) level groups the visitor has matched
+- `<add key="personalisationGroups.persistentMatchedGroupsCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for tracking which persistent (visitor) level groups the visitor has matched (default if not provided is 90)
 
 
 ## How it works
@@ -323,3 +328,4 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Creates base class `PersonalisationGroupCriteriaBase` providing common helper methods for all criteria
 	- Added the "matches regular expression" from the querystring criteria to other appropriate ones
 	- Allowed for configuration of cookie names used for number of visits and pages viewed tracking
+	- Sticky groups
