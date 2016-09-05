@@ -16,6 +16,7 @@ It contains a few different pieces:
     - Day of week
 	- Number of site visits
 	- Pages viewed
+	- Querystring
 	- Referrer
     - Session key presence/absence and value matching
     - Time of day
