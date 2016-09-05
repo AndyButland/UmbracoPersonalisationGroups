@@ -56,7 +56,7 @@ However this will only install the dll, not the document types and data types.  
  - Back to "Content", as a child of the node you just created, create a node of type **Personalisation Group** called, for example, *Weekday morning visitors*
      - Set the **Match** option to **All**
 	 - Set the **Duration in group** option to **Page**
-	     - If you select other options here, the groups will become "sticky".  For example if someone comes to your home page that's personalised based on a querystring parameter, if they then return to the page by default they will no longer match the group (as the querystring value is no longer there).  But selecting **Session** or **Visitor** you can make the visitor stick to the group they matched origianlly (using a cookie).
+	     - If you select other options here, the groups will become "sticky".  For example if someone comes to your home page that's personalised based on a querystring parameter, if they then return to the page by default they will no longer match the group (as the querystring value is no longer there).  But selecting **Session** or **Visitor** you can make the visitor stick to the group they matched originally (using a cookie).
 	 - Add a new criteria of type **Day of week** and tick the boxes for Monday to Friday.
 	 - Add a second criteria of type **Time of day** and add a range of 0000 to 1200
 	 - Save and publish
@@ -325,9 +325,9 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 0.1.16
     - Added the output caching helper `GetPersonalisationGroupsHashForVisitor()`
 - 0.2.0
-    - Added querystring criteria
+    - Added querystring criteria (thanks to [Perplex](perplex.nl) for the code contribution
 	- Creates base class `PersonalisationGroupCriteriaBase` providing common helper methods for all criteria
 	- Added the "matches regular expression" from the querystring criteria to other appropriate ones
 	- Allowed for configuration of cookie names used for number of visits and pages viewed tracking
 	- Set all cookies to HttpOnly
-	- Implemented "sticky" groups
+	- Implemented "sticky" groups (thanks to [Perplex](perplex.nl) for the suggestion
