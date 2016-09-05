@@ -49,7 +49,8 @@
             {
                 cookie = new HttpCookie(key)
                 {
-                    Value = umbracoContext.PageId.Value.ToString()
+                    Value = umbracoContext.PageId.Value.ToString(),
+                    HttpOnly = true,
                 };
             }
 

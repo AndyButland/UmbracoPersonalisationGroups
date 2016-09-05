@@ -328,4 +328,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Creates base class `PersonalisationGroupCriteriaBase` providing common helper methods for all criteria
 	- Added the "matches regular expression" from the querystring criteria to other appropriate ones
 	- Allowed for configuration of cookie names used for number of visits and pages viewed tracking
-	- Sticky groups
+	- Set all cookies to HttpOnly
+	- Implemented "sticky" groups

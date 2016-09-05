@@ -52,8 +52,11 @@
                 }
                 else
                 {
-                    trackingCookie = new HttpCookie(CookieNumberOfVisitsProvider.GetCookieKeyForTrackingNumberOfVisits());
-                    trackingCookie.Value = "1";
+                    trackingCookie = new HttpCookie(CookieNumberOfVisitsProvider.GetCookieKeyForTrackingNumberOfVisits())
+                    {
+                        Value = "1",
+                        HttpOnly = true,
+                    };
                 }
 
                 int cookieExpiryInDays;
@@ -68,8 +71,12 @@
                 httpContext.Response.Cookies.Add(trackingCookie);
 
                 // Set the session cookie so we don't keep updating on each request
-                sessionCookie = new HttpCookie(CookieNumberOfVisitsProvider.GetCookieKeyForTrackingIfSessionAlreadyTracked());
-                sessionCookie.Value = "1";
+                sessionCookie =
+                    new HttpCookie(CookieNumberOfVisitsProvider.GetCookieKeyForTrackingIfSessionAlreadyTracked())
+                    {
+                        Value = "1",
+                        HttpOnly = true,
+                    };
                 httpContext.Response.Cookies.Add(sessionCookie);
             }
         }

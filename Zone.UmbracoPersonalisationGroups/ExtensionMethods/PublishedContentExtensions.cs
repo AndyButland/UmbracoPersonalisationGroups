@@ -137,7 +137,8 @@
             {
                 cookie = new HttpCookie(key)
                 {
-                    Value = groupNodeId.ToString()
+                    Value = groupNodeId.ToString(),
+                    HttpOnly = true,
                 };
             }
 
