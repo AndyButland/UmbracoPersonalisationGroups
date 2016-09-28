@@ -25,11 +25,21 @@
             {
                 if (IsServerVariableForClientIpAvailableAndNotSetToAPrivateIp(httpContext, variable))
                 {
-                    return httpContext.Request.ServerVariables[variable];
+                    return RemovePortNumberFromIp(httpContext.Request.ServerVariables[variable]);
                 }
             }
 
             return string.Empty;
+        }
+
+        private string RemovePortNumberFromIp(string ip)
+        {
+            if (ip.Contains(":"))
+            {
+                ip = ip.Substring(0, ip.IndexOf(":"));
+            }
+
+            return ip;
         }
 
         private IEnumerable<string> GetServerVariablesForPublicIpDetection()
