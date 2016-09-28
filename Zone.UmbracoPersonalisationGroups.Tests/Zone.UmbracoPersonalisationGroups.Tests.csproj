@@ -70,8 +70,8 @@
     <Compile Include="Criteria\PersonalisationGroupCriteriaBaseTests.cs" />
     <Compile Include="PersonalisationGroupMatcherTests.cs" />
     <Compile Include="Criteria\Cookie\CookiePersonalisationGroupCriteriaTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Criteria\TimeOfDay\TimeOfDayPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zone.UmbracoPersonalisationGroups\Zone.UmbracoPersonalisationGroups.csproj">

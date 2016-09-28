@@ -1,5 +1,6 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
 {
+    using System;
     using System.Collections.Generic;
     using System.Web;
 
@@ -32,16 +33,6 @@
             return string.Empty;
         }
 
-        private string RemovePortNumberFromIp(string ip)
-        {
-            if (ip.Contains(":"))
-            {
-                ip = ip.Substring(0, ip.IndexOf(":"));
-            }
-
-            return ip;
-        }
-
         private IEnumerable<string> GetServerVariablesForPublicIpDetection()
         {
             return new string[]
@@ -56,6 +47,16 @@
         {
             return !string.IsNullOrEmpty(httpContext.Request.ServerVariables[variable]) &&
                    !httpContext.Request.ServerVariables[variable].StartsWith("192.");
+        }
+
+        private string RemovePortNumberFromIp(string ip)
+        {
+            if (ip.Contains(":"))
+            {
+                ip = ip.Substring(0, ip.IndexOf(":", StringComparison.Ordinal));
+            }
+
+            return ip;
         }
     }
 }
