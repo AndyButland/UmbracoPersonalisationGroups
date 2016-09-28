@@ -331,3 +331,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Allowed for configuration of cookie names used for number of visits and pages viewed tracking
 	- Set all cookies to HttpOnly
 	- Implemented "sticky" groups (thanks to [Perplex](perplex.nl) for the suggestion
+- 0.2.1
+    - Ensured [IP used for geo-location does not have port number included](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/5)
