@@ -13,7 +13,6 @@
     /// </summary>
     public static class PublishedContentExtensions
     {
-
         /// <summary>
         /// Adds an extension method to IPublishedContent to determine if the content item should be shown to the current site
         /// visitor, based on the personalisation groups associated with it.
@@ -27,20 +26,18 @@
             return ShowToVisitor(pickedGroups, showIfNoGroupsDefined);
         }
 
-        public static bool ShowToVisitor(this UmbracoHelper umbraco, IEnumerable<int> groupIds, bool showIfNoGroupDefined = true)
+        /// <summary>
+        /// Adds an extension method to UmbracoHelper to determine if the content item should be shown to the current site
+        /// visitor, based on the personalisation groups associated with the Ids passed into the method
+        /// </summary>
+        /// <param name="umbraco">Instance of UmbracoHelper</param>
+        /// <param name="groupIds">List of group Ids</param>
+        /// <param name="showIfNoGroupsDefined">Indicates the response to return if groups cannot be found on the content</param>
+        /// <returns>True if content should be shown to visitor</returns>
+        public static bool ShowToVisitor(this UmbracoHelper umbraco, IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)
         {
-            try
-            {
-                var pickedGroups = umbraco.TypedContent(groupIds).ToList();
-
-                return ShowToVisitor(pickedGroups, showIfNoGroupDefined);
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            return false;
+            var groups = umbraco.TypedContent(groupIds).ToList();
+            return ShowToVisitor(groups, showIfNoGroupsDefined);
         }
 
         /// <summary>

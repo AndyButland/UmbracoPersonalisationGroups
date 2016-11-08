@@ -330,6 +330,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Added the "matches regular expression" from the querystring criteria to other appropriate ones
 	- Allowed for configuration of cookie names used for number of visits and pages viewed tracking
 	- Set all cookies to HttpOnly
-	- Implemented "sticky" groups (thanks to [Perplex](perplex.nl) for the suggestion
+	- Implemented "sticky" groups (thanks again to [Perplex](perplex.nl) for the suggestion
 - 0.2.1
     - Ensured [IP used for geo-location does not have port number included](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/5)
+- 0.2.2
+    - Added further extension methods to allow passing in a list of groups to the method determining if a particular piece of content should be shown to a visitor.  Thanks to [Kevin Jump](https://github.com/KevinJump) for the [PR](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/6)	
