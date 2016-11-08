@@ -167,6 +167,8 @@ Each criteria also has an angular service named **definition.translator.js** res
     - If any one of them does, we return true (indicating to show the content)
 	- If none of them do, we return false (indicating to hide the content)
 	
+There's also a related extension method on **UmbracoHelper** named **ShowToVisitor(IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)**.  Using this you can pass through a list of group Ids that may be drawn from another location than the current node.
+	
 ## Notes on particular criteria
 
 ### Country
