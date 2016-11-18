@@ -13,8 +13,15 @@
             <option value="Session">Per session</option>
             <option value="Visitor">Per visitor</option>
         </select>
-        <div class="help-inline" style="margin: 3px 0 12px 0; font-size: 80%;">
+        <div class="help-inline" style="margin: 3px 0 3px 0; font-size: 80%;">
             <span>Determines for how long a user that is matched to a personalisation group remains in it</span>
+        </div>
+    </umb-control-group>
+
+    <umb-control-group alias="score" label="Score:">
+        <input ng-model="model.value.score" type="number" min="0" max="100" step="1" />
+        <div class="help-inline" style="margin: 3px 0 3px 0; font-size: 80%;">
+            <span>A number between 1 and 100, can be used to weight groups when scoring the visitor's match to a piece of content</span>
         </div>
     </umb-control-group>
 

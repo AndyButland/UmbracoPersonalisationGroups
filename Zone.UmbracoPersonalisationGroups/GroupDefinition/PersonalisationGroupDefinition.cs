@@ -24,6 +24,8 @@
 
         public PersonalisationGroupDefinitionDuration Duration { get; set; }
 
+        public int Score { get; set; }
+
         public IEnumerable<PersonalisationGroupDefinitionDetail> Details { get; set; }
     }
 }

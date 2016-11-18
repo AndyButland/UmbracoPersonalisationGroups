@@ -25,7 +25,7 @@ It contains a few different pieces:
 	- Umbraco member type
 - An extensible mechanism to allow other criteria to be created and loaded from other assemblies
 - A property editor with associated angular controllers/views that provide the means of configuring personalisation groups based on the available criteria
-- A single extension method on IPublishedContent named ShowToVisitor() that allows checking if the content should be available for the current site visitor
+- A extension methods on IPublishedContent and UmbracoHelper named ShowToVisitor() and ScoreForVisitor() that allows for showing, hiding or ordering ranking content for the current site visitor
 
 ## Using the package
 
@@ -57,6 +57,7 @@ However this will only install the dll, not the document types and data types.  
      - Set the **Match** option to **All**
 	 - Set the **Duration in group** option to **Page**
 	     - If you select other options here, the groups will become "sticky".  For example if someone comes to your home page that's personalised based on a querystring parameter, if they then return to the page by default they will no longer match the group (as the querystring value is no longer there).  But selecting **Session** or **Visitor** you can make the visitor stick to the group they matched originally (using a cookie).
+	 - Set the **Score** option to **50**
 	 - Add a new criteria of type **Day of week** and tick the boxes for Monday to Friday.
 	 - Add a second criteria of type **Time of day** and add a range of 0000 to 1200
 	 - Save and publish
@@ -74,7 +75,7 @@ However this will only install the dll, not the document types and data types.  
 	```	
 	
  - Back to "Content" again, find or create a page of this document type and pick the **Weekday morning visitors** personalisation group
- - Finally you need to amend your template to make use of the personalisation group via new extension method that will be available on instances of **IPublishedContent**, named **ShowToVisitor()**, as described below.
+ - Finally you need to amend your template to make use of the personalisation group via extension methods that will be available on instances of **IPublishedContent**, named **ShowToVisitor()** and/or **ScoreForVisitor()**, as described below.
  
 ## Templating
  
@@ -106,6 +107,17 @@ With a little more work you can also personalise an individual page.  One way to
 	
 	<h1>@title</h1>
 	<p>@bodyText</p>
+	
+Instead of using sub-nodes for the personalised information, this could just as well be items of [nested content](https://our.umbraco.org/projects/backoffice-extensions/nested-content/), given they also implement IPublishedContent.
+
+In addition to simply showing and hiding content, it's possible to rank a list of items to display them in order of relevence to the site visitor.  This can be achieved using the **Score** field for each created personsalisation group that can be set to a value between 1 and 100. These can either be set to all the same value, or more important groups can be given a higher score.
+
+The following code will then determine which groups are associated with each item of content in the list, sum up the scores of those that match the site visitor and order with the highest score first:
+
+    @{
+        var personalisedContent = Model.Content.Children.OrderByDescending(x => x.ScoreForVisitor());
+    }
+
 	
 ## Configuration
 
@@ -337,3 +349,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Ensured [IP used for geo-location does not have port number included](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/5)
 - 0.2.2
     - Added further extension methods to allow passing in a list of groups to the method determining if a particular piece of content should be shown to a visitor.  Thanks to [Kevin Jump](https://github.com/KevinJump) for the [PR](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/6)	
+- 0.2.3
+	- Introduced `ScoreForVisitor()` extension method to allow personalised list ordering
