@@ -79,7 +79,7 @@ However this will only install the dll, not the document types and data types.  
  
 ## Templating
  
-### Personalising repeated content
+### Personalising repeated content - showing and hiding items in a list
  
 A typical example would be to personalise a list of repeated content to only show items that are appropriate for the current site visitor.  Here's how you might do that:
  
@@ -87,6 +87,8 @@ A typical example would be to personalise a list of repeated content to only sho
 	{
 	    <h2>@post.Name</h2>
     }
+		
+### Personalising page content
 		
 With a little more work you can also personalise an individual page.  One way to do this would be to create sub-nodes of a page of a new type called e.g. "Page Variation".  This document type should contain all the fields common to the parent page that you might want to personalise - e.g. title, body text, image - and an instance of the "Personalisation group picker".  You could then implement some logic on the parent page template to pull back the first of the sub-nodes that match the current site visitor.  If one is found, you can display the content from that sub-node rather than what's defined for the page.  And if not, display the default content for the page.  Something like:
 
@@ -109,6 +111,8 @@ With a little more work you can also personalise an individual page.  One way to
 	<p>@bodyText</p>
 	
 Instead of using sub-nodes for the personalised information, this could just as well be items of [nested content](https://our.umbraco.org/projects/backoffice-extensions/nested-content/), given they also implement IPublishedContent.
+
+### Personalising repeated content - ranking of items in a list
 
 In addition to simply showing and hiding content, it's possible to rank a list of items to display them in order of relevence to the site visitor.  This can be achieved using the **Score** field for each created personsalisation group that can be set to a value between 1 and 100. These can either be set to all the same value, or more important groups can be given a higher score.
 
