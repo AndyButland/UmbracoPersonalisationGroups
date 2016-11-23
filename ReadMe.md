@@ -75,6 +75,9 @@ However this will only install the dll, not the document types and data types.  
 	```	
 	
  - Back to "Content" again, find or create a page of this document type and pick the **Weekday morning visitors** personalisation group
+ 
+ ![Picking groups](/documentation/picking-groups.png?raw=true "Picking groups")	
+ 
  - Finally you need to amend your template to make use of the personalisation group via extension methods that will be available on instances of **IPublishedContent**, named **ShowToVisitor()** and/or **ScoreForVisitor()**, as described below.
  
 ## Templating
