@@ -34,7 +34,7 @@
                         .Select(x => new
                         {
                             code = x.Split(',')[0],
-                            name = x.Split(',')[1]
+                            name = CleanName(x.Split(',')[1])
                         })
                         .OrderBy(x => x.name);
                     return Json(countries, JsonRequestBehavior.AllowGet);
@@ -67,12 +67,17 @@
                         .Select(x => new
                         {
                             code = x.Split(',')[1],
-                            name = x.Split(',')[2]
+                            name = CleanName(x.Split(',')[2])
                         })
                         .OrderBy(x => x.name);
                     return Json(regions, JsonRequestBehavior.AllowGet);
                 }
             }
+        }
+
+        private string CleanName(string name)
+        {
+            return name.Replace("\"", string.Empty).Trim();
         }
     }
 }

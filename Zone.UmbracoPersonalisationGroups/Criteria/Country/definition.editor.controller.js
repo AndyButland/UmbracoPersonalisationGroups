@@ -1,13 +1,15 @@
 ﻿angular.module("umbraco")
     .controller("UmbracoPersonalisationGroups.CountryPersonalisationGroupCriteriaController",
-        function ($scope) {
+        function ($scope, geoLocationService) {
 
-            function isValidCountryCode(code) {
-                return code.length === 2;
+            function initCountryList() {
+                $scope.availableCountries = geoLocationService.getCountryList();
             };
 
-            function resetNewCode() {
-                $scope.newCode = { value: "", hasError: false };
+            initCountryList();
+
+            function resetNewCountry() {
+                $scope.newCountry = { code: "", hasError: false };
             }
 
             $scope.renderModel = { match: "IsLocatedIn" };
@@ -23,7 +25,11 @@
                 }
             }
 
-            resetNewCode();
+            resetNewCountry();
+
+            $scope.getCountryName = function (code) {
+                return geoLocationService.getCountryName(code);
+            }
 
             $scope.edit = function (index) {
                 for (var i = 0; i < $scope.renderModel.countries.length; i++) {
@@ -41,14 +47,17 @@
                 $scope.renderModel.countries.splice(index, 1);
             };
 
-            $scope.add = function () {
-                if (isValidCountryCode($scope.newCode.value)) {
-                    var country = { code: $scope.newCode.value, edit: false };
-                    $scope.renderModel.countries.push(country);
+            function isValidCountryCode(code) {
+                return code.length === 2;
+            };
 
-                    resetNewCode();
+            $scope.add = function () {
+                if (isValidCountryCode($scope.newCountry.code)) {
+                    var country = { code: $scope.newCountry.code, edit: false };
+                    $scope.renderModel.countries.push(country);
+                    resetNewCountry();
                 } else {
-                    $scope.newCode.hasError = true;
+                    $scope.newCountry.hasError = true;
                 }
             };
 

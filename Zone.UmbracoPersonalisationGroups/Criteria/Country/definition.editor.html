@@ -11,17 +11,13 @@
         </umb-control-group>
         <umb-control-group alias="countries" label="Countries">
             <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>Country code</td>
-                        <td></td>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr ng-repeat="country in renderModel.countries">
                         <td>
-                            <span ng-show="!country.edit">{{country.code}}</span>
-                            <input type="text" ng-model="country.code" ng-show="country.edit" style="width: 100px" maxlength="2" />
+                            <span ng-show="!country.edit">{{getCountryName(country.code)}}</span>
+                            <select ng-model="country.code"
+                                    ng-options="item.code as item.name for item in availableCountries"
+                                    ng-show="country.edit" ></select>
                         </td>
                         <td>
                             <div class="btn-group" ng-show="!country.edit">
@@ -36,7 +32,10 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td><input type="text" ng-model="newCode.value" val-highlight="newCode.hasError" style="width: 100px" /></td>
+                        <td>
+                            <select ng-model="newCountry.code"
+                                    ng-options="item.code as item.name for item in availableCountries"></select>
+                        </td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default" ng-click="add()"><localize key="general_add">Add</localize></button>

@@ -1,7 +1,7 @@
 ﻿angular.module("umbraco.services")
-	.factory("UmbracoPersonalisationGroups.CountryTranslatorService", function () {
+	.factory("UmbracoPersonalisationGroups.CountryTranslatorService", function (geoLocationService) {
 
-	    var service = {
+        var service = {
 	        translate: function (definition) {
 	            var translation = "";
 	            if (definition) {
@@ -19,11 +19,13 @@
 	                translation += " in: ";
 
 	                for (var i = 0; i < selectedCountryDetails.codes.length; i++) {
-	                    if (i > 0) {
+	                    if (i > 0 && i === selectedCountryDetails.codes.length - 1) {
+	                        translation += " or ";
+	                    } else if (i > 0) {
 	                        translation += ", ";
 	                    }
 
-	                    translation += selectedCountryDetails.codes[i].toUpperCase();
+	                    translation += geoLocationService.getCountryName(selectedCountryDetails.codes[i].toUpperCase());
 	                }
 	            }
 
