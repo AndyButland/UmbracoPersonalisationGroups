@@ -27,23 +27,33 @@
 
 	    var service = {
 	        getCountryList: function (withRegionsOnly) {
-	            return $http.get("/App_Plugins/UmbracoPersonalisationGroups/GeoLocation/GetCountries?withRegionsOnly=" + withRegionsOnly,
-                    { cache: true });
+	            var url = "/App_Plugins/UmbracoPersonalisationGroups/GeoLocation/GetCountries?withRegionsOnly=" + withRegionsOnly;
+	            return $http.get(url, { cache: true });
 	        },
 
-            //getRegionList: function (countryCode) {
-            //    if (countryCode !== currentCountryCode || regions.length === 0) {
-            //        currentCountryCode = countryCode;
-            //        return initRegionList();
-            //    } else {
-            //        return Promise.resolve(regions);
-            //    }
-            //},
+            getRegionList: function (countryCode) {
+                var url = "/App_Plugins/UmbracoPersonalisationGroups/GeoLocation/GetRegions?countryCode=" + countryCode;
+                return $http.get(url, { cache: true });
+            },
 
             getCountryName: function (code, countries) {
-                for (var j = 0; j < countries.length; j++) {
-                    if (countries[j].code === code) {
-                        return countries[j].name;
+                if (countries) {
+                    for (var j = 0; j < countries.length; j++) {
+                        if (countries[j].code === code) {
+                            return countries[j].name;
+                        }
+                    }
+                }
+
+                return "";
+            },
+
+            getRegionName: function (code, regions) {
+                if (regions) {
+                    for (var j = 0; j < regions.length; j++) {
+                        if (regions[j].code === code) {
+                            return regions[j].name;
+                        }
                     }
                 }
 

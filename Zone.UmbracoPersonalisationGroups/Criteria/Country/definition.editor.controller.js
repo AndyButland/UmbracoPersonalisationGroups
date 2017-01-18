@@ -2,14 +2,14 @@
     .controller("UmbracoPersonalisationGroups.CountryPersonalisationGroupCriteriaController",
         function ($scope, geoLocationService) {
 
-            function initCountryList() {
+            function initAvailableCountriesList() {
                 geoLocationService.getCountryList()
                     .success(function (data) {
                         $scope.availableCountries = data;
                     });
             };
 
-            initCountryList();
+            initAvailableCountriesList();
 
             function resetNewCountry() {
                 $scope.newCountry = { code: "", hasError: false };
@@ -87,9 +87,9 @@
                     serializedResult += "\"" + geoLocationService.getCountryName($scope.renderModel.countries[i].code, $scope.availableCountries) + "\"";
                 }
                 serializedResult += "]";
-
-
+                
                 serializedResult += " }";
+
                 $scope.submit(serializedResult);
             };
         });

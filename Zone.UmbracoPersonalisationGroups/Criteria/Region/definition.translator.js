@@ -5,10 +5,9 @@
 	        translate: function (definition) {
 	            var translation = "";
 	            if (definition) {
-	                console.log(definition);
-	                var selectedCountryDetails = JSON.parse(definition);
+	                var selectedRegionDetails = JSON.parse(definition);
 	                translation = "Visitor is ";
-	                switch (selectedCountryDetails.match) {
+	                switch (selectedRegionDetails.match) {
 	                    case "IsLocatedIn":
 	                        translation += "located";
 	                        break;
@@ -19,19 +18,17 @@
 
 	                translation += " in: ";
 
-	                for (var i = 0; i < selectedCountryDetails.codes.length; i++) {
-	                    if (i > 0 && i === selectedCountryDetails.codes.length - 1) {
+	                for (var i = 0; i < selectedRegionDetails.codes.length; i++) {
+	                    if (i > 0 && i === selectedRegionDetails.codes.length - 1) {
 	                        translation += " or ";
 	                    } else if (i > 0) {
 	                        translation += ", ";
 	                    }
 
-	                    // Versions 0.2.5 and later store the country name, before that we just had the code.
-                        // So display the name if we have it, otherwise just the code.
-	                    translation += selectedCountryDetails.names
-                            ? selectedCountryDetails.names[i]
-                            : selectedCountryDetails.codes[i].toUpperCase();
+	                    translation += selectedRegionDetails.names[i];
 	                }
+
+	                translation += ", " + selectedRegionDetails.countryName;
 	            }
 
 	            return translation;

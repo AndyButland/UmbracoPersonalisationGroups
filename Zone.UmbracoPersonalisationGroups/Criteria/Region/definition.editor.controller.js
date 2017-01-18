@@ -2,10 +2,19 @@
     .controller("UmbracoPersonalisationGroups.RegionPersonalisationGroupCriteriaController",
         function ($scope, geoLocationService) {
 
+            var defaultCountryCode = "GB";
+
+            function initAvailableRegionsList(countryCode) {
+                geoLocationService.getRegionList(countryCode)
+                    .success(function (data) {
+                        $scope.availableRegions = data;
+                    });
+            }
+
             function initCountryList() {
                 geoLocationService.getCountryList(true)
-                    .then(function (result) {
-                        $scope.availableCountries = result;
+                    .success(function (data) {
+                        $scope.availableCountries = data;
                     });
             };
 
@@ -15,7 +24,11 @@
                 $scope.newRegion = { code: "", hasError: false };
             }
 
-            $scope.renderModel = { match: "IsLocatedIn", countryCode: "GB" };
+            function clearRegions() {
+                $scope.renderModel.regions = [];
+            }
+
+            $scope.renderModel = { match: "IsLocatedIn", countryCode: defaultCountryCode };
             $scope.renderModel.regions = [];
 
             if ($scope.dialogOptions.definition) {
@@ -27,19 +40,21 @@
                         $scope.renderModel.regions.push({ code: regionSettings.codes[i], edit: false });
                     }
                 }
+
+                initAvailableRegionsList(regionSettings.countryCode);
+            } else {
+                initAvailableRegionsList(defaultCountryCode);
             }
 
             resetNewRegion();
 
             $scope.changedCountryCode = function (countryCode) {
-                geoLocationService.getRegionList(countryCode)
-                    .then(function (result) {
-                        $scope.availableRegions = result;
-                    });
+                clearRegions();
+                initAvailableRegionsList(countryCode);
             }
 
             $scope.getRegionName = function (code) {
-                return geoLocationService.getRegionName(code);
+                return geoLocationService.getRegionName(code, $scope.availableRegions);
             }
 
             $scope.edit = function (index) {
@@ -73,17 +88,32 @@
             };
 
             $scope.saveAndClose = function () {
-                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", " + "\"countryCode\": \"" + $scope.renderModel.countryCode + "\", " + "\"codes\": [";
+                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", ";
+                serializedResult += "\"countryCode\": \"" + $scope.renderModel.countryCode + "\", ";
+                serializedResult += "\"countryName\": \"" + geoLocationService.getCountryName($scope.renderModel.countryCode, $scope.availableCountries) + "\", ";
 
-                for (var i = 0; i < $scope.renderModel.countries.length; i++) {
+                serializedResult += "\"codes\": [";
+                for (var i = 0; i < $scope.renderModel.regions.length; i++) {
                     if (i > 0) {
                         serializedResult += ", ";
                     }
 
-                    serializedResult += "\"" + $scope.renderModel.countries[i].code + "\"";
+                    serializedResult += "\"" + $scope.renderModel.regions[i].code + "\"";
                 }
+                serializedResult += "], ";
 
-                serializedResult += "] }";
+                serializedResult += "\"names\": [";
+                for (var i = 0; i < $scope.renderModel.regions.length; i++) {
+                    if (i > 0) {
+                        serializedResult += ", ";
+                    }
+
+                    serializedResult += "\"" + geoLocationService.getRegionName($scope.renderModel.regions[i].code, $scope.availableRegions) + "\"";
+                }
+                serializedResult += "]";
+
+                serializedResult += " }";
+
                 $scope.submit(serializedResult);
             };
         });
