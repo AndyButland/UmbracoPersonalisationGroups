@@ -7,7 +7,7 @@
     using Umbraco.Core.Services;
 
     /// <summary>
-    /// Controller making available criteria details to HTTP requests
+    /// Controller making available member details to HTTP requests
     /// </summary>
     public class MemberController : BaseJsonResultController
     {
