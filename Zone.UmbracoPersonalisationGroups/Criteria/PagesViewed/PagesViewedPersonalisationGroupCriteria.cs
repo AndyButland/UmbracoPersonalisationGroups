@@ -48,17 +48,17 @@
             switch (pagesViewedSetting.Match)
             {
                 case PagesViewedSettingMatch.ViewedAny:
-                    return pagesViewedSetting.NodeIds
-                        .ContainsAny(nodeIdsViewed);
+                    return nodeIdsViewed
+                        .ContainsAny(pagesViewedSetting.NodeIds);
                 case PagesViewedSettingMatch.ViewedAll:
-                    return pagesViewedSetting.NodeIds
-                        .ContainsAll(nodeIdsViewed);
+                    return nodeIdsViewed
+                        .ContainsAll(pagesViewedSetting.NodeIds);
                 case PagesViewedSettingMatch.NotViewedAny:
-                    return !pagesViewedSetting.NodeIds
-                        .ContainsAny(nodeIdsViewed);
+                    return !nodeIdsViewed
+                        .ContainsAny(pagesViewedSetting.NodeIds);
                 case PagesViewedSettingMatch.NotViewedAll:
-                    return !pagesViewedSetting.NodeIds
-                        .ContainsAll(nodeIdsViewed);
+                    return !nodeIdsViewed
+                        .ContainsAll(pagesViewedSetting.NodeIds);
                 default:
                     return false;
             }

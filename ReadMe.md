@@ -358,3 +358,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Added further extension methods to allow passing in a list of groups to the method determining if a particular piece of content should be shown to a visitor.  Thanks to [Kevin Jump](https://github.com/KevinJump) for the [PR](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/6)	
 - 0.2.3
 	- Introduced `ScoreForVisitor()` extension method to allow personalised list ordering
+- 0.2.4
+	- Fixed bug with pages viewed criteria
