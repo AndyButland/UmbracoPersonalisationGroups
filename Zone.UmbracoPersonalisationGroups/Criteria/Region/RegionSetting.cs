@@ -1,10 +1,12 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
+﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Region
 {
     using System.Collections.Generic;
 
-    public class CountrySetting
+    public class RegionSetting
     {
         public GeoLocationSettingMatch Match { get; set; }
+
+        public string CountryCode { get; set; }
 
         public List<string> Codes { get; set; }
     }

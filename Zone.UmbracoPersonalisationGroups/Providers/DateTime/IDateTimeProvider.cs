@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Criteria
+﻿namespace Zone.UmbracoPersonalisationGroups.Providers.DateTime
 {
     using System;
 

@@ -1,10 +1,11 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
+﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Region
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
     using Umbraco.Core;
+    using Zone.UmbracoPersonalisationGroups.Criteria.Country;
     using Zone.UmbracoPersonalisationGroups.Providers;
     using Zone.UmbracoPersonalisationGroups.Providers.GeoLocation;
     using Zone.UmbracoPersonalisationGroups.Providers.Ip;
@@ -12,37 +13,37 @@
     /// <summary>
     /// Implements a personalisation group criteria based on the country derived from the vistor's IP address
     /// </summary>
-    public class CountryPersonalisationGroupCriteria : IPersonalisationGroupCriteria
+    public class RegionPersonalisationGroupCriteria : IPersonalisationGroupCriteria
     {
         private readonly IIpProvider _ipProvider;
         private readonly IGeoLocationProvider _geoLocationProvider;
 
-        public CountryPersonalisationGroupCriteria()
+        public RegionPersonalisationGroupCriteria()
         {
             _ipProvider = new HttpContextIpProvider();
             _geoLocationProvider = new MaxMindGeoLocationProvider();
         }
 
-        public CountryPersonalisationGroupCriteria(IIpProvider ipProvider, IGeoLocationProvider geoLocationProvider)
+        public RegionPersonalisationGroupCriteria(IIpProvider ipProvider, IGeoLocationProvider geoLocationProvider)
         {
             _ipProvider = ipProvider;
             _geoLocationProvider = geoLocationProvider;
         }
 
-        public string Name => "Country";
+        public string Name => "Region";
 
-        public string Alias => "country";
+        public string Alias => "region";
 
-        public string Description => "Matches visitor country derived from their IP address to a given list of countries";
+        public string Description => "Matches visitor region derived from their IP address to a given list of regions";
 
         public bool MatchesVisitor(string definition)
         {
             Mandate.ParameterNotNullOrEmpty(definition, "definition");
 
-            CountrySetting countrySetting;
+            RegionSetting regionSetting;
             try
             {
-                countrySetting = JsonConvert.DeserializeObject<CountrySetting>(definition);
+                regionSetting = JsonConvert.DeserializeObject<RegionSetting>(definition);
             }
             catch (JsonReaderException)
             {
@@ -55,14 +56,24 @@
                 var country = _geoLocationProvider.GetCountryFromIp(ip);
                 if (country != null)
                 {
-                    var matchedCountry = countrySetting.Codes
-                        .Any(x => string.Equals(x, country.Code, StringComparison.InvariantCultureIgnoreCase));
-                    switch (countrySetting.Match)
+                    var matchedCountry = string.Equals(regionSetting.CountryCode, country.Code, StringComparison.InvariantCultureIgnoreCase);
+                    var matchedRegion = false;
+                    if (matchedCountry)
+                    {
+                        var region = _geoLocationProvider.GetRegionFromIp(ip);
+                        if (region != null)
+                        {
+                            matchedRegion = regionSetting.Codes
+                                .Any(x => string.Equals(x, region.Code, StringComparison.InvariantCultureIgnoreCase));
+                        }
+                    }
+
+                    switch (regionSetting.Match)
                     {
                         case GeoLocationSettingMatch.IsLocatedIn:
-                            return matchedCountry;
+                            return matchedRegion;
                         case GeoLocationSettingMatch.IsNotLocatedIn:
-                            return !matchedCountry;
+                            return !matchedRegion;
                         default:
                             return false;
                     }

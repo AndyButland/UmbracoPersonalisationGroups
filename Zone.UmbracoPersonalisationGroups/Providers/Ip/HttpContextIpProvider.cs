@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
+﻿namespace Zone.UmbracoPersonalisationGroups.Providers.Ip
 {
     using System;
     using System.Collections.Generic;

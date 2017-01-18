@@ -4,6 +4,8 @@
     using System.Linq;
     using Newtonsoft.Json;
     using Umbraco.Core;
+    using Zone.UmbracoPersonalisationGroups.Providers;
+    using Zone.UmbracoPersonalisationGroups.Providers.DateTime;
 
     /// <summary>
     /// Implements a personalisation group criteria based on the day of the week

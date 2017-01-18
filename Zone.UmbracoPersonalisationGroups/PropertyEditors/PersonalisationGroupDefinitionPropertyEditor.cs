@@ -45,6 +45,10 @@
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "referral/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "referral/definition.translator.js" + Constants.ResourceExtension)]
 
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "region/definition.editor.controller.js" + Constants.ResourceExtension)]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "region/definition.translator.js" + Constants.ResourceExtension)]
+
+
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "session/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "session/definition.translator.js" + Constants.ResourceExtension)]
 

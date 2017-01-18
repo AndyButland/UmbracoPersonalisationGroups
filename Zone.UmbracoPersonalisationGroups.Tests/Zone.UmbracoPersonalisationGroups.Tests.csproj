@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Criteria\Region\RegionPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\PagesViewed\PagesViewedPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteriaTests.cs" />

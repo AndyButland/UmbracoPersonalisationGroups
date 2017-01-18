@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
+﻿namespace Zone.UmbracoPersonalisationGroups.Providers.Ip
 {
     public interface IIpProvider
     {

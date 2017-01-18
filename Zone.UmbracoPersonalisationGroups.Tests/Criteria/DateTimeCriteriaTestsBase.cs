@@ -3,6 +3,8 @@
     using System;
     using Moq;
     using Zone.UmbracoPersonalisationGroups.Criteria;
+    using Zone.UmbracoPersonalisationGroups.Providers;
+    using Zone.UmbracoPersonalisationGroups.Providers.DateTime;
 
     public abstract class DateTimeCriteriaTestsBase
     {

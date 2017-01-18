@@ -48,22 +48,21 @@
             Mandate.ParameterNotNullOrEmpty(criteriaAlias, "criteriaAlias");
             Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
 
-            IPersonalisationGroupCriteria criteria = 
-                PersonalisationGroupMatcher.GetAvailableCriteria()
-                                           .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
+            var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
+                .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
 
             if (criteria != null)
             {
                 string resourceName;
-                Stream resourceStream = EmbeddedResourceHelper.GetResource(criteria.GetType().Assembly, criteriaAlias + "." + fileName, out resourceName);
+                var resourceStream = EmbeddedResourceHelper.GetResource(criteria.GetType().Assembly, criteriaAlias + "." + fileName, out resourceName);
 
                 if (resourceStream != null)
                 {
-                    return new FileStreamResult(resourceStream, this.GetMimeType(resourceName));
+                    return new FileStreamResult(resourceStream, GetMimeType(resourceName));
                 }
             }
 
-            return this.HttpNotFound();
+            return HttpNotFound();
         }
 
         /// <summary>

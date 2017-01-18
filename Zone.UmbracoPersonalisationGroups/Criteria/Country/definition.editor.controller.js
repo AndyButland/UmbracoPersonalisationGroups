@@ -3,7 +3,10 @@
         function ($scope, geoLocationService) {
 
             function initCountryList() {
-                $scope.availableCountries = geoLocationService.getCountryList();
+                geoLocationService.getCountryList()
+                    .success(function (data) {
+                        $scope.availableCountries = data;
+                    });
             };
 
             initCountryList();
@@ -28,7 +31,7 @@
             resetNewCountry();
 
             $scope.getCountryName = function (code) {
-                return geoLocationService.getCountryName(code);
+                return geoLocationService.getCountryName(code, $scope.availableCountries);
             }
 
             $scope.edit = function (index) {
@@ -62,8 +65,10 @@
             };
 
             $scope.saveAndClose = function () {
-                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", " + "\"codes\": [";
 
+                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", ";
+
+                serializedResult += "\"codes\": [";
                 for (var i = 0; i < $scope.renderModel.countries.length; i++) {
                     if (i > 0) {
                         serializedResult += ", ";
@@ -71,8 +76,20 @@
 
                     serializedResult += "\"" + $scope.renderModel.countries[i].code + "\"";
                 }
+                serializedResult += "], ";
 
-                serializedResult += "] }";
+                serializedResult += "\"names\": [";
+                for (var i = 0; i < $scope.renderModel.countries.length; i++) {
+                    if (i > 0) {
+                        serializedResult += ", ";
+                    }
+
+                    serializedResult += "\"" + geoLocationService.getCountryName($scope.renderModel.countries[i].code, $scope.availableCountries) + "\"";
+                }
+                serializedResult += "]";
+
+
+                serializedResult += " }";
                 $scope.submit(serializedResult);
             };
         });

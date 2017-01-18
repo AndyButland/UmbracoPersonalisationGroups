@@ -1,25 +1,25 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Country
+﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Region
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Country;
+    using Zone.UmbracoPersonalisationGroups.Criteria.Region;
     using Zone.UmbracoPersonalisationGroups.Providers.GeoLocation;
     using Zone.UmbracoPersonalisationGroups.Providers.Ip;
 
     [TestClass]
-    public class CountryPersonalisationGroupCriteriaTests
+    public class RegionPersonalisationGroupCriteriaTests
     {
-        private const string DefinitionFormat = "{{ \"match\": \"{0}\", \"codes\": [ \"{1}\", \"{2}\" ] }}";
+        private const string DefinitionFormat = "{{ \"match\": \"{0}\", \"countryCode\": \"{1}\", \"codes\": [ \"{2}\", \"{3}\" ] }}";
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithEmptyDefinition_ThrowsException()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithEmptyDefinition_ThrowsException()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
 
             // Act
             criteria.MatchesVisitor((string)null);
@@ -27,12 +27,12 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithInvalidDefinition_ThrowsException()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithInvalidDefinition_ThrowsException()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = "invalid";
 
             // Act
@@ -40,13 +40,13 @@
         }
 
         [TestMethod]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithEmptyCountryLists_ReturnsFalse()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithEmptyRegionLists_ReturnsFalse()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
-            var definition = "{ \"match\": \"IsLocatedIn\", \"codes\": [] }";
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = "{ \"match\": \"IsLocatedIn\", \"countryCode\": \"GB\", \"codes\": [] }";
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -56,13 +56,13 @@
         }
 
         [TestMethod]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentCountryList_ReturnsFalse()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentRegionList_ReturnsFalse()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
-            var definition = string.Format(DefinitionFormat, "IsLocatedIn", "ES", "IT");
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "C7", "C8");
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -72,13 +72,13 @@
         }
 
         [TestMethod]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingCountryList_ReturnsTrue()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingRegionList_ReturnsTrue()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
-            var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "IT");
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "C6", "C7");
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -88,13 +88,13 @@
         }
 
         [TestMethod]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentCountryListAndNotInCheck_ReturnsTrue()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentRegionListAndNotInCheck_ReturnsTrue()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
-            var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "ES", "IT");
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "GB", "C7", "C8");
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -104,13 +104,13 @@
         }
 
         [TestMethod]
-        public void CountryPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingCountryListAndNotInCheck_ReturnsFalse()
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingRegionListAndNotInCheck_ReturnsFalse()
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
             var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
-            var criteria = new CountryPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
-            var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "GB", "IT");
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "GB", "C6", "C7");
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -137,8 +137,16 @@
             mock.Setup(x => x.GetCountryFromIp(It.IsAny<string>()))
                 .Returns(new Country
                 {
-                    Code = "GB", Name = "United Kingdom"
+                    Code = "GB",
+                    Name = "United Kingdom"
                 });
+            mock.Setup(x => x.GetRegionFromIp(It.IsAny<string>()))
+                .Returns(new Region
+                    {
+                        Code = "C6",
+                        Name = "Cornwall",
+                        Country = new Country { Code = "GB", Name = "United Kingdom" }
+                    });
 
             return mock;
         }

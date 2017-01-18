@@ -1,10 +1,11 @@
 ﻿angular.module("umbraco.services")
-	.factory("UmbracoPersonalisationGroups.CountryTranslatorService", function () {
+	.factory("UmbracoPersonalisationGroups.RegionTranslatorService", function () {
 
         var service = {
 	        translate: function (definition) {
 	            var translation = "";
 	            if (definition) {
+	                console.log(definition);
 	                var selectedCountryDetails = JSON.parse(definition);
 	                translation = "Visitor is ";
 	                switch (selectedCountryDetails.match) {
@@ -26,7 +27,7 @@
 	                    }
 
 	                    // Versions 0.2.5 and later store the country name, before that we just had the code.
-	                    // So display the name if we have it, otherwise just the code.
+                        // So display the name if we have it, otherwise just the code.
 	                    translation += selectedCountryDetails.names
                             ? selectedCountryDetails.names[i]
                             : selectedCountryDetails.codes[i].toUpperCase();
