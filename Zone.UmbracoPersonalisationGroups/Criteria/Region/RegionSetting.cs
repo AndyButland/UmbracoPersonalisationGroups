@@ -8,6 +8,6 @@
 
         public string CountryCode { get; set; }
 
-        public List<string> Codes { get; set; }
+        public List<string> Names { get; set; }
     }
 }

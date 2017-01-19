@@ -18,8 +18,8 @@
 
 	                translation += " in: ";
 
-	                for (var i = 0; i < selectedRegionDetails.codes.length; i++) {
-	                    if (i > 0 && i === selectedRegionDetails.codes.length - 1) {
+	                for (var i = 0; i < selectedRegionDetails.names.length; i++) {
+	                    if (i > 0 && i === selectedRegionDetails.names.length - 1) {
 	                        translation += " or ";
 	                    } else if (i > 0) {
 	                        translation += ", ";

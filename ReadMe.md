@@ -132,6 +132,7 @@ No configuration is required if you are happy to accept the default behaviour of
 
 - `<add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/>` - amends the alias that must be used when creating a property field of type personalisation group picker
 - `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found see below for more details.
+- `<add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-city geolocation database can be found see below for more details.
 - `<add key="personalisationGroups.includeCriteria" value="alias1,alias2"/>` - provides the specific list of criteria to make available for creating personsaliation groups
 - `<add key="personalisationGroups.excludeCriteria" value="alias1,alias2"/>` - provides a list of criteria to exclude from the full list of available criteria made available for creating personsaliation groups
 - `<add key="personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for number of visits page tracking for the pages viewed criteria (default if not provided is 90)

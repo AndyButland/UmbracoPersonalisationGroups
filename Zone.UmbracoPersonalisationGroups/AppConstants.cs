@@ -16,6 +16,8 @@
 
             public const string CustomGeoLocationCountryDatabasePath = "personalisationGroups.geoLocationCountryDatabasePath";
 
+            public const string CustomGeoLocationCityDatabasePath = "personalisationGroups.geoLocationCityDatabasePath";
+
             public const string IncludeCriteria = "personalisationGroups.includeCriteria";
 
             public const string ExcludeCriteria = "personalisationGroups.excludeCriteria";
@@ -61,6 +63,8 @@
         public const string ResourceExtension = ".umb"; 
 
         public const string DefaultGeoLocationCountryDatabasePath = "/App_Data/GeoLite2-Country.mmdb";
+
+        public const string DefaultGeoLocationCityDatabasePath = "/App_Data/GeoLite2-City.mmdb";
 
         public const int DefaultViewedPagesTrackingCookieExpiryInDays = 90;
 

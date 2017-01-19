@@ -1,5 +1,6 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Providers.GeoLocation
 {
+    using System;
     using System.Configuration;
     using System.IO;
     using System.Web;
@@ -11,11 +12,13 @@
 
     public class MaxMindGeoLocationProvider : IGeoLocationProvider
     {
-        private readonly string _pathToDb;
+        private readonly string _pathToCountryDb;
+        private readonly string _pathToCityDb;
 
         public MaxMindGeoLocationProvider()
         {
-            _pathToDb = HostingEnvironment.MapPath(GetDatabasePath());
+            _pathToCountryDb = HostingEnvironment.MapPath(GetCountryDatabasePath());
+            _pathToCityDb = HostingEnvironment.MapPath(GetCityDatabasePath());
         }
 
         public Country GetCountryFromIp(string ip)
@@ -27,7 +30,7 @@
                     {
                         try
                         {
-                            using (var reader = new DatabaseReader(_pathToDb))
+                            using (var reader = new DatabaseReader(_pathToCountryDb))
                             {
                                 try
                                 {
@@ -52,8 +55,8 @@
                         catch (FileNotFoundException)
                         {
                             throw new FileNotFoundException(
-                                $"MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {_pathToDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
-                                    _pathToDb);
+                                $"MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {_pathToCountryDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
+                                    _pathToCountryDb);
                         }
                     });
 
@@ -69,17 +72,16 @@
                     {
                         try
                         {
-                            using (var reader = new DatabaseReader(_pathToDb))
+                            using (var reader = new DatabaseReader(_pathToCityDb))
                             {
                                 try
                                 {
                                     var response = reader.City(ip);
                                     var country = new Region
                                     {
-                                        Code = response.MostSpecificSubdivision.IsoCode,
-                                        Name = response.MostSpecificSubdivision.Name,
+                                        Name = response.City.Name,
                                         Country = new Country
-                                        { 
+                                        {
                                             Code = response.Country.IsoCode,
                                             Name = response.Country.Name,
                                         }
@@ -99,20 +101,31 @@
                         catch (FileNotFoundException)
                         {
                             throw new FileNotFoundException(
-                                $"MaxMind Geolocation database required for locating visitor region from IP address not found, expected at: {_pathToDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
-                                    _pathToDb);
+                                $"MaxMind Geolocation database required for locating visitor region from IP address not found, expected at: {_pathToCountryDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
+                                    _pathToCountryDb);
                         }
                     });
 
             return cachedItem as Region;
         }
 
-        private string GetDatabasePath()
+        private string GetCountryDatabasePath()
         {
             var path = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath];
             if (string.IsNullOrEmpty(path))
             {
                 path = AppConstants.DefaultGeoLocationCountryDatabasePath;
+            }
+
+            return path;
+        }
+
+        private string GetCityDatabasePath()
+        {
+            var path = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomGeoLocationCityDatabasePath];
+            if (string.IsNullOrEmpty(path))
+            {
+                path = AppConstants.DefaultGeoLocationCityDatabasePath;
             }
 
             return path;

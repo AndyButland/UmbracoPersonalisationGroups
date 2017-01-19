@@ -21,9 +21,9 @@
                 <tbody>
                 <tr ng-repeat="region in renderModel.regions">
                     <td>
-                        <span ng-show="!region.edit">{{getRegionName(region.code)}}</span>
-                        <select ng-model="region.code"
-                                ng-options="item.code as item.name for item in availableRegions"
+                        <span ng-show="!region.edit">{{region.name}}</span>
+                        <select ng-model="region.name"
+                                ng-options="item.name as item.name for item in availableRegions"
                                 ng-show="region.edit"></select>
                     </td>
                     <td>
@@ -40,8 +40,8 @@
                 <tfoot>
                 <tr>
                     <td>
-                        <select ng-model="newRegion.code"
-                                ng-options="item.code as item.name for item in availableRegions"></select>
+                        <select ng-model="newRegion.name"
+                                ng-options="item.name as item.name for item in availableRegions"></select>
                     </td>
                     <td>
                         <div class="btn-group">

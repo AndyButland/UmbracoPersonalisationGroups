@@ -51,6 +51,7 @@
             }
 
             var ip = _ipProvider.GetIp();
+            ip = "62.252.197.226";
             if (!string.IsNullOrEmpty(ip))
             {
                 var country = _geoLocationProvider.GetCountryFromIp(ip);
@@ -63,8 +64,8 @@
                         var region = _geoLocationProvider.GetRegionFromIp(ip);
                         if (region != null)
                         {
-                            matchedRegion = regionSetting.Codes
-                                .Any(x => string.Equals(x, region.Code, StringComparison.InvariantCultureIgnoreCase));
+                            matchedRegion = regionSetting.Names
+                                .Any(x => string.Equals(x, region.Name, StringComparison.InvariantCultureIgnoreCase));
                         }
                     }
 
