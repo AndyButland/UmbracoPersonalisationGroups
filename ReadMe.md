@@ -18,6 +18,7 @@ It contains a few different pieces:
 	- Pages viewed
 	- Querystring
 	- Referrer
+	- Region (via IP matching)
     - Session key presence/absence and value matching
     - Time of day
 	- Umbraco member group
@@ -191,11 +192,15 @@ There's also a related extension method on **UmbracoHelper** named **ShowToVisit
 	
 ## Notes on particular criteria
 
-### Country
+### Country and region
 
-The country criteria uses the [free GeoLite2 IP to country database](http://dev.maxmind.com/geoip/geoip2/geolite2/) made available by Maxmind.com.  It'll look for it in /App_Data/GeoLite2-Country.mmdb or at the path specified in the following appSetting:
+The country criteria uses the [free GeoLite2 IP to country database](http://dev.maxmind.com/geoip/geoip2/geolite2/) made available by Maxmind.com.  It will look for it in `/App_Data/GeoLite2-Country.mmdb` or at the path specified in the following appSetting:
 
     <add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/> 
+	
+Similarly the region criteria uses the city database available from the same link above.  Similarly it will be read from the default location of `/App_Data/GeoLite2-City.mmdb` or at the path specified in the following appSetting:
+
+    <add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/> 
 
 ### Pages viewed
 
@@ -361,3 +366,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Introduced `ScoreForVisitor()` extension method to allow personalised list ordering
 - 0.2.4
 	- Fixed bug with pages viewed criteria
+- 0.2.5
+	- Added Region criteria and amended Country criteria to allow selection of countries via drop-down list rather than entering of ISO codes
