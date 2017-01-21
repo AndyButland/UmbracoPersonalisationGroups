@@ -64,7 +64,8 @@
                         if (region != null)
                         {
                             matchedRegion = regionSetting.Names
-                                .Any(x => string.Equals(x, region.Name, StringComparison.InvariantCultureIgnoreCase));
+                                .Intersect(region.GetAllNames(), StringComparer.OrdinalIgnoreCase)
+                                .Any();
                         }
                     }
 

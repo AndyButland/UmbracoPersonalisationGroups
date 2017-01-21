@@ -37,6 +37,8 @@
             public const string CookieKeyForPersistentMatchedGroups = "personalisationGroups.cookieKeyForPersistentMatchedGroups";
 
             public const string PersistentMatchedGroupsCookieExpiryInDays = "personalisationGroups.persistentMatchedGroupsCookieExpiryInDays";
+
+            public const string TestFixedIp = "personalisationGroups.testFixedIp";
         }
 
         public static class DocumentTypeAliases

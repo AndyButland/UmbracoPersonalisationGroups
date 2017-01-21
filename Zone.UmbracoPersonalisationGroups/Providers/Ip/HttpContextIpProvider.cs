@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Web;
 
     public class HttpContextIpProvider : IIpProvider
@@ -19,6 +20,14 @@
 
         private string GetIpFromHttpContext()
         {
+            // Return a test Ip if we've configured one
+            var testIp = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.TestFixedIp];
+            if (!string.IsNullOrEmpty(testIp))
+            {
+                return testIp;
+            }
+
+            // Otherwise retrieve from the HTTP context
             var httpContext = HttpContext.Current;
             var variables = GetServerVariablesForPublicIpDetection();
 

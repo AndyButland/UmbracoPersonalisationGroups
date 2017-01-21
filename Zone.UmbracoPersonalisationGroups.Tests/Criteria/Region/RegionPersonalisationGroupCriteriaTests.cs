@@ -88,6 +88,22 @@
         }
 
         [TestMethod]
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithMatchingRegionListFromSubdivision_ReturnsTrue()
+        {
+            // Arrange
+            var mockIpProvider = MockIpProvider();
+            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "South-west", "Cumbria");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
         public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionWithDifferentRegionListAndNotInCheck_ReturnsTrue()
         {
             // Arrange
@@ -143,7 +159,8 @@
             mock.Setup(x => x.GetRegionFromIp(It.IsAny<string>()))
                 .Returns(new Region
                     {
-                        Name = "Cornwall",
+                        City = "Cornwall",
+                        Subdivisions = new string[] { "South-west"},
                         Country = new Country { Code = "GB", Name = "United Kingdom" }
                     });
 

@@ -1,8 +1,8 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Providers.GeoLocation
 {
-    using System;
     using System.Configuration;
     using System.IO;
+    using System.Linq;
     using System.Web;
     using System.Web.Caching;
     using System.Web.Hosting;
@@ -79,7 +79,10 @@
                                     var response = reader.City(ip);
                                     var country = new Region
                                     {
-                                        Name = response.City.Name,
+                                        City = response.City.Name,
+                                        Subdivisions = response.Subdivisions
+                                            .Select(x => x.Name)
+                                            .ToArray(),
                                         Country = new Country
                                         {
                                             Code = response.Country.IsoCode,
