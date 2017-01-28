@@ -144,7 +144,7 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.cookieKeyForSessionMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which session level groups the visitor has matched
 - `<add key="personalisationGroups.cookieKeyForPersistentMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which persistent (visitor) level groups the visitor has matched
 - `<add key="personalisationGroups.persistentMatchedGroupsCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for tracking which persistent (visitor) level groups the visitor has matched (default if not provided is 90)
-
+- `<add key="personalisationGroups.testFixedIp" value="37.117.73.202"/>` - sets up an "spoof" IP address to use, in preference to the actual one used for browsing the site, for testing country and/or region matching using IP address
 
 ## How it works
 
