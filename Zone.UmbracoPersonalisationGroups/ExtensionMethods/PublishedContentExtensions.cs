@@ -152,16 +152,22 @@
             var propertyAlias = GetGroupPickerAlias();
             if (content.HasProperty(propertyAlias))
             {
-                var propertyValue = content.GetProperty(propertyAlias).DataValue.ToString();
-                if (!string.IsNullOrEmpty(propertyValue))
-                {
-                    var pickedGroupIds = propertyValue
-                        .Split(',')
-                        .Select(x => int.Parse(x));
+                var list = content.GetPropertyValue<IEnumerable<IPublishedContent>>(propertyAlias);
 
-                    var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
-                    return umbracoHelper.TypedContent(pickedGroupIds).ToList();
+                if (list == null)
+                {
+                    var item = content.GetPropertyValue<IPublishedContent>(propertyAlias);
+
+                    if (item == null)
+                    {
+                        return new List<IPublishedContent>();
+                    }
+
+                    return new List<IPublishedContent> { item };
                 }
+
+                return list.ToList();
+
             }
 
             return new List<IPublishedContent>();
