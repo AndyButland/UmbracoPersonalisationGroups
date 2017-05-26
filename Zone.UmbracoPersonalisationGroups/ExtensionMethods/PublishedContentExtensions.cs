@@ -152,10 +152,19 @@
             var propertyAlias = GetGroupPickerAlias();
             if (content.HasProperty(propertyAlias))
             {
-                var propertyValue = content.GetProperty(propertyAlias).DataValue.ToString();
-                if (!string.IsNullOrEmpty(propertyValue))
+                // If on v7.6 (or if Umbraco Core Property Converters package installed on an earlier version)
+                // we can retrieve typed property values.
+                var propertyValueAsEnumerable = content.GetPropertyValue<IEnumerable<IPublishedContent>>(propertyAlias);
+                if (propertyValueAsEnumerable != null)
                 {
-                    var pickedGroupIds = propertyValue
+                    return propertyValueAsEnumerable.ToList();
+                }
+
+                // Fall-back check for CSV of integers (format used for MNTP before v7.6)
+                var propertyValueAsCsv = content.GetProperty(propertyAlias).DataValue.ToString();
+                if (!string.IsNullOrEmpty(propertyValueAsCsv))
+                {
+                    var pickedGroupIds = propertyValueAsCsv
                         .Split(',')
                         .Select(x => int.Parse(x));
 

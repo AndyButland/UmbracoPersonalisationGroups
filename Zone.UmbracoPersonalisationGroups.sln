@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups", "Zone.UmbracoPersonalisationGroups\Zone.UmbracoPersonalisationGroups.csproj", "{0988C56B-0E20-4786-B653-9EEBFBC4E791}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{642616
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp7.6", "TestWebApp7.6\TestWebApp7.6.csproj", "{3B375803-EED1-4F8C-A020-1F72092BA5CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{D9D26085-B3D6-4ABE-92F8-CBA2AD73BAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9D26085-B3D6-4ABE-92F8-CBA2AD73BAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9D26085-B3D6-4ABE-92F8-CBA2AD73BAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

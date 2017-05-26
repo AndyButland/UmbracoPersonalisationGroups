@@ -368,3 +368,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Fixed bug with pages viewed criteria
 - 0.2.5
 	- Added Region criteria and amended Country criteria to allow selection of countries via drop-down list rather than entering of ISO codes
+- 0.2.6
+	- Handled introduction of core property value converters in core and change of stored ID format with Umbraco 7.6
