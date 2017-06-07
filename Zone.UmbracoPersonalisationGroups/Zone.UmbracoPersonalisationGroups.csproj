@@ -211,6 +211,7 @@
     <Compile Include="Criteria\GeoLocationSettingMatch.cs" />
     <Compile Include="Criteria\Region\RegionPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Region\RegionSetting.cs" />
+    <Compile Include="ExtensionMethods\UmbracoExtensionsHelper.cs" />
     <Compile Include="Providers\DateTime\DateTimeProvider.cs" />
     <Compile Include="Providers\DateTime\IDateTimeProvider.cs" />
     <Compile Include="Criteria\NumberOfVisits\CookieNumberOfVisitsProvider.cs" />

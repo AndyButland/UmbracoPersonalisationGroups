@@ -126,6 +126,13 @@ The following code will then determine which groups are associated with each ite
         var personalisedContent = Model.Content.Children.OrderByDescending(x => x.ScoreForVisitor());
     }
 
+### Matching groups by name
+
+If you want to simply check if the current user matches one or more groups by their name, there are some extensions on the `UmbracoHelper` to support this.  The following all return a boolean value:
+
+    @Umbraco.MatchesGroup("Weekday Visitors")
+    @Umbraco.MatchesAllGroups(new string[] { "Weekday Visitors", "Country match" })
+    @Umbraco.MatchesAnyGroup(new string[] { "Weekday Visitors", "Country match" })
 	
 ## Configuration
 
@@ -189,7 +196,7 @@ Each criteria also has an angular service named **definition.translator.js** res
 	- If none of them do, we return false (indicating to hide the content)
 	
 There's also a related extension method on **UmbracoHelper** named **ShowToVisitor(IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)**.  Using this you can pass through a list of group Ids that may be drawn from another location than the current node.
-	
+
 ## Notes on particular criteria
 
 ### Country and region
@@ -370,3 +377,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Added Region criteria and amended Country criteria to allow selection of countries via drop-down list rather than entering of ISO codes
 - 0.2.6
 	- Handled introduction of core property value converters in core and change of stored ID format with Umbraco 7.6
+- 0.3.0
+	- Added extension methods on `UmbracoHelper` for checks on whether current visitor matches groups by name	

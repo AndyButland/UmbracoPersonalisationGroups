@@ -1,18 +1,80 @@
 ﻿namespace Umbraco.Web
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web;
     using Umbraco.Core;
     using Umbraco.Core.Models;
     using Zone.UmbracoPersonalisationGroups;
+    using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
     /// Provides extension methods to UmbracoHelper
     /// </summary>
     public static class UmbracoHelperExtensions
     {
+        /// <summary>
+        /// Adds an extension method to UmbracoHelper to determine if the current site
+        /// visitor matches a single personalisation group.
+        /// </summary>
+        /// <param name="helper">Instance of UmbracoHelper</param>
+        /// <param name="groupName">Name of group node to match</param>
+        /// <returns>True if visitor matches group</returns>
+        public static bool MatchesGroup(this UmbracoHelper helper, string groupName)
+        {
+            return MatchesGroups(helper, new string[] { groupName }, PersonalisationGroupDefinitionMatch.Any);
+        }
+
+        /// <summary>
+        /// Adds an extension method to UmbracoHelper to determine if the current site
+        /// visitor matches any of a set of personalisation groups.
+        /// </summary>
+        /// <param name="helper">Instance of UmbracoHelper</param>
+        /// <param name="groupNames">Names of group nodes to match</param>
+        /// <returns>True if visitor matches any group</returns>
+        public static bool MatchesAnyGroup(this UmbracoHelper helper, string[] groupNames)
+        {
+            return MatchesGroups(helper, groupNames, PersonalisationGroupDefinitionMatch.Any);
+        }
+
+        /// <summary>
+        /// Adds an extension method to UmbracoHelper to determine if the current site
+        /// visitor matches all of a set of personalisation groups.
+        /// </summary>
+        /// <param name="helper">Instance of UmbracoHelper</param>
+        /// <param name="groupNames">Names of group nodes to match</param>
+        /// <returns>True if visitor matches all groups</returns>
+        public static bool MatchesAllGroups(this UmbracoHelper helper, string[] groupNames)
+        {
+            return MatchesGroups(helper, groupNames, PersonalisationGroupDefinitionMatch.All);
+        }
+
+        private static bool MatchesGroups(this UmbracoHelper helper, string[] groupNames, PersonalisationGroupDefinitionMatch matchType)
+        {
+            var groupsRootFolder = GetGroupsRootFolder(helper);
+            if (groupsRootFolder == null)
+            {
+                return false;
+            }
+
+            var groups = GetGroups(groupsRootFolder);
+            return UmbracoExtensionsHelper.MatchGroupsByName(groupNames, groups, matchType);
+        }
+
+        private static IPublishedContent GetGroupsRootFolder(UmbracoHelper helper)
+        {
+            return helper.TypedContentAtRoot()
+                .FirstOrDefault(x => x.DocumentTypeAlias == AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder);
+        }
+
+        private static IList<IPublishedContent> GetGroups(IPublishedContent groupsRootFolder)
+        {
+            return groupsRootFolder.Descendants()
+                .Where(x => x.DocumentTypeAlias == AppConstants.DocumentTypeAliases.PersonalisationGroup)
+                .ToList();
+        }
+
         /// <summary>
         /// Adds an extension method to UmbracoHelper to calculate a hash for the current visitor for all visitor groups
         /// </summary>

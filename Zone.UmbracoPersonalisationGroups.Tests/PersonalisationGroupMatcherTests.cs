@@ -17,8 +17,8 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    MatchingDayOfWeekDefinition(),
-                    MatchingTimeOfDayDefinition(),
+                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                 }
             };
 
@@ -38,9 +38,9 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    MatchingDayOfWeekDefinition(),
-                    MatchingTimeOfDayDefinition(),
-                    NonMatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
+                    TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                 }
             };
 
@@ -60,9 +60,9 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    NonMatchingDayOfWeekDefinition(),
-                    MatchingDayOfWeekDefinition(),
-                    MatchingTimeOfDayDefinition(),
+                    TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                 }
             };
 
@@ -82,9 +82,9 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    MatchingDayOfWeekDefinition(),
-                    NonMatchingDayOfWeekDefinition(),
-                    MatchingTimeOfDayDefinition(),
+                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
+                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                 }
             };
 
@@ -114,40 +114,13 @@
         public void PersonalisationGroupMatcher_IsMatch_WithMatchingCriteria_ReturnsTrue()
         {
             // Arrange
-            var definitionDetail = MatchingDayOfWeekDefinition();
+            var definitionDetail = TestHelpers.Definitions.MatchingDayOfWeekDefinition();
 
             // Act
             var result = PersonalisationGroupMatcher.IsMatch(definitionDetail);
 
             // Arrange
             Assert.IsTrue(result);
-        }
-
-        private static PersonalisationGroupDefinitionDetail MatchingDayOfWeekDefinition()
-        {
-            return new PersonalisationGroupDefinitionDetail
-            {
-                Alias = "dayOfWeek",
-                Definition = $"[ {(int) (DateTime.Now.DayOfWeek) + 1} ]",
-            };
-        }
-
-        private static PersonalisationGroupDefinitionDetail NonMatchingDayOfWeekDefinition()
-        {
-            return new PersonalisationGroupDefinitionDetail
-            {
-                Alias = "dayOfWeek",
-                Definition = $"[ {(int)(DateTime.Now.DayOfWeek) + 2} ]",
-            };
-        }
-
-        private static PersonalisationGroupDefinitionDetail MatchingTimeOfDayDefinition()
-        {
-            return new PersonalisationGroupDefinitionDetail
-            {
-                Alias = "timeOfDay",
-                Definition = "[ { \"from\": \"0000\", \"to\": \"2359\" } ]"
-            };
-        }
+        }        
     }
 }
