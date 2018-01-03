@@ -12,33 +12,37 @@
     {
         public static class ConfigKeys
         {
-            public const string CustomPersonalisationGroupPickerAlias = "personalisationGroups.groupPickerAlias";
+            private const string Prefix = "personalisationGroups.";
 
-            public const string CustomGeoLocationCountryDatabasePath = "personalisationGroups.geoLocationCountryDatabasePath";
+            public const string DisablePackage = Prefix + "disabled";
 
-            public const string CustomGeoLocationCityDatabasePath = "personalisationGroups.geoLocationCityDatabasePath";
+            public const string CustomPersonalisationGroupPickerAlias = Prefix + "groupPickerAlias";
 
-            public const string IncludeCriteria = "personalisationGroups.includeCriteria";
+            public const string CustomGeoLocationCountryDatabasePath = Prefix + "geoLocationCountryDatabasePath";
 
-            public const string ExcludeCriteria = "personalisationGroups.excludeCriteria";
+            public const string CustomGeoLocationCityDatabasePath = Prefix + "geoLocationCityDatabasePath";
 
-            public const string NumberOfVisitsTrackingCookieExpiryInDays = "personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays";
+            public const string IncludeCriteria = Prefix + "includeCriteria";
 
-            public const string ViewedPagesTrackingCookieExpiryInDays = "personalisationGroups.viewedPagesTrackingCookieExpiryInDays";
+            public const string ExcludeCriteria = Prefix + "excludeCriteria";
 
-            public const string CookieKeyForTrackingNumberOfVisits = "personalisationGroups.CookieKeyForTrackingNumberOfVisits";
+            public const string NumberOfVisitsTrackingCookieExpiryInDays = Prefix + "numberOfVisitsTrackingCookieExpiryInDays";
 
-            public const string CookieKeyForTrackingIfSessionAlreadyTracked = "personalisationGroups.cookieKeyForTrackingIfSessionAlreadyTracked";
+            public const string ViewedPagesTrackingCookieExpiryInDays = Prefix + "viewedPagesTrackingCookieExpiryInDays";
 
-            public const string CookieKeyForTrackingPagesViewed = "personalisationGroups.CookieKeyForTrackingPagesViewed";
+            public const string CookieKeyForTrackingNumberOfVisits = Prefix + "CookieKeyForTrackingNumberOfVisits";
 
-            public const string CookieKeyForSessionMatchedGroups = "personalisationGroups.cookieKeyForSessionMatchedGroups";
+            public const string CookieKeyForTrackingIfSessionAlreadyTracked = Prefix + "cookieKeyForTrackingIfSessionAlreadyTracked";
 
-            public const string CookieKeyForPersistentMatchedGroups = "personalisationGroups.cookieKeyForPersistentMatchedGroups";
+            public const string CookieKeyForTrackingPagesViewed = Prefix + "CookieKeyForTrackingPagesViewed";
 
-            public const string PersistentMatchedGroupsCookieExpiryInDays = "personalisationGroups.persistentMatchedGroupsCookieExpiryInDays";
+            public const string CookieKeyForSessionMatchedGroups = Prefix + "cookieKeyForSessionMatchedGroups";
 
-            public const string TestFixedIp = "personalisationGroups.testFixedIp";
+            public const string CookieKeyForPersistentMatchedGroups = Prefix + "cookieKeyForPersistentMatchedGroups";
+
+            public const string PersistentMatchedGroupsCookieExpiryInDays = Prefix + "persistentMatchedGroupsCookieExpiryInDays";
+
+            public const string TestFixedIp = Prefix + "testFixedIp";
         }
 
         public static class DocumentTypeAliases

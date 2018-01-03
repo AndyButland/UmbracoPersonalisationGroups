@@ -6,11 +6,33 @@
     using Moq;
     using Umbraco.Core.Models;
     using Zone.UmbracoPersonalisationGroups;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
     using Zone.UmbracoPersonalisationGroups.Helpers;
 
     [TestClass]
     public class UmbracoExtensionsHelperTests
     {
+        [TestInitialize]
+        public void Setup()
+        {
+            // this is needed to ensure that Config.Setup is OK in each test
+            UmbracoConfigExtensions.ResetConfig();
+        }
+
+        [TestMethod]
+        public void MatchGroups_WithPackageDisabled_ReturnsTrue()
+        {
+            // Arrange
+            var pickedGroups = new List<IPublishedContent>();
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig(disablePackage: true));
+
+            // Act
+            var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
         [TestMethod]
         public void MatchGroups_WithNoGroups_ReturnsFalse()
         {
@@ -149,6 +171,36 @@
         }
 
         [TestMethod]
+        public void MatchGroupsByName_WithPackageDisabledUsingAll_ReturnsTrue()
+        {
+            // Arrange
+            var groups = new string[] { "Group 1000", "Group X" };
+            var pickedGroups = new List<IPublishedContent>();
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig(disablePackage: true));
+
+            // Act
+            var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.All);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void MatchGroupsByName_WithPackageDisabledUsingAny_ReturnsTrue()
+        {
+            // Arrange
+            var groups = new string[] { "Group 1000", "Group X" };
+            var pickedGroups = new List<IPublishedContent>();
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig(disablePackage: true));
+
+            // Act
+            var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.Any);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
         public void MatchGroupsByName_WithNonMatchingGroupsUsingAll_ReturnsFalse()
         {
             // Arrange
@@ -259,6 +311,20 @@
 
             // Assert
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ScoreGroups_WithPackageDisabled_ReturnsDefaultScore()
+        {
+            // Arrange
+            var pickedGroups = new List<IPublishedContent>();
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig(disablePackage: true));
+
+            // Act
+            var result = UmbracoExtensionsHelper.ScoreGroups(pickedGroups);
+
+            // Assert
+            Assert.AreEqual(0, result);
         }
 
         [TestMethod]

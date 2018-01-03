@@ -138,6 +138,7 @@ If you want to simply check if the current user matches one or more groups by th
 
 No configuration is required if you are happy to accept the default behaviour of the package.  The following optional keys can be added to your web.config appSettings though if required to amend this.  
 
+- `<add key="personalisationGroups.disabled" value="false"/>` - disables the filtering of content by personalisation groups, if this is set to true your content won't differ no matter what is configured in Umbraco
 - `<add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/>` - amends the alias that must be used when creating a property field of type personalisation group picker
 - `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found see below for more details.
 - `<add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-city geolocation database can be found see below for more details.

@@ -5,18 +5,32 @@
     using System.Configuration;
     using System.Linq;
     using System.Web;
+    using Umbraco.Core.Configuration;
     using Umbraco.Core.Models;
     using Umbraco.Web;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
 
     internal static class UmbracoExtensionsHelper
     {
         internal static bool MatchGroup(IPublishedContent pickedGroup)
         {
+            // package is disabled, return default
+            if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
+            {
+                return true;
+            }
+
             return MatchGroups(new List<IPublishedContent> { pickedGroup });
         }
 
         internal static bool MatchGroups(IList<IPublishedContent> pickedGroups)
         {
+            // package is disabled, return default
+            if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
+            {
+                return true;
+            }
+
             // Check each personalisation group assigned for a match with the current site visitor
             foreach (var group in pickedGroups)
             {
@@ -44,6 +58,12 @@
 
         internal static bool MatchGroupsByName(string[] groupNames, IList<IPublishedContent> groups, PersonalisationGroupDefinitionMatch matchType)
         {
+            // package is disabled, return default
+            if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
+            {
+                return true;
+            }
+
             var matches = 0;
             foreach (var groupName in groupNames)
             {
@@ -77,6 +97,12 @@
 
         internal static int ScoreGroups(IList<IPublishedContent> pickedGroups)
         {
+            // package is disabled, return default
+            if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
+            {
+                return 0;
+            }
+
             // Check each personalisation group assigned for a match with the current site visitor
             var score = 0;
             foreach (var group in pickedGroups)
