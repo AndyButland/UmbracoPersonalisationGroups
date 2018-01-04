@@ -37,6 +37,7 @@
         {
             // Arrange
             var pickedGroups = new List<IPublishedContent>();
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -60,6 +61,7 @@
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -83,6 +85,7 @@
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition()
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -106,6 +109,7 @@
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition()
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -129,6 +133,7 @@
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition()
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -161,6 +166,7 @@
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -221,6 +227,7 @@
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.All);
@@ -251,6 +258,7 @@
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.Any);
@@ -274,6 +282,7 @@
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.Any);
@@ -304,6 +313,7 @@
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.All);
@@ -349,6 +359,7 @@
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }, 40).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.ScoreGroups(pickedGroups);
@@ -357,10 +368,10 @@
             Assert.AreEqual(90, result);
         }
 
-        private Mock<IPublishedContent> MockPublishedContent(int id,
+        private static Mock<IPublishedContent> MockPublishedContent(int id,
             PersonalisationGroupDefinitionMatch match,
             PersonalisationGroupDefinitionDuration duration,
-            List<PersonalisationGroupDefinitionDetail> definitionDetails,
+            IEnumerable<PersonalisationGroupDefinitionDetail> definitionDetails,
             int score = 0)
         {
             var definitionPropertyMock = new Mock<IPublishedProperty>();
