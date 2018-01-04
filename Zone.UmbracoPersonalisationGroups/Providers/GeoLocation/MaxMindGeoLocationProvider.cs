@@ -1,6 +1,5 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Providers.GeoLocation
 {
-    using System.Configuration;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -9,6 +8,8 @@
     using MaxMind.GeoIP2;
     using MaxMind.GeoIP2.Exceptions;
     using Umbraco.Core;
+    using Umbraco.Core.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
 
     public class MaxMindGeoLocationProvider : IGeoLocationProvider
     {
@@ -17,8 +18,9 @@
 
         public MaxMindGeoLocationProvider()
         {
-            _pathToCountryDb = HostingEnvironment.MapPath(GetCountryDatabasePath());
-            _pathToCityDb = HostingEnvironment.MapPath(GetCityDatabasePath());
+            var config = UmbracoConfig.For.PersonalisationGroups();
+            _pathToCountryDb = HostingEnvironment.MapPath(config.GeoLocationCountryDatabasePath);
+            _pathToCityDb = HostingEnvironment.MapPath(config.GeoLocationCityDatabasePath);
         }
 
         public Country GetCountryFromIp(string ip)
@@ -110,28 +112,6 @@
                     });
 
             return cachedItem as Region;
-        }
-
-        private string GetCountryDatabasePath()
-        {
-            var path = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath];
-            if (string.IsNullOrEmpty(path))
-            {
-                path = AppConstants.DefaultGeoLocationCountryDatabasePath;
-            }
-
-            return path;
-        }
-
-        private string GetCityDatabasePath()
-        {
-            var path = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomGeoLocationCityDatabasePath];
-            if (string.IsNullOrEmpty(path))
-            {
-                path = AppConstants.DefaultGeoLocationCityDatabasePath;
-            }
-
-            return path;
         }
     }
 }

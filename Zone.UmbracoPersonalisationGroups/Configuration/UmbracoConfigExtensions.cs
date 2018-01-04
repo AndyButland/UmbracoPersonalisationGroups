@@ -25,7 +25,7 @@
             return _config;
         }
 
-        // internal for tests
+        // Internal for tests
         internal static void ResetConfig()
         {
             _config = null;

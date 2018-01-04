@@ -1,13 +1,15 @@
 namespace Zone.UmbracoPersonalisationGroups.Helpers
 {
-    using System.Configuration;
     using System.Linq;
+    using Umbraco.Core.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
 
     public static class CriteriaConfigHelpers
     {
         public static bool IsCriteriaInUse(string alias)
         {
-            var includeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.IncludeCriteria];
+            var config = UmbracoConfig.For.PersonalisationGroups();
+            var includeCriteria = config.IncludeCriteria;
             if (!string.IsNullOrEmpty(includeCriteria))
             {
                 return includeCriteria
@@ -15,7 +17,7 @@ namespace Zone.UmbracoPersonalisationGroups.Helpers
                     .Contains(alias);
             }
 
-            var excludeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.ExcludeCriteria];
+            var excludeCriteria = config.ExcludeCriteria;
             if (!string.IsNullOrEmpty(excludeCriteria))
             {
                 return !excludeCriteria

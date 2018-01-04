@@ -16,7 +16,7 @@
 
             public const string DisablePackage = Prefix + "disabled";
 
-            public const string CustomPersonalisationGroupPickerAlias = Prefix + "groupPickerAlias";
+            public const string CustomGroupPickerAlias = Prefix + "groupPickerAlias";
 
             public const string CustomGeoLocationCountryDatabasePath = Prefix + "geoLocationCountryDatabasePath";
 
@@ -52,7 +52,7 @@
             public const string PersonalisationGroup = "PersonalisationGroup";
         }
 
-        public const string DefaultPersonalisationGroupPickerAlias = "personalisationGroups";
+        public const string DefaultGroupPickerAlias = "personalisationGroups";
 
         public const string PersonalisationGroupDefinitionPropertyEditorAlias = "personalisationGroupDefinition";
 
@@ -72,9 +72,21 @@
 
         public const string DefaultGeoLocationCityDatabasePath = "/App_Data/GeoLite2-City.mmdb";
 
+        public const int DefaultNumberOfVisitsTrackingCookieExpiryInDays = 90;
+
         public const int DefaultViewedPagesTrackingCookieExpiryInDays = 90;
 
-        public const int DefaultMatchedGroupsTrackingCookieExpiryInDays = 90;
+        public const int DefaultPersistentMatchedGroupsCookieExpiryInDays = 90;
+
+        public const string DefaultCookieKeyForTrackingNumberOfVisits = "personalisationGroupsNumberOfVisits";
+
+        public const string DefaultCookieKeyForTrackingIfSessionAlreadyTracked = "personalisationGroupsNumberOfVisitsSessionStarted";
+
+        public const string DefaultCookieKeyForTrackingPagesViewed = "personalisationGroupsPagesViewed";
+
+        public const string DefaultCookieKeyForSessionMatchedGroups = "sessionMatchedGroups";
+
+        public const string DefaultCookieKeyForPersistentMatchedGroups = "persistentMatchedGroups";
 
         public static class CacheKeys
         {

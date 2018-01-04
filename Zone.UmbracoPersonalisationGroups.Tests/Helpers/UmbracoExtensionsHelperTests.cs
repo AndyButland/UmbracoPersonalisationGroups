@@ -1,6 +1,5 @@
 ﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Helpers
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
@@ -15,7 +14,7 @@
         [TestInitialize]
         public void Setup()
         {
-            // this is needed to ensure that Config.Setup is OK in each test
+            // Ensure that Config.Setup is OK in each test
             UmbracoConfigExtensions.ResetConfig();
         }
 
@@ -38,6 +37,7 @@
         {
             // Arrange
             var pickedGroups = new List<IPublishedContent>();
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -55,12 +55,13 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -78,12 +79,13 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition()
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -101,12 +103,13 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition()
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -124,12 +127,13 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition()
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -147,7 +151,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
@@ -156,12 +160,13 @@
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroups(pickedGroups);
@@ -210,18 +215,19 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.All);
@@ -240,18 +246,19 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.Any);
@@ -270,11 +277,12 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.Any);
@@ -293,18 +301,19 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.MatchGroupsByName(groups, pickedGroups, PersonalisationGroupDefinitionMatch.All);
@@ -336,7 +345,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
@@ -344,12 +353,13 @@
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }, 40).Object,
             };
+            PersonalisationGroupsConfig.Setup(new PersonalisationGroupsConfig());
 
             // Act
             var result = UmbracoExtensionsHelper.ScoreGroups(pickedGroups);
@@ -358,10 +368,10 @@
             Assert.AreEqual(90, result);
         }
 
-        private Mock<IPublishedContent> MockPublishedContent(int id,
+        private static Mock<IPublishedContent> MockPublishedContent(int id,
             PersonalisationGroupDefinitionMatch match,
             PersonalisationGroupDefinitionDuration duration,
-            List<PersonalisationGroupDefinitionDetail> definitionDetails,
+            IEnumerable<PersonalisationGroupDefinitionDetail> definitionDetails,
             int score = 0)
         {
             var definitionPropertyMock = new Mock<IPublishedProperty>();

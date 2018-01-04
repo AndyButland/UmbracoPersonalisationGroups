@@ -1,35 +1,21 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed
 {
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
     using System.Web;
+    using Umbraco.Core.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
 
     public class CookiePagesViewedProvider : IPagesViewedProvider
     {
-        public static string GetCookieKeyForTrackingNumberOfVisits()
-        {
-            const string DefaultCookieKeyForTrackingPagesViewed = "personalisationGroupsPagesViewed";
-
-            // First check if key defined in config
-            var cookieKey = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CookieKeyForTrackingPagesViewed];
-            if (string.IsNullOrEmpty(cookieKey))
-            {
-                // If not, use the convention key
-                cookieKey = DefaultCookieKeyForTrackingPagesViewed;
-            }
-
-            return cookieKey;
-        }
-
         public IEnumerable<int> GetNodeIdsViewed()
         {
-            var cookie = HttpContext.Current.Request.Cookies[GetCookieKeyForTrackingNumberOfVisits()];
-            if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
+            var cookie = HttpContext.Current.Request.Cookies[UmbracoConfig.For.PersonalisationGroups().CookieKeyForTrackingNumberOfVisits];
+            if (!string.IsNullOrEmpty(cookie?.Value))
             {
                 return cookie.Value
                     .Split(',')
-                    .Select(x => int.Parse(x));
+                    .Select(int.Parse);
             }
 
             return Enumerable.Empty<int>();
