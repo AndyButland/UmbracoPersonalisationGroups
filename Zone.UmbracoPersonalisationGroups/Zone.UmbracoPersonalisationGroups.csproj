@@ -203,6 +203,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\UmbracoConfigExtensions.cs" />
+    <Compile Include="Configuration\PersonalisationGroupsConfig.cs" />
     <Compile Include="AppConstants.cs" />
     <Compile Include="Controllers\BaseJsonResultController.cs" />
     <Compile Include="Controllers\GeoLocationController.cs" />
