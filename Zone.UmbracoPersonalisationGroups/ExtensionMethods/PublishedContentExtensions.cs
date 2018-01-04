@@ -1,10 +1,10 @@
 ﻿namespace Umbraco.Web
 {
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
+    using Umbraco.Core.Configuration;
     using Umbraco.Core.Models;
-    using Zone.UmbracoPersonalisationGroups;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
     using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
@@ -104,7 +104,7 @@
         /// <returns>List of personalisation group content items</returns>
         private static IList<IPublishedContent> GetPickedGroups(IPublishedContent content)
         {
-            var propertyAlias = GetGroupPickerAlias();
+            var propertyAlias = UmbracoConfig.For.PersonalisationGroups().GroupPickerAlias;
             if (content.HasProperty(propertyAlias))
             {
                 // If on v7.6 (or if Umbraco Core Property Converters package installed on an earlier version)
@@ -121,7 +121,7 @@
                 {
                     var pickedGroupIds = propertyValueAsCsv
                         .Split(',')
-                        .Select(x => int.Parse(x));
+                        .Select(int.Parse);
 
                     var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
                     return umbracoHelper.TypedContent(pickedGroupIds).ToList();
@@ -129,23 +129,6 @@
             }
 
             return new List<IPublishedContent>();
-        }
-
-        /// <summary>
-        /// Gets the alias used for identifying the picked personalisation groups
-        /// </summary>
-        /// <returns>Alias string</returns>
-        private static string GetGroupPickerAlias()
-        {
-            // First check if defined in config
-            var groupPickerAlias = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.CustomPersonalisationGroupPickerAlias];
-            if (string.IsNullOrEmpty(groupPickerAlias))
-            {
-                // If not, use the convention alias
-                groupPickerAlias = AppConstants.DefaultPersonalisationGroupPickerAlias;
-            }
-
-            return groupPickerAlias;
         }
      }
 }

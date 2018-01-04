@@ -380,3 +380,7 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Handled introduction of core property value converters in core and change of stored ID format with Umbraco 7.6
 - 0.3.0
 	- Added extension methods on `UmbracoHelper` for checks on whether current visitor matches groups by name	
+- 0.3.1
+	- Refactored configuration
+	- Added `personalisationGroups.disabled` configuration switch
+	- Added additional header for checking for requesting IP from Cloudflare

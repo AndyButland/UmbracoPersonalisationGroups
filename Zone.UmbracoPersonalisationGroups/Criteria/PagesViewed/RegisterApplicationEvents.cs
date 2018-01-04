@@ -1,12 +1,13 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed
 {
     using System;
-    using System.Configuration;
     using System.Linq;
     using System.Web;
     using Helpers;
     using Umbraco.Core;
+    using Umbraco.Core.Configuration;
     using Umbraco.Web;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
 
     /// <summary>
     /// Registered required Umbraco application events for the pages viewed criteria - to track via a cookie
@@ -33,13 +34,14 @@
         {
             var httpContext = HttpContext.Current;
             var umbracoContext = UmbracoContext.Current;
+            var config = UmbracoConfig.For.PersonalisationGroups();
 
             if (umbracoContext?.PageId == null)
             {
                 return;
             }
 
-            var key = CookiePagesViewedProvider.GetCookieKeyForTrackingNumberOfVisits();
+            var key = config.CookieKeyForTrackingNumberOfVisits;
             var cookie = httpContext.Request.Cookies[key];
             if (cookie != null)
             {
@@ -54,13 +56,7 @@
                 };
             }
 
-            int cookieExpiryInDays;
-            if (!int.TryParse(ConfigurationManager.AppSettings[AppConstants.ConfigKeys.ViewedPagesTrackingCookieExpiryInDays], out cookieExpiryInDays))
-            {
-                cookieExpiryInDays = AppConstants.DefaultViewedPagesTrackingCookieExpiryInDays;
-            }
-
-            cookie.Expires = DateTime.Now.AddDays(cookieExpiryInDays);
+            cookie.Expires = DateTime.Now.AddDays(config.ViewedPagesTrackingCookieExpiryInDays);
             httpContext.Response.Cookies.Add(cookie);
         }
 
@@ -68,7 +64,7 @@
         {
             var ids = viewedPageIds
                 .Split(',')
-                .Select(x => int.Parse(x));
+                .Select(int.Parse);
             if (!ids.Contains(pageId))
             {
                 viewedPageIds = viewedPageIds + "," + pageId;

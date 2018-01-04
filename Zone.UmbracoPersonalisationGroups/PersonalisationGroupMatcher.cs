@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
+    using Umbraco.Core.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
     using Zone.UmbracoPersonalisationGroups.Criteria;
     using Zone.UmbracoPersonalisationGroups.ExtensionMethods;
 
@@ -87,20 +88,21 @@
         /// </summary>
         private static void BuildAvailableCriteria()
         {
+            var config = UmbracoConfig.For.PersonalisationGroups();
             var type = typeof(IPersonalisationGroupCriteria);
             var typesImplementingInterface = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetLoadableTypes())
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass)
                 .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria);
 
-            var includeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.IncludeCriteria];
+            var includeCriteria = config.IncludeCriteria;
             if (!string.IsNullOrEmpty(includeCriteria))
             {
                 typesImplementingInterface = typesImplementingInterface
                     .Where(x => includeCriteria.Split(',').Contains(x.Alias, StringComparer.InvariantCultureIgnoreCase));
             }
 
-            var excludeCriteria = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.ExcludeCriteria];
+            var excludeCriteria = config.ExcludeCriteria;
             if (!string.IsNullOrEmpty(excludeCriteria))
             {
                 typesImplementingInterface = typesImplementingInterface

@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Web;
+    using Umbraco.Core.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Configuration;
 
     public class HttpContextIpProvider : IIpProvider
     {
@@ -21,7 +22,7 @@
         private string GetIpFromHttpContext()
         {
             // Return a test Ip if we've configured one
-            var testIp = ConfigurationManager.AppSettings[AppConstants.ConfigKeys.TestFixedIp];
+            var testIp = UmbracoConfig.For.PersonalisationGroups().TestFixedIp;
             if (!string.IsNullOrEmpty(testIp))
             {
                 return testIp;
@@ -42,23 +43,23 @@
             return string.Empty;
         }
 
-        private IEnumerable<string> GetServerVariablesForPublicIpDetection()
+        private static IEnumerable<string> GetServerVariablesForPublicIpDetection()
         {
-            return new string[]
+            return new[]
             {
-                "HTTP_X_FORWARDED_FOR", "REMOTE_ADDR", "HTTP_CLIENT_IP",
-                "HTTP_X_FORWARDED", "HTTP_X_CLUSTER_CLIENT_IP",
+                "CF-Connecting-IP", "HTTP_X_FORWARDED_FOR", "REMOTE_ADDR",
+                "HTTP_CLIENT_IP", "HTTP_X_FORWARDED", "HTTP_X_CLUSTER_CLIENT_IP",
                 "HTTP_FORWARDED_FOR", "HTTP_FORWARDED"
             };
         }
 
-        private bool IsServerVariableForClientIpAvailableAndNotSetToAPrivateIp(HttpContext httpContext, string variable)
+        private static bool IsServerVariableForClientIpAvailableAndNotSetToAPrivateIp(HttpContext httpContext, string variable)
         {
             return !string.IsNullOrEmpty(httpContext.Request.ServerVariables[variable]) &&
                    !httpContext.Request.ServerVariables[variable].StartsWith("192.");
         }
 
-        private string RemovePortNumberFromIp(string ip)
+        private static string RemovePortNumberFromIp(string ip)
         {
             if (ip.Contains(":"))
             {

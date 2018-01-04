@@ -14,7 +14,7 @@
     {
         internal static bool MatchGroup(IPublishedContent pickedGroup)
         {
-            // package is disabled, return default
+            // Package is disabled, return default
             if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
             {
                 return true;
@@ -25,7 +25,7 @@
 
         internal static bool MatchGroups(IList<IPublishedContent> pickedGroups)
         {
-            // package is disabled, return default
+            // Package is disabled, return default
             if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
             {
                 return true;
@@ -58,7 +58,7 @@
 
         internal static bool MatchGroupsByName(string[] groupNames, IList<IPublishedContent> groups, PersonalisationGroupDefinitionMatch matchType)
         {
-            // package is disabled, return default
+            // Package is disabled, return default
             if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
             {
                 return true;
@@ -97,7 +97,7 @@
 
         internal static int ScoreGroups(IList<IPublishedContent> pickedGroups)
         {
-            // package is disabled, return default
+            // Package is disabled, return default
             if (UmbracoConfig.For.PersonalisationGroups().DisablePackage)
             {
                 return 0;
@@ -177,12 +177,7 @@
 
             if (definition.Duration == PersonalisationGroupDefinitionDuration.Visitor)
             {
-                int cookieExpiryInDays;
-                if (!int.TryParse(ConfigurationManager.AppSettings[AppConstants.ConfigKeys.PersistentMatchedGroupsCookieExpiryInDays], out cookieExpiryInDays))
-                {
-                    cookieExpiryInDays = AppConstants.DefaultMatchedGroupsTrackingCookieExpiryInDays;
-                }
-
+                var cookieExpiryInDays = UmbracoConfig.For.PersonalisationGroups().PersistentMatchedGroupsCookieExpiryInDays;
                 cookie.Expires = DateTime.Now.AddDays(cookieExpiryInDays);
             }
 
@@ -196,30 +191,16 @@
         /// <returns>Cookie key to use</returns>
         private static string GetCookieKeyForMatchedGroups(PersonalisationGroupDefinitionDuration duration)
         {
-            string defaultKey, appSettingKey;
+            var config = UmbracoConfig.For.PersonalisationGroups();
             switch (duration)
             {
                 case PersonalisationGroupDefinitionDuration.Session:
-                    defaultKey = "sessionMatchedGroups";
-                    appSettingKey = AppConstants.ConfigKeys.CookieKeyForSessionMatchedGroups;
-                    break;
+                    return config.CookieKeyForSessionMatchedGroups;
                 case PersonalisationGroupDefinitionDuration.Visitor:
-                    defaultKey = "persistentMatchedGroups";
-                    appSettingKey = AppConstants.ConfigKeys.CookieKeyForPersistentMatchedGroups;
-                    break;
+                    return config.CookieKeyForPersistentMatchedGroups;
                 default:
                     throw new InvalidOperationException("Only session and visitor personalisation groups can be tracked.");
             }
-
-            // First check if key defined in config
-            var cookieKey = ConfigurationManager.AppSettings[appSettingKey];
-            if (string.IsNullOrEmpty(cookieKey))
-            {
-                // If not, use the convention key
-                cookieKey = defaultKey;
-            }
-
-            return cookieKey;
         }
 
         /// <summary>

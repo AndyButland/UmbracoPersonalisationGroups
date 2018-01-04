@@ -1,6 +1,5 @@
 ﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Helpers
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
@@ -15,7 +14,7 @@
         [TestInitialize]
         public void Setup()
         {
-            // this is needed to ensure that Config.Setup is OK in each test
+            // Ensure that Config.Setup is OK in each test
             UmbracoConfigExtensions.ResetConfig();
         }
 
@@ -55,7 +54,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
@@ -78,7 +77,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition()
@@ -101,7 +100,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition()
@@ -124,7 +123,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition()
@@ -147,7 +146,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
@@ -156,7 +155,7 @@
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
@@ -210,14 +209,14 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
@@ -240,14 +239,14 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
@@ -270,7 +269,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                     }).Object,
@@ -293,14 +292,14 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                     }).Object,
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
                     }).Object,
@@ -336,7 +335,7 @@
                 MockPublishedContent(1000,
                     PersonalisationGroupDefinitionMatch.All,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
@@ -344,7 +343,7 @@
                 MockPublishedContent(1001,
                     PersonalisationGroupDefinitionMatch.Any,
                     PersonalisationGroupDefinitionDuration.Page,
-                    new List <PersonalisationGroupDefinitionDetail>
+                    new List<PersonalisationGroupDefinitionDetail>
                     {
                         TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
                         TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
