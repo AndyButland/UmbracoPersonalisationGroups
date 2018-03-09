@@ -1,0 +1,35 @@
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.HostPersonalisationGroupCriteriaController">
+
+    <div class="umb-panel-body no-header with-footer compact">
+
+        <p>Please enter the host settings:</p>
+
+        <umb-control-group alias="value" label="Value">
+            <input type="text" ng-model="renderModel.value"/>
+        </umb-control-group>
+        <umb-control-group alias="match" label="Comparison">
+            <select ng-model="renderModel.match">
+                <option value="MatchesValue">Matches value</option>
+                <option value="DoesNotMatchValue">Does not match value</option>
+                <option value="ContainsValue">Contains value</option>
+                <option value="DoesNotContainValue">Does not contain value</option>
+            </select>
+        </umb-control-group>
+
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
