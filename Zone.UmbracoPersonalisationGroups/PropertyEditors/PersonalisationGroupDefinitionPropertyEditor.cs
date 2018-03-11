@@ -24,6 +24,9 @@
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "dayOfWeek/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "dayOfWeek/definition.translator.js" + Constants.ResourceExtension)]
 
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "host/definition.editor.controller.js" + Constants.ResourceExtension)]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "host/definition.translator.js" + Constants.ResourceExtension)]
+
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "memberGroup/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "memberGroup/definition.translator.js" + Constants.ResourceExtension)]
 

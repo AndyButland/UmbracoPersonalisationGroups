@@ -431,9 +431,9 @@
     <EmbeddedResource Include="Criteria\Region\definition.translator.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Criteria\Host\definition.editor.controller.js" />
-    <Content Include="Criteria\Host\definition.editor.html" />
-    <Content Include="Criteria\Host\definition.translator.js" />
+    <EmbeddedResource Include="Criteria\Host\definition.editor.controller.js" />
+    <EmbeddedResource Include="Criteria\Host\definition.editor.html" />
+    <EmbeddedResource Include="Criteria\Host\definition.translator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

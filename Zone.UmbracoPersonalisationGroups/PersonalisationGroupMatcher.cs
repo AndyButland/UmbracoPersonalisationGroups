@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using Umbraco.Core.Configuration;
+    using Umbraco.Core.Logging;
     using Zone.UmbracoPersonalisationGroups.Configuration;
     using Zone.UmbracoPersonalisationGroups.Criteria;
     using Zone.UmbracoPersonalisationGroups.ExtensionMethods;
@@ -93,7 +95,8 @@
             var typesImplementingInterface = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetLoadableTypes())
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass)
-                .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria);
+                .Select(x => Activator.CreateInstance(x) as IPersonalisationGroupCriteria)
+                .Where(x => x != null);
 
             var includeCriteria = config.IncludeCriteria;
             if (!string.IsNullOrEmpty(includeCriteria))
@@ -111,6 +114,14 @@
 
             foreach (var typeImplementingInterface in typesImplementingInterface)
             {
+                // Aliases have to be unique - but in case they aren't, make sure we don't attempt
+                // to load a second criteria of the same alias.  Issue #14.
+                if (AvailableCriteria.ContainsKey(typeImplementingInterface.Alias))
+                {
+                    LogHelper.Warn(MethodBase.GetCurrentMethod().DeclaringType, $"Could not add criteria with alias {typeImplementingInterface.Alias} as a criteria with that alias has already been loaded.  Aliases must be unique across the solution.");
+                    continue;
+                }
+
                 AvailableCriteria.Add(typeImplementingInterface.Alias, typeImplementingInterface);
             }
         }

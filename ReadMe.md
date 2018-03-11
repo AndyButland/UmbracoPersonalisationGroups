@@ -384,3 +384,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Refactored configuration
 	- Added `personalisationGroups.disabled` configuration switch
 	- Added additional header for checking for requesting IP from Cloudflare
+- 0.3.2
+    - Added host/domain criteria (thanks to PR #15 from [Tom Waddell](https://github.com/twaddell))
