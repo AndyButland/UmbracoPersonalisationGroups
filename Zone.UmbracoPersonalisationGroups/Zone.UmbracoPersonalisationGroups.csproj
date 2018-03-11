@@ -211,6 +211,10 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
     <Compile Include="Criteria\GeoLocationSettingMatch.cs" />
+    <Compile Include="Criteria\Host\HostPersonalisationGroupCriteria.cs" />
+    <Compile Include="Criteria\Host\HostSetting.cs" />
+    <Compile Include="Criteria\Host\HttpContextHostProvider.cs" />
+    <Compile Include="Criteria\Host\IHostProvider.cs" />
     <Compile Include="Criteria\Region\RegionPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Region\RegionSetting.cs" />
     <Compile Include="ExtensionMethods\UmbracoExtensionsHelper.cs" />
@@ -425,6 +429,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Criteria\Region\definition.translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Criteria\Host\definition.editor.controller.js" />
+    <Content Include="Criteria\Host\definition.editor.html" />
+    <Content Include="Criteria\Host\definition.translator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
