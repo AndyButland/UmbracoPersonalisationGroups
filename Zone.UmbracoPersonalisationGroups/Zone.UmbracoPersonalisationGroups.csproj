@@ -249,6 +249,7 @@
     <Compile Include="Providers\GeoLocation\Region.cs" />
     <Compile Include="Providers\GeoLocation\Country.cs" />
     <Compile Include="Providers\GeoLocation\MaxMindGeoLocationProvider.cs" />
+    <Compile Include="Providers\Ip\ClientIpParsingHelper.cs" />
     <Compile Include="Providers\Ip\HttpContextIpProvider.cs" />
     <Compile Include="Providers\Ip\IIpProvider.cs" />
     <Compile Include="Providers\GeoLocation\IGeoLocationProvider.cs" />

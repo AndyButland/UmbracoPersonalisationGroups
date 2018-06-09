@@ -387,3 +387,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 0.3.2
     - Added host/domain criteria (thanks to PR #15 from [Tom Waddell](https://github.com/twaddell))
 	- Check to prevent attempted load of criteria with duplicate alias
+- 0.3.3
+    - Fixed issue with IP detection when multiple IPs are found in the server variable

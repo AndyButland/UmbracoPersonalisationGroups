@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Web;
     using Umbraco.Core.Configuration;
     using Zone.UmbracoPersonalisationGroups.Configuration;
@@ -19,7 +20,7 @@
             return ip;
         }
 
-        private string GetIpFromHttpContext()
+        private static string GetIpFromHttpContext()
         {
             // Return a test Ip if we've configured one
             var testIp = UmbracoConfig.For.PersonalisationGroups().TestFixedIp;
@@ -29,44 +30,8 @@
             }
 
             // Otherwise retrieve from the HTTP context
-            var httpContext = HttpContext.Current;
-            var variables = GetServerVariablesForPublicIpDetection();
-
-            foreach (var variable in variables)
-            {
-                if (IsServerVariableForClientIpAvailableAndNotSetToAPrivateIp(httpContext, variable))
-                {
-                    return RemovePortNumberFromIp(httpContext.Request.ServerVariables[variable]);
-                }
-            }
-
-            return string.Empty;
-        }
-
-        private static IEnumerable<string> GetServerVariablesForPublicIpDetection()
-        {
-            return new[]
-            {
-                "CF-Connecting-IP", "HTTP_X_FORWARDED_FOR", "REMOTE_ADDR",
-                "HTTP_CLIENT_IP", "HTTP_X_FORWARDED", "HTTP_X_CLUSTER_CLIENT_IP",
-                "HTTP_FORWARDED_FOR", "HTTP_FORWARDED"
-            };
-        }
-
-        private static bool IsServerVariableForClientIpAvailableAndNotSetToAPrivateIp(HttpContext httpContext, string variable)
-        {
-            return !string.IsNullOrEmpty(httpContext.Request.ServerVariables[variable]) &&
-                   !httpContext.Request.ServerVariables[variable].StartsWith("192.");
-        }
-
-        private static string RemovePortNumberFromIp(string ip)
-        {
-            if (ip.Contains(":"))
-            {
-                ip = ip.Substring(0, ip.IndexOf(":", StringComparison.Ordinal));
-            }
-
-            return ip;
+            var requestServerVariables = HttpContext.Current.Request.ServerVariables;
+            return ClientIpParsingHelper.ParseClientIp(requestServerVariables);
         }
     }
 }
