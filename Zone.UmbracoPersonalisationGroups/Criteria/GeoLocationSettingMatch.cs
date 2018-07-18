@@ -4,5 +4,6 @@
     {
         IsLocatedIn,
         IsNotLocatedIn,
+        CouldNotBeLocated
     }
 }

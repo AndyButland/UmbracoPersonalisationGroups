@@ -48,6 +48,10 @@
 
             resetNewRegion();
 
+            $scope.geoDetailsRequired = function () {
+                return $scope.renderModel.match !== "CouldNotBeLocated";
+            };
+
             $scope.changedCountryCode = function (countryCode) {
                 clearRegions();
                 initAvailableRegionsList(countryCode);
@@ -76,19 +80,24 @@
             };
 
             $scope.saveAndClose = function () {
-                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", ";
-                serializedResult += "\"countryCode\": \"" + $scope.renderModel.countryCode + "\", ";
-                serializedResult += "\"countryName\": \"" + geoLocationService.getCountryName($scope.renderModel.countryCode, $scope.availableCountries) + "\", ";
+                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\"";
 
-                serializedResult += "\"names\": [";
-                for (var i = 0; i < $scope.renderModel.regions.length; i++) {
-                    if (i > 0) {
-                        serializedResult += ", ";
+                if ($scope.renderModel.match !== "CouldNotBeLocated") {
+                    serializedResult += ", ";
+                    serializedResult += "\"countryCode\": \"" + $scope.renderModel.countryCode + "\", ";
+                    serializedResult += "\"countryName\": \"" + geoLocationService.getCountryName($scope.renderModel.countryCode, $scope.availableCountries) + "\", ";
+
+                    serializedResult += "\"names\": [";
+                    for (var i = 0; i < $scope.renderModel.regions.length; i++) {
+                        if (i > 0) {
+                            serializedResult += ", ";
+                        }
+
+                        serializedResult += "\"" + $scope.renderModel.regions[i].name + "\"";
                     }
 
-                    serializedResult += "\"" + $scope.renderModel.regions[i].name + "\"";
+                    serializedResult += "] ";
                 }
-                serializedResult += "] ";
 
                 serializedResult += " }";
 

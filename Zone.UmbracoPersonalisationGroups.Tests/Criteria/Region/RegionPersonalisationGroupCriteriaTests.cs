@@ -18,7 +18,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
 
             // Act
@@ -31,7 +31,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = "invalid";
 
@@ -44,7 +44,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = "{ \"match\": \"IsLocatedIn\", \"countryCode\": \"GB\", \"names\": [] }";
 
@@ -60,7 +60,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "Devon", "Somerset");
 
@@ -76,7 +76,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "Cornwall", "Devon");
 
@@ -92,7 +92,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "South-west", "Cumbria");
 
@@ -108,7 +108,7 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "GB", "Devon", "Somerset");
 
@@ -124,9 +124,41 @@
         {
             // Arrange
             var mockIpProvider = MockIpProvider();
-            var mockCountryGeoLocationProvider = MockCountryGeoLocationProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
             var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
             var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "GB", "Cornwall", "Devon");
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionForCouldNotBeLocatedWhenCannotLocate_ReturnsTrue()
+        {
+            // Arrange
+            var mockIpProvider = MockIpProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider(canGeolocate: false);
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = "{ \"match\": \"CouldNotBeLocated\", \"codes\": [] }";
+
+            // Act
+            var result = criteria.MatchesVisitor(definition);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void RegionPersonalisationGroupCriteria_MatchesVisitor_WithValidDefinitionForCouldNotBeLocatedWhenCanLocate_ReturnsFalse()
+        {
+            // Arrange
+            var mockIpProvider = MockIpProvider();
+            var mockCountryGeoLocationProvider = MockGeoLocationProvider();
+            var criteria = new RegionPersonalisationGroupCriteria(mockIpProvider.Object, mockCountryGeoLocationProvider.Object);
+            var definition = "{ \"match\": \"CouldNotBeLocated\", \"codes\": [] }";
 
             // Act
             var result = criteria.MatchesVisitor(definition);
@@ -146,23 +178,27 @@
             return mock;
         }
 
-        private static Mock<IGeoLocationProvider> MockCountryGeoLocationProvider()
+        private static Mock<IGeoLocationProvider> MockGeoLocationProvider(bool canGeolocate = true)
         {
             var mock = new Mock<IGeoLocationProvider>();
 
             mock.Setup(x => x.GetCountryFromIp(It.IsAny<string>()))
-                .Returns(new Country
-                {
-                    Code = "GB",
-                    Name = "United Kingdom"
-                });
+                .Returns(canGeolocate 
+                    ? new Country
+                        {
+                            Code = "GB",
+                            Name = "United Kingdom"
+                        }
+                    : null);
             mock.Setup(x => x.GetRegionFromIp(It.IsAny<string>()))
-                .Returns(new Region
-                    {
-                        City = "Cornwall",
-                        Subdivisions = new string[] { "South-west"},
-                        Country = new Country { Code = "GB", Name = "United Kingdom" }
-                    });
+                .Returns(canGeolocate 
+                    ? new Region
+                        {
+                            City = "Cornwall",
+                            Subdivisions = new string[] { "South-west"},
+                            Country = new Country { Code = "GB", Name = "United Kingdom" }
+                        }
+                    : null);
 
             return mock;
         }

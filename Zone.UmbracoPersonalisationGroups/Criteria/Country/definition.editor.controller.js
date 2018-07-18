@@ -30,6 +30,10 @@
 
             resetNewCountry();
 
+            $scope.geoDetailsRequired = function () {
+                return $scope.renderModel.match !== "CouldNotBeLocated";
+            };
+
             $scope.getCountryName = function (code) {
                 return geoLocationService.getCountryName(code, $scope.availableCountries);
             }
@@ -66,27 +70,31 @@
 
             $scope.saveAndClose = function () {
 
-                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", ";
+                var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\" ";
 
-                serializedResult += "\"codes\": [";
-                for (var i = 0; i < $scope.renderModel.countries.length; i++) {
-                    if (i > 0) {
-                        serializedResult += ", ";
+                if ($scope.renderModel.match !== "CouldNotBeLocated") {
+
+                    serializedResult += ", \"codes\": [";
+                    for (var i = 0; i < $scope.renderModel.countries.length; i++) {
+                        if (i > 0) {
+                            serializedResult += ", ";
+                        }
+
+                        serializedResult += "\"" + $scope.renderModel.countries[i].code + "\"";
+                    }
+                    serializedResult += "], ";
+
+                    serializedResult += "\"names\": [";
+                    for (var i = 0; i < $scope.renderModel.countries.length; i++) {
+                        if (i > 0) {
+                            serializedResult += ", ";
+                        }
+
+                        serializedResult += "\"" + geoLocationService.getCountryName($scope.renderModel.countries[i].code, $scope.availableCountries) + "\"";
                     }
 
-                    serializedResult += "\"" + $scope.renderModel.countries[i].code + "\"";
+                    serializedResult += "]";
                 }
-                serializedResult += "], ";
-
-                serializedResult += "\"names\": [";
-                for (var i = 0; i < $scope.renderModel.countries.length; i++) {
-                    if (i > 0) {
-                        serializedResult += ", ";
-                    }
-
-                    serializedResult += "\"" + geoLocationService.getCountryName($scope.renderModel.countries[i].code, $scope.availableCountries) + "\"";
-                }
-                serializedResult += "]";
                 
                 serializedResult += " }";
 

@@ -1,11 +1,9 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.Country
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
     using Umbraco.Core;
-    using Zone.UmbracoPersonalisationGroups.Providers;
     using Zone.UmbracoPersonalisationGroups.Providers.GeoLocation;
     using Zone.UmbracoPersonalisationGroups.Providers.Ip;
 
@@ -55,6 +53,12 @@
                 var country = _geoLocationProvider.GetCountryFromIp(ip);
                 if (country != null)
                 {
+                    if (countrySetting.Match == GeoLocationSettingMatch.CouldNotBeLocated)
+                    {
+                        // We can locate, so return false.
+                        return false;
+                    }
+
                     var matchedCountry = countrySetting.Codes
                         .Any(x => string.Equals(x, country.Code, StringComparison.InvariantCultureIgnoreCase));
                     switch (countrySetting.Match)
@@ -69,7 +73,7 @@
                 }
             }
 
-            return false;
+            return countrySetting.Match == GeoLocationSettingMatch.CouldNotBeLocated;
         }
     }
 }

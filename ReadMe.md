@@ -389,3 +389,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Check to prevent attempted load of criteria with duplicate alias
 - 0.3.3
     - Fixed issue with IP detection when multiple IPs are found in the server variable
+- 0.3.4
+    - Added option to create a geographical matching option for when the user's location can't be identified
