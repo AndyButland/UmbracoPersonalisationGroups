@@ -391,3 +391,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Fixed issue with IP detection when multiple IPs are found in the server variable
 - 0.3.4
     - Added option to create a geographical matching option for when the user's location can't be identified
+- 0.3.5
+    - Added additional checks and exception handling for IP address detection on geographical look-ups

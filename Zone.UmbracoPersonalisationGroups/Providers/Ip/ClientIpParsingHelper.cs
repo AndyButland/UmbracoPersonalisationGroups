@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Linq;
+    using System.Net;
 
     public static class ClientIpParsingHelper
     {
@@ -48,7 +49,9 @@
             // If so, the original requesting IP is the first one in a comma+space delimited list
             value = value.Split(new[] { ", " }, StringSplitOptions.None).First();
             ip = RemovePortNumberFromIp(value);
-            return true;
+
+            // Finally, ensure we have a valid IP.
+            return IsValidIp(ip);
         }
 
         private static string RemovePortNumberFromIp(string ip)
@@ -59,6 +62,11 @@
             }
 
             return ip;
+        }
+
+        private static bool IsValidIp(string ip)
+        {
+            return !string.IsNullOrEmpty(ip) && IPAddress.TryParse(ip, out IPAddress result);
         }
     }
 }

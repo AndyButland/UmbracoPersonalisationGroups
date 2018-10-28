@@ -37,20 +37,30 @@
                                 try
                                 {
                                     var response = reader.Country(ip);
-                                    var country = new Country
-                                    {
-                                        Code = response.Country.IsoCode,
-                                        Name = response.Country.Name,
-                                    };
+                                    var country =
+                                        new Country { Code = response.Country.IsoCode, Name = response.Country.Name, };
 
-                                    HttpRuntime.Cache.Insert(cacheKey, country, null, 
-                                        Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration);
+                                    HttpRuntime.Cache.Insert(
+                                        cacheKey,
+                                        country,
+                                        null,
+                                        Cache.NoAbsoluteExpiration,
+                                        Cache.NoSlidingExpiration);
 
                                     return country;
                                 }
                                 catch (AddressNotFoundException)
                                 {
-                                    return string.Empty;
+                                    return null;
+                                }
+                                catch (GeoIP2Exception ex)
+                                {
+                                    if (IsInvalidIpException(ex))
+                                    {
+                                        return null;
+                                    }
+
+                                    throw;
                                 }
                             }
                         }
@@ -58,7 +68,7 @@
                         {
                             throw new FileNotFoundException(
                                 $"MaxMind Geolocation database required for locating visitor country from IP address not found, expected at: {_pathToCountryDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
-                                    _pathToCountryDb);
+                                _pathToCountryDb);
                         }
                     });
 
@@ -79,7 +89,7 @@
                                 try
                                 {
                                     var response = reader.City(ip);
-                                    var country = new Region
+                                    var region = new Region
                                     {
                                         City = response.City.Name,
                                         Subdivisions = response.Subdivisions
@@ -92,14 +102,23 @@
                                         }
                                     };
 
-                                    HttpRuntime.Cache.Insert(cacheKey, country, null,
+                                    HttpRuntime.Cache.Insert(cacheKey, region, null,
                                         Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration);
 
-                                    return country;
+                                    return region;
                                 }
                                 catch (AddressNotFoundException)
                                 {
-                                    return string.Empty;
+                                    return null;
+                                }
+                                catch (GeoIP2Exception ex)
+                                {
+                                    if (IsInvalidIpException(ex))
+                                    {
+                                        return null;
+                                    }
+
+                                    throw;
                                 }
                             }
                         }
@@ -112,6 +131,11 @@
                     });
 
             return cachedItem as Region;
+        }
+
+        private static bool IsInvalidIpException(GeoIP2Exception ex)
+        {
+            return ex.Message.StartsWith("The specified IP address was incorrectly formatted");
         }
     }
 }

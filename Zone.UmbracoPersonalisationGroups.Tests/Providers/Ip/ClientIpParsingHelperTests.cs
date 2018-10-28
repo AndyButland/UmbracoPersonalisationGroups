@@ -47,6 +47,19 @@
         }
 
         [TestMethod]
+        public void ParseClientIp_WithSingleInvalidIpInServerVariable_ReturnsEmptyString()
+        {
+            // Arrange
+            var requestServerVariables = new NameValueCollection { { "HTTP_FORWARDED_FOR", "xxxx" } };
+
+            // Act
+            var result = ClientIpParsingHelper.ParseClientIp(requestServerVariables);
+
+            // Assert
+            Assert.AreEqual(string.Empty, result);
+        }
+
+        [TestMethod]
         public void ParseClientIp_WithMultipleIpsInServerVariable_ReturnsIp()
         {
             // Arrange

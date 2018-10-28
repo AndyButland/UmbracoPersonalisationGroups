@@ -1,8 +1,5 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Providers.Ip
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
     using System.Web;
     using Umbraco.Core.Configuration;
     using Zone.UmbracoPersonalisationGroups.Configuration;
