@@ -3,7 +3,7 @@
     using ClientDependency.Core;
     using Umbraco.Core.PropertyEditors;
     using Umbraco.Web.PropertyEditors;
-    using Constants = Zone.UmbracoPersonalisationGroups.AppConstants;
+    using Constants = Zone.UmbracoPersonalisationGroups.Common.AppConstants;
 
     /// <summary>
     /// Property editor for managing the definition of a personalisation group

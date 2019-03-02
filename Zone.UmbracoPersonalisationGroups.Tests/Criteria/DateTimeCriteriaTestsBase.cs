@@ -1,10 +1,8 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria
 {
     using System;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria;
-    using Zone.UmbracoPersonalisationGroups.Providers;
-    using Zone.UmbracoPersonalisationGroups.Providers.DateTime;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.DateTime;
 
     public abstract class DateTimeCriteriaTestsBase
     {

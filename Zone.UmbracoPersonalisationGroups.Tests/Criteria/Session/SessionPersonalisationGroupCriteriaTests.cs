@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Session
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Session
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Session;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Session;
 
     [TestClass]
     public class SessionPersonalisationGroupCriteriaTests

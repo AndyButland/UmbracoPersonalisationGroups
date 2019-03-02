@@ -1,22 +1,18 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.MemberType
 {
-    using System.Web;
     using Umbraco.Web;
     using Umbraco.Web.Security;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.MemberType;
 
-    public class UmbracoMemberTypeProvider : IMemberTypeProvider
+    public class UmbracoMemberTypeProvider : MemberTypeProviderBase
     {
-        public string GetMemberType()
+        protected override string GetAuthenticatedMemberType()
         {
-            if (HttpContext.Current.Request.IsAuthenticated)
+            var membershipHelper = new MembershipHelper(UmbracoContext.Current);
+            var member = membershipHelper.GetCurrentMember();
+            if (member != null)
             {
-                var membershipHelper = new MembershipHelper(UmbracoContext.Current);
-                var member = membershipHelper.GetCurrentMember();
-                if (member != null)
-                {
-                    return member.DocumentTypeAlias;
-                }
-
+                return member.DocumentTypeAlias;
             }
 
             return string.Empty;

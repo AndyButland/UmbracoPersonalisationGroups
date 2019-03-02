@@ -2,10 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Umbraco.Core.Configuration;
     using Umbraco.Core.Models;
-    using Zone.UmbracoPersonalisationGroups.Configuration;
-    using Zone.UmbracoPersonalisationGroups.Helpers;
+    using Zone.UmbracoPersonalisationGroups.Common.Configuration;
+    using Zone.UmbracoPersonalisationGroups.ExtensionMethods;
 
     /// <summary>
     /// Provides extension methods to IPublishedContent
@@ -104,7 +103,7 @@
         /// <returns>List of personalisation group content items</returns>
         private static IList<IPublishedContent> GetPickedGroups(IPublishedContent content)
         {
-            var propertyAlias = UmbracoConfig.For.PersonalisationGroups().GroupPickerAlias;
+            var propertyAlias = PersonalisationGroupsConfig.Value.GroupPickerAlias;
             if (content.HasProperty(propertyAlias))
             {
                 // If on v7.6 (or if Umbraco Core Property Converters package installed on an earlier version)

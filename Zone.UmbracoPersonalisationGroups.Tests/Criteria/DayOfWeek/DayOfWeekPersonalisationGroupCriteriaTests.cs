@@ -1,8 +1,8 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.DayOfWeek
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.DayOfWeek
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Zone.UmbracoPersonalisationGroups.Criteria.DayOfWeek;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.DayOfWeek;
 
     [TestClass]
     public class DayOfWeekPersonalisationGroupCriteriaTests : DateTimeCriteriaTestsBase

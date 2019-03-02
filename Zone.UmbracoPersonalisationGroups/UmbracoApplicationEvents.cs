@@ -2,6 +2,7 @@
 {
     using System.Web.Routing;
     using Umbraco.Core;
+    using Zone.UmbracoPersonalisationGroups.Routing;
 
     /// <summary>
     /// Hooks into the Umbraco application start-up to register additional routes

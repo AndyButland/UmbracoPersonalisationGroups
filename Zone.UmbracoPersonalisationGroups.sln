@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups", "Zone.UmbracoPersonalisationGroups\Zone.UmbracoPersonalisationGroups.csproj", "{0988C56B-0E20-4786-B653-9EEBFBC4E791}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.V7", "Zone.UmbracoPersonalisationGroups\Zone.UmbracoPersonalisationGroups.V7.csproj", "{0988C56B-0E20-4786-B653-9EEBFBC4E791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.Tests", "Zone.UmbracoPersonalisationGroups.Tests\Zone.UmbracoPersonalisationGroups.Tests.csproj", "{BED5253A-45B6-4D03-A3FB-3DD99CE1D9A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.Common.Tests", "Zone.UmbracoPersonalisationGroups.Tests\Zone.UmbracoPersonalisationGroups.Common.Tests.csproj", "{BED5253A-45B6-4D03-A3FB-3DD99CE1D9A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp", "TestWebApp\TestWebApp.csproj", "{7B18ED66-E895-4135-8786-2CB2AF255578}"
 EndProject
@@ -19,6 +19,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{642616
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp7.6", "TestWebApp7.6\TestWebApp7.6.csproj", "{3B375803-EED1-4F8C-A020-1F72092BA5CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.Common", "Zone.UmbracoPersonalisationGroups.Common\Zone.UmbracoPersonalisationGroups.Common.csproj", "{2084E9EE-1E69-40B4-9AE0-D7A2CD24F9F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.V7.Tests", "Zone.UmbracoPersonalisationGroups.V7.Tests\Zone.UmbracoPersonalisationGroups.V7.Tests.csproj", "{FE7A2310-AE4B-43E4-8498-3882374D5AAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{B7DC82CE-00B2-41C3-8A92-76EB6A2CA2FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1A034002-EC0A-4E9B-AC1C-A27D004E34CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,8 +54,26 @@ Global
 		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B375803-EED1-4F8C-A020-1F72092BA5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2084E9EE-1E69-40B4-9AE0-D7A2CD24F9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2084E9EE-1E69-40B4-9AE0-D7A2CD24F9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2084E9EE-1E69-40B4-9AE0-D7A2CD24F9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2084E9EE-1E69-40B4-9AE0-D7A2CD24F9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BED5253A-45B6-4D03-A3FB-3DD99CE1D9A0} = {1A034002-EC0A-4E9B-AC1C-A27D004E34CD}
+		{7B18ED66-E895-4135-8786-2CB2AF255578} = {B7DC82CE-00B2-41C3-8A92-76EB6A2CA2FE}
+		{D9D26085-B3D6-4ABE-92F8-CBA2AD73BAE4} = {B7DC82CE-00B2-41C3-8A92-76EB6A2CA2FE}
+		{3B375803-EED1-4F8C-A020-1F72092BA5CA} = {B7DC82CE-00B2-41C3-8A92-76EB6A2CA2FE}
+		{FE7A2310-AE4B-43E4-8498-3882374D5AAF} = {1A034002-EC0A-4E9B-AC1C-A27D004E34CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8E675ED-F590-40CB-86E9-16D4FB036E63}
 	EndGlobalSection
 EndGlobal

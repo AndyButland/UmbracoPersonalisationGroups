@@ -1,11 +1,11 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Country
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Country
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Country;
-    using Zone.UmbracoPersonalisationGroups.Providers.GeoLocation;
-    using Zone.UmbracoPersonalisationGroups.Providers.Ip;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Country;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.GeoLocation;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Ip;
 
     [TestClass]
     public class CountryPersonalisationGroupCriteriaTests

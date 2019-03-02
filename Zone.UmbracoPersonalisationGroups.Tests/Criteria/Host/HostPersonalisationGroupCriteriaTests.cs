@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Host
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Host
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Host;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Host;
 
     [TestClass]
     public class HostPersonalisationGroupCriteriaTests

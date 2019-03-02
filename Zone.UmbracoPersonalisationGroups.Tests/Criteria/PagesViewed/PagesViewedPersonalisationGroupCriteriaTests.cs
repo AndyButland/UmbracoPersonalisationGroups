@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.PagesViewed
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.PagesViewed
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.PagesViewed;
 
     [TestClass]
     public class PagesViewedPersonalisationGroupCriteriaTests

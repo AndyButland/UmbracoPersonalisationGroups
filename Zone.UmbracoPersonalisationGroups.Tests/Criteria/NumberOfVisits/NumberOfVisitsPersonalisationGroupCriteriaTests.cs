@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.NumberOfVisits
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.NumberOfVisits
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.NumberOfVisits;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.NumberOfVisits;
 
     [TestClass]
     public class NumberOfVisitsPersonalisationGroupCriteriaTests

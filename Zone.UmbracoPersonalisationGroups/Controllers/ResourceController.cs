@@ -1,13 +1,10 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
 {
-    using System;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Web.Mvc;
-    using Umbraco.Core;
-
-    using Zone.UmbracoPersonalisationGroups.Criteria;
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
+    using Zone.UmbracoPersonalisationGroups.Common.Helpers;
     using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
@@ -22,16 +19,16 @@
         /// <returns>File stream of resource</returns>
         public ActionResult GetResource(string fileName)
         {
-            Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
+            Mandate.ParameterNotNullOrEmpty(fileName, nameof(fileName));
 
             // Get this assembly.
-            Assembly assembly = typeof(ResourceController).Assembly;
+            var assembly = typeof(ResourceController).Assembly;
             string resourceName;
-            Stream resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out resourceName);
+            var resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out resourceName);
 
             if (resourceStream != null)
             {
-                return new FileStreamResult(resourceStream, this.GetMimeType(resourceName));
+                return new FileStreamResult(resourceStream, GetMimeType(resourceName));
             }
 
             return this.HttpNotFound();
@@ -45,8 +42,8 @@
         /// <returns>File stream of resource</returns>
         public ActionResult GetResourceForCriteria(string criteriaAlias, string fileName)
         {
-            Mandate.ParameterNotNullOrEmpty(criteriaAlias, "criteriaAlias");
-            Mandate.ParameterNotNullOrEmpty(fileName, "fileName");
+            Mandate.ParameterNotNullOrEmpty(criteriaAlias, nameof(criteriaAlias));
+            Mandate.ParameterNotNullOrEmpty(fileName, nameof(fileName));
 
             var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
                 .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
@@ -70,7 +67,7 @@
         /// </summary>
         /// <param name="fileName">Name of file</param>
         /// <returns>MIME type for file</returns>
-        private string GetMimeType(string fileName)
+        private static string GetMimeType(string fileName)
         {
             if (fileName.EndsWith(".js"))
             {

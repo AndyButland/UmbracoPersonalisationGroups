@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.MemberGroup
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.MemberGroup
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.MemberGroup;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.MemberGroup;
 
     [TestClass]
     public class MemberGroupPersonalisationGroupCriteriaTests

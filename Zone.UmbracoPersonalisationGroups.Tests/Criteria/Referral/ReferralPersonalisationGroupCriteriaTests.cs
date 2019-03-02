@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Referral
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Referral
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Referral;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Referral;
 
     [TestClass]
     public class ReferralPersonalisationGroupCriteriaTests

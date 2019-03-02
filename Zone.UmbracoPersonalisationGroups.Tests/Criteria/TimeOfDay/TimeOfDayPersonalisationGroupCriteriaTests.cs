@@ -1,10 +1,8 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.TimeOfDay
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.TimeOfDay
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria;
-    using Zone.UmbracoPersonalisationGroups.Criteria.TimeOfDay;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.TimeOfDay;
 
     [TestClass]
     public class TimeOfDayPersonalisationGroupCriteriaTests : DateTimeCriteriaTestsBase

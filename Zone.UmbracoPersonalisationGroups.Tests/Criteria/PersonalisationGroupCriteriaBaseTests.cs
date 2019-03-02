@@ -1,8 +1,8 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Zone.UmbracoPersonalisationGroups;
-    using Zone.UmbracoPersonalisationGroups.Criteria;
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria;
 
     [TestClass]
     public class PersonalisationGroupCriteriaBaseTests

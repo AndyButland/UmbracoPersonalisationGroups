@@ -1,10 +1,10 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Querystring
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Querystring
 {
     using System;
     using System.Collections.Specialized;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Querystring;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Querystring;
 
     [TestClass]
     public class QuerystringPersonalisationGroupCriteriaTests

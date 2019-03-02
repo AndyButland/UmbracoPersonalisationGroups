@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.AuthenticationStatus
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.AuthenticationStatus
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.AuthenticationStatus;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.AuthenticationStatus;
 
     [TestClass]
     public class AuthenticationStatusPersonalisationGroupCriteriaTests

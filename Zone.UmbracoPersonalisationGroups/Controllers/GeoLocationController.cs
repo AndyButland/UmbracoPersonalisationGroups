@@ -7,6 +7,7 @@
     using System.Reflection;
     using System.Web.Mvc;
     using Umbraco.Core;
+    using Zone.UmbracoPersonalisationGroups.Common.Controllers;
 
     /// <summary>
     /// Controller making available country & region details to HTTP requests

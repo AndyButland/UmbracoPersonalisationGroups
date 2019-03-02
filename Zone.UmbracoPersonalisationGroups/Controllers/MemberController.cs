@@ -1,10 +1,9 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Umbraco.Core;
-    using Umbraco.Core.Services;
+    using Zone.UmbracoPersonalisationGroups.Common.Controllers;
 
     /// <summary>
     /// Controller making available member details to HTTP requests

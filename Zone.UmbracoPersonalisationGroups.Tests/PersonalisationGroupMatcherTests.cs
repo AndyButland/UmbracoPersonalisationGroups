@@ -1,9 +1,10 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests
 {
-    using System;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Zone.UmbracoPersonalisationGroups;
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
+    using Zone.UmbracoPersonalisationGroups.Common.Tests.TestHelpers;
 
     [TestClass]
     public class PersonalisationGroupMatcherTests
@@ -17,8 +18,8 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
-                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
+                    Definitions.MatchingDayOfWeekDefinition(),
+                    Definitions.MatchingTimeOfDayDefinition(),
                 }
             };
 
@@ -38,9 +39,9 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
-                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
-                    TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
+                    Definitions.MatchingDayOfWeekDefinition(),
+                    Definitions.MatchingTimeOfDayDefinition(),
+                    Definitions.NonMatchingDayOfWeekDefinition(),
                 }
             };
 
@@ -60,9 +61,9 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
-                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
-                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
+                    Definitions.NonMatchingDayOfWeekDefinition(),
+                    Definitions.MatchingDayOfWeekDefinition(),
+                    Definitions.MatchingTimeOfDayDefinition(),
                 }
             };
 
@@ -82,9 +83,9 @@
                 Match = PersonalisationGroupDefinitionMatch.All,
                 Details = new List<PersonalisationGroupDefinitionDetail>
                 {
-                    TestHelpers.Definitions.MatchingDayOfWeekDefinition(),
-                    TestHelpers.Definitions.NonMatchingDayOfWeekDefinition(),
-                    TestHelpers.Definitions.MatchingTimeOfDayDefinition(),
+                    Definitions.MatchingDayOfWeekDefinition(),
+                    Definitions.NonMatchingDayOfWeekDefinition(),
+                    Definitions.MatchingTimeOfDayDefinition(),
                 }
             };
 
@@ -114,7 +115,7 @@
         public void PersonalisationGroupMatcher_IsMatch_WithMatchingCriteria_ReturnsTrue()
         {
             // Arrange
-            var definitionDetail = TestHelpers.Definitions.MatchingDayOfWeekDefinition();
+            var definitionDetail = Definitions.MatchingDayOfWeekDefinition();
 
             // Act
             var result = PersonalisationGroupMatcher.IsMatch(definitionDetail);

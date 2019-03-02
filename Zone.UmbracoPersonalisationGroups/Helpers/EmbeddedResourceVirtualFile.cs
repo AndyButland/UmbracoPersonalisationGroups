@@ -1,16 +1,11 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
 {
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
-
     using ClientDependency.Core.CompositeFiles;
-
-    using Umbraco.Core;
-
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
     using Zone.UmbracoPersonalisationGroups.Controllers;
-    using Zone.UmbracoPersonalisationGroups.Criteria;
 
     /// <summary>
     /// The embedded resource virtual file.
@@ -20,7 +15,7 @@
         /// <summary>
         /// The virtual path to the resource.
         /// </summary>
-        private readonly string virtualPath;
+        private readonly string _virtualPath;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbeddedResourceVirtualFile"/> class.
@@ -30,13 +25,13 @@
         /// </param>
         public EmbeddedResourceVirtualFile(string virtualPath)
         {
-            this.virtualPath = virtualPath;
+            _virtualPath = virtualPath;
         }
 
         /// <summary>
         /// Gets the path to the virtual resource.
         /// </summary>
-        public string Path => this.virtualPath;
+        public string Path => _virtualPath;
 
         /// <summary>
         /// When overridden in a derived class, returns a read-only stream to the virtual resource.
@@ -46,35 +41,33 @@
         /// </returns>
         public Stream Open()
         {
-            string resourceName;
-
             // Get this assembly.
-            Assembly assembly = typeof(ResourceController).Assembly;
-            Stream output = EmbeddedResourceHelper.GetResource(assembly, this.virtualPath, out resourceName);
-
-            if (output == null)
+            var assembly = typeof(ResourceController).Assembly;
+            var output = EmbeddedResourceHelper.GetResource(assembly, this._virtualPath, out string resourceName);
+            if (output != null)
             {
-                // We need to loop through the loaded criteria and check each one.
-                Assembly localAssembly = assembly;
-                IEnumerable<IPersonalisationGroupCriteria> criteria =
-                    PersonalisationGroupMatcher
-                    .GetAvailableCriteria().Where(a => a.GetType().Assembly != localAssembly);
+                return output;
+            }
 
-                foreach (IPersonalisationGroupCriteria criterion in criteria)
+            // We need to loop through the loaded criteria and check each one.
+            var localAssembly = assembly;
+            var criteria = PersonalisationGroupMatcher .GetAvailableCriteria()
+                .Where(a => a.GetType().Assembly != localAssembly);
+
+            foreach (var criterion in criteria)
+            {
+                var resource = EmbeddedResourceHelper.SanitizeCriteriaResourceName(this._virtualPath);
+
+                assembly = criterion.GetType().Assembly;
+                resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
+
+                if (!string.IsNullOrWhiteSpace(resourceName))
                 {
-                    string resource = EmbeddedResourceHelper.SanitizeCriteriaResourceName(this.virtualPath);
-
-                    assembly = criterion.GetType().Assembly;
-                    resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
-
-                    if (!string.IsNullOrWhiteSpace(resourceName))
-                    {
-                        return EmbeddedResourceHelper.GetResource(assembly, resource, out resourceName);
-                    }
+                    return EmbeddedResourceHelper.GetResource(assembly, resource, out resourceName);
                 }
             }
 
-            return output;
+            return null;
         }
     }
 }

@@ -1,13 +1,10 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed
 {
     using System;
-    using System.Linq;
     using System.Web;
-    using Helpers;
     using Umbraco.Core;
-    using Umbraco.Core.Configuration;
-    using Umbraco.Web;
-    using Zone.UmbracoPersonalisationGroups.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.PagesViewed;
+    using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
     /// <summary>
     /// Registered required Umbraco application events for the pages viewed criteria - to track via a cookie
@@ -24,53 +21,10 @@
             }
         }
 
-        private void ApplicationInit(object sender, EventArgs e)
+        private static void ApplicationInit(object sender, EventArgs e)
         {
             var app = (HttpApplication)sender;
-            app.PostRequestHandlerExecute += TrackPageView;
-        }
-
-        private void TrackPageView(object sender, EventArgs e)
-        {
-            var httpContext = HttpContext.Current;
-            var umbracoContext = UmbracoContext.Current;
-            var config = UmbracoConfig.For.PersonalisationGroups();
-
-            if (umbracoContext?.PageId == null)
-            {
-                return;
-            }
-
-            var key = config.CookieKeyForTrackingNumberOfVisits;
-            var cookie = httpContext.Request.Cookies[key];
-            if (cookie != null)
-            {
-                cookie.Value = AppendPageIdIfNotPreviouslyViewed(cookie.Value, umbracoContext.PageId.Value);
-            }
-            else
-            {
-                cookie = new HttpCookie(key)
-                {
-                    Value = umbracoContext.PageId.Value.ToString(),
-                    HttpOnly = true,
-                };
-            }
-
-            cookie.Expires = DateTime.Now.AddDays(config.ViewedPagesTrackingCookieExpiryInDays);
-            httpContext.Response.Cookies.Add(cookie);
-        }
-
-        private string AppendPageIdIfNotPreviouslyViewed(string viewedPageIds, int pageId)
-        {
-            var ids = viewedPageIds
-                .Split(',')
-                .Select(int.Parse);
-            if (!ids.Contains(pageId))
-            {
-                viewedPageIds = viewedPageIds + "," + pageId;
-            }
-
-            return viewedPageIds;
+            app.PostRequestHandlerExecute += UserActivityTracker.TrackPageView;
         }
     }
 }

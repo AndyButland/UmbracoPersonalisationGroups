@@ -7,7 +7,9 @@
     using Umbraco.Core;
     using Umbraco.Core.Models;
     using Zone.UmbracoPersonalisationGroups;
-    using Zone.UmbracoPersonalisationGroups.Helpers;
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
+    using Zone.UmbracoPersonalisationGroups.ExtensionMethods;
 
     /// <summary>
     /// Provides extension methods to UmbracoHelper

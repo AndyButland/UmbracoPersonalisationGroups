@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Cookie
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Cookie
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Cookie;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Cookie;
 
     [TestClass]
     public class CookiePersonalisationGroupCriteriaTests

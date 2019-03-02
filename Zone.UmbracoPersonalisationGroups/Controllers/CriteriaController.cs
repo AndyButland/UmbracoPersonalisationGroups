@@ -1,6 +1,8 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
 {
     using System.Web.Mvc;
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.Controllers;
 
     /// <summary>
     /// Controller making available criteria details to HTTP requests

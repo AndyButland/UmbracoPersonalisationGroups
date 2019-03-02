@@ -1,8 +1,8 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Providers.Ip
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Providers.Ip
 {
     using System.Collections.Specialized;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Zone.UmbracoPersonalisationGroups.Providers.Ip;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Ip;
 
     [TestClass]
     public class ClientIpParsingHelperTests

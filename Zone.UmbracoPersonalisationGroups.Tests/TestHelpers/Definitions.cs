@@ -1,9 +1,9 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.TestHelpers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.TestHelpers
 {
     using System;
-    using Zone.UmbracoPersonalisationGroups;
+    using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
 
-    public class Definitions
+    public static class Definitions
     {
         public static PersonalisationGroupDefinitionDetail MatchingDayOfWeekDefinition()
         {

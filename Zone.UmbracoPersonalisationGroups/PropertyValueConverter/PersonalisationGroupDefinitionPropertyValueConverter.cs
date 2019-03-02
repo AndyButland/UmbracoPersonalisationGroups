@@ -1,9 +1,11 @@
-﻿namespace Zone.UmbracoPersonalisationGroups
+﻿namespace Zone.UmbracoPersonalisationGroups.PropertyValueConverter
 {
     using Newtonsoft.Json;
     using Umbraco.Core.Models.PublishedContent;
     using Umbraco.Core.PropertyEditors;
     using Umbraco.Web;
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
 
     /// <summary>
     /// Property converter to convert the saved JSON representation of a personalisation group definition to the

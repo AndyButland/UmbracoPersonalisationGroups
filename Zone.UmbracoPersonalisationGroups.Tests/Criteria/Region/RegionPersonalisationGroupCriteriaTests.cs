@@ -1,11 +1,11 @@
-﻿namespace Zone.UmbracoPersonsalisationGroups.Tests.Criteria.Region
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Tests.Criteria.Region
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using Zone.UmbracoPersonalisationGroups.Criteria.Region;
-    using Zone.UmbracoPersonalisationGroups.Providers.GeoLocation;
-    using Zone.UmbracoPersonalisationGroups.Providers.Ip;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria.Region;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.GeoLocation;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Ip;
 
     [TestClass]
     public class RegionPersonalisationGroupCriteriaTests
@@ -195,7 +195,7 @@
                     ? new Region
                         {
                             City = "Cornwall",
-                            Subdivisions = new string[] { "South-west"},
+                            Subdivisions = new[] { "South-west"},
                             Country = new Country { Code = "GB", Name = "United Kingdom" }
                         }
                     : null);

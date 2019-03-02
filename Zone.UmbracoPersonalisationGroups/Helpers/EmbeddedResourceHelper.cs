@@ -1,21 +1,16 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
 {
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-
-    using Umbraco.Core;
-
+    using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
     using Zone.UmbracoPersonalisationGroups.Controllers;
-    using Zone.UmbracoPersonalisationGroups.Criteria;
-
-    using Constants = Zone.UmbracoPersonalisationGroups.AppConstants;
 
     /// <summary>
     /// Provides methods for retrieving embedded resources.
     /// </summary>
-    internal class EmbeddedResourceHelper
+    internal static class EmbeddedResourceHelper
     {
         /// <summary>
         /// Returns a value indicating whether the given resource exists.
@@ -27,37 +22,33 @@
         public static bool ResourceExists(string resource)
         {
             // Sanitize the resource request.
-            string resourceRoot = Constants.ResourceRoot;
-            string criteriaRoot = Constants.ResourceForCriteriaRoot;
-            string extension = Constants.ResourceExtension;
-
-            if (resource.StartsWith(resourceRoot))
+            if (resource.StartsWith(AppConstants.ResourceRoot))
             {
-                resource = resource.TrimStart(resourceRoot).Replace("/", ".").TrimEnd(extension);
+                resource = resource.TrimStart(AppConstants.ResourceRoot).Replace("/", ".").TrimEnd(AppConstants.ResourceExtension);
             }
-            else if (resource.StartsWith(criteriaRoot))
+            else if (resource.StartsWith(AppConstants.ResourceForCriteriaRoot))
             {
-                resource = resource.TrimStart(criteriaRoot).Replace("/", ".").TrimEnd(extension);
+                resource = resource.TrimStart(AppConstants.ResourceForCriteriaRoot).Replace("/", ".").TrimEnd(AppConstants.ResourceExtension);
             }
-            else if (resource.EndsWith(extension))
+            else if (resource.EndsWith(AppConstants.ResourceExtension))
             {
-                resource = resource.TrimEnd(extension);
+                resource = resource.TrimEnd(AppConstants.ResourceExtension);
             }
 
             // Check this assembly first.
-            Assembly assembly = typeof(ResourceController).Assembly;
+            var assembly = typeof(ResourceController).Assembly;
 
             // Find the resource name; not case sensitive.
-            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
+            var resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
 
             if (string.IsNullOrWhiteSpace(resourceName))
             {
                 // We need to loop through the loaded criteria and check each one.
-                Assembly localAssembly = assembly;
-                IEnumerable<IPersonalisationGroupCriteria> criteria =
-                    PersonalisationGroupMatcher.GetAvailableCriteria().Where(a => a.GetType().Assembly != localAssembly);
+                var localAssembly = assembly;
+                var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
+                    .Where(a => a.GetType().Assembly != localAssembly);
 
-                foreach (IPersonalisationGroupCriteria criterion in criteria)
+                foreach (var criterion in criteria)
                 {
                     assembly = criterion.GetType().Assembly;
                     resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
@@ -88,12 +79,9 @@
 
             // Find the resource name; not case sensitive.
             resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
-            if (resourceName != null)
-            {
-                return assembly.GetManifestResourceStream(resourceName);
-            }
-
-            return null;
+            return resourceName != null 
+                ? assembly.GetManifestResourceStream(resourceName) 
+                : null;
         }
 
         /// <summary>
@@ -106,21 +94,17 @@
         public static string SanitizeCriteriaResourceName(string resource)
         {
             // Sanitize the resource request.
-            string root = Constants.ResourceRoot;
-            string criteria = Constants.ResourceForCriteriaRoot;
-            string extension = Constants.ResourceExtension;
-
-            if (resource.StartsWith(root))
+            if (resource.StartsWith(AppConstants.ResourceRoot))
             {
-                resource = Constants.ResourceRootNameSpace + resource.TrimStart(root).Replace("/", ".").TrimEnd(extension);
+                resource = AppConstants.ResourceRootNameSpace + resource.TrimStart(AppConstants.ResourceRoot).Replace("/", ".").TrimEnd(AppConstants.ResourceExtension);
             }
-            else if (resource.StartsWith(criteria))
+            else if (resource.StartsWith(AppConstants.ResourceForCriteriaRoot))
             {
-                resource = Constants.ResourceForCriteriaRootNameSpace + resource.TrimStart(criteria).Replace("/", ".").TrimEnd(extension);
+                resource = AppConstants.ResourceForCriteriaRootNameSpace + resource.TrimStart(AppConstants.ResourceForCriteriaRoot).Replace("/", ".").TrimEnd(AppConstants.ResourceExtension);
             }
-            else if (resource.EndsWith(extension))
+            else if (resource.EndsWith(AppConstants.ResourceExtension))
             {
-                resource = resource.TrimEnd(extension);
+                resource = resource.TrimEnd(AppConstants.ResourceExtension);
             }
 
             return resource;
