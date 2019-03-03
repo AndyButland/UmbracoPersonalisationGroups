@@ -4,6 +4,7 @@
     using Umbraco.Core.Models.PublishedContent;
     using Umbraco.Core.PropertyEditors;
     using Umbraco.Web;
+    using Umbraco.Web.Composing;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
 
@@ -17,12 +18,12 @@
     {
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
-            return propertyType.PropertyEditorAlias.Equals(AppConstants.PersonalisationGroupDefinitionPropertyEditorAlias);
+            return propertyType.EditorAlias.Equals(AppConstants.PersonalisationGroupDefinitionPropertyEditorAlias);
         }
 
         public override object ConvertSourceToObject(PublishedPropertyType propertyType, object source, bool preview)
         {
-            if (source == null || UmbracoContext.Current == null)
+            if (source == null || Current.UmbracoContext == null)
             {
                 return null;
             }

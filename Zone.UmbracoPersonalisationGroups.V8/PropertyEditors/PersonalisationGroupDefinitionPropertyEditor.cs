@@ -1,13 +1,15 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.V8.PropertyEditors
 {
     using ClientDependency.Core;
+    using Umbraco.Core.Logging;
+    using Umbraco.Core.PropertyEditors;
     using Umbraco.Web.PropertyEditors;
     using Constants = Zone.UmbracoPersonalisationGroups.Common.AppConstants;
 
     /// <summary>
     /// Property editor for managing the definition of a personalisation group
     /// </summary>
-    [PropertyEditor(Constants.PersonalisationGroupDefinitionPropertyEditorAlias, "Personalisation group definition", Constants.ResourceRoot + "editor.html", ValueType = "JSON")]
+    [DataEditor(Constants.PersonalisationGroupDefinitionPropertyEditorAlias, "Personalisation group definition", Constants.ResourceRoot + "editor.html", ValueType = "JSON")]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceRoot + "editor.controller.js" + Constants.ResourceExtension)]
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "authenticationStatus/definition.editor.controller.js" + Constants.ResourceExtension)]
@@ -49,14 +51,18 @@
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "region/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "region/definition.translator.js" + Constants.ResourceExtension)]
-
+    
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "session/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "session/definition.translator.js" + Constants.ResourceExtension)]
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "timeOfDay/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "timeOfDay/definition.translator.js" + Constants.ResourceExtension)]
-    public class PersonalisationGroupDefinitionPropertyEditor : PropertyEditor
+    public class PersonalisationGroupDefinitionPropertyEditor : DataEditor
     {
+        public PersonalisationGroupDefinitionPropertyEditor(ILogger logger, EditorType type = EditorType.PropertyValue)
+            : base(logger, type)
+        {
+        }
     }
 }
