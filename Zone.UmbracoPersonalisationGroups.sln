@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{B7DC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1A034002-EC0A-4E9B-AC1C-A27D004E34CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.V8", "Zone.UmbracoPersonalisationGroups.V8\Zone.UmbracoPersonalisationGroups.V8.csproj", "{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7A2310-AE4B-43E4-8498-3882374D5AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

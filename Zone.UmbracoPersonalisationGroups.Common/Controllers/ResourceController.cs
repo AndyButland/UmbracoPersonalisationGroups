@@ -1,11 +1,10 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
-    using Zone.UmbracoPersonalisationGroups.Helpers;
 
     /// <summary>
     /// Controller providing access to embedded client-side angular resource

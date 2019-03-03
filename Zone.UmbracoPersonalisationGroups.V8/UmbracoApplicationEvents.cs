@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups
+﻿namespace Zone.UmbracoPersonalisationGroups.V8
 {
     using System.Web.Routing;
     using Umbraco.Core;

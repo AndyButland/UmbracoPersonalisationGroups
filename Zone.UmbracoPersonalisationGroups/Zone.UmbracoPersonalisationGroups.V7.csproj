@@ -197,26 +197,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\CriteriaController.cs" />
-    <Compile Include="Controllers\GeoLocationController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Criteria\NumberOfVisits\RegisterApplicationEvents.cs" />
     <Compile Include="Criteria\PagesViewed\RegisterApplicationEvents.cs" />
     <Compile Include="Criteria\PagesViewed\UserActivityTracker.cs" />
     <Compile Include="ExtensionMethods\UmbracoExtensionsHelper.cs" />
     <Compile Include="ExtensionMethods\UmbracoHelperExtensions.cs" />
-    <Compile Include="Helpers\EmbeddedResourceHelper.cs" />
-    <Compile Include="Helpers\EmbeddedResourceVirtualFile.cs" />
-    <Compile Include="Helpers\EmbeddedResourceVirtualPathProvider.cs" />
-    <Compile Include="Helpers\EmbeddedResourceWriter.cs" />
     <Compile Include="Criteria\MemberProfileField\MemberProfileFieldPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\MemberProfileField\UmbracoMemberProfileFieldProvider.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\MemberType\UmbracoMemberTypeProvider.cs" />
     <Compile Include="PropertyEditors\PersonalisationGroupDefinitionPropertyEditor.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
-    <Compile Include="Routing\RouteConfig.cs" />
     <Compile Include="UmbracoApplicationEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyValueConverter\PersonalisationGroupDefinitionPropertyValueConverter.cs" />

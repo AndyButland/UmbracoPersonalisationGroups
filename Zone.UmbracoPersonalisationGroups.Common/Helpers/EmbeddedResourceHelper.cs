@@ -1,11 +1,11 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
 {
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.Controllers;
     using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
-    using Zone.UmbracoPersonalisationGroups.Controllers;
 
     /// <summary>
     /// Provides methods for retrieving embedded resources.

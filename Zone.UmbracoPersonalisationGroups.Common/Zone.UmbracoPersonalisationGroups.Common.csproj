@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClientDependency.Core, Version=1.9.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency.1.9.7\lib\net45\ClientDependency.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MaxMind.Db, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaxMind.Db.1.0.0.0\lib\net40\MaxMind.Db.dll</HintPath>
     </Reference>
@@ -78,6 +81,9 @@
     <Compile Include="AppConstants.cs" />
     <Compile Include="Configuration\PersonalisationGroupsConfig.cs" />
     <Compile Include="Controllers\BaseJsonResultController.cs" />
+    <Compile Include="Controllers\CriteriaController.cs" />
+    <Compile Include="Controllers\GeoLocationController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\AuthenticationStatus\AuthenticationStatusSetting.cs" />
     <Compile Include="Criteria\AuthenticationStatus\HttpContextAuthenticationStatusProvider.cs" />
@@ -137,6 +143,10 @@
     <Compile Include="ExtensionMethods\AssemblyExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumerableExtensions.cs" />
     <Compile Include="Helpers\CriteriaConfigHelpers.cs" />
+    <Compile Include="Helpers\EmbeddedResourceHelper.cs" />
+    <Compile Include="Helpers\EmbeddedResourceVirtualFile.cs" />
+    <Compile Include="Helpers\EmbeddedResourceVirtualPathProvider.cs" />
+    <Compile Include="Helpers\EmbeddedResourceWriter.cs" />
     <Compile Include="Helpers\GroupMatchingHelper.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="GroupDefinition\PersonalisationGroupDefinition.cs" />

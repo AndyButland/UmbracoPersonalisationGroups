@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
 {
     using System;
     using System.IO;

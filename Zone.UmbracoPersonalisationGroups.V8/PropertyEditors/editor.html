@@ -1,0 +1,65 @@
+﻿<div ng-controller="UmbracoPersonalisationGroups.PersonalisationGroupDefinitionController">
+
+    <umb-control-group alias="match" label="Match:">
+        <select ng-model="model.value.match">
+            <option value="All">All</option>
+            <option value="Any">Any</option>
+        </select>
+    </umb-control-group>
+
+    <umb-control-group alias="duration" label="Duration in group:">
+        <select ng-model="model.value.duration">
+            <option value="Page">Per page request</option>
+            <option value="Session">Per session</option>
+            <option value="Visitor">Per visitor</option>
+        </select>
+        <div class="help-inline" style="margin: 3px 0 3px 0; font-size: 80%;">
+            <span>Determines for how long a user that is matched to a personalisation group remains in it</span>
+        </div>
+    </umb-control-group>
+
+    <umb-control-group alias="score" label="Score:">
+        <input ng-model="model.value.score" type="number" min="0" max="100" step="1" />
+        <div class="help-inline" style="margin: 3px 0 3px 0; font-size: 80%;">
+            <span>A number between 1 and 100, can be used to weight groups when scoring the visitor's match to a piece of content</span>
+        </div>
+    </umb-control-group>
+
+    <div class="control-group umb-control-group">
+        <div class="umb-el-wrap">
+            <label class="control-label ng-scope ng-binding">
+                Add Criteria:
+            </label>
+            <div class="controls controls-row">
+                <select ng-model="selectedCriteria"
+                        ng-options="item.name for item in availableCriteria"></select>
+                <button type="button" class="btn btn-default" ng-click="addCriteria()">Add</button>
+                <div class="help-inline" style="margin: 3px 0 12px 0; font-size: 80%;">
+                    <span ng-bind="selectedCriteria.description"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Criteria</th>
+                <th>Definition</th>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="detail in model.value.details">
+                <td><span ng-bind="getCriteriaName(detail.alias)"></span></td>
+                <td>
+                    <span ng-bind="getDefinitionTranslation(detail)"></span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default" ng-click="editDefinitionDetail(detail)">Edit</button>
+                    <button type="button" class="btn btn-default" ng-click="delete($index)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

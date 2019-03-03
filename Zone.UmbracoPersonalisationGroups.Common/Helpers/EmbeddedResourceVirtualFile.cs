@@ -1,11 +1,11 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
 {
     using System.IO;
     using System.Linq;
     using ClientDependency.Core.CompositeFiles;
     using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.Controllers;
     using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
-    using Zone.UmbracoPersonalisationGroups.Controllers;
 
     /// <summary>
     /// The embedded resource virtual file.

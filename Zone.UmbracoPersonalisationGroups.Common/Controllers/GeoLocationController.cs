@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Controllers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
-    using Umbraco.Core;
-    using Zone.UmbracoPersonalisationGroups.Common.Controllers;
+    using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
     /// <summary>
     /// Controller making available country & region details to HTTP requests
@@ -21,11 +20,10 @@
         public JsonResult GetCountries(bool withRegionsOnly = false)
         {
             var cacheKey = $"PersonalisationGroups_GeoLocation_Countries_{withRegionsOnly}";
-            var cachedCountries = ApplicationContext.Current.ApplicationCache.RuntimeCache
-                .GetCacheItem(cacheKey,
-                    () =>
+            var countries = RuntimeCacheHelper.GetCacheItem(cacheKey, 
+                () =>
                     {
-                        var assembly = Assembly.GetExecutingAssembly();
+                        var assembly = GetResourceAssembly();
                         var resourceName = GetResourceName("countries");
                         using (var stream = assembly.GetManifestResourceStream(resourceName))
                         {
@@ -36,7 +34,7 @@
 
                             using (var reader = new StreamReader(stream))
                             {
-                                var countries = reader.ReadToEnd()
+                                var countryRecords = reader.ReadToEnd()
                                     .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
                                     .Select(x => new
                                     {
@@ -47,18 +45,18 @@
                                 if (withRegionsOnly)
                                 {
                                     var countryCodesWithRegions = GetCountryCodesWithRegions(assembly);
-                                    countries = countries
+                                    countryRecords = countryRecords
                                         .Where(x => countryCodesWithRegions.Contains(x.code));
                                 }
 
-                                countries = countries.OrderBy(x => x.name);
+                                countryRecords = countryRecords.OrderBy(x => x.name);
 
-                                return countries;
+                                return countryRecords;
                             }
                         }
                     });
 
-            return Json(cachedCountries, JsonRequestBehavior.AllowGet);
+            return Json(countries, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -69,40 +67,55 @@
         public JsonResult GetRegions(string countryCode)
         {
             var cacheKey = $"PersonalisationGroups_GeoLocation_Regions_{countryCode}";
-            var cachedRegions = ApplicationContext.Current.ApplicationCache.RuntimeCache
-                .GetCacheItem(cacheKey,
-                    () =>
+            var regions = RuntimeCacheHelper.GetCacheItem(cacheKey,
+                () =>
+                {
+                    var assembly = GetResourceAssembly();
+                    var resourceName = GetResourceName("regions");
+
+                    using (var stream = assembly.GetManifestResourceStream(resourceName))
                     {
-                        var assembly = Assembly.GetExecutingAssembly();
-                        var resourceName = GetResourceName("regions");
-
-                        using (var stream = assembly.GetManifestResourceStream(resourceName))
+                        if (stream == null)
                         {
-                            if (stream == null)
-                            {
-                                return null;
-                            }
-
-                            using (var reader = new StreamReader(stream))
-                            {
-                                var regions = reader.ReadToEnd()
-                                    .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-                                    .Where(x => x.Split(',')[0] == countryCode.ToUpperInvariant())
-                                    .Select(x => new
-                                    {
-                                        code = x.Split(',')[1],
-                                        name = CleanName(x.Split(',')[2])
-                                    })
-                                    .OrderBy(x => x.name);
-                                return regions;
-                            }
+                            return null;
                         }
-                    });
 
-            return Json(cachedRegions, JsonRequestBehavior.AllowGet);
+                        using (var reader = new StreamReader(stream))
+                        {
+                            var regionRecords = reader.ReadToEnd()
+                                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                                .Where(x => x.Split(',')[0] == countryCode.ToUpperInvariant())
+                                .Select(x => new
+                                {
+                                    code = x.Split(',')[1],
+                                    name = CleanName(x.Split(',')[2])
+                                })
+                                .OrderBy(x => x.name);
+                            return regionRecords;
+                        }
+                    }
+                });
+
+            return Json(regions, JsonRequestBehavior.AllowGet);
         }
 
-        private IEnumerable<string> GetCountryCodesWithRegions(Assembly assembly)
+        private static Assembly GetResourceAssembly()
+        {
+            return Assembly.Load("Zone.PersonalisationGroups.Common");
+        }
+
+
+        private static string GetResourceName(string area)
+        {
+            return $"Zone.UmbracoPersonalisationGroups.Common.Data.{area}.txt";
+        }
+
+        private static string CleanName(string name)
+        {
+            return name.Replace("\"", string.Empty).Trim();
+        }
+
+        private static IEnumerable<string> GetCountryCodesWithRegions(Assembly assembly)
         {
             var resourceName = GetResourceName("regions");
             using (var stream = assembly.GetManifestResourceStream(resourceName))
@@ -121,16 +134,6 @@
                         .ToArray();
                 }
             }
-        }
-
-        private string GetResourceName(string area)
-        {
-            return $"Zone.UmbracoPersonalisationGroups.Data.{area}.txt";
-        }
-
-        private string CleanName(string name)
-        {
-            return name.Replace("\"", string.Empty).Trim();
         }
     }
 }

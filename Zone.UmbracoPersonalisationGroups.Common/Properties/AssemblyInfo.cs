@@ -36,6 +36,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: InternalsVisibleTo("Zone.UmbracoPersonalisationGroups")]
+[assembly: InternalsVisibleTo("Zone.UmbracoPersonalisationGroups.V8")]
 [assembly: InternalsVisibleTo("Zone.UmbracoPersonalisationGroups.Common.Tests")]
 [assembly: InternalsVisibleTo("Zone.UmbracoPersonalisationGroups.V7.Tests")]
 [assembly: InternalsVisibleTo("Zone.UmbracoPersonalisationGroups.V8.Tests")]

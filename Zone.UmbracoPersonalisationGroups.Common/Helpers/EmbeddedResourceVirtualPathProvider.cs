@@ -1,8 +1,9 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Helpers
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
 {
     using System;
     using ClientDependency.Core.CompositeFiles;
     using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
     /// <summary>
     /// The embedded resource virtual path provider.
