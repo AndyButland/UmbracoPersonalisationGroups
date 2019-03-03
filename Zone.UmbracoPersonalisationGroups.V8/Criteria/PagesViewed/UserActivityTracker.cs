@@ -1,15 +1,14 @@
 namespace Zone.UmbracoPersonalisationGroups.V8.Criteria.PagesViewed
 {
     using System;
-    using Umbraco.Web;
+    using Umbraco.Web.Composing;
 
     public static class UserActivityTracker
     {
         public static void TrackPageView(object sender, EventArgs e)
         {
-            var umbracoContext = UmbracoContext.Current;
-            var pageId = umbracoContext?.PageId;
-
+            var umbracoContext = Current.UmbracoContext;
+            var pageId = umbracoContext?.PublishedRequest?.PublishedContent?.Id;
             if (pageId == null)
             {
                 return;

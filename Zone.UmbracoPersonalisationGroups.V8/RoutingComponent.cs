@@ -1,17 +1,21 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.V8
 {
     using System.Web.Routing;
-    using Umbraco.Core;
+    using Umbraco.Core.Composing;
     using Zone.UmbracoPersonalisationGroups.Common.Routing;
 
     /// <summary>
     /// Hooks into the Umbraco application start-up to register additional routes
     /// </summary>
-    public class UmbracoApplicationEvents : ApplicationEventHandler
+    public class RoutingComponent : IComponent
     {
-        protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        public void Initialize()
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        public void Terminate()
+        {
         }
     }
 }

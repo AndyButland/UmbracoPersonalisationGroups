@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
+    using Umbraco.Core.Models.PublishedContent;
     using Umbraco.Web;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
+    using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
     /// <summary>
     /// Provides extension methods to UmbracoHelper
@@ -62,14 +65,14 @@
 
         private static IPublishedContent GetGroupsRootFolder(UmbracoHelper helper)
         {
-            return helper.TypedContentAtRoot()
-                .FirstOrDefault(x => x.DocumentTypeAlias == AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder);
+            return helper.ContentAtRoot()
+                .FirstOrDefault(x => x.ContentType.Alias == AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder);
         }
 
         private static IList<IPublishedContent> GetGroups(IPublishedContent groupsRootFolder)
         {
             return groupsRootFolder.Descendants()
-                .Where(x => x.DocumentTypeAlias == AppConstants.DocumentTypeAliases.PersonalisationGroup)
+                .Where(x => x.ContentType.Alias == AppConstants.DocumentTypeAliases.PersonalisationGroup)
                 .ToList();
         }
 
@@ -84,8 +87,8 @@
         public static string GetPersonalisationGroupsHashForVisitor(this UmbracoHelper helper, Guid personalisationGroupsRootNodeId, 
             string cacheUserIdentifier, int cacheForSeconds)
         {
-            var personalisationGroupsRootNode = helper.TypedContent(personalisationGroupsRootNodeId);
-            if (personalisationGroupsRootNode.DocumentTypeAlias != AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder)
+            var personalisationGroupsRootNode = helper.Content(personalisationGroupsRootNodeId);
+            if (personalisationGroupsRootNode.ContentType.Alias != AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder)
             {
                 throw new InvalidOperationException(
                     $"The personalisation groups hash for a visitor can only be calculated for a root node of type {AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder}");
@@ -105,8 +108,8 @@
         public static string GetPersonalisationGroupsHashForVisitor(this UmbracoHelper helper, int personalisationGroupsRootNodeId,
             string cacheUserIdentifier, int cacheForSeconds)
         {
-            var personalisationGroupsRootNode = helper.TypedContent(personalisationGroupsRootNodeId);
-            if (personalisationGroupsRootNode.DocumentTypeAlias != AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder)
+            var personalisationGroupsRootNode = helper.Content(personalisationGroupsRootNodeId);
+            if (personalisationGroupsRootNode.ContentType.Alias != AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder)
             {
                 throw new InvalidOperationException(
                     $"The personalisation groups hash for a visitor can only be calculated for a root node of type {AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder}");

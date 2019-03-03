@@ -262,8 +262,8 @@
     <Compile Include="Criteria\MemberProfileField\UmbracoMemberProfileFieldProvider.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\MemberType\UmbracoMemberTypeProvider.cs" />
-    <Compile Include="Criteria\NumberOfVisits\RegisterApplicationEvents.cs" />
-    <Compile Include="Criteria\PagesViewed\RegisterApplicationEvents.cs" />
+    <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsComponent.cs" />
+    <Compile Include="Criteria\PagesViewed\PagesViewedComponent.cs" />
     <Compile Include="Criteria\PagesViewed\UserActivityTracker.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="ExtensionMethods\UmbracoExtensionsHelper.cs" />
@@ -271,7 +271,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyEditors\PersonalisationGroupDefinitionPropertyEditor.cs" />
     <Compile Include="PropertyValueConverter\PersonalisationGroupDefinitionPropertyValueConverter.cs" />
-    <Compile Include="UmbracoApplicationEvents.cs" />
+    <Compile Include="RoutingComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

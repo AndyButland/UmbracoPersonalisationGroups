@@ -2,6 +2,8 @@
 {
     using System;
     using System.Web;
+    using Umbraco.Core.Composing;
+    using Umbraco.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Criteria.NumberOfVisits;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
@@ -9,10 +11,9 @@
     /// Registered required Umbraco application events for the number of visits criteria - to track via a cookie
     /// the number of times the visitor has accessed the site
     /// </summary>
-    /// <remarks>See: https://our.umbraco.org/Documentation/Reference/Events-v6/Application-Startup</remarks>
-    public class RegisterApplicationEvents : ApplicationEventHandler
+    public class NumberOfVisitsComponent : IComponent
     {
-        protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        public void Initialize()
         {
             if (CriteriaConfigHelpers.IsCriteriaInUse(NumberOfVisitsPersonalisationGroupCriteria.CriteriaAlias))
             {
@@ -24,6 +25,10 @@
         {
             var app = (HttpApplication)sender;
             app.PostRequestHandlerExecute += UserActivityTracker.TrackSession;
+        }
+
+        public void Terminate()
+        {
         }
     }
 }
