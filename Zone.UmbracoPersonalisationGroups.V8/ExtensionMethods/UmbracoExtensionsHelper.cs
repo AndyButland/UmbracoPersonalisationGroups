@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Umbraco.Core.Models.PublishedContent;
+    using Umbraco.Web;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
@@ -33,7 +34,7 @@
             // Check each personalisation group assigned for a match with the current site visitor
             foreach (var group in pickedGroups)
             {
-                var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
+                var definition = group.Value<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
                 if (GroupMatchingHelper.IsStickyMatch(definition, group.Id))
                 {
                     return true;
@@ -106,7 +107,7 @@
             var score = 0;
             foreach (var group in pickedGroups)
             {
-                var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
+                var definition = group.Value<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
                 if (GroupMatchingHelper.IsStickyMatch(definition, group.Id))
                 {
                     score += definition.Score;

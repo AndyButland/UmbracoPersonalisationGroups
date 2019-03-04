@@ -46,7 +46,7 @@
         /// <returns>True if content should be shown to visitor</returns>
         public static bool ShowToVisitor(this UmbracoHelper umbraco, IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)
         {
-            var groups = umbraco.TypedContent(groupIds).ToList();
+            var groups = umbraco.Content(groupIds).ToList();
             return ShowToVisitor(groups, showIfNoGroupsDefined);
         }
 
@@ -59,7 +59,7 @@
         /// <returns>True if content should be shown to visitor</returns>
         public static int ScoreForVisitor(this UmbracoHelper umbraco, IEnumerable<int> groupIds)
         {
-            var groups = umbraco.TypedContent(groupIds).ToList();
+            var groups = umbraco.Content(groupIds).ToList();
             return ScoreForVisitor(groups);
         }
 
@@ -104,30 +104,9 @@
         private static IList<IPublishedContent> GetPickedGroups(IPublishedContent content)
         {
             var propertyAlias = PersonalisationGroupsConfig.Value.GroupPickerAlias;
-            if (content.HasProperty(propertyAlias))
-            {
-                // If on v7.6 (or if Umbraco Core Property Converters package installed on an earlier version)
-                // we can retrieve typed property values.
-                var propertyValueAsEnumerable = content.GetPropertyValue<IEnumerable<IPublishedContent>>(propertyAlias);
-                if (propertyValueAsEnumerable != null)
-                {
-                    return propertyValueAsEnumerable.ToList();
-                }
-
-                // Fall-back check for CSV of integers (format used for MNTP before v7.6)
-                var propertyValueAsCsv = content.GetProperty(propertyAlias).DataValue.ToString();
-                if (!string.IsNullOrEmpty(propertyValueAsCsv))
-                {
-                    var pickedGroupIds = propertyValueAsCsv
-                        .Split(',')
-                        .Select(int.Parse);
-
-                    var umbracoHelper = new UmbracoHelper(UmbracoContext.Current);
-                    return umbracoHelper.TypedContent(pickedGroupIds).ToList();
-                }
-            }
-
-            return new List<IPublishedContent>();
+            return content.HasProperty(propertyAlias) ? 
+                content.Value<IEnumerable<IPublishedContent>>(propertyAlias).ToList() 
+                : new List<IPublishedContent>();
         }
      }
 }

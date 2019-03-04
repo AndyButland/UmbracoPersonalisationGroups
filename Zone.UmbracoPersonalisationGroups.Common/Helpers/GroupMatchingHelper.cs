@@ -2,6 +2,7 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
 {
     using System;
     using System.Linq;
+    using System.Text;
     using System.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
@@ -105,6 +106,20 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
             return matchedGroupIds
                 .Split(',')
                 .Any(x => int.Parse(x) == groupNodeId);
+        }
+
+        public static void AppendMatchedGroupDetailToVisitorHashString(StringBuilder sb, PersonalisationGroupDefinition definition, string name)
+        {
+            var matchCount = PersonalisationGroupMatcher.CountMatchingDefinitionDetails(definition);
+            var matched = (definition.Match == PersonalisationGroupDefinitionMatch.Any && matchCount > 0) || 
+                          (definition.Match == PersonalisationGroupDefinitionMatch.All && matchCount == definition.Details.Count());
+
+            if (sb.Length > 0)
+            {
+                sb.Append(",");
+            }
+
+            sb.AppendFormat("{0}={1}", name, matched);
         }
     }
 }

@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Umbraco.Core.Cache;
     using Umbraco.Core.Models.PublishedContent;
     using Umbraco.Web;
+    using Umbraco.Web.Composing;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
@@ -132,30 +134,22 @@
             Mandate.ParameterNotNull(personalisationGroupsRootNode, "personalisationGroupsRootNode");
 
             var cacheKey = $"{cacheUserIdentifier}-{AppConstants.CacheKeys.PersonalisationGroupsVisitorHash}";
-            return (string)UmbracoContext.Current.Application.ApplicationCache.RuntimeCache
-                .GetCacheItem(cacheKey,
-                    () =>
-                    {
-                        var groups = personalisationGroupsRootNode.Descendants(AppConstants.DocumentTypeAliases.PersonalisationGroup);
-                        var sb = new StringBuilder();
-                        foreach (var group in groups)
-                        {
-                            var definition = group.GetPropertyValue<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
-                            var matchCount = PersonalisationGroupMatcher.CountMatchingDefinitionDetails(definition);
-                            var matched = ((definition.Match == PersonalisationGroupDefinitionMatch.Any && matchCount > 0) ||
-                                (definition.Match == PersonalisationGroupDefinitionMatch.All && matchCount == definition.Details.Count()));
+            return Current.AppCaches.RuntimeCache.GetCacheItem(cacheKey,
+                () => CreatePersonalisationGroupsHashForVisitor(personalisationGroupsRootNode), 
+                timeout: TimeSpan.FromSeconds(cacheForSeconds));
+        }
 
-                            if (sb.Length > 0)
-                            {
-                                sb.Append(",");
-                            }
+        private static string CreatePersonalisationGroupsHashForVisitor(IPublishedContent personalisationGroupsRootNode)
+        {
+            var groups = personalisationGroupsRootNode.Descendants(AppConstants.DocumentTypeAliases.PersonalisationGroup);
+            var sb = new StringBuilder();
+            foreach (var group in groups)
+            {
+                var definition = group.Value<PersonalisationGroupDefinition>(AppConstants.PersonalisationGroupDefinitionPropertyAlias);
+                GroupMatchingHelper.AppendMatchedGroupDetailToVisitorHashString(sb, definition, group.CreatorName);
+            }
 
-                            sb.AppendFormat("{0}={1}", group.Name, matched);
-                        }
-
-                        return sb.ToString().GetHashCode().ToString();
-                    }, timeout: TimeSpan.FromSeconds(cacheForSeconds));
-
+            return sb.ToString().GetHashCode().ToString();
         }
     }
 }

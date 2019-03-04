@@ -207,6 +207,7 @@
     <Compile Include="Criteria\MemberProfileField\UmbracoMemberProfileFieldProvider.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\MemberType\UmbracoMemberTypeProvider.cs" />
+    <Compile Include="Helpers\MemberHelper.cs" />
     <Compile Include="PropertyEditors\PersonalisationGroupDefinitionPropertyEditor.cs" />
     <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
     <Compile Include="UmbracoApplicationEvents.cs" />
