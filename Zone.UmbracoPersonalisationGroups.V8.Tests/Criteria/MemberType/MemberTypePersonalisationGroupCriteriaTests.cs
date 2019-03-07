@@ -1,10 +1,10 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.V7.Tests.Criteria.MemberType
+﻿namespace Zone.UmbracoPersonalisationGroups.V8.Tests.Criteria.MemberType
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Zone.UmbracoPersonalisationGroups.Common.Criteria.MemberType;
-    using Zone.UmbracoPersonalisationGroups.Criteria.MemberType;
+    using Zone.UmbracoPersonalisationGroups.V8.Criteria.MemberType;
 
     [TestClass]
     public class MemberTypePersonalisationGroupCriteriaTests

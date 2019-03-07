@@ -68,13 +68,13 @@
         private static IPublishedContent GetGroupsRootFolder(UmbracoHelper helper)
         {
             return helper.ContentAtRoot()
-                .FirstOrDefault(x => x.ContentType.Alias == AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder);
+                .FirstOrDefault(x => x.IsDocumentType(AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder));
         }
 
         private static IList<IPublishedContent> GetGroups(IPublishedContent groupsRootFolder)
         {
             return groupsRootFolder.Descendants()
-                .Where(x => x.ContentType.Alias == AppConstants.DocumentTypeAliases.PersonalisationGroup)
+                .Where(x => x.IsDocumentType(AppConstants.DocumentTypeAliases.PersonalisationGroup))
                 .ToList();
         }
 
@@ -90,7 +90,7 @@
             string cacheUserIdentifier, int cacheForSeconds)
         {
             var personalisationGroupsRootNode = helper.Content(personalisationGroupsRootNodeId);
-            if (personalisationGroupsRootNode.ContentType.Alias != AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder)
+            if (!personalisationGroupsRootNode.IsDocumentType(AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder))
             {
                 throw new InvalidOperationException(
                     $"The personalisation groups hash for a visitor can only be calculated for a root node of type {AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder}");
@@ -111,7 +111,7 @@
             string cacheUserIdentifier, int cacheForSeconds)
         {
             var personalisationGroupsRootNode = helper.Content(personalisationGroupsRootNodeId);
-            if (personalisationGroupsRootNode.ContentType.Alias != AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder)
+            if (!personalisationGroupsRootNode.IsDocumentType(AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder))
             {
                 throw new InvalidOperationException(
                     $"The personalisation groups hash for a visitor can only be calculated for a root node of type {AppConstants.DocumentTypeAliases.PersonalisationGroupsFolder}");

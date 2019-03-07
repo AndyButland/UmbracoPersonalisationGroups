@@ -1,10 +1,10 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.V7.Tests.Criteria.MemberProfileField
+﻿namespace Zone.UmbracoPersonalisationGroups.V8.Tests.Criteria.MemberProfileField
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Zone.UmbracoPersonalisationGroups.Common.Criteria.MemberProfileField;
-    using Zone.UmbracoPersonalisationGroups.Criteria.MemberProfileField;
+    using Zone.UmbracoPersonalisationGroups.V8.Criteria.MemberProfileField;
 
     [TestClass]
     public class MemberProfileFieldPersonalisationGroupCriteriaTests

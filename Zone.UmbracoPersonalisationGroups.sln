@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1A034002
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.V8", "Zone.UmbracoPersonalisationGroups.V8\Zone.UmbracoPersonalisationGroups.V8.csproj", "{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zone.UmbracoPersonalisationGroups.V8.Tests", "Zone.UmbracoPersonalisationGroups.V8.Tests\Zone.UmbracoPersonalisationGroups.V8.Tests.csproj", "{EFAD4F7E-D94E-49DE-B613-EAA1D3A37AE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AD831EB-9F9B-42BE-A4BE-B04F2E9FE2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFAD4F7E-D94E-49DE-B613-EAA1D3A37AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFAD4F7E-D94E-49DE-B613-EAA1D3A37AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFAD4F7E-D94E-49DE-B613-EAA1D3A37AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFAD4F7E-D94E-49DE-B613-EAA1D3A37AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{D9D26085-B3D6-4ABE-92F8-CBA2AD73BAE4} = {B7DC82CE-00B2-41C3-8A92-76EB6A2CA2FE}
 		{3B375803-EED1-4F8C-A020-1F72092BA5CA} = {B7DC82CE-00B2-41C3-8A92-76EB6A2CA2FE}
 		{FE7A2310-AE4B-43E4-8498-3882374D5AAF} = {1A034002-EC0A-4E9B-AC1C-A27D004E34CD}
+		{EFAD4F7E-D94E-49DE-B613-EAA1D3A37AE7} = {1A034002-EC0A-4E9B-AC1C-A27D004E34CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8E675ED-F590-40CB-86E9-16D4FB036E63}
