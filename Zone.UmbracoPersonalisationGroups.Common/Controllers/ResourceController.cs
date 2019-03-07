@@ -1,8 +1,11 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Common.Controllers
 {
     using System.Linq;
+    using System.Reflection;
     using System.Web.Mvc;
     using Zone.UmbracoPersonalisationGroups.Common;
+    using Zone.UmbracoPersonalisationGroups.Common.Attributes;
+    using Zone.UmbracoPersonalisationGroups.Common.Criteria;
     using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
@@ -22,15 +25,14 @@
 
             // Get this assembly.
             var assembly = typeof(ResourceController).Assembly;
-            string resourceName;
-            var resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out resourceName);
+            var resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out string resourceName);
 
             if (resourceStream != null)
             {
                 return new FileStreamResult(resourceStream, GetMimeType(resourceName));
             }
 
-            return this.HttpNotFound();
+            return HttpNotFound();
         }
 
         /// <summary>
@@ -47,18 +49,30 @@
             var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
                 .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
 
-            if (criteria != null)
+            if (criteria == null)
             {
-                string resourceName;
-                var resourceStream = EmbeddedResourceHelper.GetResource(criteria.GetType().Assembly, criteriaAlias + "." + fileName, out resourceName);
+                return HttpNotFound();
+            }
 
-                if (resourceStream != null)
-                {
-                    return new FileStreamResult(resourceStream, GetMimeType(resourceName));
-                }
+            var resourceStream = EmbeddedResourceHelper.GetResource(GetResourceAssembly(criteria), criteriaAlias + "." + fileName, out string resourceName);
+            if (resourceStream != null)
+            {
+                return new FileStreamResult(resourceStream, GetMimeType(resourceName));
             }
 
             return HttpNotFound();
+        }
+
+        private static Assembly GetResourceAssembly(IPersonalisationGroupCriteria criteria)
+        {
+            // If a criteria has an CriteriaResourceAssembly attribute applied, we load the resources from there.
+            // If not, we use the criteria's type itself.
+            var criteriaType = criteria.GetType();
+            var criteriaResourceAssemblyAttribute = criteriaType.GetCustomAttributes(typeof(CriteriaResourceAssemblyAttribute))
+                .SingleOrDefault() as CriteriaResourceAssemblyAttribute;
+            return criteriaResourceAssemblyAttribute == null 
+                ? criteria.GetType().Assembly 
+                : Assembly.Load(criteriaResourceAssemblyAttribute.AssemblyName);
         }
 
         /// <summary>

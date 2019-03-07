@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Attributes\CriteriaResourceAssemblyAttribute.cs" />
     <Compile Include="Configuration\PersonalisationGroupsConfig.cs" />
     <Compile Include="Controllers\BaseJsonResultController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
@@ -312,6 +313,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Criteria\MemberType\definition.translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PropertyEditors\editor.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PropertyEditors\editor.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

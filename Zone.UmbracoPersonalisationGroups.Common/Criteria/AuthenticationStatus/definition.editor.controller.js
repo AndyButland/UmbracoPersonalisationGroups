@@ -2,6 +2,8 @@
     .controller("UmbracoPersonalisationGroups.AuthenticationStatusPersonalisationGroupCriteriaController",
         function ($scope) {
 
+            console.log($scope);
+            console.log($scope.dialogOptions);
             $scope.renderModel = {};
 
             if ($scope.dialogOptions.definition) {

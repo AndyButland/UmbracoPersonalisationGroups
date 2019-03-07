@@ -219,10 +219,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PropertyEditors\editor.html" />
-    <EmbeddedResource Include="PropertyEditors\editor.controller.js" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Zone.UmbracoPersonalisationGroups.Common\Zone.UmbracoPersonalisationGroups.Common.csproj">
       <Project>{2084e9ee-1e69-40b4-9ae0-d7a2cd24f9f0}</Project>
       <Name>Zone.UmbracoPersonalisationGroups.Common</Name>

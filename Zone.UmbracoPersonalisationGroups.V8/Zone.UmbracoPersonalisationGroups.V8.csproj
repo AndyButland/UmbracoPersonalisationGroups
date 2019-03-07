@@ -252,8 +252,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PropertyEditors\editor.controller.js" />
-    <EmbeddedResource Include="PropertyEditors\editor.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
