@@ -8,8 +8,8 @@
     /// <summary>
     /// Property editor for managing the definition of a personalisation group
     /// </summary>
-    [PropertyEditor(Constants.PersonalisationGroupDefinitionPropertyEditorAlias, "Personalisation group definition", Constants.ResourceRoot + "editor.html", ValueType = "JSON")]
-    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceRoot + "editor.controller.js" + Constants.ResourceExtension)]
+    [PropertyEditor(Constants.PersonalisationGroupDefinitionPropertyEditorAlias, "Personalisation group definition", Constants.ResourceRoot + "property.editor.html", ValueType = "JSON")]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceRoot + "property.editor.controller.js" + Constants.ResourceExtension)]
 
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "authenticationStatus/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "authenticationStatus/definition.translator.js" + Constants.ResourceExtension)]

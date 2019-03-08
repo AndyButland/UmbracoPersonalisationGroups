@@ -48,7 +48,6 @@
 
             var criteria = PersonalisationGroupMatcher.GetAvailableCriteria()
                 .SingleOrDefault(x => x.Alias.InvariantEquals(criteriaAlias));
-
             if (criteria == null)
             {
                 return HttpNotFound();

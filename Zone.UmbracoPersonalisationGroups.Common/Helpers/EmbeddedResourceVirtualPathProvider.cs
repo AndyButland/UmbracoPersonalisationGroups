@@ -3,7 +3,6 @@
     using System;
     using ClientDependency.Core.CompositeFiles;
     using Zone.UmbracoPersonalisationGroups.Common;
-    using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
     /// <summary>
     /// The embedded resource virtual path provider.
@@ -38,7 +37,7 @@
         /// </returns>
         public IVirtualFile GetFile(string virtualPath)
         {
-            if (!this.FileExists(virtualPath))
+            if (!FileExists(virtualPath))
             {
                 return null;
             }

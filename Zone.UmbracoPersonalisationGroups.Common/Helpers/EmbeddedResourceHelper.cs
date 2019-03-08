@@ -78,7 +78,8 @@
             resource = SanitizeCriteriaResourceName(resource);
 
             // Find the resource name; not case sensitive.
-            resourceName = assembly.GetManifestResourceNames().FirstOrDefault(r => r.InvariantEndsWith(resource));
+            resourceName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(r => r.InvariantEndsWith(resource));
             return resourceName != null 
                 ? assembly.GetManifestResourceStream(resourceName) 
                 : null;

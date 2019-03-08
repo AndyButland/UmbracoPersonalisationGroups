@@ -315,10 +315,10 @@
     <EmbeddedResource Include="Criteria\MemberType\definition.translator.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PropertyEditors\editor.controller.js" />
+    <EmbeddedResource Include="PropertyEditors\property.editor.controller.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PropertyEditors\editor.html" />
+    <EmbeddedResource Include="PropertyEditors\property.editor.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
