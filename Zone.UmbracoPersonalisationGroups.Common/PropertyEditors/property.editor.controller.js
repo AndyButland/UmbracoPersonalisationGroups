@@ -1,6 +1,17 @@
 ﻿angular.module("umbraco")
     .controller("UmbracoPersonalisationGroups.PersonalisationGroupDefinitionController",
-        function ($scope, $http, $injector, dialogService) {
+        function ($scope, $http, $injector) {
+
+            // In V7 we use dialogService, in V8 it's editorService.
+            // So we can't inject them directly as one or other will fail.
+            // Instead we'll pull them in manually using $injector, handling when they can't be located.
+            var dialogService = null;
+            var editorService = null;
+            try {
+                dialogService = $injector.get("dialogService");
+            } catch (e) {
+                editorService = $injector.get("editorService");
+            }
 
             var translators = [];
             var editingNew = false;
@@ -77,20 +88,45 @@
             $scope.editDefinitionDetail = function (definitionDetail) {
                 editingNew = false;
                 var templateUrl = "/App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/" + definitionDetail.alias + "/definition.editor.html";
-                dialogService.open(
-                    {
-                        template: templateUrl,
-                        definition: definitionDetail.definition,
-                        callback: function (data) {
-                            definitionDetail.definition = data;
-                        },
-                        closeCallback: function() {
-                            if (editingNew) {
-                                // If we've cancelled a new one, we don't want an empty record
-                                $scope.model.value.details.pop();
+
+                if (dialogService) {
+                    // V7 - use dialogService
+                    dialogService.open(
+                        {
+                            template: templateUrl,
+                            definition: definitionDetail.definition,
+                            callback: function(data) {
+                                definitionDetail.definition = data;
+                            },
+                            closeCallback: function() {
+                                if (editingNew) {
+                                    // If we've cancelled a new one, we don't want an empty record
+                                    $scope.model.value.details.pop();
+                                }
                             }
-                        },
-                    });
+                        });
+                } else {
+                    // V8 - use editorService
+                    editorService.open(
+                        {
+                            title: "Edit definition detail",
+                            view: templateUrl,
+                            size: "small",
+                            definition: definitionDetail.definition,
+                            submit: function (data) {
+                                definitionDetail.definition = data;
+                                editorService.close();
+                            },
+                            close: function () {
+                                if (editingNew) {
+                                    // If we've cancelled a new one, we don't want an empty record
+                                    $scope.model.value.details.pop();
+                                }
+
+                                editorService.close();
+                            }
+                        });
+                }
             };
 
             $scope.delete = function (index) {

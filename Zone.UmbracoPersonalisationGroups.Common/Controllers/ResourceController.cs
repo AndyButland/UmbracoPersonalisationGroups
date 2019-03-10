@@ -23,7 +23,6 @@
         {
             Mandate.ParameterNotNullOrEmpty(fileName, nameof(fileName));
 
-            // Get this assembly.
             var assembly = typeof(ResourceController).Assembly;
             var resourceStream = EmbeddedResourceHelper.GetResource(assembly, fileName, out string resourceName);
 

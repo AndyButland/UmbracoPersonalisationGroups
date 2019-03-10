@@ -255,6 +255,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PackageComposer.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Criteria\MemberProfileField\MemberProfileFieldPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\MemberProfileField\UmbracoMemberProfileFieldProvider.cs" />

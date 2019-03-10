@@ -2,6 +2,9 @@
     .controller("UmbracoPersonalisationGroups.CountryPersonalisationGroupCriteriaController",
         function ($scope, geoLocationService) {
 
+            // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
+            var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
+
             function initAvailableCountriesList() {
                 geoLocationService.getCountryList()
                     .success(function (data) {
@@ -18,8 +21,8 @@
             $scope.renderModel = { match: "IsLocatedIn" };
             $scope.renderModel.countries = [];
 
-            if ($scope.dialogOptions.definition) {
-                var countrySettings = JSON.parse($scope.dialogOptions.definition);
+            if (definition) {
+                var countrySettings = JSON.parse(definition);
                 $scope.renderModel.match = countrySettings.match;
                 if (countrySettings.codes) {
                     for (var i = 0; i < countrySettings.codes.length; i++) {
@@ -98,6 +101,17 @@
                 
                 serializedResult += " }";
 
-                $scope.submit(serializedResult);
+                // For V7 we use $scope.submit(), for V8 $scope.model.submit()
+                if ($scope.submit) {
+                    $scope.submit(serializedResult);
+                } else {
+                    $scope.model.submit(serializedResult);
+                }
+            };
+
+            $scope.close = function () {
+                if ($scope.model.close) {
+                    $scope.model.close();
+                }
             };
         });

@@ -2,10 +2,13 @@
     .controller("UmbracoPersonalisationGroups.SessionPersonalisationGroupCriteriaController",
         function ($scope) {
 
+            // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
+            var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
+
             $scope.renderModel = { match: "Exists" };
 
-            if ($scope.dialogOptions.definition) {
-                var sessionSettings = JSON.parse($scope.dialogOptions.definition);
+            if (definition) {
+                var sessionSettings = JSON.parse(definition);
                 $scope.renderModel = sessionSettings;
             }
 
@@ -18,7 +21,19 @@
                     var serializedResult = "{ \"key\": \"" + $scope.renderModel.key + "\", " +
                         "\"match\": \"" + $scope.renderModel.match + "\", " +
                         "\"value\": \"" + ($scope.valueRequired() ? $scope.renderModel.value : "") + "\" }";
-                    $scope.submit(serializedResult);
+
+                    // For V7 we use $scope.submit(), for V8 $scope.model.submit()
+                    if ($scope.submit) {
+                        $scope.submit(serializedResult);
+                    } else {
+                        $scope.model.submit(serializedResult);
+                    }
+                }
+            };
+
+            $scope.close = function () {
+                if ($scope.model.close) {
+                    $scope.model.close();
                 }
             };
 

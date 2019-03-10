@@ -59,8 +59,8 @@
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "timeOfDay/definition.translator.js" + Constants.ResourceExtension)]
     public class PersonalisationGroupDefinitionPropertyEditor : DataEditor
     {
-        public PersonalisationGroupDefinitionPropertyEditor(ILogger logger, EditorType type = EditorType.PropertyValue)
-            : base(logger, type)
+        public PersonalisationGroupDefinitionPropertyEditor(ILogger logger)
+            : base(logger)
         {
         }
     }

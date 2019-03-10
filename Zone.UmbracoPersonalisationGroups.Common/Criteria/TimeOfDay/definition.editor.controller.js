@@ -2,6 +2,9 @@
     .controller("UmbracoPersonalisationGroups.TimeOfDayPersonalisationGroupCriteriaController",
         function ($scope) {
 
+            // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
+            var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
+
             function isNumber(n) {
                 return !isNaN(parseFloat(n)) && isFinite(n);
             };
@@ -16,8 +19,8 @@
             $scope.renderModel = {};
             $scope.renderModel.periods = [];
 
-            if ($scope.dialogOptions.definition) {
-                $scope.renderModel.periods = JSON.parse($scope.dialogOptions.definition);
+            if (definition) {
+                $scope.renderModel.periods = JSON.parse(definition);
             }
 
             $scope.newFrom = "";
@@ -66,6 +69,18 @@
                 }
 
                 serializedResult += "]";
-                $scope.submit(serializedResult);
+
+                // For V7 we use $scope.submit(), for V8 $scope.model.submit()
+                if ($scope.submit) {
+                    $scope.submit(serializedResult);
+                } else {
+                    $scope.model.submit(serializedResult);
+                }
+            };
+
+            $scope.close = function () {
+                if ($scope.model.close) {
+                    $scope.model.close();
+                }
             };
         });

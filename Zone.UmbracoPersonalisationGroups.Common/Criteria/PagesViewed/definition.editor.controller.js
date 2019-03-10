@@ -1,6 +1,20 @@
 ﻿angular.module("umbraco")
     .controller("UmbracoPersonalisationGroups.PagesViewedPersonalisationGroupCriteriaController",
-        function ($scope, dialogService, entityResource, iconHelper) {
+        function ($scope, $injector, entityResource, iconHelper) {
+
+            // In V7 we use dialogService, in V8 it's editorService.
+            // So we can't inject them directly as one or other will fail.
+            // Instead we'll pull them in manually using $injector, handling when they can't be located.
+            var dialogService = null;
+            var editorService = null;
+            try {
+                dialogService = $injector.get("dialogService");
+            } catch (e) {
+                editorService = $injector.get("editorService");
+            }
+
+            // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
+            var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
 
             function loadNodeDetails() {
 
@@ -25,36 +39,63 @@
 
             $scope.renderModel = { match: "ViewedAny", nodes: [] };
 
-            if ($scope.dialogOptions.definition) {
-                var pagesViewedSettings = JSON.parse($scope.dialogOptions.definition);
+            if (definition) {
+                var pagesViewedSettings = JSON.parse(definition);
                 $scope.renderModel = pagesViewedSettings;
                 if ($scope.renderModel.nodeIds.length > 0) {
                     loadNodeDetails();
                 }
             }
 
+            function processSelections(selection) {
+                if (angular.isArray(selection)) {
+                    _.each(selection,
+                        function(item) {
+                            $scope.add(item);
+                        });
+                } else {
+                    $scope.clear();
+                    $scope.add(data);
+                }
+            }
+
             $scope.openContentPicker = function () {
 
-                var dialogOptions = {
-                    multiPicker: true,
-                    entityType: "Document",
-                    filterCssClass: "not-allowed not-published",
-                    startNodeId: null,
-                    callback: function (data) {
-                        if (angular.isArray(data)) {
-                            _.each(data, function (item, i) {
-                                $scope.add(item);
-                            });
-                        } else {
-                            $scope.clear();
-                            $scope.add(data);
-                        }
-                    },
-                    treeAlias: "content",
-                    section: "content"
-                };
+                var dialogOptions;
+                if (dialogService) {
+                    // V7 - use dialogService
+                    dialogOptions = {
+                        multiPicker: true,
+                        entityType: "Document",
+                        filterCssClass: "not-allowed not-published",
+                        startNodeId: null,
+                        callback: function (data) {
+                            processSelections(data);
+                        },
+                        treeAlias: "content",
+                        section: "content"
+                    };
 
-                var d = dialogService.treePicker(dialogOptions);
+                    dialogService.treePicker(dialogOptions);
+                } else {
+                    // V8 - use editorService
+                    dialogOptions = {
+                        view: "views/common/infiniteeditors/treepicker/treepicker.html",
+                        size: "small",
+                        section: "content",
+                        treeAlias: "content",
+                        multiPicker: true,
+                        submit: function (data) {
+                            processSelections(data.selection);
+                            editorService.close();
+                        },
+                        close: function () {
+                            editorService.close();
+                        }
+                    };
+                    editorService.contentPicker(dialogOptions);
+
+                }
             };
 
             $scope.remove = function (index) {
@@ -85,7 +126,19 @@
 
                 var serializedResult = "{ \"match\": \"" + $scope.renderModel.match + "\", " +
                     "\"nodeIds\": " + "[" + $scope.renderModel.nodeIds.join() + "]" + " }";
-                $scope.submit(serializedResult);
+
+                // For V7 we use $scope.submit(), for V8 $scope.model.submit()
+                if ($scope.submit) {
+                    $scope.submit(serializedResult);
+                } else {
+                    $scope.model.submit(serializedResult);
+                }
+            };
+
+            $scope.close = function () {
+                if ($scope.model.close) {
+                    $scope.model.close();
+                }
             };
 
         });

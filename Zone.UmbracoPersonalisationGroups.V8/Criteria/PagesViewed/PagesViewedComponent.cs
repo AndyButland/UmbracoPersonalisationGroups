@@ -11,7 +11,7 @@
     /// Registered required Umbraco application events for the pages viewed criteria - to track via a cookie
     /// all pages viewed
     /// </summary>
-    public class RegisterApplicationEvents : IComponent
+    public class PagesViewedComponent : IComponent
     {
         public void Initialize()
         {

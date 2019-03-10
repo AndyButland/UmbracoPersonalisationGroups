@@ -2,6 +2,9 @@
     .controller("UmbracoPersonalisationGroups.MemberProfileFieldPersonalisationGroupCriteriaController",
         function ($scope, $http) {
 
+            // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
+            var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
+
             function initGroupList() {
                 $scope.availableFields = [];
                 $http.get("/App_Plugins/UmbracoPersonalisationGroups/Member/GetMemberProfileFields")
@@ -17,8 +20,8 @@
 
             initGroupList();
 
-            if ($scope.dialogOptions.definition) {
-                var profileFieldSettings = JSON.parse($scope.dialogOptions.definition);
+            if (definition) {
+                var profileFieldSettings = JSON.parse(definition);
                 $scope.renderModel = profileFieldSettings;
             }
 
@@ -26,7 +29,19 @@
                 var serializedResult = "{ \"alias\": \"" + $scope.renderModel.alias + "\", " +
                     "\"match\": \"" + $scope.renderModel.match + "\", " +
                     "\"value\": \"" + $scope.renderModel.value + "\" }";
-                $scope.submit(serializedResult);
+
+                // For V7 we use $scope.submit(), for V8 $scope.model.submit()
+                if ($scope.submit) {
+                    $scope.submit(serializedResult);
+                } else {
+                    $scope.model.submit(serializedResult);
+                }
+            };
+
+            $scope.close = function () {
+                if ($scope.model.close) {
+                    $scope.model.close();
+                }
             };
 
         });
