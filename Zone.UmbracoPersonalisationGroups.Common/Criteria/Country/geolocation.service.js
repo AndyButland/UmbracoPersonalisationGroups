@@ -1,30 +1,6 @@
 ﻿angular.module("umbraco.services")
 	.factory("geoLocationService", function ($http) {
 
-	    var currentCountryCode = "GB";
-        var regions = [];
-
-        //function initCountryList(withRegionsOnly) {
-        //    return $http.get("/App_Plugins/UmbracoPersonalisationGroups/GeoLocation/GetCountries?withRegionsOnly=" + withRegionsOnly)
-        //        .success(function (result) {
-
-        //            // Cache result for further requests
-        //            if (withRegionsOnly) {
-        //                countriesWithRegions = result.data;
-        //            } else {
-        //                allCountries = result.data;
-        //            }
-        //        });
-        //};
-
-	    //function initRegionList() {
-	    //    $http.get("/App_Plugins/UmbracoPersonalisationGroups/GeoLocation/GetRegions?countryCode=" + currentCountryCode)
-        //        .then(function (result) {
-        //            regions = result.data;
-        //            return result.data;
-        //        });
-	    //};
-
 	    var service = {
 	        getCountryList: function (withRegionsOnly) {
 	            var url = "/App_Plugins/UmbracoPersonalisationGroups/GeoLocation/GetCountries?withRegionsOnly=" + withRegionsOnly;

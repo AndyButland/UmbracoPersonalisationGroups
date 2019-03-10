@@ -101,13 +101,13 @@
 
         private static Assembly GetResourceAssembly()
         {
-            return Assembly.Load("Zone.PersonalisationGroups.Common");
+            return Assembly.Load(AppConstants.CommonAssemblyName);
         }
 
 
         private static string GetResourceName(string area)
         {
-            return $"Zone.UmbracoPersonalisationGroups.Common.Data.{area}.txt";
+            return $"{AppConstants.CommonAssemblyName}.Data.{area}.txt";
         }
 
         private static string CleanName(string name)

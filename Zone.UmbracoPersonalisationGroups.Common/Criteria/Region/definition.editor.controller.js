@@ -9,15 +9,19 @@
 
             function initAvailableRegionsList(countryCode) {
                 geoLocationService.getRegionList(countryCode)
-                    .success(function (data) {
-                        $scope.availableRegions = data;
+                    .then(function (data) {
+                        // For V7 country list is available on data, for V8 need to use data.data
+                        var regionData = data.data ? data.data : data;
+                        $scope.availableRegions = regionData;
                     });
             }
 
             function initCountryList() {
                 geoLocationService.getCountryList(true)
-                    .success(function (data) {
-                        $scope.availableCountries = data;
+                    .then(function (data) {
+                        // For V7 country list is available on data, for V8 need to use data.data
+                        var countryData = data.data ? data.data : data;
+                        $scope.availableCountries = countryData;
                     });
             };
 

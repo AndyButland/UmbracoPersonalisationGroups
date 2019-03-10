@@ -7,8 +7,10 @@
 
             function initAvailableCountriesList() {
                 geoLocationService.getCountryList()
-                    .success(function (data) {
-                        $scope.availableCountries = data;
+                    .then(function (data) {
+                        // For V7 country list is available on data, for V8 need to use data.data
+                        var countryData = data.data ? data.data : data;
+                        $scope.availableCountries = countryData;
                     });
             };
 
