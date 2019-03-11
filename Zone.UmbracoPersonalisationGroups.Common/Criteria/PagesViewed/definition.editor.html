@@ -1,43 +1,50 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.PagesViewedPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the pages viewed criteria settings:</p>
 
-        <umb-control-group alias="match" label="Visitor has">
-            <select ng-model="renderModel.match" style="width: auto">
-                <option value="ViewedAny">Viewed any one of the following pages</option>
-                <option value="ViewedAll">Viewed all of the following pages</option>
-                <option value="NotViewedAny">Not viewed any one of the following pages</option>
-                <option value="NotViewedAll">Not viewed all of the following pages</option>
-            </select>
-        </umb-control-group>
-        <umb-control-group alias="nodeIds" label="Pages">
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="match">Vistor has</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match" style="width: auto">
+                            <option value="ViewedAny">Viewed any one of the following pages</option>
+                            <option value="ViewedAll">Viewed all of the following pages</option>
+                            <option value="NotViewedAny">Not viewed any one of the following pages</option>
+                            <option value="NotViewedAll">Not viewed all of the following pages</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="nodeIds">Pages</label></td>
+                    <td style="padding-top: 20px">
+                        <ul class="unstyled list-icons" ng-model="renderModel.nodes">
 
-            <ul class="unstyled list-icons" ng-model="renderModel.nodes">
+                            <li ng-repeat="node in renderModel.nodes">
 
-                <li ng-repeat="node in renderModel.nodes">
+                                <a href="#" prevent-default ng-click="remove($index)">
+                                    <i class="icon icon-delete red hover-show"></i>
+                                    <i class="{{node.icon}} hover-hide"></i>
+                                    {{node.name}}
+                                </a>
 
-                    <a href="#" prevent-default ng-click="remove($index)">
-                        <i class="icon icon-delete red hover-show"></i>
-                        <i class="{{node.icon}} hover-hide"></i>
-                        {{node.name}}
-                    </a>
+                            </li>
+                        </ul>
 
-                </li>
-            </ul>
-
-            <ul class="unstyled list-icons">
-                <li>
-                    <i class="icon icon-add blue"></i>
-                    <a href="#" ng-click="openContentPicker()" prevent-default>
-                        <localize key="general_add">Add</localize>
-                    </a>
-                </li>
-            </ul>
-
-        </umb-control-group>
-
+                        <ul class="unstyled list-icons">
+                            <li>
+                                <i class="icon icon-add blue"></i>
+                                <a href="#" ng-click="openContentPicker()" prevent-default>
+                                    <localize key="general_add">Add</localize>
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
     </div>
 
     <div class="umb-panel-footer">

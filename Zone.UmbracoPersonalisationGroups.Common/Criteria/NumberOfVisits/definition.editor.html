@@ -1,19 +1,29 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.NumberOfVisitsPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the number of visits settings:</p>
-
-        <umb-control-group alias="match" label="Vistor has access the site">
-            <select ng-model="renderModel.match">
-                <option value="MoreThan">More than</option>
-                <option value="LessThan">Less than</option>
-                <option value="Exactly">Exactly</option>
-            </select>
-        </umb-control-group>
-        <umb-control-group alias="number" label="Number of times">
-            <input type="number" min="0" ng-model="renderModel.number" />
-        </umb-control-group>
+        
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="match">Vistor has accessed the site</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="MoreThan">More than</option>
+                            <option value="LessThan">Less than</option>
+                            <option value="Exactly">Exactly</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="number">Number of times</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="number" min="0" ng-model="renderModel.number" />
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
 
     </div>
 

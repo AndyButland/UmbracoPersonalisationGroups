@@ -5,33 +5,24 @@
         // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
         var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
 
-        var self = this;
+        $scope.renderModel = { match: "MatchesValue" };
 
-        self.renderModel = { match: "MatchesValue" };
-        self.matchOptions = [
-            { key: 'MatchesValue', value: 'Matches value' },
-            { key: 'DoesNotMatchValue', value: 'Does not match value' },
+        $scope.currentMatchIsCaseInsensitive = function() {
+            if (!$scope.renderModel.match) {
+                return false;
+            }
 
-            { key: 'ContainsValue', value: 'Contains value' },
-            { key: 'DoesNotContainValue', value: 'Does not contain value' },
-
-            { key: 'MatchesRegex', value: 'Matches regular expression' },
-            { key: 'DoesNotMatchRegex', value: 'Does not match regular expression' },
-        ];
-
-        self.currentMatchIsCaseInsensitive = function() {
-            if (!self.renderModel.match) return false;
-            var key = self.renderModel.match;
+            var key = $scope.renderModel.match;
             return key.indexOf('Regex') === -1;
         }
 
         if (definition) {
-            self.renderModel = JSON.parse(definition);
+            $scope.renderModel = JSON.parse(definition);
         }
 
         $scope.saveAndClose = function () {
 
-            var serializedResult = JSON.stringify(self.renderModel);
+            var serializedResult = JSON.stringify($scope.renderModel);
 
             // For V7 we use $scope.submit(), for V8 $scope.model.submit()
             if ($scope.submit) {

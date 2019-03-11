@@ -1,20 +1,30 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.HostPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the host settings:</p>
 
-        <umb-control-group alias="value" label="Value">
-            <input type="text" ng-model="renderModel.value"/>
-        </umb-control-group>
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="renderModel.match">
-                <option value="MatchesValue">Matches value</option>
-                <option value="DoesNotMatchValue">Does not match value</option>
-                <option value="ContainsValue">Contains value</option>
-                <option value="DoesNotContainValue">Does not contain value</option>
-            </select>
-        </umb-control-group>
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="value">Value</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="text" ng-model="renderModel.value" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="MatchesValue">Matches value</option>
+                            <option value="DoesNotMatchValue">Does not match value</option>
+                            <option value="ContainsValue">Contains value</option>
+                            <option value="DoesNotContainValue">Does not contain value</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
 
     </div>
 

@@ -1,19 +1,29 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.MemberTypePersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the member type settings:</p>
-
-        <umb-control-group alias="typeName" label="Type">
-            <select ng-model="renderModel.typeName"
-                    ng-options="item as item for item in availableTypes"></select>
-        </umb-control-group>
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="renderModel.match">
-                <option value="IsOfType">Matches type</option>
-                <option value="IsNotOfType">Does not match type</option>
-            </select>
-        </umb-control-group>
+        
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="typeName">Type</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.typeName"
+                                ng-options="item as item for item in availableTypes"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="IsOfType">Matches type</option>
+                            <option value="IsNotOfType">Does not match type</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
 
     </div>
 

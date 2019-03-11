@@ -1,19 +1,29 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.MemberGroupPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the member group settings:</p>
-
-        <umb-control-group alias="groupName" label="Group">
-            <select ng-model="renderModel.groupName"
-                    ng-options="item as item for item in availableGroups"></select>
-        </umb-control-group>
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="renderModel.match">
-                <option value="IsInGroup">Is in group</option>
-                <option value="IsNotInGroup">Is not in group</option>
-            </select>
-        </umb-control-group>
+        
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="groupName">Group</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.groupName"
+                                ng-options="item as item for item in availableGroups"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="IsInGroup">Is in group</option>
+                            <option value="IsNotInGroup">Is not in group</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
 
     </div>
 

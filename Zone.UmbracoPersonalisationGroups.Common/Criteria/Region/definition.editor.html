@@ -1,60 +1,73 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.RegionPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
+        
         <p>Please select the country and regions for for the group.</p>
-
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="renderModel.match">
-                <option value="IsLocatedIn">Visitor is located in</option>
-                <option value="IsNotLocatedIn">Visitor is not located in</option>
-                <option value="CouldNotBeLocated">Visitor cannot be located</option>
-            </select>
-        </umb-control-group>
-
-        <umb-control-group alias="countryCode" label="Country">
-            <select ng-model="renderModel.countryCode"
-                    ng-change="changedCountryCode(renderModel.countryCode)" 
-                    ng-options="item.code as item.name for item in availableCountries" ng-disabled="!geoDetailsRequired()"></select>
-        </umb-control-group>
-
-        <umb-control-group alias="regions" label="Regions">
-            <table class="table table-striped">
-                <tbody>
-                <tr ng-repeat="region in renderModel.regions">
-                    <td>
-                        <span ng-show="!region.edit">{{region.name}}</span>
-                        <select ng-model="region.name"
-                                ng-options="item.name as item.name for item in availableRegions"
-                                ng-show="region.edit"
-                                ng-disabled="!geoDetailsRequired()"></select>
-                    </td>
-                    <td>
-                        <div class="btn-group" ng-show="!region.edit">
-                            <button type="button" class="btn btn-default" ng-click="edit($index)" ng-disabled="!geoDetailsRequired()"><localize key="edit">Edit</localize></button>
-                            <button type="button" class="btn btn-default" ng-click="delete($index)" ng-disabled="!geoDetailsRequired()"><localize key="delete">Delete</localize></button>
-                        </div>
-                        <div class="btn-group" ng-show="region.edit">
-                            <button type="button" class="btn btn-default" ng-click="saveEdit($index)" ng-disabled="!geoDetailsRequired()"><localize key="buttons_save">Save</localize></button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
+        
+        <umb-pane>
+            <table class="table">
                 <tr>
-                    <td>
-                        <select ng-model="newRegion.name"
-                                ng-options="item.name as item.name for item in availableRegions"
-                                ng-disabled="!geoDetailsRequired()"></select>
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" ng-click="add()" ng-disabled="!geoDetailsRequired()"><localize key="general_add">Add</localize></button>
-                        </div>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="IsLocatedIn">Visitor is located in</option>
+                            <option value="IsNotLocatedIn">Visitor is not located in</option>
+                            <option value="CouldNotBeLocated">Visitor cannot be located</option>
+                        </select>
                     </td>
                 </tr>
-                </tfoot>
+                <tr>
+                    <td><label class="control-label" for="countryCode">Country</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.countryCode"
+                                ng-change="changedCountryCode(renderModel.countryCode)" 
+                                ng-options="item.code as item.name for item in availableCountries" ng-disabled="!geoDetailsRequired()"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label" for="regions">Regions</label>
+                        <table class="table table-striped" style="margin-top: 16px">
+                            <tbody>
+                            <tr ng-repeat="region in renderModel.regions">
+                                <td>
+                                    <span ng-show="!region.edit">{{region.name}}</span>
+                                    <select ng-model="region.name"
+                                            ng-options="item.name as item.name for item in availableRegions"
+                                            ng-show="region.edit"
+                                            ng-disabled="!geoDetailsRequired()"></select>
+                                </td>
+                                <td>
+                                    <div class="btn-group" ng-show="!region.edit">
+                                        <button type="button" class="btn btn-default" ng-click="edit($index)" ng-disabled="!geoDetailsRequired()"><localize key="edit">Edit</localize></button>
+                                        <button type="button" class="btn btn-default" ng-click="delete($index)" ng-disabled="!geoDetailsRequired()"><localize key="delete">Delete</localize></button>
+                                    </div>
+                                    <div class="btn-group" ng-show="region.edit">
+                                        <button type="button" class="btn btn-default" ng-click="saveEdit($index)" ng-disabled="!geoDetailsRequired()"><localize key="buttons_save">Save</localize></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td>
+                                    <select ng-model="newRegion.name"
+                                            ng-options="item.name as item.name for item in availableRegions"
+                                            ng-disabled="!geoDetailsRequired()"></select>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" ng-click="add()" ng-disabled="!geoDetailsRequired()"><localize key="general_add">Add</localize></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </td>
+                </tr>
             </table>
-        </umb-control-group>
+        </umb-pane>
+
     </div>
 
     <div class="umb-panel-footer">

@@ -1,21 +1,44 @@
-﻿<div class="umb-panel querystring-personalisation-group-critera" ng-controller="UmbracoPersonalisationGroups.QuerystringPersonalisationGroupCriteriaController as ctrl">
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+﻿<div class="umb-panel querystring-personalisation-group-critera" ng-controller="UmbracoPersonalisationGroups.QuerystringPersonalisationGroupCriteriaController">
+    
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
+
         <p>Please enter the querystring settings:</p>
-        <umb-control-group alias="key" label="Querystring key">
-            <input type="text" ng-model="ctrl.renderModel.key" />
-        </umb-control-group>
 
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="ctrl.renderModel.match" ng-options="match.key as match.value for match in ctrl.matchOptions"></select>
-        </umb-control-group>
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="key">Key</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="text" ng-model="renderModel.key" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="MatchesValue">Matches value</option>
+                            <option value="DoesNotMatchValue">Does not match value</option>
+                            <option value="ContainsValue">Contains value</option>
+                            <option value="DoesNotContainValue">Does not contain value</option>
+                            <option value="MatchesRegex">Matches regular expression</option>
+                            <option value="DoesNotMatchRegex">Does not match regular expression</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="value">Value</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="text" ng-model="renderModel.value" />
+                        <div ng-if="currentMatchIsCaseInsensitive()">
+                            <em>Matching is not case sensitive</em>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
 
-        <umb-control-group alias="value" label="Value">
-            <input type="text" ng-model="ctrl.renderModel.value" />
-            <div ng-if="ctrl.currentMatchIsCaseInsensitive()">
-                <em>Matching is not case sensitive</em>
-            </div>
-        </umb-control-group>
     </div>
+
     <div class="umb-panel-footer">
         <div class="umb-el-wrap umb-panel-buttons">
             <div class="btn-toolbar umb-btn-toolbar pull-right">

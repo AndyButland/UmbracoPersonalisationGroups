@@ -1,26 +1,39 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.MemberProfileFieldPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the member profile field settings:</p>
 
-        <umb-control-group alias="alias" label="Alias">
-            <select ng-model="renderModel.alias"
-                    ng-options="item as item for item in availableFields"></select>
-        </umb-control-group>
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="renderModel.match">
-                <option value="MatchesValue">Matches</option>
-                <option value="DoesNotMatchValue">Does not match</option>
-                <option value="GreaterThanValue">Is greater than</option>
-                <option value="GreaterThanOrEqualToValue">Is greater than or equal to</option>
-                <option value="LessThanValue">Is less than</option>
-                <option value="LessThanOrEqualToValue">Is less than or equal to</option>
-            </select>
-        </umb-control-group>
-        <umb-control-group alias="value" label="Value">
-            <input type="text" ng-model="renderModel.value" />
-        </umb-control-group>
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="alias">Alias</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.alias"
+                                ng-options="item as item for item in availableFields"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="MatchesValue">Matches</option>
+                            <option value="DoesNotMatchValue">Does not match</option>
+                            <option value="GreaterThanValue">Is greater than</option>
+                            <option value="GreaterThanOrEqualToValue">Is greater than or equal to</option>
+                            <option value="LessThanValue">Is less than</option>
+                            <option value="LessThanOrEqualToValue">Is less than or equal to</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="value">Value</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="text" ng-model="renderModel.value" />
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
 
     </div>
 
