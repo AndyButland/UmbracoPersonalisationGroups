@@ -1,30 +1,42 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.CookiePersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the cookie settings:</p>
-
-        <umb-control-group alias="key" label="Key">
-            <input type="text" ng-model="renderModel.key" />
-        </umb-control-group>
-        <umb-control-group alias="match" label="Comparison">
-            <select ng-model="renderModel.match">
-                <option value="Exists">Cookie is present</option>
-                <option value="DoesNotExist">Cookie is absent</option>
-                <option value="MatchesValue">Cookie value matches</option>
-                <option value="ContainsValue">Cookie value contains</option>
-                <option value="GreaterThanValue">Cookie value is greater than</option>
-                <option value="GreaterThanOrEqualToValue">Cookie value is greater than or equal to</option>
-                <option value="LessThanValue">Cookie value is less than</option>
-                <option value="LessThanOrEqualToValue">Cookie value is less than or equal to</option>
-                <option value="MatchesRegex">Matches regular expression</option>
-                <option value="DoesNotMatchRegex">Does not match regular expression</option>
-            </select>
-        </umb-control-group>
-        <umb-control-group alias="value" label="Value">
-            <input type="text" ng-model="renderModel.value" ng-disabled="!valueRequired()" />
-        </umb-control-group>
-
+        
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="key">Key</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="text" ng-model="renderModel.key" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="Exists">Cookie is present</option>
+                            <option value="DoesNotExist">Cookie is absent</option>
+                            <option value="MatchesValue">Cookie value matches</option>
+                            <option value="ContainsValue">Cookie value contains</option>
+                            <option value="GreaterThanValue">Cookie value is greater than</option>
+                            <option value="GreaterThanOrEqualToValue">Cookie value is greater than or equal to</option>
+                            <option value="LessThanValue">Cookie value is less than</option>
+                            <option value="LessThanOrEqualToValue">Cookie value is less than or equal to</option>
+                            <option value="MatchesRegex">Matches regular expression</option>
+                            <option value="DoesNotMatchRegex">Does not match regular expression</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="value">Value</label></td>
+                    <td style="padding-top: 20px">
+                        <input type="text" ng-model="renderModel.value" ng-disabled="!valueRequired()" />
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
     </div>
 
     <div class="umb-panel-footer">

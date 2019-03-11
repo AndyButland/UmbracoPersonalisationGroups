@@ -1,12 +1,17 @@
 ﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.AuthenticationStatusPersonalisationGroupCriteriaController">
 
-    <div class="umb-panel-body no-header with-footer compact">
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
 
         <p>Please enter the authentication status settings:</p>
 
         <umb-pane>
-            <table>
-                <tr><td style="padding-right: 10px; padding-top: 5px;">Is logged in? </td><td><input type="checkbox" ng-model="renderModel.isAuthenticated" value="true" /></td></tr>
+            <table class="table">
+                <tr>
+                    <td><label class="control-label" for="isAuthenticated">Is logged in?</label></td>
+                    <td>
+                        <input type="checkbox" ng-model="renderModel.isAuthenticated" value="true"/>
+                    </td>
+                </tr>
             </table>
         </umb-pane>
     </div>
