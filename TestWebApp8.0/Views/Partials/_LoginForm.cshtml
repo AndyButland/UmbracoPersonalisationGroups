@@ -1,0 +1,10 @@
+﻿@model TestWebAppV8.Models.LoginFormModel
+
+<div style="color: #fff">
+    @using (Html.BeginUmbracoForm("Login", "AccountSurface"))
+    {
+            @Html.AntiForgeryToken()
+            @Html.EditorFor(x => Model)
+            <input type="submit" />
+    }
+</div>
