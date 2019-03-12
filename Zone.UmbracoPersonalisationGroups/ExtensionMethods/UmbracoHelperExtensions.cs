@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Text;
     using Umbraco.Core.Models;
-    using Zone.UmbracoPersonalisationGroups;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;

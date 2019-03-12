@@ -1,10 +1,11 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.V8.ExtensionMethods
+﻿namespace Umbraco.Web
 {
     using System.Collections.Generic;
     using System.Linq;
     using Umbraco.Core.Models.PublishedContent;
     using Umbraco.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
+    using Zone.UmbracoPersonalisationGroups.V8.ExtensionMethods;
 
     /// <summary>
     /// Provides extension methods to IPublishedContent
@@ -105,7 +106,7 @@
         {
             var propertyAlias = PersonalisationGroupsConfig.Value.GroupPickerAlias;
             return content.HasProperty(propertyAlias) ? 
-                content.Value<IEnumerable<IPublishedContent>>(propertyAlias).ToList() 
+                content.Value<IEnumerable<IPublishedContent>>(propertyAlias)?.ToList() ?? new List<IPublishedContent>()
                 : new List<IPublishedContent>();
         }
      }

@@ -55,7 +55,7 @@
                 {
                     if (regionSetting.Match == GeoLocationSettingMatch.CouldNotBeLocated)
                     {
-                        // We can locate, so return false.
+                        // We can't locate, so return false.
                         return false;
                     }
 

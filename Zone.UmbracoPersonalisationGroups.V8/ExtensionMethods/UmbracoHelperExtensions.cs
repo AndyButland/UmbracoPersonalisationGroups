@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.V8.ExtensionMethods
+﻿namespace Umbraco.Web
 {
     using System;
     using System.Collections.Generic;
@@ -6,11 +6,11 @@
     using System.Text;
     using Umbraco.Core.Cache;
     using Umbraco.Core.Models.PublishedContent;
-    using Umbraco.Web;
     using Umbraco.Web.Composing;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
+    using Zone.UmbracoPersonalisationGroups.V8.ExtensionMethods;
 
     /// <summary>
     /// Provides extension methods to UmbracoHelper

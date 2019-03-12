@@ -11,7 +11,7 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Criteria.PagesViewed
         {
             var httpContext = HttpContext.Current;
             var config = PersonalisationGroupsConfig.Value;
-            var key = config.CookieKeyForTrackingNumberOfVisits;
+            var key = config.CookieKeyForTrackingPagesViewed;
             var cookie = httpContext.Request.Cookies[key];
             if (cookie != null)
             {

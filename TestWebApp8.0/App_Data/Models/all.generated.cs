@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "59b61a55481ebb69")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8c18921fe9d4e480")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -97,6 +97,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.1")]
 		[ImplementPropertyType("heading")]
 		public string Heading => this.Value<string>("heading");
+
+		///<summary>
+		/// Personalisation Groups
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.1")]
+		[ImplementPropertyType("personalisationGroups")]
+		public IEnumerable<IPublishedContent> PersonalisationGroups => this.Value<IEnumerable<IPublishedContent>>("personalisationGroups");
 	}
 
 	/// <summary>Personalisation Groups Folder</summary>
@@ -154,8 +161,8 @@ namespace Umbraco.Web.PublishedModels
 		/// Group definition
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.1")]
-		[ImplementPropertyType("groupDefinition")]
-		public Zone.UmbracoPersonalisationGroups.Common.GroupDefinition.PersonalisationGroupDefinition GroupDefinition => this.Value<Zone.UmbracoPersonalisationGroups.Common.GroupDefinition.PersonalisationGroupDefinition>("groupDefinition");
+		[ImplementPropertyType("definition")]
+		public Zone.UmbracoPersonalisationGroups.Common.GroupDefinition.PersonalisationGroupDefinition Definition => this.Value<Zone.UmbracoPersonalisationGroups.Common.GroupDefinition.PersonalisationGroupDefinition>("definition");
 	}
 
 	/// <summary>Folder</summary>

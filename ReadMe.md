@@ -393,7 +393,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Added option to create a geographical matching option for when the user's location can't be identified
 - 0.3.5
     - Added additional checks and exception handling for IP address detection on geographical look-ups
-- 1.0.0
-    - Bumped major version following internal refactor to support Umbraco 7 and 8.  Version 1.* will be the Umbraco 7 version moving forward.
+- 0.3.6
+    - Resolved issue with using wrong cookie when tracking pages viewed
+    - Internal refactor to support Umbraco 7 and 8.
 - 2.0.0
     - Umbraco 8 version
