@@ -7,14 +7,14 @@
         <umb-pane>
             <table class="table">
                 <tr>
-                    <td><label class="control-label" for="typeName">Type</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="typeName">Type</label></td>
                     <td style="padding-top: 20px">
                         <select ng-model="renderModel.typeName"
                                 ng-options="item as item for item in availableTypes"></select>
                     </td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="match">Comparison</label></td>
                     <td style="padding-top: 20px">
                         <select ng-model="renderModel.match">
                             <option value="IsOfType">Matches type</option>

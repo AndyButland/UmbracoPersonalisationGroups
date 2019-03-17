@@ -7,14 +7,14 @@
         <umb-pane>
             <table class="table">
                 <tr>
-                    <td><label class="control-label" for="groupName">Group</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="groupName">Group</label></td>
                     <td style="padding-top: 20px">
                         <select ng-model="renderModel.groupName"
                                 ng-options="item as item for item in availableGroups"></select>
                     </td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="match">Comparison</label></td>
                     <td style="padding-top: 20px">
                         <select ng-model="renderModel.match">
                             <option value="IsInGroup">Is in group</option>

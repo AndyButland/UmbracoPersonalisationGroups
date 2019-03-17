@@ -135,10 +135,11 @@
                 }
             };
 
-            $scope.close = function () {
-                if ($scope.model.close) {
+            // For V8 we need to make a call to fire any handler on the close of the dialog
+            if ($scope.model && $scope.model.close) {
+                $scope.close = function () {
                     $scope.model.close();
                 }
-            };
+            }
 
         });

@@ -7,13 +7,13 @@
         <umb-pane>
             <table class="table">
                 <tr>
-                    <td><label class="control-label" for="key">Key</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="key">Key</label></td>
                     <td style="padding-top: 20px">
                         <input type="text" ng-model="renderModel.key" />
                     </td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="match">Comparison</label></td>
                     <td style="padding-top: 20px">
                         <select ng-model="renderModel.match">
                             <option value="Exists">Key is present</option>
@@ -30,7 +30,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="value">Value</label></td>
+                    <td style="padding-top: 12px"><label class="control-label" for="value">Value</label></td>
                     <td style="padding-top: 20px">
                         <input type="text" ng-model="renderModel.value" ng-disabled="!valueRequired()" />
                     </td>

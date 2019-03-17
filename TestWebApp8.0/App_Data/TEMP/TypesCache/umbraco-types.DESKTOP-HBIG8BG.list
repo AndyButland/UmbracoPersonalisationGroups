@@ -146,6 +146,9 @@ Umbraco.ModelsBuilder.Validation.MediaTypeModelValidator, Umbraco.ModelsBuilder,
 Umbraco.ModelsBuilder.Validation.MemberTypeModelValidator, Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Umbraco.ModelsBuilderComposer, Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Umbraco.ModelsBuilderBackOfficeController, Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Zone.UmbracoPersonalisationGroups.V8.PackageComposer, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
+Zone.UmbracoPersonalisationGroups.V8.PropertyValueConverter.PersonalisationGroupDefinitionPropertyValueConverter, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
+Zone.UmbracoPersonalisationGroups.V8.PropertyEditors.PersonalisationGroupDefinitionPropertyEditor, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbProfileController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbLoginStatusController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -339,9 +342,6 @@ Umbraco.Web.Cache.MemberGroupCacheRefresher, Umbraco.Web, Version=8.0.0.0, Cultu
 Umbraco.Web.Cache.PublicAccessCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.TemplateCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.UserCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Zone.UmbracoPersonalisationGroups.V8.PackageComposer, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
-Zone.UmbracoPersonalisationGroups.V8.PropertyValueConverter.PersonalisationGroupDefinitionPropertyValueConverter, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
-Zone.UmbracoPersonalisationGroups.V8.PropertyEditors.PersonalisationGroupDefinitionPropertyEditor, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.Composing.IComposer
 
@@ -352,6 +352,7 @@ Umbraco.Core.Compose.ManifestWatcherComposer, Umbraco.Core, Version=8.0.0.0, Cul
 Umbraco.Core.Compose.RelateOnCopyComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Compose.RelateOnTrashComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Umbraco.ModelsBuilderComposer, Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Zone.UmbracoPersonalisationGroups.V8.PackageComposer, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.SignalR.PreviewHubComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Search.ExamineComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Scheduling.SchedulerComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -365,7 +366,6 @@ Umbraco.Web.Compose.NotificationsComposer, Umbraco.Web, Version=8.0.0.0, Culture
 Umbraco.Web.Compose.PublicAccessComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Compose.DatabaseServerRegistrarAndMessengerComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.DistributedCacheBinderComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Zone.UmbracoPersonalisationGroups.V8.PackageComposer, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.PropertyEditors.IPropertyValueConverter
 
@@ -390,6 +390,7 @@ Umbraco.Core.PropertyEditors.ValueConverters.TextStringValueConverter, Umbraco.C
 Umbraco.Core.PropertyEditors.ValueConverters.TinyMceValueConverter, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.PropertyEditors.ValueConverters.UploadPropertyConverter, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.PropertyEditors.ValueConverters.YesNoValueConverter, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Zone.UmbracoPersonalisationGroups.V8.PropertyValueConverter.PersonalisationGroupDefinitionPropertyValueConverter, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ValueConverters.MultiUrlPickerValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ValueConverters.FlexibleDropdownPropertyValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ValueConverters.NestedContentManyValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -402,7 +403,6 @@ Umbraco.Web.PropertyEditors.ValueConverters.MacroContainerValueConverter, Umbrac
 Umbraco.Web.PropertyEditors.ValueConverters.MarkdownEditorValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ValueConverters.TextStringValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ValueConverters.RteMacroRenderingValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Zone.UmbracoPersonalisationGroups.V8.PropertyValueConverter.PersonalisationGroupDefinitionPropertyValueConverter, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Web.Mvc.PluginController
 
@@ -512,6 +512,7 @@ Umbraco.Web.Dashboards.SettingsDashboard, Umbraco.Web, Version=8.0.0.0, Culture=
 Umbraco.Core.PropertyEditors.IDataEditor
 
 Umbraco.Core.PropertyEditors.LabelPropertyEditor, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Zone.UmbracoPersonalisationGroups.V8.PropertyEditors.PersonalisationGroupDefinitionPropertyEditor, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.MultiUrlPickerPropertyEditor, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ContentPickerPropertyEditor, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.DropDownFlexiblePropertyEditor, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -548,7 +549,6 @@ Umbraco.Web.PropertyEditors.ParameterEditors.MultiplePropertyGroupParameterEdito
 Umbraco.Web.PropertyEditors.ParameterEditors.MultiplePropertyTypeParameterEditor, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ParameterEditors.PropertyGroupParameterEditor, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ParameterEditors.PropertyTypeParameterEditor, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Zone.UmbracoPersonalisationGroups.V8.PropertyEditors.PersonalisationGroupDefinitionPropertyEditor, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.Cache.ICacheRefresher
 
@@ -630,7 +630,4 @@ Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck, Umbraco.Web, Version=8.0.0.0
 Umbraco.Web.HealthCheck.NotificationMethods.IHealthCheckNotificationMethod
 
 Umbraco.Web.HealthCheck.NotificationMethods.EmailNotificationMethod, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-
-Umbraco.Core.Deploy.IServiceConnector
-
 
