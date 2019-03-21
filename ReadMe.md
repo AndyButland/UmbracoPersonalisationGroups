@@ -393,3 +393,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Added option to create a geographical matching option for when the user's location can't be identified
 - 0.3.5
     - Added additional checks and exception handling for IP address detection on geographical look-ups
+- 0.3.6
+    - Issue with corrupt page tracking cookie resolved.  Thanks to [Tom Waddell](https://github.com/twaddell) for the [PR](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/17)	

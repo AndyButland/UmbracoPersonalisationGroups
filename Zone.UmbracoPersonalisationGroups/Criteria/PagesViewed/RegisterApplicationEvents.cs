@@ -69,7 +69,7 @@
                 ids.Add(pageId);
             }
 
-            return string.Join(",",ids);
+            return string.Join(",", ids);
         }
     }
 }
