@@ -60,17 +60,16 @@
             httpContext.Response.Cookies.Add(cookie);
         }
 
-        private string AppendPageIdIfNotPreviouslyViewed(string viewedPageIds, int pageId)
+        public static string AppendPageIdIfNotPreviouslyViewed(string viewedPageIds, int pageId)
         {
-            var ids = viewedPageIds
-                .Split(',')
-                .Select(int.Parse);
+            var ids = CookiePagesViewedProvider.ParseCookieValue(viewedPageIds);
+
             if (!ids.Contains(pageId))
             {
-                viewedPageIds = viewedPageIds + "," + pageId;
+                ids.Add(pageId);
             }
 
-            return viewedPageIds;
+            return string.Join(",",ids);
         }
     }
 }
