@@ -395,6 +395,7 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Added additional checks and exception handling for IP address detection on geographical look-ups
 - 0.3.6
     - Resolved issue with using wrong cookie when tracking pages viewed
+    - Issue with corrupt page tracking cookie resolved.  Thanks to [Tom Waddell](https://github.com/twaddell) for the [PR](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/17)	
     - Internal refactor to support Umbraco 7 and 8.
 - 2.0.0
     - Umbraco 8 version

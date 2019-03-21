@@ -186,6 +186,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\UmbracoExtensionsHelperTests.cs" />
+    <Compile Include="Criteria\PagesViewed\CookiePagesViewedProviderTests.cs" />
+    <Compile Include="Criteria\PagesViewed\RegisterApplicationEventsTests.cs" />
     <Compile Include="Criteria\MemberProfileField\MemberProfileFieldPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
