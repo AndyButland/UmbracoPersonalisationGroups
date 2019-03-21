@@ -185,7 +185,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD:Zone.UmbracoPersonalisationGroups.V7.Tests/Zone.UmbracoPersonalisationGroups.V7.Tests.csproj
     <Compile Include="Helpers\UmbracoExtensionsHelperTests.cs" />
+=======
+    <Compile Include="Criteria\Host\HostPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\PagesViewed\CookiePagesViewedProviderTests.cs" />
+    <Compile Include="Criteria\PagesViewed\RegisterApplicationEventsTests.cs" />
+    <Compile Include="Criteria\Region\RegionPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\PagesViewed\PagesViewedPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\MemberGroup\MemberTypePersonalisationGroupCriteriaTests.cs" />
+>>>>>>> master:Zone.UmbracoPersonalisationGroups.Tests/Zone.UmbracoPersonalisationGroups.Tests.csproj
     <Compile Include="Criteria\MemberProfileField\MemberProfileFieldPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\MemberType\MemberTypePersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

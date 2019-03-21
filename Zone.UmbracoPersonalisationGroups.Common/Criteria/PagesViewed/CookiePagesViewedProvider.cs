@@ -32,6 +32,5 @@
                                              return result;
                                          });
         }
-        
     }
 }

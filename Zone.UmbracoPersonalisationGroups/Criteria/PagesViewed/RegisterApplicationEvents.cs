@@ -26,10 +26,5 @@
             var app = (HttpApplication)sender;
             app.PostRequestHandlerExecute += UserActivityTracker.TrackPageView;
         }
-        public static string AppendPageIdIfNotPreviouslyViewed(string viewedPageIds, int pageId)
-            var ids = CookiePagesViewedProvider.ParseCookieValue(viewedPageIds);
-
-                ids.Add(pageId);
-            return string.Join(",", ids);
     }
 }

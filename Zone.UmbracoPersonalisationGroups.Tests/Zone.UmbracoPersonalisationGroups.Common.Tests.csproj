@@ -134,6 +134,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Criteria\Host\HostPersonalisationGroupCriteriaTests.cs" />
+    <Compile Include="Criteria\PagesViewed\CookiePagesViewedProviderTests.cs" />
+    <Compile Include="Criteria\PagesViewed\UserActivityTrackerTests.cs" />
     <Compile Include="Criteria\Region\RegionPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\PagesViewed\PagesViewedPersonalisationGroupCriteriaTests.cs" />
