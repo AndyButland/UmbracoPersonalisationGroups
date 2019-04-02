@@ -1,6 +1,6 @@
 Umbraco.Core.Composing.IDiscoverable
 
-Umbraco.Core.Runtime.CoreRuntimeComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Core.Runtime.CoreInitialComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Persistence.Mappers.AuditEntryMapper, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Persistence.Mappers.AuditItemMapper, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Persistence.Mappers.ConsentMapper, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -97,6 +97,7 @@ Umbraco.Core.Migrations.Upgrade.V_7_12_0.RenameTrueFalseField, Umbraco.Core, Ver
 Umbraco.Core.Migrations.Upgrade.V_7_12_0.SetDefaultTagsStorageType, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Migrations.Upgrade.V_7_12_0.UpdateUmbracoConsent, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Migrations.Upgrade.V_7_10_0.RenamePreviewFolder, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Core.Migrations.Upgrade.V_8_0_1.ChangeNuCacheJsonFormat, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Migrations.Upgrade.V_8_0_0.MergeDateAndDateTimePropertyEditor, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Migrations.Upgrade.V_8_0_0.RenameLabelAndRichTextPropertyEditorAliases, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Migrations.Upgrade.V_8_0_0.AddUserLoginDtoDateIndex, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -149,7 +150,6 @@ Umbraco.ModelsBuilder.Umbraco.ModelsBuilderBackOfficeController, Umbraco.ModelsB
 Zone.UmbracoPersonalisationGroups.V8.PackageComposer, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 Zone.UmbracoPersonalisationGroups.V8.PropertyValueConverter.PersonalisationGroupDefinitionPropertyValueConverter, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
 Zone.UmbracoPersonalisationGroups.V8.PropertyEditors.PersonalisationGroupDefinitionPropertyEditor, Zone.UmbracoPersonalisationGroups.V8, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null
-TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbProfileController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbLoginStatusController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbRegisterController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -188,10 +188,10 @@ Umbraco.Web.HealthCheck.Checks.Security.ExcessiveHeadersCheck, Umbraco.Web, Vers
 Umbraco.Web.HealthCheck.Checks.Security.ClickJackingCheck, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.SignalR.PreviewHubComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Umbraco.Web.Mvc.RenderMvcController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Search.ExamineComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Scheduling.SchedulerComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Umbraco.Web.Runtime.WebRuntimeComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Web.Runtime.WebInitialComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Web.Runtime.WebFinalComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PublishedCache.NuCache.NuCacheComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Trees.LogViewerTreeController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Trees.FilesTreeController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -270,6 +270,7 @@ Umbraco.Web.PropertyEditors.ValueConverters.MarkdownEditorValueConverter, Umbrac
 Umbraco.Web.PropertyEditors.ValueConverters.TextStringValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.ValueConverters.RteMacroRenderingValueConverter, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Routing.RedirectTrackingComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Web.Mvc.RenderMvcController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Migrations.PostMigrations.ClearCsrfCookies, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Logging.WebProfilerComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Editors.PackageController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -342,10 +343,11 @@ Umbraco.Web.Cache.MemberGroupCacheRefresher, Umbraco.Web, Version=8.0.0.0, Cultu
 Umbraco.Web.Cache.PublicAccessCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.TemplateCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.UserCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.Composing.IComposer
 
-Umbraco.Core.Runtime.CoreRuntimeComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Core.Runtime.CoreInitialComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Logging.Viewer.LogViewerComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Compose.AuditEventsComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Core.Compose.ManifestWatcherComposer, Umbraco.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -356,7 +358,8 @@ Zone.UmbracoPersonalisationGroups.V8.PackageComposer, Zone.UmbracoPersonalisatio
 Umbraco.Web.SignalR.PreviewHubComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Search.ExamineComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Scheduling.SchedulerComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-Umbraco.Web.Runtime.WebRuntimeComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Web.Runtime.WebInitialComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+Umbraco.Web.Runtime.WebFinalComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PublishedCache.NuCache.NuCacheComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.PropertyEditors.PropertyEditorsComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Routing.RedirectTrackingComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -406,11 +409,11 @@ Umbraco.Web.PropertyEditors.ValueConverters.RteMacroRenderingValueConverter, Umb
 
 Umbraco.Web.Mvc.PluginController
 
-TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbProfileController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbLoginStatusController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbRegisterController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbLoginController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Web.Mvc.IRenderMvcController
 
@@ -490,11 +493,11 @@ Umbraco.Web.Editors.MediaController, Umbraco.Web, Version=8.0.0.0, Culture=neutr
 
 Umbraco.Web.Mvc.SurfaceController
 
-TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbProfileController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbLoginStatusController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbRegisterController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Controllers.UmbLoginController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+TestWebAppV8.Controllers.AccountSurfaceController, TestWebApp8.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.Dashboards.IDashboard
 
@@ -630,4 +633,7 @@ Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck, Umbraco.Web, Version=8.0.0.0
 Umbraco.Web.HealthCheck.NotificationMethods.IHealthCheckNotificationMethod
 
 Umbraco.Web.HealthCheck.NotificationMethods.EmailNotificationMethod, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+
+Umbraco.Core.Deploy.IServiceConnector
+
 

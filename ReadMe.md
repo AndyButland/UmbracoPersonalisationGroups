@@ -396,6 +396,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 0.3.6
     - Resolved issue with using wrong cookie when tracking pages viewed
     - Issue with corrupt page tracking cookie resolved.  Thanks to [Tom Waddell](https://github.com/twaddell) for the [PR](https://github.com/AndyButland/UmbracoPersonalisationGroups/pull/17)	
+- 1.0.0
     - Internal refactor to support Umbraco 7 and 8.
+    - Bumped version number to 1.0 
 - 2.0.0
-    - Umbraco 8 version
+    - Release supporting Umbraco 8
