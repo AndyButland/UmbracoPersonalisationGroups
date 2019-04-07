@@ -403,8 +403,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Internal refactor to support Umbraco 7 and 8.
     - Bumped version number to 1.0 
 - 1.0.1
-    - Added "month of year" criteria
+    - Added "month of year" and "continent" criteria
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
-    - Added "month of year" criteria
+    - Added "month of year" and "continent" criteria

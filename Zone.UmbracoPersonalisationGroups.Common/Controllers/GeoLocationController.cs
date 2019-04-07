@@ -14,6 +14,45 @@
     public class GeoLocationController : BaseJsonResultController
     {
         /// <summary>
+        /// Gets a JSON list of the available continents
+        /// </summary>
+        /// <returns>JSON response of available criteria</returns>
+        public JsonResult GetContinents()
+        {
+            var cacheKey = $"PersonalisationGroups_GeoLocation_Continents";
+            var countries = RuntimeCacheHelper.GetCacheItem(cacheKey,
+                () =>
+                    {
+                        var assembly = GetResourceAssembly();
+                        var resourceName = GetResourceName("continents");
+                        using (var stream = assembly.GetManifestResourceStream(resourceName))
+                        {
+                            if (stream == null)
+                            {
+                                return null;
+                            }
+
+                            using (var reader = new StreamReader(stream))
+                            {
+                                var continentRecords = reader.ReadToEnd()
+                                    .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(x => new
+                                        {
+                                            code = x.Split(',')[0],
+                                            name = CleanName(x.Split(',')[1])
+                                        });
+
+                                continentRecords = continentRecords.OrderBy(x => x.name);
+
+                                return continentRecords;
+                            }
+                        }
+                    });
+
+            return Json(countries, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// Gets a JSON list of the available countries
         /// </summary>
         /// <returns>JSON response of available criteria</returns>

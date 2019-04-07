@@ -1,0 +1,77 @@
+﻿<div class="umb-panel" ng-controller="UmbracoPersonalisationGroups.ContinentPersonalisationGroupCriteriaController">
+
+    <div class="umb-panel-body no-header with-footer compact" style="padding-left: 16px; padding-right: 16px">
+        <p>Please select the continents for for the group.</p>
+        
+        <umb-pane>
+            <table class="table">
+                <tr>
+                    <td style="padding-top: 12px"><label class="control-label" for="match">Comparison</label></td>
+                    <td style="padding-top: 20px">
+                        <select ng-model="renderModel.match">
+                            <option value="IsLocatedIn">Visitor is located in</option>
+                            <option value="IsNotLocatedIn">Visitor is not located in</option>
+                            <option value="CouldNotBeLocated">Visitor cannot be located</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label" for="continents">Continents</label>
+                        <table class="table table-striped" style="margin-top: 16px">
+                            <tbody>
+                            <tr ng-repeat="country in renderModel.continents">
+                                <td>
+                                    <span ng-show="!country.edit">{{getContinentName(country.code)}}</span>
+                                    <select ng-model="country.code"
+                                            ng-options="item.code as item.name for item in availableCountries"
+                                            ng-show="country.edit"
+                                            ng-disabled="!geoDetailsRequired()"></select>
+                                </td>
+                                <td>
+                                    <div class="btn-group" ng-show="!country.edit">
+                                        <button type="button" class="btn btn-default" ng-click="edit($index)" ng-disabled="!geoDetailsRequired()"><localize key="edit">Edit</localize></button>
+                                        <button type="button" class="btn btn-default" ng-click="delete($index)" ng-disabled="!geoDetailsRequired()"><localize key="delete">Delete</localize></button>
+                                    </div>
+                                    <div class="btn-group" ng-show="country.edit">
+                                        <button type="button" class="btn btn-default" ng-click="saveEdit($index)" ng-disabled="!geoDetailsRequired()"><localize key="buttons_save">Save</localize></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td>
+                                    <select ng-model="newContinent.code"
+                                            ng-options="item.code as item.name for item in availableCountries"
+                                            ng-disabled="!geoDetailsRequired()"></select>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" ng-click="add()" ng-disabled="!geoDetailsRequired()"><localize key="general_add">Add</localize></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </umb-pane>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel">Cancel</localize>
+                </a>
+
+                <a href ng-click="saveAndClose()" class="btn btn-primary">
+                    <localize key="buttons_save">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

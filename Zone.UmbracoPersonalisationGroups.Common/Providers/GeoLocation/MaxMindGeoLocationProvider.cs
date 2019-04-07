@@ -2,8 +2,6 @@
 {
     using System.IO;
     using System.Linq;
-    using System.Web;
-    using System.Web.Caching;
     using System.Web.Hosting;
     using MaxMind.GeoIP2;
     using MaxMind.GeoIP2.Exceptions;
@@ -21,6 +19,47 @@
             var config = PersonalisationGroupsConfig.Value;
             _pathToCountryDb = HostingEnvironment.MapPath(config.GeoLocationCountryDatabasePath);
             _pathToCityDb = HostingEnvironment.MapPath(config.GeoLocationCityDatabasePath);
+        }
+
+        public Continent GetContinentFromIp(string ip)
+        {
+            var cacheKey = $"PersonalisationGroups_GeoLocation_Continent_{ip}";
+            var cachedItem = RuntimeCacheHelper.GetCacheItem(cacheKey,
+                () =>
+                    {
+                        try
+                        {
+                            using (var reader = new DatabaseReader(_pathToCountryDb))
+                            {
+                                try
+                                {
+                                    var response = reader.Country(ip);
+                                    return new Continent { Code = response.Continent.Code, Name = response.Continent.Name, };
+                                }
+                                catch (AddressNotFoundException)
+                                {
+                                    return null;
+                                }
+                                catch (GeoIP2Exception ex)
+                                {
+                                    if (IsInvalidIpException(ex))
+                                    {
+                                        return null;
+                                    }
+
+                                    throw;
+                                }
+                            }
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            throw new FileNotFoundException(
+                                $"MaxMind Geolocation database required for locating visitor continent from IP address not found, expected at: {_pathToCountryDb}. The path is derived from either the default ({AppConstants.DefaultGeoLocationCountryDatabasePath}) or can be configured using a relative path in an appSetting with key: \"{AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath}\"",
+                                _pathToCountryDb);
+                        }
+                    });
+
+            return cachedItem;
         }
 
         public Country GetCountryFromIp(string ip)

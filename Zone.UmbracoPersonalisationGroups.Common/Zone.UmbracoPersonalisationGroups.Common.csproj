@@ -93,6 +93,8 @@
     <Compile Include="Criteria\Cookie\CookieSetting.cs" />
     <Compile Include="Criteria\Cookie\HttpContextCookieProvider.cs" />
     <Compile Include="Criteria\Cookie\ICookieProvider.cs" />
+    <Compile Include="Criteria\Continent\ContinentPersonalisationGroupCriteria.cs" />
+    <Compile Include="Criteria\Continent\ContinentSetting.cs" />
     <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Country\CountrySetting.cs" />
     <Compile Include="Criteria\MonthOfYear\MonthOfYearPersonalisationGroupCriteria.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\DateTime\DateTimeProvider.cs" />
     <Compile Include="Providers\DateTime\IDateTimeProvider.cs" />
+    <Compile Include="Providers\GeoLocation\Continent.cs" />
     <Compile Include="Providers\GeoLocation\Country.cs" />
     <Compile Include="Providers\GeoLocation\IGeoLocationProvider.cs" />
     <Compile Include="Providers\GeoLocation\MaxMindGeoLocationProvider.cs" />
@@ -329,6 +332,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Criteria\MonthOfYear\definition.translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Continent\definition.editor.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Continent\definition.editor.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\Continent\definition.translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\continents.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

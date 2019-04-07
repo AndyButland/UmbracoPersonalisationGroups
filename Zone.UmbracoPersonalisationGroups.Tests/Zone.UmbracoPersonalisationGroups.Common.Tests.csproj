@@ -133,6 +133,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Criteria\Continent\ContinentPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\MonthOfYear\MonthOfYearPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\Host\HostPersonalisationGroupCriteriaTests.cs" />
     <Compile Include="Criteria\PagesViewed\CookiePagesViewedProviderTests.cs" />

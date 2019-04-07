@@ -17,6 +17,9 @@
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "cookie/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "cookie/definition.translator.js" + Constants.ResourceExtension)]
 
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "continent/definition.editor.controller.js" + Constants.ResourceExtension)]
+    [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "continent/definition.translator.js" + Constants.ResourceExtension)]
+
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "country/geolocation.service.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "country/definition.editor.controller.js" + Constants.ResourceExtension)]
     [PropertyEditorAsset(ClientDependencyType.Javascript, Constants.ResourceForCriteriaRoot + "country/definition.translator.js" + Constants.ResourceExtension)]
