@@ -95,6 +95,7 @@
     <Compile Include="Criteria\Cookie\ICookieProvider.cs" />
     <Compile Include="Criteria\Country\CountryPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Country\CountrySetting.cs" />
+    <Compile Include="Criteria\MonthOfYear\MonthOfYearPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\DayOfWeek\DayOfWeekPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\GeoLocationSettingMatch.cs" />
     <Compile Include="Criteria\Host\HostPersonalisationGroupCriteria.cs" />
@@ -319,6 +320,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PropertyEditors\property.editor.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\MonthOfYear\definition.editor.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\MonthOfYear\definition.editor.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Criteria\MonthOfYear\definition.translator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

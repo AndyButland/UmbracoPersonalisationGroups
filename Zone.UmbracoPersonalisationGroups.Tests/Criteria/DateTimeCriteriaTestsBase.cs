@@ -8,7 +8,7 @@
     {
         protected static Mock<IDateTimeProvider> MockDateTimeProvider(DateTime? dateTime = null)
         {
-            dateTime = dateTime ?? new DateTime(2016, 1, 1, 10, 0, 0); // a Friday
+            dateTime = dateTime ?? new DateTime(2016, 6, 1, 10, 0, 0); // a Friday in June
             var mock = new Mock<IDateTimeProvider>();
 
             mock.Setup(x => x.GetCurrentDateTime()).Returns(dateTime.Value);

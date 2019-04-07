@@ -1,29 +1,29 @@
 ﻿angular.module("umbraco")
-    .controller("UmbracoPersonalisationGroups.DayOfWeekPersonalisationGroupCriteriaController",
+    .controller("UmbracoPersonalisationGroups.MonthOfYearPersonalisationGroupCriteriaController",
         function ($scope) {
 
-            var daysInWeek = 7;
+            var monthsInYear = 12;
 
             // Handle passed value for V7 (will have populated dialogOptions), falling back to V8 if not found.
             var definition = $scope.dialogOptions ? $scope.dialogOptions.definition : $scope.model.definition;
 
             $scope.renderModel = {};
-            $scope.renderModel.days = [];
-            for (var i = 0; i < daysInWeek; i++) {
-                $scope.renderModel.days.push(false);
+            $scope.renderModel.months = [];
+            for (var i = 0; i < monthsInYear; i++) {
+                $scope.renderModel.months.push(false);
             }
 
             if (definition) {
-                var selectedDays = JSON.parse(definition);
-                for (var i = 0; i < selectedDays.length; i++) {
-                    $scope.renderModel.days[selectedDays[i] - 1] = true;
+                var selectedMonths = JSON.parse(definition);
+                for (var i = 0; i < selectedMonths.length; i++) {
+                    $scope.renderModel.months[selectedMonths[i] - 1] = true;
                 }
             }
 
             $scope.saveAndClose = function () {
                 var serializedResult = "[";
-                for (var i = 0; i < daysInWeek; i++) {
-                    if ($scope.renderModel.days[i]) {
+                for (var i = 0; i < monthsInYear; i++) {
+                    if ($scope.renderModel.months[i]) {
                         if (serializedResult.length > 1) {
                             serializedResult += ",";
                         }

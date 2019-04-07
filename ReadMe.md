@@ -16,6 +16,7 @@ It contains a few different pieces:
     - Cookie key presence/absence and value matching
 	- Country (via IP matching)
     - Day of week
+	- Month of year
 	- Number of site visits
 	- Pages viewed
 	- Querystring
@@ -401,5 +402,9 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 1.0.0
     - Internal refactor to support Umbraco 7 and 8.
     - Bumped version number to 1.0 
+- 1.0.1
+    - Added "month of year" criteria
 - 2.0.0
     - Release supporting Umbraco 8
+- 2.0.1
+    - Added "month of year" criteria
