@@ -5,6 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Zone.UmbracoPersonalisationGroups.Common.Criteria.Querystring;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Querystring;
 
     [TestClass]
     public class QuerystringPersonalisationGroupCriteriaTests

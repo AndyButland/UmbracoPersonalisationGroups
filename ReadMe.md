@@ -14,7 +14,7 @@ It contains a few different pieces:
 - Implementation of the following criteria:
 	- Authentication status
     - Cookie key presence/absence and value matching
-	- Country (via IP matching)
+	- Country (via IP matching or CDN header)
     - Day of week
 	- Month of year
 	- Number of site visits
@@ -156,6 +156,7 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.cookieKeyForPersistentMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which persistent (visitor) level groups the visitor has matched
 - `<add key="personalisationGroups.persistentMatchedGroupsCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for tracking which persistent (visitor) level groups the visitor has matched (default if not provided is 90)
 - `<add key="personalisationGroups.testFixedIp" value="37.117.73.202"/>` - sets up an "spoof" IP address to use, in preference to the actual one used for browsing the site, for testing country and/or region matching using IP address
+- `<add key="personalisationGroups.countryCodeProvider" value="MaxMindDatabase|CloudFlareCdnHeader"/>` - indicates which provider to use for country matching (the default is the MaxMind geo-location database, but a [Cloudflare CDN header](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-) is available to be configured to use too.
 
 ## How it works
 
@@ -212,6 +213,11 @@ The country criteria uses the [free GeoLite2 IP to country database](http://dev.
 Similarly the region criteria uses the city database available from the same link above.  Similarly it will be read from the default location of `/App_Data/GeoLite2-City.mmdb` or at the path specified in the following appSetting:
 
     <add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/> 
+	
+If you are using CloudFlare CDN, it's possible to use a feature that [provides the user's geographical country location in a header](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).  To use that method instead, add the following configuration:
+
+    <add key="personalisationGroups.countryCodeProvider" value="CloudFlareCdnHeader"/> 
+
 
 ### Pages viewed
 
@@ -404,7 +410,9 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Bumped version number to 1.0 
 - 1.0.1
     - Added "month of year" and "continent" criteria
+	- Added option to use CloudFlare CDN for user's geographical location by country for the country criteria	
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
     - Added "month of year" and "continent" criteria
+	- Added option to use CloudFlare CDN for user's geographical location by country for the country criteria

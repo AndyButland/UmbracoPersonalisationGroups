@@ -1,6 +1,8 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Common.Configuration
 {
+    using System;
     using System.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.GeoLocation;
 
     /// <summary>
     /// Configuration for personalisation groups
@@ -30,6 +32,7 @@
             CookieKeyForPersistentMatchedGroups = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForPersistentMatchedGroups, AppConstants.DefaultCookieKeyForPersistentMatchedGroups);
             PersistentMatchedGroupsCookieExpiryInDays = GetConfigIntValue(AppConstants.ConfigKeys.PersistentMatchedGroupsCookieExpiryInDays, AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays);
             TestFixedIp = GetConfigStringValue(AppConstants.ConfigKeys.TestFixedIp, string.Empty);
+            CountryCodeProvider = (CountryCodeProvider)Enum.Parse(typeof(CountryCodeProvider), GetConfigStringValue(AppConstants.ConfigKeys.CountryCodeProvider, CountryCodeProvider.MaxMindDatabase.ToString()));
         }
 
         /// <summary>
@@ -51,7 +54,8 @@
             string cookieKeyForSessionMatchedGroups = AppConstants.DefaultCookieKeyForSessionMatchedGroups,
             string cookieKeyForPersistentMatchedGroups = AppConstants.DefaultCookieKeyForPersistentMatchedGroups, 
             int persistentMatchedGroupsCookieExpiryInDays = AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays, 
-            string testFixedIp = "")
+            string testFixedIp = "",
+            CountryCodeProvider countryCodeProvider = CountryCodeProvider.MaxMindDatabase)
         {
             DisablePackage = disablePackage;
             GroupPickerAlias = groupPickerAlias;
@@ -68,6 +72,7 @@
             CookieKeyForPersistentMatchedGroups = cookieKeyForPersistentMatchedGroups;
             PersistentMatchedGroupsCookieExpiryInDays = persistentMatchedGroupsCookieExpiryInDays;
             TestFixedIp = testFixedIp;
+            CountryCodeProvider = countryCodeProvider;
         }
 
         internal static PersonalisationGroupsConfig Value => _value ?? new PersonalisationGroupsConfig();
@@ -111,6 +116,8 @@
         public int PersistentMatchedGroupsCookieExpiryInDays { get; }
 
         public string TestFixedIp { get; }
+
+        public CountryCodeProvider CountryCodeProvider { get; }
 
         private static bool GetConfigBoolValue(string key, bool defaultValue)
         {

@@ -81,6 +81,8 @@
             public const string PersistentMatchedGroupsCookieExpiryInDays = Prefix + "persistentMatchedGroupsCookieExpiryInDays";
 
             public const string TestFixedIp = Prefix + "testFixedIp";
+
+            public const string CountryCodeProvider = Prefix + "countryCodeProvider";
         }
 
         public static class DocumentTypeAliases

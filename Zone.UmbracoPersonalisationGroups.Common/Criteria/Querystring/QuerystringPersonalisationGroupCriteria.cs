@@ -4,6 +4,7 @@
     using Newtonsoft.Json;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Querystring;
 
     public class QuerystringPersonalisationGroupCriteria : PersonalisationGroupCriteriaBase, IPersonalisationGroupCriteria
     {

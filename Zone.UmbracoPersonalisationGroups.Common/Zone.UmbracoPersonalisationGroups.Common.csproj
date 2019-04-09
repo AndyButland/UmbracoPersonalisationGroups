@@ -128,8 +128,10 @@
     <Compile Include="Criteria\PagesViewed\PagesViewedSetting.cs" />
     <Compile Include="Criteria\PagesViewed\UserActivityTracker.cs" />
     <Compile Include="Criteria\PersonalisationGroupCriteriaBase.cs" />
-    <Compile Include="Criteria\Querystring\HttpContextQuerystringProvider.cs" />
-    <Compile Include="Criteria\Querystring\IQuerystringProvider.cs" />
+    <Compile Include="Providers\RequestHeaders\HttpContextRequestHeadersProvider.cs" />
+    <Compile Include="Providers\RequestHeaders\IRequestHeadersProvider.cs" />
+    <Compile Include="Providers\Querystring\HttpContextQuerystringProvider.cs" />
+    <Compile Include="Providers\Querystring\IQuerystringProvider.cs" />
     <Compile Include="Criteria\Querystring\QuerystringPersonalisationGroupCriteria.cs" />
     <Compile Include="Criteria\Querystring\QuerystringSetting.cs" />
     <Compile Include="Criteria\Referral\HttpContextReferrerProvider.cs" />
@@ -163,7 +165,11 @@
     <Compile Include="Providers\DateTime\IDateTimeProvider.cs" />
     <Compile Include="Providers\GeoLocation\Continent.cs" />
     <Compile Include="Providers\GeoLocation\Country.cs" />
+    <Compile Include="Providers\GeoLocation\CountryCodeProviderFactory.cs" />
+    <Compile Include="Providers\GeoLocation\ICountryCodeProvider.cs" />
     <Compile Include="Providers\GeoLocation\IGeoLocationProvider.cs" />
+    <Compile Include="Providers\GeoLocation\CloudFlareCdnHeaderCountryCodeProvider.cs" />
+    <Compile Include="Providers\GeoLocation\MaxMindCountryCodeFromIpProvider.cs" />
     <Compile Include="Providers\GeoLocation\MaxMindGeoLocationProvider.cs" />
     <Compile Include="Providers\GeoLocation\Region.cs" />
     <Compile Include="Providers\Ip\ClientIpParsingHelper.cs" />

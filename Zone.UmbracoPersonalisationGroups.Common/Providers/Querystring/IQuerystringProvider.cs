@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Common.Criteria.Querystring
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Providers.Querystring
 {
     using System.Collections.Specialized;
 
