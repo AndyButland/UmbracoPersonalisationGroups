@@ -156,7 +156,8 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.cookieKeyForPersistentMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which persistent (visitor) level groups the visitor has matched
 - `<add key="personalisationGroups.persistentMatchedGroupsCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for tracking which persistent (visitor) level groups the visitor has matched (default if not provided is 90)
 - `<add key="personalisationGroups.testFixedIp" value="37.117.73.202"/>` - sets up an "spoof" IP address to use, in preference to the actual one used for browsing the site, for testing country and/or region matching using IP address
-- `<add key="personalisationGroups.countryCodeProvider" value="MaxMindDatabase|CloudFlareCdnHeader"/>` - indicates which provider to use for country matching (the default is the MaxMind geo-location database, but a [Cloudflare CDN header](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-) is available to be configured to use too.
+- `<add key="personalisationGroups.countryCodeProvider" value="MaxMindDatabase|CdnHeader"/>` - indicates which provider to use for country matching (the default is the MaxMind geo-location database, but a CDN header, e.g. that from [Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-) is available to be configured to use too.
+- `<add key="personalisationGroups.cdnCountryCodeHttpHeaderName" value="CF-IPCountry"/>` - if a CDN header is used for country matching due to the above configuration setting, this key can be used to define which header is looked for.  If not provided, the default value of CF-IPCountry (as used by Cloudflare CDN) is used.
 
 ## How it works
 
@@ -214,10 +215,13 @@ Similarly the region criteria uses the city database available from the same lin
 
     <add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/> 
 	
-If you are using CloudFlare CDN, it's possible to use a feature that [provides the user's geographical country location in a header](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).  To use that method instead, add the following configuration:
+If you are using a CDN , it's possible to use a feature that provides the user's geographical country location in a header [such as that provided by Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).  To use that method instead, add the following configuration:
 
-    <add key="personalisationGroups.countryCodeProvider" value="CloudFlareCdnHeader"/> 
+    <add key="personalisationGroups.countryCodeProvider" value="CdnHeader"/> 
+	
+By default the header `CF-IPCountry` is used.  If another is required it can be configured with:
 
+    <add key="personalisationGroups.cdnCountryCodeHttpHeaderName" value="Some-Custom-Header"/> 
 
 ### Pages viewed
 
