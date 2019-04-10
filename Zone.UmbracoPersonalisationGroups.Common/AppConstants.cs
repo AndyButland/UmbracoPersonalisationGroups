@@ -47,7 +47,10 @@
         public const string DefaultCookieKeyForSessionMatchedGroups = "sessionMatchedGroups";
 
         public const string DefaultCookieKeyForPersistentMatchedGroups = "persistentMatchedGroups";
-        
+
+        public const string DefaultCdnCountryCodeHttpHeaderName = "CF-IPCountry";
+
+
         public static class ConfigKeys
         {
             private const string Prefix = "personalisationGroups.";
@@ -83,6 +86,8 @@
             public const string TestFixedIp = Prefix + "testFixedIp";
 
             public const string CountryCodeProvider = Prefix + "countryCodeProvider";
+
+            public const string CdnCountryCodeHttpHeaderName = Prefix + "cdnCountryCodeHttpHeaderName";
         }
 
         public static class DocumentTypeAliases

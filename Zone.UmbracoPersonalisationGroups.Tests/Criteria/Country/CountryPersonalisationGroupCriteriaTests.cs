@@ -168,7 +168,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
 
             // Act
@@ -181,7 +181,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = "invalid";
 
@@ -194,7 +194,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = "{ \"match\": \"IsLocatedIn\", \"codes\": [] }";
 
@@ -210,7 +210,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = string.Format(DefinitionFormat, "IsLocatedIn", "ES", "IT");
 
@@ -226,7 +226,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = string.Format(DefinitionFormat, "IsLocatedIn", "GB", "IT");
 
@@ -242,7 +242,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "ES", "IT");
 
@@ -258,7 +258,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = string.Format(DefinitionFormat, "IsNotLocatedIn", "GB", "IT");
 
@@ -274,7 +274,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider(withHeader: false);
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = "{ \"match\": \"CouldNotBeLocated\", \"codes\": [] }";
 
@@ -290,7 +290,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider(withValue: false);
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = "{ \"match\": \"CouldNotBeLocated\", \"codes\": [] }";
 
@@ -306,7 +306,7 @@
         {
             // Arrange
             var mockRequestHeadersProvider = MockRequestHeadersProvider();
-            var countryCodeProvider = new CloudFlareCdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
+            var countryCodeProvider = new CdnHeaderCountryCodeProvider(mockRequestHeadersProvider.Object);
             var criteria = new CountryPersonalisationGroupCriteria(countryCodeProvider);
             var definition = "{ \"match\": \"CouldNotBeLocated\", \"codes\": [] }";
 
@@ -350,7 +350,7 @@
             var resultHeaders = new NameValueCollection();
             if (withHeader)
             {
-                resultHeaders.Add(CloudFlareCdnHeaderCountryCodeProvider.CloudFlareCdnCountryHeaderName, withValue ? "GB" : string.Empty);
+                resultHeaders.Add(AppConstants.DefaultCdnCountryCodeHttpHeaderName, withValue ? "GB" : string.Empty);
             }
 
             mock.Setup(x => x.GetHeaders()).Returns(resultHeaders);

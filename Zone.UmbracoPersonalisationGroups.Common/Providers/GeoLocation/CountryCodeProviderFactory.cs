@@ -5,7 +5,7 @@
     public enum CountryCodeProvider
     {
         MaxMindDatabase,
-        CloudFlareCdnHeader
+        CdnHeader
     }
 
     public class CountryCodeProviderFactory
@@ -15,8 +15,8 @@
             var config = PersonalisationGroupsConfig.Value;
             switch (config.CountryCodeProvider)
             {
-                case CountryCodeProvider.CloudFlareCdnHeader:
-                    return new CloudFlareCdnHeaderCountryCodeProvider();
+                case CountryCodeProvider.CdnHeader:
+                    return new CdnHeaderCountryCodeProvider();
                 default:
                     return new MaxMindCountryCodeFromIpProvider();
             }

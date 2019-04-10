@@ -33,6 +33,7 @@
             PersistentMatchedGroupsCookieExpiryInDays = GetConfigIntValue(AppConstants.ConfigKeys.PersistentMatchedGroupsCookieExpiryInDays, AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays);
             TestFixedIp = GetConfigStringValue(AppConstants.ConfigKeys.TestFixedIp, string.Empty);
             CountryCodeProvider = (CountryCodeProvider)Enum.Parse(typeof(CountryCodeProvider), GetConfigStringValue(AppConstants.ConfigKeys.CountryCodeProvider, CountryCodeProvider.MaxMindDatabase.ToString()));
+            CdnCountryCodeHttpHeaderName = GetConfigStringValue(AppConstants.ConfigKeys.CdnCountryCodeHttpHeaderName, AppConstants.DefaultCdnCountryCodeHttpHeaderName);
         }
 
         /// <summary>
@@ -55,7 +56,8 @@
             string cookieKeyForPersistentMatchedGroups = AppConstants.DefaultCookieKeyForPersistentMatchedGroups, 
             int persistentMatchedGroupsCookieExpiryInDays = AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays, 
             string testFixedIp = "",
-            CountryCodeProvider countryCodeProvider = CountryCodeProvider.MaxMindDatabase)
+            CountryCodeProvider countryCodeProvider = CountryCodeProvider.MaxMindDatabase,
+            string cdnCountryCodeHttpHeaderName = AppConstants.DefaultCdnCountryCodeHttpHeaderName)
         {
             DisablePackage = disablePackage;
             GroupPickerAlias = groupPickerAlias;
@@ -73,6 +75,7 @@
             PersistentMatchedGroupsCookieExpiryInDays = persistentMatchedGroupsCookieExpiryInDays;
             TestFixedIp = testFixedIp;
             CountryCodeProvider = countryCodeProvider;
+            CdnCountryCodeHttpHeaderName = cdnCountryCodeHttpHeaderName;
         }
 
         internal static PersonalisationGroupsConfig Value => _value ?? new PersonalisationGroupsConfig();
@@ -118,6 +121,8 @@
         public string TestFixedIp { get; }
 
         public CountryCodeProvider CountryCodeProvider { get; }
+
+        public string CdnCountryCodeHttpHeaderName { get; }
 
         private static bool GetConfigBoolValue(string key, bool defaultValue)
         {

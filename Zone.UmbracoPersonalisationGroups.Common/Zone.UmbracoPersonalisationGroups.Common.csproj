@@ -168,7 +168,7 @@
     <Compile Include="Providers\GeoLocation\CountryCodeProviderFactory.cs" />
     <Compile Include="Providers\GeoLocation\ICountryCodeProvider.cs" />
     <Compile Include="Providers\GeoLocation\IGeoLocationProvider.cs" />
-    <Compile Include="Providers\GeoLocation\CloudFlareCdnHeaderCountryCodeProvider.cs" />
+    <Compile Include="Providers\GeoLocation\CdnHeaderCountryCodeProvider.cs" />
     <Compile Include="Providers\GeoLocation\MaxMindCountryCodeFromIpProvider.cs" />
     <Compile Include="Providers\GeoLocation\MaxMindGeoLocationProvider.cs" />
     <Compile Include="Providers\GeoLocation\Region.cs" />
