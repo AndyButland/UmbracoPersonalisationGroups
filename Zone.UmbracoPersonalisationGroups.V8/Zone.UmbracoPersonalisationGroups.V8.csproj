@@ -264,7 +264,7 @@
     <Compile Include="Criteria\NumberOfVisits\NumberOfVisitsComponent.cs" />
     <Compile Include="Criteria\PagesViewed\PagesViewedComponent.cs" />
     <Compile Include="Criteria\PagesViewed\UserActivityTracker.cs" />
-    <Compile Include="ExtensionMethods\PublishedContentExtensions.cs" />
+    <Compile Include="ExtensionMethods\PublishedElementExtensions.cs" />
     <Compile Include="ExtensionMethods\UmbracoExtensionsHelper.cs" />
     <Compile Include="ExtensionMethods\UmbracoHelperExtensions.cs" />
     <Compile Include="Helpers\MemberHelper.cs" />

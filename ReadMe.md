@@ -169,29 +169,29 @@ Implementations of this interface must provide logic in this method for checking
 
 ### PersonalisationGroupMatcher
 
-**PersonalisationGroupMatcher** is a static class that when first instantiated will scan all loaded assemblies for implementations of the IPersonalisationGroupCriteria interface and store references to them.  It's in this way the package will support extensions through the development of other criteria that may not be in the core package itself.
+`PersonalisationGroupMatcher` is a static class that when first instantiated will scan all loaded assemblies for implementations of the IPersonalisationGroupCriteria interface and store references to them.  It's in this way the package will support extensions through the development of other criteria that may not be in the core package itself.
 
 It then makes these criteria available to application logic that needs to create group definitions based on them and to check if a given definition matches the related criteria.
 
 ### PersonalisationGroupDefinitionPropertyEditor
 
-**PersonalisationGroupDefinitionPropertyEditor** defines an Umbraco property editor for the definition of the personalisation groups.  It has a related angular view and controller, and also ensures the angular assets required for the specific criteria that are provided with the core package are loaded and available for use.
+`PersonalisationGroupDefinitionPropertyEditor` defines an Umbraco property editor for the definition of the personalisation groups.  It has a related angular view and controller, and also ensures the angular assets required for the specific criteria that are provided with the core package are loaded and available for use.
 
 ### PersonalisationGroupDefinitionController
 
-**PersonalisationGroupDefinitionController** is a server-side controller that provides logic and resources to the angular view and controller used for the property editor.  It provides JSON end-points for the retrieval of the available criteria via HTTP requests.  It also provides methods for the retrieval of the angular assets that are provided as embedded resources in the package dll (or any extension dlls). See http://www.nibble.be/?p=415 for more detail on how this technique is implemented.
+`PersonalisationGroupDefinitionController` is a server-side controller that provides logic and resources to the angular view and controller used for the property editor.  It provides JSON end-points for the retrieval of the available criteria via HTTP requests.  It also provides methods for the retrieval of the angular assets that are provided as embedded resources in the package dll (or any extension dlls). See http://www.nibble.be/?p=415 for more detail on how this technique is implemented.
 
 ### Angular views and controllers
 
-The primary view and controller for the property editor are **editor.html** and **editor.controller.js** respectively.
+The primary view and controller for the property editor are `editor.html` and `editor.controller.js` respectively.
 
-In addition to these, each criteria has it's own view and controller that provide a user friendly means of configuring the definitions, named **definition.editor.html** and **definition.editor.controller.js** which are loaded via a call to the Umbraco dialogService.  All are provided as embedded resources.
+In addition to these, each criteria has it's own view and controller that provide a user friendly means of configuring the definitions, named `definition.editor.html` and `definition.editor.controller.js` which are loaded via a call to the Umbraco dialogService.  All are provided as embedded resources.
 
-Each criteria also has an angular service named **definition.translator.js** responsible for translating the JSON syntax into something more human readable.  So again for example the **DayOfWeekPersonalisationGroupCriteria** will render "Sunday, Tuesday, Thursday" from [1, 3, 5].
+Each criteria also has an angular service named `definition.translator.js` responsible for translating the JSON syntax into something more human readable.  So again for example the `DayOfWeekPersonalisationGroupCriteria` will render "Sunday, Tuesday, Thursday" from `[1, 3, 5]`.
 
-### PublishedContentExtensions
+### PublishedContentExtensions / PublishedElementExtensions
 
-**PublishedContentExtensions** defines the extension method on **IPublishedContent** named **ShowToVisitor(bool showIfNoGroupsDefined = true)**.  This implements the following logic:
+`PublishedContentExtensions` defines the extension methods on `IPublishedContent` (`PublishedElementExtensions` and `IPublishedElement` are used when targetting Umbraco V8) named `ShowToVisitor(bool showIfNoGroupsDefined = true)` and `ScoreForVisitor(bool showIfNoGroupsDefined = true)`.  This implements the following logic:
 
 - Checks for a group picker on the content.
     - If there's not one then we return the default value passed in the `showIfNoGroupsDefined` parameter (which if not provided, defaults to true, indicating to show to everyone).
@@ -201,7 +201,7 @@ Each criteria also has an angular service named **definition.translator.js** res
     - If any one of them does, we return true (indicating to show the content)
 	- If none of them do, we return false (indicating to hide the content)
 	
-There's also a related extension method on **UmbracoHelper** named **ShowToVisitor(IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)**.  Using this you can pass through a list of group Ids that may be drawn from another location than the current node.
+There's also a related extension method on `UmbracoHelper` named `ShowToVisitor(IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)`.  Using this you can pass through a list of group Ids that may be drawn from another location than the current node.
 
 ## Notes on particular criteria
 
@@ -420,3 +420,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 2.0.1
     - Added "month of year" and "continent" criteria
 	- Added option to use CloudFlare CDN for user's geographical location by country for the country criteria
+- 2.0.2
+    - Added support for personalisation of nested content using V8's `IPublishedElement`

@@ -19,7 +19,7 @@
         /// <param name="content">Instance of IPublishedContent</param>
         /// <param name="showIfNoGroupsDefined">Indicates the response to return if groups cannot be found on the content</param>
         /// <returns>True if content should be shown to visitor</returns>
-        public static bool ShowToVisitor(this IPublishedContent content, bool showIfNoGroupsDefined = true)
+        public static bool ShowToVisitor(this IPublishedElement content, bool showIfNoGroupsDefined = true)
         {
             var pickedGroups = GetPickedGroups(content);
             return ShowToVisitor(pickedGroups, showIfNoGroupsDefined);
@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="content">Instance of IPublishedContent</param>
         /// <returns>True if content should be shown to visitor</returns>
-        public static int ScoreForVisitor(this IPublishedContent content)
+        public static int ScoreForVisitor(this IPublishedElement content)
         {
             var pickedGroups = GetPickedGroups(content);
             return ScoreForVisitor(pickedGroups);
@@ -102,7 +102,7 @@
         /// </summary>
         /// <param name="content">Instance of IPublished content</param>
         /// <returns>List of personalisation group content items</returns>
-        private static IList<IPublishedContent> GetPickedGroups(IPublishedContent content)
+        private static IList<IPublishedContent> GetPickedGroups(IPublishedElement content)
         {
             var propertyAlias = PersonalisationGroupsConfig.Value.GroupPickerAlias;
             return content.HasProperty(propertyAlias) ? 
