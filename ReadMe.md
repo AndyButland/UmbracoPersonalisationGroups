@@ -422,3 +422,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 	- Added option to use CloudFlare CDN for user's geographical location by country for the country criteria
 - 2.0.2
     - Added support for personalisation of nested content using V8's `IPublishedElement`
+- 2.1.0
+    - Upgraded dependencies for version targetting Umbraco V8 to use 8.1
