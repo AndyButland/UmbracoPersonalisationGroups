@@ -9,7 +9,7 @@
     {
         public IEnumerable<int> GetNodeIdsViewed()
         {
-            var cookie = HttpContext.Current.Request.Cookies[PersonalisationGroupsConfig.Value.CookieKeyForTrackingNumberOfVisits];
+            var cookie = HttpContext.Current.Request.Cookies[PersonalisationGroupsConfig.Value.CookieKeyForTrackingPagesViewed];
             if (!string.IsNullOrEmpty(cookie?.Value))
             {
                 return ParseCookieValue(cookie.Value);
