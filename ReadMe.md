@@ -415,8 +415,10 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 1.0.1
     - Added "month of year" and "continent" criteria
 	- Added option to use CloudFlare CDN for user's geographical location by country for the country criteria	
- - 1.0.2
+- 1.0.2
      - Fixed issue #19 with pages viewed criteria
+- 1.0.3
+     - Fixed issue #20 with local name geographical region matching
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
@@ -428,3 +430,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Upgraded dependencies for version targetting Umbraco V8 to use 8.1
 - 2.1.1
      - Fixed issue #19 with pages viewed criteria
+- 2.1.2
+     - Fixed issue #20 with local name geographical region matching

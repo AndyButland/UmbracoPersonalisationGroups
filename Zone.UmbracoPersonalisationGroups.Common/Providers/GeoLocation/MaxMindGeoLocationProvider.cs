@@ -121,6 +121,10 @@
                                     City = response.City.Name,
                                     Subdivisions = response.Subdivisions
                                         .Select(x => x.Name)
+                                        .Union(response.Subdivisions
+                                            .SelectMany(x => x.Names
+                                                .Where(y => !string.IsNullOrEmpty(y.Value))
+                                                .Select(y => y.Value)))
                                         .ToArray(),
                                     Country = new Country
                                     {
