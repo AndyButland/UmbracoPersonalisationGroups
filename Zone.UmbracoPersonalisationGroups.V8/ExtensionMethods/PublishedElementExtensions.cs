@@ -2,8 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Umbraco.Core.Models.PublishedContent;
     using Umbraco.Web;
+
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
     using Zone.UmbracoPersonalisationGroups.V8.ExtensionMethods;
 
@@ -45,7 +47,10 @@
         /// <param name="groupIds">List of group Ids</param>
         /// <param name="showIfNoGroupsDefined">Indicates the response to return if groups cannot be found on the content</param>
         /// <returns>True if content should be shown to visitor</returns>
-        public static bool ShowToVisitor(this UmbracoHelper umbraco, IEnumerable<int> groupIds, bool showIfNoGroupsDefined = true)
+        public static bool ShowToVisitor(
+            this UmbracoHelper umbraco,
+            IEnumerable<int> groupIds,
+            bool showIfNoGroupsDefined = true)
         {
             var groups = umbraco.Content(groupIds).ToList();
             return ShowToVisitor(groups, showIfNoGroupsDefined);
@@ -80,7 +85,7 @@
 
             return UmbracoExtensionsHelper.MatchGroups(pickedGroups);
         }
-        
+
         /// <summary>
         /// Scores the content item for the current site visitor, based on the personalisation groups associated with it.
         /// </summary>
@@ -105,9 +110,19 @@
         private static IList<IPublishedContent> GetPickedGroups(IPublishedElement content)
         {
             var propertyAlias = PersonalisationGroupsConfig.Value.GroupPickerAlias;
-            return content.HasProperty(propertyAlias) ? 
-                content.Value<IEnumerable<IPublishedContent>>(propertyAlias)?.ToList() ?? new List<IPublishedContent>()
-                : new List<IPublishedContent>();
+            if (content.HasProperty(propertyAlias))
+            {
+                var rawValue = content.Value(propertyAlias);
+                switch (rawValue)
+                {
+                    case IEnumerable<IPublishedContent> list:
+                        return list.ToList();
+                    case IPublishedContent group:
+                        return new List<IPublishedContent> { group };
+                }
+            }
+
+            return new List<IPublishedContent>();
         }
-     }
+    }
 }
