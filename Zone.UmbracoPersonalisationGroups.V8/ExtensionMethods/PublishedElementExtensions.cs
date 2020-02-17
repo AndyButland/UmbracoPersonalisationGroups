@@ -105,9 +105,19 @@
         private static IList<IPublishedContent> GetPickedGroups(IPublishedElement content)
         {
             var propertyAlias = PersonalisationGroupsConfig.Value.GroupPickerAlias;
-            return content.HasProperty(propertyAlias) ? 
-                content.Value<IEnumerable<IPublishedContent>>(propertyAlias)?.ToList() ?? new List<IPublishedContent>()
-                : new List<IPublishedContent>();
+            if (content.HasProperty(propertyAlias))
+            {
+                var rawValue = content.Value(propertyAlias);
+                switch (rawValue)
+                {
+                    case IEnumerable<IPublishedContent> list:
+                        return list.ToList();
+                    case IPublishedContent group:
+                        return new List<IPublishedContent> { group };
+                }
+            }
+
+            return new List<IPublishedContent>();
         }
      }
 }
