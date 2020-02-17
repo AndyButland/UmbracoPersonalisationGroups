@@ -5,7 +5,10 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Web.Hosting;
     using System.Web.Mvc;
+    using Zone.UmbracoPersonalisationGroups.Common.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Common.ExtensionMethods;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
 
     /// <summary>
@@ -35,7 +38,7 @@
                             using (var reader = new StreamReader(stream))
                             {
                                 var continentRecords = reader.ReadToEnd()
-                                    .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                                    .SplitByNewLine(StringSplitOptions.RemoveEmptyEntries)
                                     .Select(x => new
                                         {
                                             code = x.Split(',')[0],
@@ -74,7 +77,7 @@
                             using (var reader = new StreamReader(stream))
                             {
                                 var countryRecords = reader.ReadToEnd()
-                                    .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+                                    .SplitByNewLine(StringSplitOptions.RemoveEmptyEntries)
                                     .Select(x => new
                                     {
                                         code = x.Split(',')[0],
@@ -109,10 +112,7 @@
             var regions = RuntimeCacheHelper.GetCacheItem(cacheKey,
                 () =>
                 {
-                    var assembly = GetResourceAssembly();
-                    var resourceName = GetResourceName("regions");
-
-                    using (var stream = assembly.GetManifestResourceStream(resourceName))
+                    using (var stream = GetStreamForRegions())
                     {
                         if (stream == null)
                         {
@@ -121,8 +121,9 @@
 
                         using (var reader = new StreamReader(stream))
                         {
-                            var regionRecords = reader.ReadToEnd()
-                                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                            var streamContents = reader.ReadToEnd();
+                            var regionRecords = streamContents
+                                .SplitByNewLine(StringSplitOptions.RemoveEmptyEntries)
                                 .Where(x => x.Split(',')[0] == countryCode.ToUpperInvariant())
                                 .Select(x => new
                                 {
@@ -142,8 +143,7 @@
         {
             return Assembly.Load(AppConstants.CommonAssemblyName);
         }
-
-
+        
         private static string GetResourceName(string area)
         {
             return $"{AppConstants.CommonAssemblyName}.Data.{area}.txt";
@@ -173,6 +173,25 @@
                         .ToArray();
                 }
             }
+        }
+
+        private static Stream GetStreamForRegions()
+        {
+            // First try to use custom file path if provided in configuration.
+            var customFilePath = PersonalisationGroupsConfig.Value.GeoLocationRegionListPath;
+            if (!string.IsNullOrEmpty(customFilePath))
+            {
+                var mappedPath = HostingEnvironment.MapPath(customFilePath);
+                if (!string.IsNullOrEmpty(mappedPath) && System.IO.File.Exists(mappedPath))
+                {
+                    return System.IO.File.OpenRead(mappedPath);
+                }
+            }
+
+            // Otherwise fall back to provided resource file.
+            var assembly = GetResourceAssembly();
+            var resourceName = GetResourceName("regions");
+            return assembly.GetManifestResourceStream(resourceName);
         }
     }
 }

@@ -143,8 +143,9 @@ No configuration is required if you are happy to accept the default behaviour of
 
 - `<add key="personalisationGroups.disabled" value="false"/>` - disables the filtering of content by personalisation groups, if this is set to true your content won't differ no matter what is configured in Umbraco
 - `<add key="personalisationGroups.groupPickerAlias" value="myCustomAlias"/>` - amends the alias that must be used when creating a property field of type personalisation group picker
-- `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found see below for more details.
-- `<add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-city geolocation database can be found see below for more details.
+- `<add key="personalisationGroups.geoLocationCountryDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-country geolocation database can be found. See the "Country and region" section below for more details.
+- `<add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/>` - amends the convention path for where the IP-city geolocation database can be found. See the "Country and region" section below for more details.
+- `<add key="personalisationGroups.geoLocationRegionListPath" value="/my/custom/relative/path"/>` - if provided, the file referenced will be used to construct the list of regions for selection. See the "Country and region" section below for more details.
 - `<add key="personalisationGroups.includeCriteria" value="alias1,alias2"/>` - provides the specific list of criteria to make available for creating personsaliation groups
 - `<add key="personalisationGroups.excludeCriteria" value="alias1,alias2"/>` - provides a list of criteria to exclude from the full list of available criteria made available for creating personsaliation groups
 - `<add key="personalisationGroups.numberOfVisitsTrackingCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for number of visits page tracking for the pages viewed criteria (default if not provided is 90)
@@ -214,8 +215,12 @@ The country criteria uses the [free GeoLite2 IP to country database](http://dev.
 Similarly the region criteria uses the city database available from the same link above.  Similarly it will be read from the default location of `/App_Data/GeoLite2-City.mmdb` or at the path specified in the following appSetting:
 
     <add key="personalisationGroups.geoLocationCityDatabasePath" value="/my/custom/relative/path"/> 
+
+When it comes to selecting regions to match against, the list of regions available is provided by the package from a [list provided by Maxmind](https://www.maxmind.com/download/geoip/misc/region_codes.csv). If you want to override this list, you can do so by taking a copy of this file, saving it to a relative path (likely in `App_Data`) and referencing it in configuration as follows.  Doing this for example would allow you to override the region names from local language to English (we've found that in some cases, matches are more likely having done this).
+
+    <add key="personalisationGroups.geoLocationRegionListPath" value="/App_Data/regions.txt"/> 
 	
-If you are using a CDN , it's possible to use a feature that provides the user's geographical country location in a header [such as that provided by Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).  To use that method instead, add the following configuration:
+If you are using a CDN, it's possible to use a feature that provides the user's geographical country location in a header [such as that provided by Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).  To use that method instead, add the following configuration:
 
     <add key="personalisationGroups.countryCodeProvider" value="CdnHeader"/> 
 	
@@ -419,6 +424,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
      - Fixed issue #19 with pages viewed criteria
 - 1.0.3
      - Fixed issue #20 with local name geographical region matching
+- 1.0.4
+     - Added support for override of region names used geographical region matching 
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
@@ -432,3 +439,7 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
      - Fixed issue #19 with pages viewed criteria
 - 2.1.2
      - Fixed issue #20 with local name geographical region matching
+- 2.1.3
+     - Added support for override of region names used geographical region matching 
+- 2.1.4
+    - Merged in fix to issue where picked groups can't be found when MNTP is restricted to a single item (PR #22).

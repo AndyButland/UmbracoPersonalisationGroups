@@ -63,6 +63,8 @@
 
             public const string CustomGeoLocationCityDatabasePath = Prefix + "geoLocationCityDatabasePath";
 
+            public const string CustomGeoLocationRegionListPath = Prefix + "geoLocationRegionListPath";
+
             public const string IncludeCriteria = Prefix + "includeCriteria";
 
             public const string ExcludeCriteria = Prefix + "excludeCriteria";

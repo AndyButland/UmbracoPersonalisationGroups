@@ -53,5 +53,10 @@
 
             return value;
         }
+
+        public static string[] SplitByNewLine(this string text, StringSplitOptions options)
+        {
+            return text.Split(new[] { "\r\n", "\r", "\n" }, options);
+        }
     }
 }

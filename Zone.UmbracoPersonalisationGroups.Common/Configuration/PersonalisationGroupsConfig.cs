@@ -21,6 +21,7 @@
             GroupPickerAlias = GetConfigStringValue(AppConstants.ConfigKeys.CustomGroupPickerAlias, AppConstants.DefaultGroupPickerAlias);
             GeoLocationCountryDatabasePath = GetConfigStringValue(AppConstants.ConfigKeys.CustomGeoLocationCountryDatabasePath, AppConstants.DefaultGeoLocationCountryDatabasePath);
             GeoLocationCityDatabasePath = GetConfigStringValue(AppConstants.ConfigKeys.CustomGeoLocationCityDatabasePath, AppConstants.DefaultGeoLocationCityDatabasePath);
+            GeoLocationRegionListPath = GetConfigStringValue(AppConstants.ConfigKeys.CustomGeoLocationRegionListPath, string.Empty);
             IncludeCriteria = GetConfigStringValue(AppConstants.ConfigKeys.IncludeCriteria, string.Empty);
             ExcludeCriteria = GetConfigStringValue(AppConstants.ConfigKeys.ExcludeCriteria, string.Empty);
             NumberOfVisitsTrackingCookieExpiryInDays = GetConfigIntValue(AppConstants.ConfigKeys.NumberOfVisitsTrackingCookieExpiryInDays, AppConstants.DefaultNumberOfVisitsTrackingCookieExpiryInDays);
@@ -45,6 +46,7 @@
             string groupPickerAlias = AppConstants.DefaultGroupPickerAlias,
             string geoLocationCountryDatabasePath = AppConstants.DefaultGeoLocationCountryDatabasePath,
             string geoLocationCityDatabasePath = AppConstants.DefaultGeoLocationCityDatabasePath,
+            string geoLocationRegionListPath = "",
             string includeCriteria = "",
             string excludeCriteria = "",
             int numberOfVisitsTrackingCookieExpiryInDays = AppConstants.DefaultNumberOfVisitsTrackingCookieExpiryInDays,
@@ -63,6 +65,7 @@
             GroupPickerAlias = groupPickerAlias;
             GeoLocationCountryDatabasePath = geoLocationCountryDatabasePath;
             GeoLocationCityDatabasePath = geoLocationCityDatabasePath;
+            GeoLocationRegionListPath = geoLocationRegionListPath;
             IncludeCriteria = includeCriteria;
             ExcludeCriteria = excludeCriteria;
             NumberOfVisitsTrackingCookieExpiryInDays = numberOfVisitsTrackingCookieExpiryInDays;
@@ -97,6 +100,8 @@
         public string GeoLocationCountryDatabasePath { get; }
 
         public string GeoLocationCityDatabasePath { get; }
+
+        public string GeoLocationRegionListPath { get; }
 
         public string IncludeCriteria { get; }
 
