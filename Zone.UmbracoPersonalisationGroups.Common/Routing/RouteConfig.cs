@@ -30,7 +30,7 @@
             routes.MapRoute(
                 name: "Member methods",
                 url: "App_Plugins/UmbracoPersonalisationGroups/Member/{action}",
-                defaults: new { controller = "Member", action = "Index" });
+                defaults: new { controller = "Member", action = "Index" }, new[] { "Zone.UmbracoPersonalisationGroups.Controllers" });
 
             routes.MapRoute(
                 name: "Geo location methods",
