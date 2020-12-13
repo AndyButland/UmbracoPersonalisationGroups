@@ -11,7 +11,7 @@
     {
         public void Initialize()
         {
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes, "Zone.UmbracoPersonalisationGroups.V8.Controllers");
         }
 
         public void Terminate()

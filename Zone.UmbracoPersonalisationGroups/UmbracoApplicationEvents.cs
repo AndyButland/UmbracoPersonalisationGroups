@@ -11,7 +11,7 @@
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes, "Zone.UmbracoPersonalisationGroups.Controllers");
         }
     }
 }

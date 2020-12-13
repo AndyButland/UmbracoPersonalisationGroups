@@ -426,6 +426,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
      - Fixed issue #20 with local name geographical region matching
 - 1.0.4
      - Added support for override of region names used geographical region matching 
+- 1.0.5
+    - Namespaced controllers in route configuration to avoid clashes with any controllers with the same name in solutions using the package (PR #23).
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
@@ -443,3 +445,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
      - Added support for override of region names used geographical region matching 
 - 2.1.4
     - Merged in fix to issue where picked groups can't be found when MNTP is restricted to a single item (PR #22).
+- 2.1.5
+    - Namespaced controllers in route configuration to avoid clashes with any controllers with the same name in solutions using the package (PR #23).

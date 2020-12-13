@@ -10,33 +10,39 @@
     /// </summary>
     public static class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        private const string CommonNamespace = "Zone.UmbracoPersonalisationGroups.Common.Controllers";
+
+        public static void RegisterRoutes(RouteCollection routes, string versionSpecificNamespace)
         {
             routes.MapRoute(
                 name: "Criteria resources",
                 url: "App_Plugins/UmbracoPersonalisationGroups/GetResourceForCriteria/{criteriaAlias}/{fileName}",
-                defaults: new { controller = "Resource", action = "GetResourceForCriteria" });
+                defaults: new { controller = "Resource", action = "GetResourceForCriteria" },
+                namespaces: new[] { CommonNamespace });
 
             routes.MapRoute(
-                name: "Core esources",
+                name: "Core resources",
                 url: "App_Plugins/UmbracoPersonalisationGroups/GetResource/{fileName}",
-                defaults: new { controller = "Resource", action = "GetResource" });
+                defaults: new { controller = "Resource", action = "GetResource" },
+                namespaces: new[] { CommonNamespace });
 
             routes.MapRoute(
                 name: "Criteria methods",
                 url: "App_Plugins/UmbracoPersonalisationGroups/Criteria/{action}",
-                defaults: new { controller = "Criteria", action = "Index" });
-
-            routes.MapRoute(
-                name: "Member methods",
-                url: "App_Plugins/UmbracoPersonalisationGroups/Member/{action}",
-                defaults: new { controller = "Member", action = "Index" }, new[] { "Zone.UmbracoPersonalisationGroups.Controllers" });
+                defaults: new { controller = "Criteria", action = "Index" },
+                namespaces: new[] { CommonNamespace });
 
             routes.MapRoute(
                 name: "Geo location methods",
                 url: "App_Plugins/UmbracoPersonalisationGroups/GeoLocation/{action}",
-                defaults: new { controller = "GeoLocation", action = "Index" });
+                defaults: new { controller = "GeoLocation", action = "Index" },
+                namespaces: new[] { CommonNamespace });
 
+            routes.MapRoute(
+                name: "Member methods",
+                url: "App_Plugins/UmbracoPersonalisationGroups/Member/{action}",
+                defaults: new { controller = "Member", action = "Index" },
+                namespaces: new[] { versionSpecificNamespace });
 
             // Add the virtual file writer for the extension type.
             FileWriters.AddWriterForExtension(AppConstants.ResourceExtension, new EmbeddedResourceWriter());
