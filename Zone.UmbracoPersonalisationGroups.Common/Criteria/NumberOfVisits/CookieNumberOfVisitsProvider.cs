@@ -1,17 +1,24 @@
 ﻿namespace Zone.UmbracoPersonalisationGroups.Common.Criteria.NumberOfVisits
 {
-    using System.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie;
 
     public class CookieNumberOfVisitsProvider : INumberOfVisitsProvider
     {
+        private readonly ICookieProvider _cookieProvider;
+
+        public CookieNumberOfVisitsProvider()
+        {
+            _cookieProvider = new HttpContextCookieProvider();
+        }
+
         public int GetNumberOfVisits()
         {
-            var cookieKey = PersonalisationGroupsConfig.Value.CookieKeyForTrackingNumberOfVisits;
-            var cookie = HttpContext.Current.Request.Cookies[cookieKey];
-            if (!string.IsNullOrEmpty(cookie?.Value) && int.TryParse(cookie.Value, out int cookieValue))
+            var cookieValue = _cookieProvider.GetCookieValue(PersonalisationGroupsConfig.Value.CookieKeyForTrackingNumberOfVisits);
+
+            if (!string.IsNullOrEmpty(cookieValue) && int.TryParse(cookieValue, out int cookieNumericValue))
             {
-                return cookieValue;
+                return cookieNumericValue;
             }
 
             return 0;

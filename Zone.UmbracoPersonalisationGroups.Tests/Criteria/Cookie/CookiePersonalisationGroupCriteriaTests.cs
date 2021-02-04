@@ -4,6 +4,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Zone.UmbracoPersonalisationGroups.Common.Criteria.Cookie;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie;
 
     [TestClass]
     public class CookiePersonalisationGroupCriteriaTests

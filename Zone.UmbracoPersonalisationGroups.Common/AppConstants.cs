@@ -90,6 +90,8 @@
             public const string CountryCodeProvider = Prefix + "countryCodeProvider";
 
             public const string CdnCountryCodeHttpHeaderName = Prefix + "cdnCountryCodeHttpHeaderName";
+
+            public const string DisableHttpContextItemsUseInCookieOperations = Prefix + "disableHttpContextItemsUseInCookieOperations";
         }
 
         public static class DocumentTypeAliases

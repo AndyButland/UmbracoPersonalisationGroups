@@ -159,6 +159,7 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.testFixedIp" value="37.117.73.202"/>` - sets up an "spoof" IP address to use, in preference to the actual one used for browsing the site, for testing country and/or region matching using IP address
 - `<add key="personalisationGroups.countryCodeProvider" value="MaxMindDatabase|CdnHeader"/>` - indicates which provider to use for country matching (the default is the MaxMind geo-location database, but a CDN header, e.g. that from [Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-) is available to be configured to use too.
 - `<add key="personalisationGroups.cdnCountryCodeHttpHeaderName" value="CF-IPCountry"/>` - if a CDN header is used for country matching due to the above configuration setting, this key can be used to define which header is looked for.  If not provided, the default value of CF-IPCountry (as used by Cloudflare CDN) is used.
+- `<add key="personalisationGroups.disableHttpContextItemsUseInCookieOperations" value="false"/>` - should anyone require it, setting this value to true will restore the previous behaviour for cookie handling amended in 1.0.5/2.1.6.
 
 ## How it works
 
@@ -428,6 +429,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
      - Added support for override of region names used geographical region matching 
 - 1.0.5
     - Namespaced controllers in route configuration to avoid clashes with any controllers with the same name in solutions using the package (PR #23).
+- 1.0.6
+    - Amended behaviour of cookie handling to check and write cookie values also to HttpContext.Current.Items, such that a set cookie can be read in the same request.  Previous behaviour can be restored via the `personalisationGroups.disableHttpContextItemsUseInCookieOperations` configuration key.
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
@@ -447,3 +450,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Merged in fix to issue where picked groups can't be found when MNTP is restricted to a single item (PR #22).
 - 2.1.5
     - Namespaced controllers in route configuration to avoid clashes with any controllers with the same name in solutions using the package (PR #23).
+- 2.1.6
+    - Amended behaviour of cookie handling to check and write cookie values also to HttpContext.Current.Items, such that a set cookie can be read in the same request.  Previous behaviour can be restored via the `personalisationGroups.disableHttpContextItemsUseInCookieOperations` configuration key.

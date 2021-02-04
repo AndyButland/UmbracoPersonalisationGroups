@@ -35,6 +35,7 @@
             TestFixedIp = GetConfigStringValue(AppConstants.ConfigKeys.TestFixedIp, string.Empty);
             CountryCodeProvider = (CountryCodeProvider)Enum.Parse(typeof(CountryCodeProvider), GetConfigStringValue(AppConstants.ConfigKeys.CountryCodeProvider, CountryCodeProvider.MaxMindDatabase.ToString()));
             CdnCountryCodeHttpHeaderName = GetConfigStringValue(AppConstants.ConfigKeys.CdnCountryCodeHttpHeaderName, AppConstants.DefaultCdnCountryCodeHttpHeaderName);
+            DisableHttpContextItemsUseInCookieOperations = GetConfigBoolValue(AppConstants.ConfigKeys.DisableHttpContextItemsUseInCookieOperations, false);
         }
 
         /// <summary>
@@ -59,7 +60,8 @@
             int persistentMatchedGroupsCookieExpiryInDays = AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays, 
             string testFixedIp = "",
             CountryCodeProvider countryCodeProvider = CountryCodeProvider.MaxMindDatabase,
-            string cdnCountryCodeHttpHeaderName = AppConstants.DefaultCdnCountryCodeHttpHeaderName)
+            string cdnCountryCodeHttpHeaderName = AppConstants.DefaultCdnCountryCodeHttpHeaderName,
+            bool disableHttpContextItemsUseInCookieOperations = false)
         {
             DisablePackage = disablePackage;
             GroupPickerAlias = groupPickerAlias;
@@ -79,6 +81,7 @@
             TestFixedIp = testFixedIp;
             CountryCodeProvider = countryCodeProvider;
             CdnCountryCodeHttpHeaderName = cdnCountryCodeHttpHeaderName;
+            DisableHttpContextItemsUseInCookieOperations = disableHttpContextItemsUseInCookieOperations;
         }
 
         internal static PersonalisationGroupsConfig Value => _value ?? new PersonalisationGroupsConfig();
@@ -128,6 +131,8 @@
         public CountryCodeProvider CountryCodeProvider { get; }
 
         public string CdnCountryCodeHttpHeaderName { get; }
+
+        public bool DisableHttpContextItemsUseInCookieOperations { get; }
 
         private static bool GetConfigBoolValue(string key, bool defaultValue)
         {
