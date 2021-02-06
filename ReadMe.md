@@ -143,7 +143,7 @@ Personalisation Groups requires the setting of cookies in the user's browser for
 
 On many websites a user will be asked if they want to accept cookies and be provided the option to opt-out of unncessary ones.
 
-In order to ensure that the package will cease writing tracking cookies, you can either set a cookie with a key of *personalisationGroupsCookiesDeclined* or a session variable with a key of *PersonalisationGroups_CookiesDeclined*.  If either of those are set, no further cookies will be written.  Any cookies already set won't be deleted (that's left to the developer to action if required when the visitor declines cookies, but they will no longer be updated or new ones created.  
+In order to ensure that the package will cease writing tracking cookies, you can either set a cookie with a key of *personalisationGroupsCookiesDeclined* or a session variable with a key of *PersonalisationGroups_CookiesDeclined*.  If either of those are set, no further cookies will be written.  Any cookies already set won't be deleted (that's left to the developer to action if required when the visitor declines cookies), but they will no longer be updated or new ones created.  
 
 The keys for this cookie and session can be amended in configuration if required via the keys `personalisationGroups.cookieKeyForTrackingCookiesDeclined` and `personalisationGroups.sessionKeyForTrackingCookiesDeclined` respectively (see "Configuration" below).
 
