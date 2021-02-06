@@ -136,7 +136,17 @@ If you want to simply check if the current user matches one or more groups by th
     @Umbraco.MatchesGroup("Weekday Visitors")
     @Umbraco.MatchesAllGroups(new string[] { "Weekday Visitors", "Country match" })
     @Umbraco.MatchesAnyGroup(new string[] { "Weekday Visitors", "Country match" })
-	
+
+## Cookie regulations
+
+Personalisation Groups requires the setting of cookies in the user's browser for certain functionality.  In particular the criteria for "pages viewed" and "number of visits" rely on the user's behaviour being tracked in a cookie value.
+
+On many websites a user will be asked if they want to accept cookies and be provided the option to opt-out of unncessary ones.
+
+In order to ensure that the package will cease writing tracking cookies, you can either set a cookie with a key of *personalisationGroupsCookiesDeclined* or a session variable with a key of *PersonalisationGroups_CookiesDeclined*.  If either of those are set, no further cookies will be written.  Any cookies already set won't be deleted (that's left to the developer to action if required when the visitor declines cookies, but they will no longer be updated or new ones created.  
+
+The keys for this cookie and session can be amended in configuration if required via the keys `personalisationGroups.cookieKeyForTrackingCookiesDeclined` and `personalisationGroups.sessionKeyForTrackingCookiesDeclined` respectively (see "Configuration" below).
+
 ## Configuration
 
 No configuration is required if you are happy to accept the default behaviour of the package.  The following optional keys can be added to your web.config appSettings though if required to amend this.  
@@ -155,10 +165,13 @@ No configuration is required if you are happy to accept the default behaviour of
 - `<add key="personalisationGroups.cookieKeyForTrackingPagesViewed" value="myCookieKey"/>` - defines the cookie key name used for tracking pages viewed
 - `<add key="personalisationGroups.cookieKeyForSessionMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which session level groups the visitor has matched
 - `<add key="personalisationGroups.cookieKeyForPersistentMatchedGroups" value="myCookieKey"/>` - defines the cookie key name used for tracking which persistent (visitor) level groups the visitor has matched
+- `<add key="personalisationGroups.cookieKeyForTrackingCookiesDeclined" value="myCookieKey"/>` - defines the cookie key name used for tracking if a user has declined cookies
+- `<add key="personalisationGroups.sessionKeyForTrackingCookiesDeclined" value="mySessionKey"/>` - defines the session key name used for tracking if a user has declined cookies
 - `<add key="personalisationGroups.persistentMatchedGroupsCookieExpiryInDays" value="90"/>` - sets the expiry time for the cookie used for tracking which persistent (visitor) level groups the visitor has matched (default if not provided is 90)
 - `<add key="personalisationGroups.testFixedIp" value="37.117.73.202"/>` - sets up an "spoof" IP address to use, in preference to the actual one used for browsing the site, for testing country and/or region matching using IP address
 - `<add key="personalisationGroups.countryCodeProvider" value="MaxMindDatabase|CdnHeader"/>` - indicates which provider to use for country matching (the default is the MaxMind geo-location database, but a CDN header, e.g. that from [Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-) is available to be configured to use too.
 - `<add key="personalisationGroups.cdnCountryCodeHttpHeaderName" value="CF-IPCountry"/>` - if a CDN header is used for country matching due to the above configuration setting, this key can be used to define which header is looked for.  If not provided, the default value of CF-IPCountry (as used by Cloudflare CDN) is used.
+- `<add key="personalisationGroups.disableHttpContextItemsUseInCookieOperations" value="false"/>` - should anyone require it, setting this value to true will restore the previous behaviour for cookie handling amended in 1.0.5/2.1.6.
 
 ## How it works
 
@@ -428,6 +441,9 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
      - Added support for override of region names used geographical region matching 
 - 1.0.5
     - Namespaced controllers in route configuration to avoid clashes with any controllers with the same name in solutions using the package (PR #23).
+- 1.0.6
+    - Amended behaviour of cookie handling to check and write cookie values also to HttpContext.Current.Items, such that a set cookie can be read in the same request.  Previous behaviour can be restored via the `personalisationGroups.disableHttpContextItemsUseInCookieOperations` configuration key.
+    - Added the ability to set a cookie or session value to prevent the package from writing any further cookies and adhere to cookie regulations.
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
@@ -447,3 +463,6 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
     - Merged in fix to issue where picked groups can't be found when MNTP is restricted to a single item (PR #22).
 - 2.1.5
     - Namespaced controllers in route configuration to avoid clashes with any controllers with the same name in solutions using the package (PR #23).
+- 2.1.6
+    - Amended behaviour of cookie handling to check and write cookie values also to HttpContext.Current.Items, such that a set cookie can be read in the same request.  Previous behaviour can be restored via the `personalisationGroups.disableHttpContextItemsUseInCookieOperations` configuration key.
+    - Added the ability to set a cookie or session value to prevent the package from writing any further cookies and adhere to cookie regulations.

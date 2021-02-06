@@ -48,6 +48,10 @@
 
         public const string DefaultCookieKeyForPersistentMatchedGroups = "persistentMatchedGroups";
 
+        public const string DefaultCookieKeyForTrackingCookiesDeclined = "personalisationGroupsCookiesDeclined";
+
+        public const string DefaultSessionKeyForTrackingCookiesDeclined = "PersonalisationGroups_CookiesDeclined";
+
         public const string DefaultCdnCountryCodeHttpHeaderName = "CF-IPCountry";
 
 
@@ -83,6 +87,10 @@
 
             public const string CookieKeyForPersistentMatchedGroups = Prefix + "cookieKeyForPersistentMatchedGroups";
 
+            public const string CookieKeyForTrackingCookiesDeclined = Prefix + "cookieKeyForTrackingCookiesDeclined";
+
+            public const string SessionKeyForTrackingCookiesDeclined = Prefix + "sessionKeyForTrackingCookiesDeclined";
+
             public const string PersistentMatchedGroupsCookieExpiryInDays = Prefix + "persistentMatchedGroupsCookieExpiryInDays";
 
             public const string TestFixedIp = Prefix + "testFixedIp";
@@ -90,6 +98,8 @@
             public const string CountryCodeProvider = Prefix + "countryCodeProvider";
 
             public const string CdnCountryCodeHttpHeaderName = Prefix + "cdnCountryCodeHttpHeaderName";
+
+            public const string DisableHttpContextItemsUseInCookieOperations = Prefix + "disableHttpContextItemsUseInCookieOperations";
         }
 
         public static class DocumentTypeAliases

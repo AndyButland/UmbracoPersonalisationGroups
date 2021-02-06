@@ -31,10 +31,13 @@
             CookieKeyForTrackingPagesViewed = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForTrackingPagesViewed, AppConstants.DefaultCookieKeyForTrackingPagesViewed);
             CookieKeyForSessionMatchedGroups = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForSessionMatchedGroups, AppConstants.DefaultCookieKeyForSessionMatchedGroups);
             CookieKeyForPersistentMatchedGroups = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForPersistentMatchedGroups, AppConstants.DefaultCookieKeyForPersistentMatchedGroups);
+            CookieKeyForTrackingCookiesDeclined = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForTrackingCookiesDeclined, AppConstants.DefaultCookieKeyForTrackingCookiesDeclined);
+            SessionKeyForTrackingCookiesDeclined = GetConfigStringValue(AppConstants.ConfigKeys.SessionKeyForTrackingCookiesDeclined, AppConstants.DefaultSessionKeyForTrackingCookiesDeclined);
             PersistentMatchedGroupsCookieExpiryInDays = GetConfigIntValue(AppConstants.ConfigKeys.PersistentMatchedGroupsCookieExpiryInDays, AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays);
             TestFixedIp = GetConfigStringValue(AppConstants.ConfigKeys.TestFixedIp, string.Empty);
             CountryCodeProvider = (CountryCodeProvider)Enum.Parse(typeof(CountryCodeProvider), GetConfigStringValue(AppConstants.ConfigKeys.CountryCodeProvider, CountryCodeProvider.MaxMindDatabase.ToString()));
             CdnCountryCodeHttpHeaderName = GetConfigStringValue(AppConstants.ConfigKeys.CdnCountryCodeHttpHeaderName, AppConstants.DefaultCdnCountryCodeHttpHeaderName);
+            DisableHttpContextItemsUseInCookieOperations = GetConfigBoolValue(AppConstants.ConfigKeys.DisableHttpContextItemsUseInCookieOperations, false);
         }
 
         /// <summary>
@@ -55,11 +58,14 @@
             string cookieKeyForTrackingIfSessionAlreadyTracked = AppConstants.DefaultCookieKeyForTrackingIfSessionAlreadyTracked,
             string cookieKeyForTrackingPagesViewed = AppConstants.DefaultCookieKeyForTrackingPagesViewed,
             string cookieKeyForSessionMatchedGroups = AppConstants.DefaultCookieKeyForSessionMatchedGroups,
-            string cookieKeyForPersistentMatchedGroups = AppConstants.DefaultCookieKeyForPersistentMatchedGroups, 
+            string cookieKeyForPersistentMatchedGroups = AppConstants.DefaultCookieKeyForPersistentMatchedGroups,
+            string cookieKeyForTrackingCookiesDeclined = AppConstants.DefaultCookieKeyForTrackingCookiesDeclined,
+            string sessionKeyForTrackingCookiesDeclined = AppConstants.DefaultSessionKeyForTrackingCookiesDeclined,
             int persistentMatchedGroupsCookieExpiryInDays = AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays, 
             string testFixedIp = "",
             CountryCodeProvider countryCodeProvider = CountryCodeProvider.MaxMindDatabase,
-            string cdnCountryCodeHttpHeaderName = AppConstants.DefaultCdnCountryCodeHttpHeaderName)
+            string cdnCountryCodeHttpHeaderName = AppConstants.DefaultCdnCountryCodeHttpHeaderName,
+            bool disableHttpContextItemsUseInCookieOperations = false)
         {
             DisablePackage = disablePackage;
             GroupPickerAlias = groupPickerAlias;
@@ -75,10 +81,13 @@
             CookieKeyForTrackingPagesViewed = cookieKeyForTrackingPagesViewed;
             CookieKeyForSessionMatchedGroups = cookieKeyForSessionMatchedGroups;
             CookieKeyForPersistentMatchedGroups = cookieKeyForPersistentMatchedGroups;
+            CookieKeyForTrackingCookiesDeclined = cookieKeyForTrackingCookiesDeclined;
+            SessionKeyForTrackingCookiesDeclined = sessionKeyForTrackingCookiesDeclined;
             PersistentMatchedGroupsCookieExpiryInDays = persistentMatchedGroupsCookieExpiryInDays;
             TestFixedIp = testFixedIp;
             CountryCodeProvider = countryCodeProvider;
             CdnCountryCodeHttpHeaderName = cdnCountryCodeHttpHeaderName;
+            DisableHttpContextItemsUseInCookieOperations = disableHttpContextItemsUseInCookieOperations;
         }
 
         internal static PersonalisationGroupsConfig Value => _value ?? new PersonalisationGroupsConfig();
@@ -121,6 +130,10 @@
 
         public string CookieKeyForPersistentMatchedGroups { get; }
 
+        public string CookieKeyForTrackingCookiesDeclined { get;  }
+
+        public string SessionKeyForTrackingCookiesDeclined { get; }
+
         public int PersistentMatchedGroupsCookieExpiryInDays { get; }
 
         public string TestFixedIp { get; }
@@ -128,6 +141,8 @@
         public CountryCodeProvider CountryCodeProvider { get; }
 
         public string CdnCountryCodeHttpHeaderName { get; }
+
+        public bool DisableHttpContextItemsUseInCookieOperations { get; }
 
         private static bool GetConfigBoolValue(string key, bool defaultValue)
         {

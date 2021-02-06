@@ -4,6 +4,7 @@
     using Newtonsoft.Json;
     using Zone.UmbracoPersonalisationGroups.Common;
     using Zone.UmbracoPersonalisationGroups.Common.Helpers;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie;
 
     /// <summary>
     /// Implements a personalisation group criteria based on the presence, absence or value of a cookie

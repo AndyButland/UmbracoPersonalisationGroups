@@ -1,4 +1,4 @@
-﻿namespace Zone.UmbracoPersonalisationGroups.Common.Criteria.Cookie
+﻿namespace Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie
 {
     public interface ICookieProvider
     {

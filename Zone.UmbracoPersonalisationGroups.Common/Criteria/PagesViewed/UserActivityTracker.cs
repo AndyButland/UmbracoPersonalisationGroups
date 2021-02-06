@@ -1,18 +1,18 @@
 namespace Zone.UmbracoPersonalisationGroups.Common.Criteria.PagesViewed
 {
     using System;
-    using System.Linq;
     using System.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie;
 
     public static class UserActivityTracker
     {
         public static void TrackPageView(int pageId)
         {
-            var httpContext = HttpContext.Current;
+            var cookieProvoder = new HttpContextCookieProvider();
             var config = PersonalisationGroupsConfig.Value;
             var key = config.CookieKeyForTrackingPagesViewed;
-            var cookie = httpContext.Request.Cookies[key];
+            var cookie = cookieProvoder.GetCookie(key);
             if (cookie != null)
             {
                 cookie.Value = AppendPageIdIfNotPreviouslyViewed(cookie.Value, pageId);
@@ -23,7 +23,7 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Criteria.PagesViewed
             }
 
             cookie.Expires = DateTime.Now.AddDays(config.ViewedPagesTrackingCookieExpiryInDays);
-            httpContext.Response.Cookies.Add(cookie);
+            cookieProvoder.SetCookie(cookie);
         }
 
         internal static string AppendPageIdIfNotPreviouslyViewed(string viewedPageIds, int pageId)

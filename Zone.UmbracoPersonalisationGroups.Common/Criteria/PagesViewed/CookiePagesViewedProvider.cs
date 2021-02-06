@@ -2,17 +2,25 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie;
 
     public class CookiePagesViewedProvider : IPagesViewedProvider
     {
+        private readonly ICookieProvider _cookieProvider;
+
+        public CookiePagesViewedProvider()
+        {
+            _cookieProvider = new HttpContextCookieProvider();
+        }
+
         public IEnumerable<int> GetNodeIdsViewed()
         {
-            var cookie = HttpContext.Current.Request.Cookies[PersonalisationGroupsConfig.Value.CookieKeyForTrackingPagesViewed];
-            if (!string.IsNullOrEmpty(cookie?.Value))
+            var cookieValue = _cookieProvider.GetCookieValue(PersonalisationGroupsConfig.Value.CookieKeyForTrackingPagesViewed);
+
+            if (!string.IsNullOrEmpty(cookieValue))
             {
-                return ParseCookieValue(cookie.Value);
+                return ParseCookieValue(cookieValue);
             }
 
             return Enumerable.Empty<int>();

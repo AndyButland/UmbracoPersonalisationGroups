@@ -6,6 +6,7 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
     using System.Web;
     using Zone.UmbracoPersonalisationGroups.Common.Configuration;
     using Zone.UmbracoPersonalisationGroups.Common.GroupDefinition;
+    using Zone.UmbracoPersonalisationGroups.Common.Providers.Cookie;
 
     internal static class GroupMatchingHelper
     {
@@ -16,10 +17,10 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
                 return false;
             }
 
-            var httpContext = HttpContext.Current;
             var key = GetCookieKeyForMatchedGroups(definition.Duration);
-            var cookie = httpContext.Request.Cookies[key];
-            return !string.IsNullOrEmpty(cookie?.Value) && IsGroupMatched(cookie.Value, groupNodeId);
+            var cookieProvider = new HttpContextCookieProvider();
+            var cookieValue = cookieProvider.GetCookieValue(key);
+            return !string.IsNullOrEmpty(cookieValue) && IsGroupMatched(cookieValue, groupNodeId);
         }
 
         /// <summary>
@@ -34,9 +35,9 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
                 return;
             }
 
-            var httpContext = HttpContext.Current;
             var key = GetCookieKeyForMatchedGroups(definition.Duration);
-            var cookie = httpContext.Request.Cookies[key];
+            var cookieProvider = new HttpContextCookieProvider();
+            var cookie = cookieProvider.GetCookie(key);
             if (cookie != null)
             {
                 cookie.Value = AppendGroupNodeId(cookie.Value, groupNodeId);
@@ -56,7 +57,7 @@ namespace Zone.UmbracoPersonalisationGroups.Common.Helpers
                 cookie.Expires = DateTime.Now.AddDays(cookieExpiryInDays);
             }
 
-            httpContext.Response.Cookies.Add(cookie);
+            cookieProvider.SetCookie(cookie);
         }
 
         /// <summary>
