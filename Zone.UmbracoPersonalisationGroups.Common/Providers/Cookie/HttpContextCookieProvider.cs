@@ -30,12 +30,26 @@
 
         public void SetCookie(HttpCookie cookie)
         {
+            if (AreCookiesDeclined())
+            {
+                return;
+            }
+
             if (!PersonalisationGroupsConfig.Value.DisableHttpContextItemsUseInCookieOperations)
             {
                 HttpContext.Current.Items[$"personalisationGroups.cookie.{cookie.Name}"] = cookie.Value;
             }
 
             HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+
+        private bool AreCookiesDeclined()
+        {
+            // Cookies can be declined by a solution developer either by setting a cookie or session variable.
+            // If either of these exist, we shouldn't write any cookies.
+            return HttpContext.Current.Request.Cookies[PersonalisationGroupsConfig.Value.CookieKeyForTrackingCookiesDeclined] != null ||
+                   HttpContext.Current.Session?[PersonalisationGroupsConfig.Value.SessionKeyForTrackingCookiesDeclined] != null;
+
         }
     }
 }

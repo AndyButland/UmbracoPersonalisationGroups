@@ -48,6 +48,10 @@
 
         public const string DefaultCookieKeyForPersistentMatchedGroups = "persistentMatchedGroups";
 
+        public const string DefaultCookieKeyForTrackingCookiesDeclined = "personalisationGroupsCookiesDeclined";
+
+        public const string DefaultSessionKeyForTrackingCookiesDeclined = "PersonalisationGroups_CookiesDeclined";
+
         public const string DefaultCdnCountryCodeHttpHeaderName = "CF-IPCountry";
 
 
@@ -82,6 +86,10 @@
             public const string CookieKeyForSessionMatchedGroups = Prefix + "cookieKeyForSessionMatchedGroups";
 
             public const string CookieKeyForPersistentMatchedGroups = Prefix + "cookieKeyForPersistentMatchedGroups";
+
+            public const string CookieKeyForTrackingCookiesDeclined = Prefix + "cookieKeyForTrackingCookiesDeclined";
+
+            public const string SessionKeyForTrackingCookiesDeclined = Prefix + "sessionKeyForTrackingCookiesDeclined";
 
             public const string PersistentMatchedGroupsCookieExpiryInDays = Prefix + "persistentMatchedGroupsCookieExpiryInDays";
 

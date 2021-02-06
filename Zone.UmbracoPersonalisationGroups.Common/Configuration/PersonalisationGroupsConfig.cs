@@ -31,6 +31,8 @@
             CookieKeyForTrackingPagesViewed = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForTrackingPagesViewed, AppConstants.DefaultCookieKeyForTrackingPagesViewed);
             CookieKeyForSessionMatchedGroups = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForSessionMatchedGroups, AppConstants.DefaultCookieKeyForSessionMatchedGroups);
             CookieKeyForPersistentMatchedGroups = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForPersistentMatchedGroups, AppConstants.DefaultCookieKeyForPersistentMatchedGroups);
+            CookieKeyForTrackingCookiesDeclined = GetConfigStringValue(AppConstants.ConfigKeys.CookieKeyForTrackingCookiesDeclined, AppConstants.DefaultCookieKeyForTrackingCookiesDeclined);
+            SessionKeyForTrackingCookiesDeclined = GetConfigStringValue(AppConstants.ConfigKeys.SessionKeyForTrackingCookiesDeclined, AppConstants.DefaultSessionKeyForTrackingCookiesDeclined);
             PersistentMatchedGroupsCookieExpiryInDays = GetConfigIntValue(AppConstants.ConfigKeys.PersistentMatchedGroupsCookieExpiryInDays, AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays);
             TestFixedIp = GetConfigStringValue(AppConstants.ConfigKeys.TestFixedIp, string.Empty);
             CountryCodeProvider = (CountryCodeProvider)Enum.Parse(typeof(CountryCodeProvider), GetConfigStringValue(AppConstants.ConfigKeys.CountryCodeProvider, CountryCodeProvider.MaxMindDatabase.ToString()));
@@ -56,7 +58,9 @@
             string cookieKeyForTrackingIfSessionAlreadyTracked = AppConstants.DefaultCookieKeyForTrackingIfSessionAlreadyTracked,
             string cookieKeyForTrackingPagesViewed = AppConstants.DefaultCookieKeyForTrackingPagesViewed,
             string cookieKeyForSessionMatchedGroups = AppConstants.DefaultCookieKeyForSessionMatchedGroups,
-            string cookieKeyForPersistentMatchedGroups = AppConstants.DefaultCookieKeyForPersistentMatchedGroups, 
+            string cookieKeyForPersistentMatchedGroups = AppConstants.DefaultCookieKeyForPersistentMatchedGroups,
+            string cookieKeyForTrackingCookiesDeclined = AppConstants.DefaultCookieKeyForTrackingCookiesDeclined,
+            string sessionKeyForTrackingCookiesDeclined = AppConstants.DefaultSessionKeyForTrackingCookiesDeclined,
             int persistentMatchedGroupsCookieExpiryInDays = AppConstants.DefaultPersistentMatchedGroupsCookieExpiryInDays, 
             string testFixedIp = "",
             CountryCodeProvider countryCodeProvider = CountryCodeProvider.MaxMindDatabase,
@@ -77,6 +81,8 @@
             CookieKeyForTrackingPagesViewed = cookieKeyForTrackingPagesViewed;
             CookieKeyForSessionMatchedGroups = cookieKeyForSessionMatchedGroups;
             CookieKeyForPersistentMatchedGroups = cookieKeyForPersistentMatchedGroups;
+            CookieKeyForTrackingCookiesDeclined = cookieKeyForTrackingCookiesDeclined;
+            SessionKeyForTrackingCookiesDeclined = sessionKeyForTrackingCookiesDeclined;
             PersistentMatchedGroupsCookieExpiryInDays = persistentMatchedGroupsCookieExpiryInDays;
             TestFixedIp = testFixedIp;
             CountryCodeProvider = countryCodeProvider;
@@ -123,6 +129,10 @@
         public string CookieKeyForSessionMatchedGroups { get; }
 
         public string CookieKeyForPersistentMatchedGroups { get; }
+
+        public string CookieKeyForTrackingCookiesDeclined { get;  }
+
+        public string SessionKeyForTrackingCookiesDeclined { get; }
 
         public int PersistentMatchedGroupsCookieExpiryInDays { get; }
 
