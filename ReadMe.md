@@ -6,6 +6,8 @@ Umbraco Personalisation Groups is an Umbraco package intended to allow personali
 
 It supports Umbraco versions 7 and 8.
 
+_For Version 9, pleasee see this source code repository: https://github.com/AndyButland/UmbracoPersonalisationGroupsCore_.
+
 It can be downloaded and installed from: https://our.umbraco.org/projects/website-utilities/personalisation-groups
 
 It contains a few different pieces:
