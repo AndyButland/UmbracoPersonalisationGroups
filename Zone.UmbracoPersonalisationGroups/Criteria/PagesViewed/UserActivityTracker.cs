@@ -8,6 +8,11 @@ namespace Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed
         public static void TrackPageView(object sender, EventArgs e)
         {
             var umbracoContext = UmbracoContext.Current;
+            var isFrontEndRequest = umbracoContext?.IsFrontEndUmbracoRequest ?? false;
+            if (!isFrontEndRequest)
+            {
+                return;
+            }
             var pageId = umbracoContext?.PageId;
 
             if (pageId == null)
