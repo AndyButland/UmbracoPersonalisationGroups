@@ -13,8 +13,8 @@ namespace Zone.UmbracoPersonalisationGroups.Criteria.PagesViewed
             {
                 return;
             }
-            var pageId = umbracoContext?.PageId;
 
+            var pageId = umbracoContext?.PageId;
             if (pageId == null)
             {
                 return;

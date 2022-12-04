@@ -446,6 +446,8 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 1.0.6
     - Amended behaviour of cookie handling to check and write cookie values also to HttpContext.Current.Items, such that a set cookie can be read in the same request.  Previous behaviour can be restored via the `personalisationGroups.disableHttpContextItemsUseInCookieOperations` configuration key.
     - Added the ability to set a cookie or session value to prevent the package from writing any further cookies and adhere to cookie regulations.
+- 1.0.7
+    - Removed tracking of back-office requests triggered by rendering via macros in rich text editor (PR #43).
 - 2.0.0
     - Release supporting Umbraco 8
 - 2.0.1
@@ -468,3 +470,5 @@ If you needed to personalise by these criteria - number of pages viewed and/or n
 - 2.1.6
     - Amended behaviour of cookie handling to check and write cookie values also to HttpContext.Current.Items, such that a set cookie can be read in the same request.  Previous behaviour can be restored via the `personalisationGroups.disableHttpContextItemsUseInCookieOperations` configuration key.
     - Added the ability to set a cookie or session value to prevent the package from writing any further cookies and adhere to cookie regulations.
+- 2.1.7
+    - Removed tracking of back-office requests triggered by rendering via macros in rich text editor (PR #43).
